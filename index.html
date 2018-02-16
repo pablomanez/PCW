@@ -1,18 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Revolucionaria página de recetas de cocina</title>
+	<title>Revolucionaria página de recetas de cocina - ÍNDICE</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<header>
+		<img src="img/LOGO_1.jpeg">
 		<h1>Este es el título</h1>
 		<h2>
 			<p>En esta página te encontrarás las mejores recetas.</p>
 			<p>¡Regístrate ahora y empieza a cocinar!</p>
-
 		</h2>
 	</header>
+	
+	<nav>
+		<ul>
+			<li> 	
+				<a href="index.html">
+					<i class="fa fa-home">Inicio</i>
+				</a> 
+			</li>
+			<li>
+				<a href="buscar.html">
+					<i class="fa fa-search">Buscar</i>
+				</a> 
+			</li>
+			<li> 
+				<a href="login.html">
+					<i class="fa fa-sign-in">Login</i>
+				</a> 
+			</li>
+			<li> 
+				<a href="registro.html">
+					<i class="fa fa-user-plus">Registro</i>
+				</a> 
+			</li>
+			<li>
+				<a href="logout.html">
+					<i class="fa fa-sign-out">Logout</i>
+				</a> 
+			</li>
+			<li>
+				<a href="nueva-receta.html">
+					<i class="fa fa-plus-circle">Nueva receta</i>
+				</a> 
+			</li>
+		</ul>
+	</nav>
+
+	<main>
+		<div>
+			<select>
+				<option disabled selected>Orden de aparición</option>
+				<option>Ascendente</option>
+				<option>Descendente</option>
+			</select>
+			<select>
+				<option disabled selected>Ordenación</option>
+				<option>Según valoración</option>
+				<option>Según fecha</option>
+			</select>
+			<form action="buscar.html" method="get">
+				<p>
+					<input type="text" name="search_box" required>
+					<input type="submit" name="submit" value="Buscar">
+				</p>
+			</form>
+		</div>
+
+		<figure>
+			<img src="img/RECETA_1.jpg" alt="Una receta de 10" height="200" width="300">
+			<figcaption>
+				<p>
+					<a href="receta.html">Pollo con chicharrón</a> <br>
+					Autor: <a href="buscar.html">Yo</a> <br>
+					Fecha de publicación: <time datetime="01/01/2018">01/01/2018</time> <br>
+					<div>
+						<i class="fa fa-thumbs-o-up">65491</i> <br>
+						<i class="fa fa-thumbs-o-down">5</i>
+					</div>
+					<div>
+						<p>Comentarios:</p>
+						<div>
+							<p><strong>Jabi</strong></p>
+							<p>Balla mierda de rezeta</p>
+							<p><strong>SLM</strong></p>
+							<p>Esto en DAW no pasaba</p>
+						</div>
+					</div>
+				</p>
+			</figcaption>
+		</figure>
+
+		<p>
+			<i class="fa fa-angle-double-left"></i>
+			<i class="fa fa-angle-left"></i>
+			2/10
+			<i class="fa fa-angle-right"></i>
+			<i class="fa fa-angle-double-right"></i>
+		</p>
+	</main>
+
+	<footer>
+		<p>
+			Revolucionaria página de cocina 
+			&copy; <time datetime="2018">2018</time>
+			<a href="acerca.html">SOBRE NOSOTROS</a>
+		</p>
+	</footer>
 	
 </body>
 </html>
