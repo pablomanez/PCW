@@ -3,12 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Revolucionaria página de recetas de cocina - ÍNDICE</title>
-
+	<link rel="stylesheet" href="CSS/Lightrap.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+	<header class="container-fluid bg-dark text-white position-fixed z-100">
+		<div class="row">
+			<div class="col-2 py-3 col-lg-1 bg-orange">
+			logo
+			</div>
+			<div class="col-5 py-3 col-lg-8">Busqueda</div>
+			<div class="col-2 py-3">Login</div>
+		</div>
+	</header>
 	<header>
-		<img src="img/LOGO_1.jpeg">
+		<img src="Images/LOGO_1.jpeg">
 		<h1>Este es el título</h1>
 		<h2>
 			<p>En esta página te encontrarás las mejores recetas.</p>
@@ -50,29 +59,73 @@
 			</li>
 		</ul>
 	</nav>
+	<div>
+		<select>
+			<option disabled selected>Orden de aparición</option>
+			<option>Ascendente</option>
+			<option>Descendente</option>
+		</select>
+		<select>
+			<option disabled selected>Ordenación</option>
+			<option>Según valoración</option>
+			<option>Según fecha</option>
+		</select>
+		<form action="buscar.html" method="get">
+			<p>
+				<input type="text" name="search_box" required>
+				<input type="submit" name="submit" value="Buscar">
+			</p>
+		</form>
+	</div>
+	<main id="index" class="container-fluid h-100 pt-78px">
+		<nav class="row bg-dark mh-100">
+			<a href="#" class="col-12 col-sm-4 col-lg-2 bg-dark h-100 mh-200px d-flex align-items-center justify-content-center p-0">
+				<div class="position-absolute z-100 text-center">
+					<div class="text-shadow pb-3">Sopa ada fsdf sdg</div>
+					<div class="circle bg-orange justify-self-center box-shadow index-button"></div>
+				</div>
+				<div style="background-image: url(Images/RECETA_1.jpg);" class="bg-url h-100 w-100"></div>
+			</a>
+			<a href="#" class="col-12 col-sm-4 col-lg-2 bg-dark h-100 mh-200px d-flex align-items-center justify-content-center p-0">
+				<div class="position-absolute z-100 text-center">
+					<div class="text-shadow pb-3">Sopa ada fsdf sdg</div>
+					<div class="circle bg-orange justify-self-center box-shadow index-button"></div>
+				</div>
+				<div style="background-image: url(Images/RECETA_1.jpg);" class="bg-url h-100 w-100"></div>
+			</a>
+			<a href="#" class="col-12 col-sm-4 col-lg-2 bg-dark h-100 mh-200px d-flex align-items-center justify-content-center p-0">
+				<div class="position-absolute z-100 text-center">
+					<div class="text-shadow pb-3">Sopa ada fsdf sdg</div>
+					<div class="circle bg-orange justify-self-center box-shadow index-button"></div>
+				</div>
+				<div style="background-image: url(Images/RECETA_1.jpg);" class="bg-url h-100 w-100"></div>
+			</a>
+			<a href="#" class="col-12 col-sm-4 col-lg-2 bg-dark h-100 mh-200px d-flex align-items-center justify-content-center p-0">
+				<div class="position-absolute z-100 text-center">
+					<div class="text-shadow pb-3">Sopa ada fsdf sdg</div>
+					<div class="circle bg-orange justify-self-center box-shadow index-button"></div>
+				</div>
+				<div style="background-image: url(Images/RECETA_1.jpg);" class="bg-url h-100 w-100"></div>
+			</a>
+			<a href="#" class="col-12 col-sm-4 col-lg-2 bg-dark h-100 mh-200px d-flex align-items-center justify-content-center p-0">
+				<div class="position-absolute z-100 text-center">
+					<div class="text-shadow pb-3">Sopa ada fsdf sdg</div>
+					<div class="circle bg-orange justify-self-center box-shadow index-button"></div>
+				</div>
+				<div style="background-image: url(Images/RECETA_1.jpg);" class="bg-url h-100 w-100"></div>
+			</a>
+			<a href="#" class="col-12 col-sm-4 col-lg-2 bg-dark h-100 mh-200px d-flex align-items-center justify-content-center p-0">
+				<div class="position-absolute z-100 text-center">
+					<div class="text-shadow pb-3">Sopa ada fsdf sdg</div>
+					<div class="circle bg-orange justify-self-center box-shadow index-button"></div>
+				</div>
+				<div style="background-image: url(Images/RECETA_1.jpg);" class="bg-url h-100 w-100"></div>
+			</a>
+		</nav>
 
-	<main>
-		<div>
-			<select>
-				<option disabled selected>Orden de aparición</option>
-				<option>Ascendente</option>
-				<option>Descendente</option>
-			</select>
-			<select>
-				<option disabled selected>Ordenación</option>
-				<option>Según valoración</option>
-				<option>Según fecha</option>
-			</select>
-			<form action="buscar.html" method="get">
-				<p>
-					<input type="text" name="search_box" required>
-					<input type="submit" name="submit" value="Buscar">
-				</p>
-			</form>
-		</div>
 
 		<figure>
-			<img src="img/RECETA_1.jpg" alt="Una receta de 10" height="200" width="300">
+			<img src="Images/RECETA_1.jpg" alt="Una receta de 10" height="200" width="300">
 			<figcaption>
 				<p>
 					<a href="receta.html">Pollo con chicharrón</a> <br>
