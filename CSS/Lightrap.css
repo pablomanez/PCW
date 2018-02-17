@@ -239,6 +239,10 @@ html, body{
 	background: rgba(0,0,0,0.5);
 }
 
+.footer-logo{
+	height: 90px;
+	width: 90px;
+}
 
 /* https://hacks.mozilla.org/2017/04/replace-bootstrap-layouts-with-css-grid/ */
 
