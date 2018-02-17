@@ -192,6 +192,54 @@ html, body{
 	opacity: 1;
 }
 
+.bg-image{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.bg-header{
+	background-image: url("../Images/header.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.index-img{
+	opacity: 0.5;
+	object-fit: cover;
+	object-position: 50% 50%;
+	transition: all 0.4s ease-in-out;
+}
+
+.index-img:hover, #index a:hover .index-img {
+	opacity: 1;
+}
+
+.index-button{
+	height: 120px;
+	width: 120px;
+	transition: all 0.3s ease-in-out;
+}
+
+.index-button:hover{
+	width: 180px;
+	height: 180px;
+}					
+
+.index-button + div{
+	opacity: 0;
+	margin-top: -10px;
+	transition: all 0.3s ease-in-out;
+}
+
+.index-button:hover + div{
+	margin-top: 10px;
+	opacity: 1;
+	background: rgba(0,0,0,0.5);
+}
+
+
 /* https://hacks.mozilla.org/2017/04/replace-bootstrap-layouts-with-css-grid/ */
 
 /* CONTENEDOR */
@@ -338,38 +386,4 @@ a{
 	box-shadow: 5px 5px 10px black;
 }
 
-.index-button{
-	height: 120px;
-	width: 120px;
-	transition: all 0.3s ease-in-out;
-}
 
-.index-button:hover{
-	width: 180px;
-	height: 180px;
-}
-
-.index-button + div{
-	opacity: 0;
-	margin-top: -10px;
-	transition: all 0.3s ease-in-out;
-}
-
-.index-button:hover + div{
-	margin-top: 10px;
-	opacity: 1;
-	background: rgba(0,0,0,0.5);
-}
-
-.bg-image{
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-.bg-header{
-	background-image: url("../Images/header.jpg");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
