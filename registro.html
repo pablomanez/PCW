@@ -7,86 +7,54 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
-<body class="background">
-	<div class="container">
-		<div class="row pt-5"></div>
-	</div>
-	<main class="container bg-dark-t text-light box-shadow p-2">
-		<form action="#" method="post">
-			<h1 class="text-center mt-0 display-4">Registro</h1>
-			<div class="row">
-				<div class="col-md-6 col-12 mb-1">
-					<!--
-						DANNY SI LEES ESTO, MIRA A VER SI ES MEJOR PONER ESTO O LO QUE TENGO PUESTO O REALMENTE DA IGUAL
-						
-						<label class="col-md-6 h2 d-flex align-items-center ml-2" for="l_user">Nombre de usuario:</label>
-
-						<input class="form-control col-md-6" type="text" name="user" id="l_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus>
-
-						EN EL INPUT SE VE DISTINTO, PERO CUAL SERIA LA FORMA "BUENA" DE PONERLO?
-					-->
-					<div class="row pt-1 pr-3">
-						<div class="col-md-6 col-sm-6 col-12 h3 d-flex align-items-center ml-4">
-							<label for="l_user">Nombre de usuario:</label>
-						</div>
-						<div class="col-md-6 col-sm-6 col-12 d-flex align-items-center">
+<body class="background d-flex align-items-center">
+	<main class="container text-light">
+		<div class="row box-shadow">
+			<div class="col-12 col-md-7 bg-dark-t pt-3">
+				<form action="#" method="post">
+					<h1 class="text-center mt-0 display-4">Registro</h1>
+					<div class="row p-3">
+						<div class="col-12 col-sm-6">
+							<label class="form-label" for="l_user">Nombre de usuario:</label>
 							<input class="form-control" type="text" name="user" id="l_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus>
-						</div>
-					</div>
-					<div class="row pt-2 pr-3">
-						<div class="col-md-6 col-sm-6 col-12 h3 d-flex align-items-center ml-4">
-							<label for="l_name">Nombre:</label>
-						</div>
-						<div class="col-md-6 col-sm-6 col-12">
-							<input class="form-control" type="text" name="name" id="l_name">
-						</div>
-					</div>
-					<div class="row pt-2 pr-3">
-						<div class="col-md-6 col-sm-6 col-12 h3 d-flex align-items-center ml-4">
-							<label for="l_date">Fecha de nacimiento:</label>
-						</div>
-						<div class="col-md-6 col-sm-6 col-12 d-flex align-items-center">
-							<input class="form-control" type="date" name="date" id="l_date">
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-md-6 col-12 mb-1">
-					<div class="row pt-1 pr-3">
-						<div class="col-md-6 col-sm-6 col-12 h3 d-flex align-items-center ml-4">
-							<label for="l_pwd">Contraseña:</label>
-						</div>
-						<div class="col-md-6 col-sm-6 col-12">
-							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">
-						</div>
-					</div>
-					<div class="row pt-2 pr-3">
-						<div class="col-md-6 col-sm-6 col-12 h3 d-flex align-items-center ml-4">
-							<label for="l_pwd">Repite la contraseña:</label>
-						</div>
-						<div class="col-md-6 col-sm-6 col-12 d-flex align-items-center">
-							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">
-						</div>
-					</div>
-					<div class="row pt-2 pr-3">
-						<div class="col-md-6 col-sm-6 col-12 h3 d-flex align-items-center ml-4">
-							<label for="l_email">Email:</label>
-						</div>
-						<div class="col-md-6 col-sm-6 col-12">
+						</div>	
+						<div class="col-12 col-sm-6 ">
+							<label class="form-label" for="l_email">Email:</label>
 							<input class="form-control" type="email" name="email" id="l_email">
 						</div>
+						<div class="col-sm-6 col-12">
+							<label class="form-label" for="l_pwd">Contraseña:</label>
+							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">
+						</div>
+						
+						<div class="col-sm-6 col-12">
+							<label class="form-label" for="l_pwd">Repite la contraseña:</label>
+							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">
+						</div>
+						
+						<div class="col-12">
+							<label class="form-label" for="l_name">Nombre:</label>
+							<input class="form-control" type="text" name="name" id="l_name">
+						</div>
+						
+						<div class="col-sm-5 col-12">
+							<label class="form-label" for="l_date">Fecha de nacimiento:</label>
+							<input class="form-control" type="date" name="date" id="l_date">
+						</div>
+						
+						
+						<div class="col-12 pt-4 px-3">
+							<input class="form-control" type="submit" name="submit" value="Registrarme">
+						</div>
 					</div>
-				</div>
-
-				<div class="col-3"></div>
-				<div class="col-6 pt-4 px-3">
-					<input class="form-control" type="submit" name="submit" value="Registrarme">
-				</div>
-				<div class="col-3"></div>
-
+				</form>
 			</div>
-
-		</form>
+			<div class="col-5 bg-light-t justify-content-center align-items-center d-none d-md-flex">
+				
+				<img class="Mw-75" src="Images/Haha_Yes.png" alt="Haha Yes">
+				
+			</div>
+		</div>
 	</main>
 	
 </body>

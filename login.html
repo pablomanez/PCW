@@ -7,42 +7,30 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
-<body class="background">
-	<div class="container">
-		<div class="row pt-5"><!-- PARA HACER HUECO --></div>
-	</div>
-	<main class="container px-0 bg-dark-t text-light p-2 box-shadow">
+<body class="background d-flex align-items-center">
+	<main class="container text-light p-2">
 		<form action="#" method="post">
-			<h1 class="text-center mt-0 display-4">Iniciar sesión</h1>
-			<div class="row">
-
-				<div class="col-12 col-md-6 col-sm-12">
-					<div class="row pb-3">
-						<div class="col-12 text-center h2 elegant">
-							<label for="f_user">Nombre de usuario:</label>
-						</div>
-						<div class="col-12 text-center">
-							<input class="form-control" type="text" name="login" id="f_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus>
-						</div>
+			<div class="row box-shadow">
+				<div class="col-12 col-md-6 bg-dark-t pt-3 pb-2">
+					<h1 class="text-center mt-0 display-4">Iniciar sesión</h1>
+					<div class="mb-2 px-2">
+						<label class="form-label" for="f_user">Nombre de usuario:</label>
+						<input class="form-control" type="text" name="login" id="f_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus>
 					</div>
-
-					<div class="row pb-2">
-						<div class="col-12 text-center h2 elegant">
-							<label for="f_pwd">Contraseña:</label>
-						</div>
-						<div class="col-12 text-center">
-							<input class="form-control" type="password" name="password" id="f_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">
-						</div>
+					<div class="mb-4 px-2">
+						<label class="form-label mt-2" for="f_pwd">Contraseña:</label>
+						<input class="form-control" type="password" name="password" id="f_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">
+					</div>
 						
-					</div>
-					<p><input class="form-control" type="submit" name="submit" value="Iniciar sesión"> </p>
-					
+						
+					<p class=" px-2"><input class="form-control" type="submit" name="submit" value="Iniciar sesión"> </p>
 				</div>
-
-				<div class="col-12 col-md-6 col-sm-12 mt-4">
-					<div class="h1 text-center text-orange">¿Todavía no te has registrado?</div>
-					<div class="h3 text-center py-2">¡A que esperas!</div>
-					<a href="registro.html"><input type="button" name="registro" value="¡Regístrate en un click!" class="form-control"></a>
+				<div class="col-12 col-md-6 d-flex align-items-center justify-content-center bg-light-t p-3">
+					<div class=" mx-2">
+						<div class="h1 text-center text-orange">¿Todavía no te has registrado?</div>
+						<div class="h3 text-center py-2">¡A que esperas!</div>
+						<a href="registro.html"><input type="button" name="registro" value="¡Regístrate en un click!" class="form-control"></a>
+					</div>
 				</div>
 
 			</div>
