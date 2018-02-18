@@ -9,20 +9,20 @@
 </head>
 <body class="background">
 	<div class="container">
-		<div class="row pt-5"></div>	
+		<div class="row pt-5"><!-- PARA HACER HUECO --></div>
 	</div>
 	<main class="container px-0 bg-dark-t text-light p-2 box-shadow">
 		<form action="#" method="post">
 			<h1 class="text-center mt-0 display-4">Iniciar sesión</h1>
 			<div class="row">
 
-				<div class="col-6">
+				<div class="col-12 col-md-6 col-sm-12">
 					<div class="row pb-3">
 						<div class="col-12 text-center h2 elegant">
 							<label for="f_user">Nombre de usuario:</label>
 						</div>
 						<div class="col-12 text-center">
-							<input class="form-control" type="text" name="login" id="f_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20">
+							<input class="form-control" type="text" name="login" id="f_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus>
 						</div>
 					</div>
 
@@ -39,10 +39,10 @@
 					
 				</div>
 
-				<div class="col-6 align mt-4">
+				<div class="col-12 col-md-6 col-sm-12 mt-4">
 					<div class="h1 text-center text-orange">¿Todavía no te has registrado?</div>
 					<div class="h3 text-center py-2">¡A que esperas!</div>
-					<a href="#"><input type="button" name="registro" value="¡Regístrate en un click!" class="form-control"></a>
+					<a href="registro.html"><input type="button" name="registro" value="¡Regístrate en un click!" class="form-control"></a>
 				</div>
 
 			</div>
