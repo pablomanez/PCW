@@ -1,30 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 	<meta charset="UTF-8">
 	<title>Revolucionaria página de recetas de cocina - ÍNDICE</title>
 	<link rel="stylesheet" href="CSS/Lightrap.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body class="background">
-	<header class="container-fluid bg-dark text-white position-fixed z-100">
-		<div class="row">
-			<div class="col-2 py-3 col-lg-1 bg-orange">
-			logo
-			</div>
-			<div class="col-5 col-lg-8">
-				<form action="buscar.html" method="get">
-					<p>
-						<input type="text" name="search_box" required>
-						<input type="submit" name="submit" value="Buscar">
-					</p>
+
+	<!-- HOME BÚSQUEDA LOGIN/REGISTRO LOGOUT AÑADIR-RECETA -->
+	
+	<header class="container-fluid bg-dark-t2 position-fixed z-5 d-flex align-items-center">	
+		<!-- ARREGLAR VERTICAL ALIGN-->
+		<img class="pt-1 w-logo float-left" src="Images/THE_LEMON.png"/>
+		<div class="pl-3 row w-100 h-100">
+			<div class="col-10 col-md-8 d-flex align-items-center">
+				<form class="position-relative w-100" action="buscar.html" method="get">
+					<input style="border-radius: 30px" class="form-control mb-0" type="text" name="search_box" required>
+					<button class="search-btn m-auto t0 b0 r0 pr-2" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
 				</form>
 			</div>
-			<div class="col-2 py-3"><a>Login</a></div>
-		</div>
+			<div class="col-2 col-md-4 d-none d-md-initial py-3 text-center">
+				<a href="login.html">Login</a>
+				<a href="registro.html">Registro</a>
+			</div>
+
+			<nav role="navigation" class="d-flex align-items-center col-2 d-md-initial d-md-none">
+			  <div id="menuToggle"> 
+			    <input type="checkbox" />
+			    <span></span>
+			    <span></span>
+			    <span></span>
+			    <ul id="menu">
+			      <a href="#"><li>Home</li></a>
+			      <a href="#"><li>About</li></a>
+			      <a href="#"><li>Info</li></a>
+			      <a href="#"><li>Contact</li></a>
+			    </ul>
+			  </div>
+			</nav>
+		</div>	
+		
 	</header>
-	
+		
+
 	<div class="container-fluid pt-150px text-dark text-center pb-5 shadow position-relative">
 		<div class="row m-0 d-flex">
 			<img class="Mh-100 position-absolute mt--150px l0 b0 Mw-20 z-1" src="Images/arguiñano.png" alt="Carlos Arguiñano">
@@ -68,7 +90,7 @@
 				<img class="index-img position-absolute h-100 w-100" src="Images/RECETA_1.jpg" alt="Pollo con chicarrón">
 				<div class="z-1 text-center p-1 pt-5 mh-100 w-100 o-hidden">
 					<a href="receta.html" class="d-block text-shadow justify-self-center h2 justify-content-center mt-2 mb-5 h-10">	
-						<span class="d-block tag">Pollo con chicarrón</span>							<!-- TÍTULO -->
+						<span class="d-block tag">Pollo con chicharrón</span>							<!-- TÍTULO -->
 					</a>
 					<div class="row">
 						<div class="col-12 col-sm-6 col-md-12">
