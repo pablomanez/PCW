@@ -15,30 +15,29 @@
 	
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 d-flex align-items-center">	
 		<!-- ARREGLAR VERTICAL ALIGN-->
-		<img class="pt-1 w-logo float-left" src="Images/THE_LEMON.png"/>
+		<a href="index.html" class="logo w-logo float-left h-100"></a>
 		<div class="pl-3 row w-100 h-100">
-			<div class="col-10 col-md-8 d-flex align-items-center">
+			<div class="Mh-100 col-10 col-md-7 col-lg-9 d-flex align-items-center justify-content-center">
 				<form class="position-relative w-100" action="buscar.html" method="get">
 					<input style="border-radius: 30px" class="form-control mb-0" type="text" name="search_box" required>
 					<button class="search-btn m-auto t0 b0 r0 pr-2" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
 				</form>
 			</div>
-			<div class="col-2 col-md-4 d-none d-md-initial py-3 text-center">
-				<a href="login.html">Login</a>
-				<a href="registro.html">Registro</a>
+			<div class="col-2 col-md-5 col-lg-3 d-none d-md-flex text-center p-0 align-items-center justify-content-center">
+				<a class="btn revers-a" href="login.html">Login</a>
+				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 			</div>
 
-			<nav role="navigation" class="d-flex align-items-center col-2 d-md-initial d-md-none">
+			<nav role="navigation" class="d-flex align-items-center col-2 d-md-initial d-md-none p-0 justify-content-center">
 			  <div id="menuToggle"> 
 			    <input type="checkbox" />
 			    <span></span>
 			    <span></span>
 			    <span></span>
-			    <ul id="menu">
-			      <a href="#"><li>Home</li></a>
-			      <a href="#"><li>About</li></a>
-			      <a href="#"><li>Info</li></a>
-			      <a href="#"><li>Contact</li></a>
+			    <ul id="menu" class="p-3">
+			      <a class="revers-a" href="#"><li>Home</li></a>
+			      <a class="revers-a" href="#"><li>Añadir receta</li></a>
+			      <a class="revers-a" href="#"><li>Logout</li></a>
 			    </ul>
 			  </div>
 			</nav>

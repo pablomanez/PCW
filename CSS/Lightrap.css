@@ -25,6 +25,19 @@ html, body{
 	font-weight: lighter;
 }
 
+header{height: 50px;}
+.logo{
+	background: url("../Images/THE_LEMON_ICON.png") no-repeat left; 
+	background-size: auto 100%;
+	transition: background 0.4s ease-in-out;
+}
+.logo:hover, .logo:focus, .logo:active{ 
+	background: url("../Images/THE_LEMON_ICON_FOCUS.png") no-repeat left; 
+	background-size: auto 100%;
+}
+
+.w-logo{min-width: 50px;}
+
 /* COLORES BACKGROUND */
 .bg-black{background: var(--black);}
 .bg-dark{background: var(--dark);}
@@ -163,8 +176,6 @@ html, body{
 .w-75 {width: 75% !important;}
 .w-100 {width: 100% !important;}
 
-.w-logo{width: 300px;}
-
 .Mw-20 {max-width: 20% !important;}
 
 .h-5 {height: 5% !important;}
@@ -220,7 +231,7 @@ html, body{
 .pl-4 {padding-left: 40px;}	.pr-4 {padding-right: 40px;}	.pt-4 {padding-top: 40px;}	.pb-4 {padding-bottom: 40px;}
 .pl-5 {padding-left: 60px;}	.pr-5 {padding-right: 60px;}	.pt-5 {padding-top: 60px;}	.pb-5 {padding-bottom: 60px;}
 
-.pt-150px{padding-top: 150px;}
+.pt-150px{padding-top: 77px;}
 
 /* MARGINS */
 .m-0 {margin: 0;}
@@ -257,67 +268,49 @@ html, body{
 .ml-auto{margin-left: auto;}
 .m-auto{margin:auto;}
 
-
 /* IMAGEN */
 
-.background{
-	background-image: url("../Images/header2.jpg");
-	background-position: center;
-}
-
+.background{background-image: url("../Images/header2.jpg"); background-position: center;}
 .bg-image{
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-
 .index-img{
 	opacity: 0.5;
 	object-fit: cover;
 	object-position: 50% 50%;
 	transition: all 0.4s ease-in-out;
 }
+.obj-fit{object-fit: cover; object-position: 50% 50%;}
+.index-img:hover, #index figure:hover .index-img {opacity: 1;}
 
-.obj-fit{
-	object-fit: cover;
-	object-position: 50% 50%;
-}
-
-.index-img:hover, #index figure:hover .index-img {
-	opacity: 1;
-}
-
+/* ICONOS DE LOS USUARIOS + DIV CON EL NOMBRE*/
 .index-button{
 	height: 120px;
 	width: 120px;
 	transition: all 0.3s ease-in-out;
 }
-
 .index-button:hover{
 	width: 180px;
 	height: 180px;
 }					
-
 .index-button + div{
 	opacity: 0;
 	margin-top: -10px;
 	transition: all 0.3s ease-in-out;
 }
-
 .index-button:hover + div{
 	margin-top: 10px;
 	opacity: 1;
 	background: rgba(0,0,0,0.5);
 }
 
-
 .mini-user-icon{height: 80px;width: 80px;}
 .footer-logo{height: 90px;width: 90px;}
 .header-logo{width: 150px;height: 150px;}
 .huge-logo{width: 250px; height: 250px;}
-
 .flip{transform: scaleX(-1);}
-/* https://hacks.mozilla.org/2017/04/replace-bootstrap-layouts-with-css-grid/ */
 
 /* CONTENEDOR */
 .container, .container-fluid{
@@ -326,16 +319,13 @@ html, body{
 	padding-left: 15px;
 	padding-right: 15px;
 }
-
 .container-fluid{width: 100%;}
-
 .row {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	margin-left: -15px;
 	margin-right: -15px;
 }
-
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
 .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,
@@ -403,10 +393,25 @@ html, body{
 	.d-sm-flex{display: flex;}
 	.d-sm-none{display: none;}
 	.mw-1500px{min-width: 1500px;}	
+
+
 }
 
 /* md */
 @media (min-width: 768px) {
+
+	header{height: 80px;}
+	.logo{
+		background: url("../Images/THE_LEMON.png") no-repeat center; 
+		background-size: 100%;
+		transition: background 0.4s ease-in-out;
+	}
+	.logo:hover, .logo:focus, .logo:active{ 
+		background: url("../Images/THE_LEMON_FOCUS.png") no-repeat center; 
+		background-size: 100%;
+	}
+	.w-logo{min-width: 300px;}
+	.pt-150px{padding-top: 150px;}
 	.col-md-1{grid-column: span 1;}
 	.col-md-2{grid-column: span 2;}
 	.col-md-3{grid-column: span 3;}
@@ -509,8 +514,9 @@ html, body{
 	.mh-index{min-height: 800px;}
 }
 
-.clear{clear:both;}
 
+
+/* FORMS */
 .form-control{
 	width: 100%;
 	height: 35px;
@@ -521,48 +527,31 @@ html, body{
 	font-size: 1rem;
 	padding: 5px 12px;
 	margin-bottom: 10px;
+	border-radius: 5px;
   	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
 .form-control:hover, .form-control:focus, .form-control:active{
 	background-color: var(--light);
 }
-
 .form-control:focus {
   color: #495057;
   border: 1px solid rgba(249, 195, 0, 0.5);
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(249, 195, 0, 0.25);
+  box-shadow: 0 0 0 3px rgba(249, 195, 0, 0.25);
 }
-
 .form-label{line-height: 1.5;}
 
-.circle{border-radius: 50%;}
-
-#index figure{
-	color: white;
-	font-size: 20px;
-	margin:0;
-}
-
-a{
-	color: var(--orange);
-	text-decoration: none;
-	transition: color 0.2s ease-in-out;
-}
-a:hover, a:focus, a:active{color: var(--light);}
 
 /* INDEX */
 #index a, .revers-a{color: var(--light);}
 #index a:hover, .revers-a:hover{color: var(--orange);}
 .tag{transition: all 0.5s ease-in-out;}
 #index a:hover .tag{background: rgba(0,0,0,0.6); }
-
-/* SHADOW */
-.shadow{text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);}
-.text-shadow{text-shadow: 4px 4px 10px black,4px 4px 10px black;}
-.box-shadow{box-shadow: 5px 5px 10px black;}
-
+#index figure{
+	color: white;
+	font-size: 20px;
+	margin:0;
+}
 
 #index nav:before {
     content: " ";
@@ -585,53 +574,56 @@ a:hover, a:focus, a:active{color: var(--light);}
     z-index: 3;
 }
 
+/* SHADOW */
+.shadow{text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);}
+.text-shadow{text-shadow: 4px 4px 10px black,4px 4px 10px black;}
+.box-shadow{box-shadow: 5px 5px 10px black;}
+
+
+/* ENLACES */
 .div-link{transition: all 0.5s ease-in-out;}
 .div-link:hover{background: rgba(249, 195, 0, 0.6); color: var(--dark) !important;}
+a{
+	color: var(--orange);
+	text-decoration: none;
+	transition: color 0.2s ease-in-out;
+}
+a:hover, a:focus, a:active{color: var(--light);}
 
 
-
+/* VARIOS */
 hr {
     border: 0;
     border-top: 1px solid rgba(0,0,0,0.4);
     margin: 1em 0;
     padding: 0;
 }
+.circle{border-radius: 50%;}
+.clear{clear:both;}
 
+
+/* BOTONES */
 .btn {
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid transparent;
-  padding: 5px 12px;
-  font-size: 1rem;
-  line-height: 1.5;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.btn:focus, .btn:hover {
-  text-decoration: none;
-}
-
-.btn:focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  	display: inline-block;
+  	text-align: center;
+  	border: 1px solid transparent;
+  	padding: 10px 12px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 18px;
+  	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn-outline-orange {
-  color: #dc3545;
+  color: var(--orange);
   background-color: transparent;
   background-image: none;
-  border-color: #dc3545;
+  border-color: var(--orange);
 }
 
-.btn-outline-orange:hover {
-  color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-.btn-outline-orange:focus, .btn-outline-orange {
-  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+.btn-outline-orange:hover, .btn-outline-orange:focus {
+  color: var(--dark);
+  background-color: var(--orange);
 }
 
 .btn-outline-dark {
@@ -640,16 +632,13 @@ hr {
   border-color:  var(--dark);
 }
 
-.btn-outline-dark:hover {
+.btn-outline-dark:hover, .btn-outline-dark:focus {
   color: var(--light);
   background-color:  var(--dark);
   border-color:  var(--light);
 }
 
-.btn-outline-dark:focus, .btn-outline-orange {
-  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
-}
-
+/* BOTON BÚSQUEDA (LUPA) */
 .search-btn{
 	color: var(--dark);
 	background: transparent;
@@ -658,132 +647,66 @@ hr {
 	cursor: pointer;
 	transition: color 0.4s ease-in-out;
 }
-
 .search-btn:hover, .search-btn:focus, .search-btn:active{
 	outline: none;
 	color: var(--orange);
 }
 
-#menuToggle
-{
+/* MENÚ DE HAMBURGUESA MOLÓN */
+#menuToggle{
   display: block;
   position: relative;
-
-  
   -webkit-user-select: none;
   user-select: none;
 }
 
-#menuToggle input
-{
+#menuToggle input{
   display: block;
   width: 40px;
   height: 32px;
   position: absolute;
   top: -7px;
   left: -5px;
-  
   cursor: pointer;
-  
-  opacity: 0; /* hide this */
-  z-index: 2; /* and place it over the hamburger */
-  
-  -webkit-touch-callout: none;
+  opacity: 0;
+  z-index: 2;
 }
-
-/*
- * Just a quick hamburger
- */
-#menuToggle span
-{
+#menuToggle span{
   display: block;
   width: 33px;
   height: 4px;
   margin-bottom: 5px;
   position: relative;
-  
   background: var(--light);
   border-radius: 3px;
- 
-  
   transform-origin: 4px 0px;
-  
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
               background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
               opacity 0.55s ease;
 }
 
-#menuToggle span:first-child
-{
-  transform-origin: 0% 0%;
-}
-
-#menuToggle span:nth-last-child(2)
-{
-  transform-origin: 0% 100%;
-}
-
-/* 
- * Transform all the slices of hamburger
- * into a crossmark.
- */
-#menuToggle input:checked ~ span
-{
+#menuToggle span:first-child{transform-origin: 0% 0%;}
+#menuToggle span:nth-last-child(2){transform-origin: 0% 100%;}
+#menuToggle input:checked ~ span{
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
   background: var(--orange);
 }
-
-/*
- * But let's hide the middle one.
- */
-#menuToggle input:checked ~ span:nth-last-child(3)
-{
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
+#menuToggle input:checked ~ span:nth-last-child(3){opacity: 0; transform: rotate(0deg) scale(0.2, 0.2);}
+#menuToggle input:checked ~ span:nth-last-child(2){transform: rotate(-45deg) translate(0, -1px);}
+#menu{
+	position: absolute;
+	right: 0;
+	width: 400px;
+	margin-top: 11.7px;
+	list-style-type: none;
+	-webkit-font-smoothing: antialiased;
+	/* to stop flickering of text in safari */
+	background: rgba(0,0,0,0.6);
+	transform-origin: 0% 0%;
+	transform: translate(110%, 0);
+	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	text-align: left;
 }
-
-/*
- * Ohyeah and the last one should go the other direction
- */
-#menuToggle input:checked ~ span:nth-last-child(2)
-{
-  transform: rotate(-45deg) translate(0, -1px);
-}
-
-/*
- * Make this absolute positioned
- * at the top left of the screen
- */
-#menu
-{
-  position: absolute;
-  right: 0;
-  width: 300px;
-  margin: 22.3px 0 0 0;
-  padding: 50px;
-  padding-top: 125px;
-  
-  list-style-type: none;
-  -webkit-font-smoothing: antialiased;
-  /* to stop flickering of text in safari */
-  background: rgba(0,0,0,0.6);
-  transform-origin: 0% 0%;
-  transform: translate(100%, 0);
-  
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-}
-
-#menu li
-{
-  padding: 10px 0;
-  font-size: 22px;
-}
-
-/*
- * And let's slide it in from the left
- */
-#menuToggle input:checked ~ ul
-{
-  transform: none;
-}
+#menu li{padding: 10px 0; font-size: 22px;}
+#menuToggle input:checked ~ ul{transform: translate(35.17%, 0);;}
