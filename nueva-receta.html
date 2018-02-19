@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Revolucionaria página de cocina - NUEVA RECETA</title>
+	<link rel="stylesheet" href="CSS/Lightrap.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+<body class="background">
+	<main>
+		<!--
+		Nombre de la receta, elaboración <textarea>, número de comensales, tiempo de elaboración, dificultad <select>
+		-->
+		<form action="#" method="post">
+			<div>
+				<label for="l_namerecipe">Nombre de la receta:</label>
+				<input type="text" name="namerecipe" id="l_namerecipe" maxlength="200" required>
+			</div>
+			<div>
+				<label for="l_elab">Elaboración:</label>
+				<textarea rows="4" cols="50" name="elab" id="l_elab" placeholder="Escribe aquí la preparación de tu receta" required></textarea>
+			</div>
+			<div>
+				<label for="l_comen">Número de comensales:</label>
+				<input type="number" name="comen" id="l_comen" step="1" min="1" value="1" required>
+			</div>
+			<div>
+				<label for="l_time">Tiempo de elaboración:</label>
+				<input type="number" name="time" id="l_time" step="5" min="5" value="5" required>
+			</div>
+			<div>
+				<label for="l_diff">Dificultad de elaboración</label>
+				<select required id="l_diff">
+					<option value="" disabled selected>Elige una opción</option>
+					<option value="baja">Baja</option>
+					<option value="media">Media</option>
+					<option value="alta">Alta</option>
+				</select>
+			</div>
+
+			<div>
+				<label for="l_ingr"><h2>Zona de ingredientes</h2></label>
+				<ul contenteditable="true" id="l_ingr" class="bg-red">
+					<li>Un ingrediente</li>
+					<li>Otro ingrediente</li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+
+			<div>
+				<h2>Selección de fotos</h2>
+				<button>Añadir foto</button>
+				<figure>
+					<input type="file" name="foto" value="Selecciona una foto" required>
+					<img src="Images/EL_LOGO.jpg" height="123" width="230">
+					<figcaption>
+						<textarea rows="4" cols="50" name="elab" id="l_elab" placeholder="Pie de foto" maxlength="250" required></textarea>
+					</figcaption>
+				</figure>
+
+			</div>
+
+
+
+
+			<input type="submit" name="submit" value="Crear receta">
+		</form>
+
+	</main>
+</body>
+</html>
