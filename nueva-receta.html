@@ -5,69 +5,131 @@
 	<title>Revolucionaria página de cocina - NUEVA RECETA</title>
 	<link rel="stylesheet" href="CSS/Lightrap.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body class="background">
-	<main>
-		<!--
-		Nombre de la receta, elaboración <textarea>, número de comensales, tiempo de elaboración, dificultad <select>
-		-->
+	<main class="container-fluid">
 		<form action="#" method="post">
-			<div>
-				<label for="l_namerecipe">Nombre de la receta:</label>
-				<input type="text" name="namerecipe" id="l_namerecipe" maxlength="200" required>
+
+			<!-- DESCRIPCIÓN DE LA RECETA -->
+			<div class="row bg-dark-t2 p-3 box-shadow text-light">
+				<div class="col-12 justify-self-center">
+					<div class="row">
+						<div class="col-2">
+							<label class="form-label" for="l_namerecipe">Nombre de la receta:</label>
+						</div>
+
+						<div class="col-10">
+							<input class="form-control" type="text" name="namerecipe" id="l_namerecipe" maxlength="200" required>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 justify-self-center">
+					<label class="form-label" for="l_elab">Elaboración:</label>
+					
+					<textarea style="resize: none; height: auto;" class="form-control" rows="10" cols="130" name="elab" id="l_elab" placeholder="Escribe aquí la preparación de tu receta" required></textarea>
+				</div>
+
+				<div class="col-12 justify-self-center">
+					<div class="row">
+						<div class="col-4">
+							<label class="form-label" for="l_comen">Número de comensales:</label>
+							<input class="form-control" type="number" name="comen" id="l_comen" step="1" min="1" value="1" required>
+						</div>
+
+						<div class="col-4">
+							<label class="form-label" for="l_time">Tiempo de elaboración:</label>
+							<input class="form-control" type="number" name="time" id="l_time" step="5" min="5" value="5" required>
+						</div>
+
+						<div class="col-4">
+							<label class="form-label" for="l_diff">Dificultad de elaboración:</label>
+							<select class="form-control" required id="l_diff">
+								<option value="" disabled selected>Elige una opción</option>
+								<option value="baja">Baja</option>
+								<option value="media">Media</option>
+								<option value="alta">Alta</option>
+							</select>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div>
-				<label for="l_elab">Elaboración:</label>
-				<textarea rows="4" cols="50" name="elab" id="l_elab" placeholder="Escribe aquí la preparación de tu receta" required></textarea>
-			</div>
-			<div>
-				<label for="l_comen">Número de comensales:</label>
-				<input type="number" name="comen" id="l_comen" step="1" min="1" value="1" required>
-			</div>
-			<div>
-				<label for="l_time">Tiempo de elaboración:</label>
-				<input type="number" name="time" id="l_time" step="5" min="5" value="5" required>
-			</div>
-			<div>
-				<label for="l_diff">Dificultad de elaboración</label>
-				<select required id="l_diff">
-					<option value="" disabled selected>Elige una opción</option>
-					<option value="baja">Baja</option>
-					<option value="media">Media</option>
-					<option value="alta">Alta</option>
-				</select>
+			
+			<!-- ZONA DE INGREDIENTES -->
+			<div class="row bg-light-t p-3 pt-0 text-dark">
+				<div class="col-12">
+					<h2 class="display-4 text-center">Zona de ingredientes</h2>
+					<p class="text-center">Pulsa "ENTER" para escribir más ingredientes</p>
+
+				</div>
+				<div class="col-12 bg-dark-t text-light box-shadow">
+					<ul contenteditable="true" id="l_ingr" class="row">
+						<li class="col-3 mr-3">Un ingrediente</li>
+						<li class="col-3 mr-3">Otro ingrediente</li>
+						<li class="col-3 mr-3">Otro más</li>
+						<li class="col-3 mr-3"></li>
+						<li class="col-3 mr-3"></li>
+						<li class="col-3 mr-3"></li>
+						<li class="col-3 mr-3"></li>
+					</ul>
+				</div>
+				
+				<!-- SELECCIÓN DE FOTOS -->
+				<div class="d-flex align-items-center justify-self-center col-12">
+					<div class="col-10">
+						<h2 class="display-4 d-inline-block">Selección de fotos</h2>
+					</div>
+					
+					<div class="col-2">
+						<div class="btn btn-outline-dark">Añadir foto</div>
+					</div>
+				</div>
+				<div class="col-6 bg-dark-t box-shadow m-2">
+					<div class="col-12 m-2">
+						<input class="form-control w-75 justify-self-center" type="file" name="foto" required>
+					</div>
+
+					<div class="col-12 justify-self-center d-flex align-items-center p-2">
+						<img style="border-radius: 5px;" class="mr-2" src="Images/EL_LOGO.jpg" height="200" alt="Foto de la receta">
+
+						<textarea style="resize: none; height: auto;" class="form-control" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+					</div>
+				</div>
+				
+				<div class="col-6 bg-dark-t box-shadow m-2">
+					<div class="col-12 m-2">
+						<input class="form-control w-75 justify-self-center" type="file" name="foto" required>
+					</div>
+
+					<div class="col-12 justify-self-center d-flex align-items-center p-2">
+						<img style="border-radius: 5px;" class="mr-2" src="Images/EL_LOGO.jpg" height="200" alt="Foto de la receta">
+
+						<textarea style="resize: none; height: auto;" class="form-control" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+					</div>
+				</div>
+
+				<div class="col-6 bg-dark-t box-shadow m-2">
+					<div class="col-12 m-2">
+						<input class="form-control w-75 justify-self-center" type="file" name="foto" required>
+					</div>
+
+					<div class="col-12 justify-self-center d-flex align-items-center p-2">
+						<img style="border-radius: 5px;" class="mr-2" src="Images/EL_LOGO.jpg" height="200" alt="Foto de la receta">
+
+						<textarea style="resize: none; height: auto;" class="form-control" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+					</div>
+				</div>
+
+
+
+				<div class="col-12 pt-4">
+					<input class="form-control" type="submit" name="submit" value="Crear receta">
+				</div>
 			</div>
 
-			<div>
-				<label for="l_ingr"><h2>Zona de ingredientes</h2></label>
-				<ul contenteditable="true" id="l_ingr" class="bg-red">
-					<li>Un ingrediente</li>
-					<li>Otro ingrediente</li>
-					<li></li>
-					<li></li>
-				</ul>
-			</div>
-
-			<div>
-				<h2>Selección de fotos</h2>
-				<button>Añadir foto</button>
-				<figure>
-					<input type="file" name="foto" value="Selecciona una foto" required>
-					<img src="Images/EL_LOGO.jpg" height="123" width="230">
-					<figcaption>
-						<textarea rows="4" cols="50" name="elab" id="l_elab" placeholder="Pie de foto" maxlength="250" required></textarea>
-					</figcaption>
-				</figure>
-
-			</div>
-
-
-
-
-			<input type="submit" name="submit" value="Crear receta">
 		</form>
-
 	</main>
 </body>
 </html>
