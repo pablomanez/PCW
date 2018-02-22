@@ -129,6 +129,7 @@ header{height: 50px;}
 .o-scroll{overflow: scroll;}
 .o-hidden{overflow: hidden;}
 .o-auto{overflow: auto;}
+.o-visible{overflow: visible;}
 
 /* Z-INDEX */
 .z-100{z-index: 100;}
@@ -177,6 +178,7 @@ header{height: 50px;}
 .w-100 {width: 100% !important;}
 
 .Mw-20 {max-width: 20% !important;}
+.Mw-100 {max-width: 100% !important;}
 
 .h-5 {height: 5% !important;}
 .h-10 {height: 10% !important;}
@@ -441,7 +443,7 @@ header{height: 50px;}
 	.d-md-initial{display: initial;}
 	.d-md-flex{display: flex;}
 	.d-md-none{display: none;}
-	.mh-index{min-height: 500px;}
+	.mh-index{min-height: 500px !important;}
 }
 
 /* lg */
@@ -511,7 +513,7 @@ header{height: 50px;}
 	.d-xl-initial{display: initial;}
 	.d-xl-flex{display: flex;}
 	.d-xl-none{display: none;}
-	.mh-index{min-height: 800px;}
+	.mh-index{min-height: 800px !important;}
 }
 
 
@@ -543,6 +545,7 @@ header{height: 50px;}
 
 
 /* INDEX */
+#index{overflow-x: hidden;}
 #index a, .revers-a{color: var(--light);}
 #index a:hover, .revers-a:hover{color: var(--orange);}
 .tag{transition: all 0.5s ease-in-out;}
@@ -550,7 +553,8 @@ header{height: 50px;}
 #index figure{
 	color: white;
 	font-size: 20px;
-	margin:0;
+	margin-left: 0;
+	margin-right: 0;
 }
 
 #index nav:before {
