@@ -12,15 +12,22 @@
 	<main class="container-fluid">
 		<form action="#" method="post">
 
+			<!--
+			xl: 1200
+			lg: 992
+			md: 768
+			sm: 576
+			-->
+
 			<!-- DESCRIPCIÓN DE LA RECETA -->
 			<div class="row bg-dark-t2 p-3 box-shadow text-light">
 				<div class="col-12 justify-self-center">
 					<div class="row">
-						<div class="col-2">
+						<div class="col-lg-2 col-md-3 col-sm-5 col-9">
 							<label class="form-label" for="l_namerecipe">Nombre de la receta:</label>
 						</div>
 
-						<div class="col-10">
+						<div class="col-lg-10 col-md-9 col-sm-12 col-12">
 							<input class="form-control" type="text" name="namerecipe" id="l_namerecipe" maxlength="200" required>
 						</div>
 					</div>
@@ -34,17 +41,17 @@
 
 				<div class="col-12 justify-self-center">
 					<div class="row">
-						<div class="col-4">
+						<div class="col-md-4 col-sm-6 col-12">
 							<label class="form-label" for="l_comen">Número de comensales:</label>
 							<input class="form-control" type="number" name="comen" id="l_comen" step="1" min="1" value="1" required>
 						</div>
 
-						<div class="col-4">
+						<div class="col-md-4 col-sm-6 col-12">
 							<label class="form-label" for="l_time">Tiempo de elaboración:</label>
 							<input class="form-control" type="number" name="time" id="l_time" step="5" min="5" value="5" required>
 						</div>
 
-						<div class="col-4">
+						<div class="col-md-4 col-12">
 							<label class="form-label" for="l_diff">Dificultad de elaboración:</label>
 							<select class="form-control" required id="l_diff">
 								<option value="" disabled selected>Elige una opción</option>
@@ -66,59 +73,76 @@
 				</div>
 				<div class="col-12 bg-dark-t text-light box-shadow">
 					<ul contenteditable="true" id="l_ingr" class="row">
-						<li class="col-3 mr-3">Un ingrediente</li>
-						<li class="col-3 mr-3">Otro ingrediente</li>
-						<li class="col-3 mr-3">Otro más</li>
-						<li class="col-3 mr-3"></li>
-						<li class="col-3 mr-3"></li>
-						<li class="col-3 mr-3"></li>
-						<li class="col-3 mr-3"></li>
+						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3">Un ingrediente</li>
+						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3">Otro ingrediente</li>
+						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3">Otro más</li>
+						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3"></li>
+						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3"></li>
 					</ul>
 				</div>
 				
 				<!-- SELECCIÓN DE FOTOS -->
 				<div class="d-flex align-items-center justify-self-center col-12">
-					<div class="col-10">
-						<h2 class="display-4 d-inline-block">Selección de fotos</h2>
-					</div>
+					<div class="row">
+						<div class="col-lg-9 col-md-8 col-sm-9 col-12 text-center">
+							<h2 class="display-4 d-inline-block text-center">Selección de fotos</h2>
+						</div>
 					
-					<div class="col-2">
-						<div class="btn btn-outline-dark">Añadir foto</div>
-					</div>
-				</div>
-				<div class="col-6 bg-dark-t box-shadow m-2">
-					<div class="col-12 m-2">
-						<input class="form-control w-75 justify-self-center" type="file" name="foto" required>
-					</div>
+						<div class="col-lg-3 col-md-4 col-sm-3 col-12 m-auto">
+							<div class="btn btn-outline-dark">Añadir foto</div>
+						</div>
 
-					<div class="col-12 justify-self-center d-flex align-items-center p-2">
-						<img style="border-radius: 5px;" class="mr-2" src="Images/EL_LOGO.jpg" height="200" alt="Foto de la receta">
-
-						<textarea style="resize: none; height: auto;" class="form-control" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
-					</div>
-				</div>
-				
-				<div class="col-6 bg-dark-t box-shadow m-2">
-					<div class="col-12 m-2">
-						<input class="form-control w-75 justify-self-center" type="file" name="foto" required>
-					</div>
-
-					<div class="col-12 justify-self-center d-flex align-items-center p-2">
-						<img style="border-radius: 5px;" class="mr-2" src="Images/EL_LOGO.jpg" height="200" alt="Foto de la receta">
-
-						<textarea style="resize: none; height: auto;" class="form-control" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
 					</div>
 				</div>
 
-				<div class="col-6 bg-dark-t box-shadow m-2">
+				<div class="col-md-6 col-12 bg-dark-t box-shadow m-2">
 					<div class="col-12 m-2">
-						<input class="form-control w-75 justify-self-center" type="file" name="foto" required>
+						<input class="form-control Mw-100 justify-self-center" type="file" name="foto" required>
 					</div>
 
 					<div class="col-12 justify-self-center d-flex align-items-center p-2">
-						<img style="border-radius: 5px;" class="mr-2" src="Images/EL_LOGO.jpg" height="200" alt="Foto de la receta">
+						<div class="row">
+							<div class="col-lg-6 col-md-12 col-sm-6 col-12 m-auto">
+								<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
+							</div>
+							<div class="col-lg-6 col-md-12 col-sm-6 col-12">
+								<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
 
-						<textarea style="resize: none; height: auto;" class="form-control" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+				<div class="col-md-6 col-12 bg-dark-t box-shadow m-2">
+					<div class="col-12 m-2">
+						<input class="form-control Mw-100 justify-self-center" type="file" name="foto" required>
+					</div>
+
+					<div class="col-12 justify-self-center d-flex align-items-center p-2">
+						<div class="row">
+							<div class="col-lg-6 col-md-12 col-sm-6 col-12 m-auto">
+								<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
+							</div>
+							<div class="col-lg-6 col-md-12 col-sm-6 col-12">
+								<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-12 bg-dark-t box-shadow m-2">
+					<div class="col-12 m-2">
+						<input class="form-control Mw-100 justify-self-center" type="file" name="foto" required>
+					</div>
+
+					<div class="col-12 justify-self-center d-flex align-items-center p-2">
+						<div class="row">
+							<div class="col-lg-6 col-md-12 col-sm-6 col-12 m-auto">
+								<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
+							</div>
+							<div class="col-lg-6 col-md-12 col-sm-6 col-12">
+								<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -131,5 +155,20 @@
 
 		</form>
 	</main>
+
+	<footer class="container-fluid py-3 bg-dark">
+			<div style="background-image: url(Images/LOGO_1.jpeg);" class="circle justify-self-center footer-logo bg-image my-2"></div>
+			<div class="text-light p-0 text-center">
+				<span class="h6">&copy; <time datetime="2018">2018</time> </span>
+				<span class="h6">Revolucionaria página de cocina, ALL RIGHTS RESERVED</span>
+			</div>
+			<div class="text-light p-0 text-center">
+				<span class="h6">Todos los derechos reservados. Todas las marcas reservadas son de sus respectivos dueños.</span>
+			</div>
+			
+			<div class="text-center p-0 mt-2">
+				<a class="text-orange" href="acerca.html">ACERCA DE NOSOTROS</a>
+			</div>
+	</footer>
 </body>
 </html>
