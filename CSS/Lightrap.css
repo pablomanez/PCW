@@ -25,18 +25,17 @@ html, body{
 	font-weight: lighter;
 }
 
-header{height: 50px;}
 .logo{
-	background: url("../Images/THE_LEMON_ICON.png") no-repeat left; 
+	background: url("../Images/THE_LEMON_ICON.png") no-repeat center; 
 	background-size: auto 100%;
 	transition: background 0.4s ease-in-out;
+	
 }
 .logo:hover, .logo:focus, .logo:active{ 
-	background: url("../Images/THE_LEMON_ICON_FOCUS.png") no-repeat left; 
+	background: url("../Images/THE_LEMON_ICON_FOCUS.png") no-repeat center; 
 	background-size: auto 100%;
 }
 
-.w-logo{min-width: 50px;}
 
 /* COLORES BACKGROUND */
 .bg-black{background: var(--black);}
@@ -176,6 +175,7 @@ header{height: 50px;}
 .w-50 {width: 50% !important;}
 .w-75 {width: 75% !important;}
 .w-100 {width: 100% !important;}
+.w-search {width: 100%}
 
 .Mw-20 {max-width: 20% !important;}
 .Mw-100 {max-width: 100% !important;}
@@ -187,7 +187,9 @@ header{height: 50px;}
 .h-50 {height: 50% !important;}
 .h-75 {height: 75% !important;}
 .h-100 {height: 100% !important;}
+.h-100vw{height: 100vw;}
 
+.height-50px {height: 50px !important;}
 .height-75px {height: 75px !important;}
 .height-100px {height: 100px !important;}
 .height-150px {height: 150px !important;}
@@ -212,7 +214,7 @@ header{height: 50px;}
 .p-4 {padding: 40px;}
 .p-5 {padding: 60px;}
 
-.px-0 {padding-left: 0; padding-right: 0;}
+.px-0 {padding-left: 0 !important; padding-right: 0 !important;}
 .px-1 {padding-left: 5px; padding-right: 5px;}
 .px-2 {padding-left: 15px; padding-right: 15px;}
 .px-3 {padding-left: 30px; padding-right: 30px;}
@@ -226,7 +228,7 @@ header{height: 50px;}
 .py-4 {padding-top: 40px; padding-bottom: 40px;}
 .py-5 {padding-top: 60px; padding-bottom: 60px;}
 
-.pl-0 {padding-left: 0;}	.pr-0 {padding-right: 0;}		.pt-0 {padding-top: 0;}		.pb-0 {padding-bottom: 0;}
+.pl-0 {padding-left: 0 !important;}	.pr-0 {padding-right: 0;}		.pt-0 {padding-top: 0;}		.pb-0 {padding-bottom: 0;}
 .pl-1 {padding-left: 5px;}	.pr-1 {padding-right: 5px;}		.pt-1 {padding-top: 5px;}	.pb-1 {padding-bottom: 5px;}
 .pl-2 {padding-left: 15px;}	.pr-2 {padding-right: 15px;}	.pt-2 {padding-top: 15px;}	.pb-2 {padding-bottom: 15px;}
 .pl-3 {padding-left: 30px;}	.pr-3 {padding-right: 30px;}	.pt-3 {padding-top: 30px;}	.pb-3 {padding-bottom: 30px;}
@@ -236,7 +238,7 @@ header{height: 50px;}
 .pt-150px{padding-top: 77px;}
 
 /* MARGINS */
-.m-0 {margin: 0;}
+.m-0 {margin: 0 !important;}
 .m-1 {margin: 5px;}
 .m-2 {margin: 15px;}
 .m-3 {margin: 30px;}
@@ -403,6 +405,10 @@ header{height: 50px;}
 @media (min-width: 768px) {
 
 	header{height: 80px;}
+	header input[type=checkbox], header input[type=checkbox] ~ span, header #menu{display: none;}
+	header div:first-child {height: auto !important;}
+	header label{display: none !important;}
+	.w-search {width: 85%}
 	.logo{
 		background: url("../Images/THE_LEMON.png") no-repeat center; 
 		background-size: 100%;
@@ -444,11 +450,13 @@ header{height: 50px;}
 	.d-md-flex{display: flex;}
 	.d-md-none{display: none;}
 	.mh-index{min-height: 500px !important;}
+
+
 }
 
 /* lg */
 @media (min-width: 992px) {
-
+	.w-search {width: 90%}
 	.container{width: 970px;}
 
 	.col-lg-1{grid-column: span 1;}
@@ -545,7 +553,6 @@ header{height: 50px;}
 
 
 /* INDEX */
-#index{overflow-x: hidden;}
 #index a, .revers-a{color: var(--light);}
 #index a:hover, .revers-a:hover{color: var(--orange);}
 .tag{transition: all 0.5s ease-in-out;}
@@ -553,8 +560,7 @@ header{height: 50px;}
 #index figure{
 	color: white;
 	font-size: 20px;
-	margin-left: 0;
-	margin-right: 0;
+	margin: 0 !important;
 }
 
 #index nav:before {
@@ -619,27 +625,27 @@ hr {
 }
 
 .btn-outline-orange {
-  color: var(--orange);
-  background-color: transparent;
-  background-image: none;
-  border-color: var(--orange);
+	color: var(--orange);
+	background-color: transparent;
+	background-image: none;
+	border-color: var(--orange);
 }
 
 .btn-outline-orange:hover, .btn-outline-orange:focus {
-  color: var(--dark);
-  background-color: var(--orange);
+	color: var(--dark);
+	background-color: var(--orange);
 }
 
 .btn-outline-dark {
-  color:  var(--dark);
-  background-color: transparent;
-  border-color:  var(--dark);
+	color:  var(--dark);
+	background-color: transparent;
+	border-color:  var(--dark);
 }
 
 .btn-outline-dark:hover, .btn-outline-dark:focus {
-  color: var(--light);
-  background-color:  var(--dark);
-  border-color:  var(--light);
+	color: var(--light);
+	background-color:  var(--dark);
+	border-color:  var(--light);
 }
 
 /* BOTON BÚSQUEDA (LUPA) */
@@ -657,25 +663,9 @@ hr {
 }
 
 /* MENÚ DE HAMBURGUESA MOLÓN */
-#menuToggle{
-  display: block;
-  position: relative;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-#menuToggle input{
-  display: block;
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: -5px;
-  cursor: pointer;
-  opacity: 0;
-  z-index: 2;
-}
-#menuToggle span{
+header label{cursor:pointer;}
+header div:first-child {height: 50px;}
+header input[type=checkbox] + label span{
   display: block;
   width: 33px;
   height: 4px;
@@ -689,29 +679,34 @@ hr {
               opacity 0.55s ease;
 }
 
-#menuToggle span:first-child{transform-origin: 0% 0%;}
-#menuToggle span:nth-last-child(2){transform-origin: 0% 100%;}
-#menuToggle input:checked ~ span{
+header input[type=checkbox] + label span:first-child{transform-origin: 0% 0%;}
+header input[type=checkbox] + label span:nth-last-child(2){transform-origin: 0% 100%;}
+header input[type=checkbox]:checked + label span{
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
   background: var(--orange);
 }
-#menuToggle input:checked ~ span:nth-last-child(3){opacity: 0; transform: rotate(0deg) scale(0.2, 0.2);}
-#menuToggle input:checked ~ span:nth-last-child(2){transform: rotate(-45deg) translate(0, -1px);}
+header input[type=checkbox]:checked + label span:nth-last-child(3){opacity: 0; transform: rotate(0deg) scale(0.2, 0.2);}
+header input[type=checkbox];checked + label span:nth-last-child(2){transform: rotate(-45deg) translate(0, -1px);}
 #menu{
-	position: absolute;
-	right: 0;
-	width: 400px;
-	margin-top: 11.7px;
+	display: block;
+	height: 0;
 	list-style-type: none;
+
+	overflow: hidden;
 	-webkit-font-smoothing: antialiased;
 	/* to stop flickering of text in safari */
 	background: rgba(0,0,0,0.6);
-	transform-origin: 0% 0%;
-	transform: translate(110%, 0);
-	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-	text-align: left;
+	transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	text-align: center;
 }
-#menu li{padding: 10px 0; font-size: 22px;}
-#menuToggle input:checked ~ ul{transform: translate(35.17%, 0);;}
 
+
+/* 86px por opcion*/
+input:checked ~ #menu{height: 344px;}
+
+/*puedo contruir una erosión a base de dilataciones*/
+/*si yo dilato, vuelvo a dilatar, y vuelvo a dilatar va a crecer... va a crece la zona blanca*/
+/*la dilatación hace crece los blancos */
+/*pero el blanco gordo, no se ha perdido, se mantiene */
+/*crecían los negros, y los blancos desparecían*/
