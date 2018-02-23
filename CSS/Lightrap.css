@@ -404,19 +404,20 @@ html, body{
 /* md */
 @media (min-width: 768px) {
 
-	header{height: 80px;}
+	.h-header{height: 80px;}
 	header input[type=checkbox], header input[type=checkbox] ~ span, header #menu{display: none;}
-	header div:first-child {height: auto !important;}
 	header label{display: none !important;}
-	.w-search {width: 85%}
+
 	.logo{
-		background: url("../Images/THE_LEMON.png") no-repeat center; 
-		background-size: 100%;
+		background: url("../Images/THE_LEMON.png") no-repeat; 
+		background-position: 10%;
+		background-size: auto 100%;
 		transition: background 0.4s ease-in-out;
 	}
 	.logo:hover, .logo:focus, .logo:active{ 
-		background: url("../Images/THE_LEMON_FOCUS.png") no-repeat center; 
-		background-size: 100%;
+		background: url("../Images/THE_LEMON_FOCUS.png") no-repeat;
+		background-position: 10%; 
+		background-size: auto 100%;
 	}
 	.w-logo{min-width: 300px;}
 	.pt-150px{padding-top: 150px;}
@@ -456,7 +457,6 @@ html, body{
 
 /* lg */
 @media (min-width: 992px) {
-	.w-search {width: 90%}
 	.container{width: 970px;}
 
 	.col-lg-1{grid-column: span 1;}
@@ -608,7 +608,7 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
-.circle{border-radius: 50%;}
+.circle{border-radius: 50% !important;}
 .clear{clear:both;}
 
 
@@ -667,6 +667,7 @@ header label{cursor:pointer;}
 header div:first-child {height: 50px;}
 header input[type=checkbox] + label span{
   display: block;
+  margin: auto;
   width: 33px;
   height: 4px;
   margin-bottom: 5px;
@@ -678,17 +679,14 @@ header input[type=checkbox] + label span{
               background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
               opacity 0.55s ease;
 }
-
-header input[type=checkbox] + label span:first-child{transform-origin: 0% 0%;}
-header input[type=checkbox] + label span:nth-last-child(2){transform-origin: 0% 100%;}
+header input[type=checkbox] + label span:nth-child(3){transform-origin: 0% 100%; margin-bottom: 0;}
 header input[type=checkbox]:checked + label span{
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
+  transform: rotate(45deg) translate(-2px, 0);
   background: var(--orange);
 }
-header input[type=checkbox]:checked + label span:nth-last-child(3){opacity: 0; transform: rotate(0deg) scale(0.2, 0.2);}
-header input[type=checkbox];checked + label span:nth-last-child(2){transform: rotate(-45deg) translate(0, -1px);}
-#menu{
+header input[type=checkbox]:checked + label span:nth-child(2){opacity: 0; transform: rotate(0deg) scale(0.2, 0.2);}
+header input[type=checkbox]:checked + label span:nth-child(3){transform: rotate(-45deg);}
+#burger{
 	display: block;
 	height: 0;
 	list-style-type: none;
@@ -703,7 +701,7 @@ header input[type=checkbox];checked + label span:nth-last-child(2){transform: ro
 
 
 /* 86px por opcion*/
-input:checked ~ #menu{height: 344px;}
+input:checked ~ #burger{height: 344px;}
 
 /*puedo contruir una erosión a base de dilataciones*/
 /*si yo dilato, vuelvo a dilatar, y vuelvo a dilatar va a crecer... va a crece la zona blanca*/
