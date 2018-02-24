@@ -14,6 +14,7 @@
 	--light: #F4F4F4;
 	--notsolight: #e2e2e2;
 	--white: #FFF;
+	--blood: #e10031;
 }
 
 html, body{
@@ -35,6 +36,21 @@ html, body{
 	background: url("../Images/THE_LEMON_ICON_FOCUS.png") no-repeat center; 
 	background-size: auto 100%;
 }
+
+.ml--15px{margin-left: -15px;}
+.filter{
+	margin-top: 15px;
+	margin-right: 15px;
+	position: absolute;
+	transform: translate(-100%);
+	width: 275px;
+	transition: transform 0.4s ease-in-out;
+}
+
+#filters:checked + div{
+	transform: translate(0);
+}
+
 
 
 /* COLORES BACKGROUND */
@@ -59,6 +75,7 @@ html, body{
 .text-orange {color: var(--orange);}
 .text-dark-t{color: rgba(0, 0, 0, 0.6);}
 .text-orange-t{color:rgba(249, 195, 0, 0.95);}
+.text-blood{color: var(--blood);}
 
 /* TEXTO */
 .text-center{text-align: center;}
@@ -187,7 +204,6 @@ html, body{
 .h-50 {height: 50% !important;}
 .h-75 {height: 75% !important;}
 .h-100 {height: 100% !important;}
-.h-100vw{height: 100vw;}
 
 .height-50px {height: 50px !important;}
 .height-75px {height: 75px !important;}
@@ -452,7 +468,12 @@ html, body{
 	.d-md-none{display: none;}
 	.mh-index{min-height: 500px !important;}
 
-
+	.filter{
+		position: relative;
+		width: 275px;
+		margin-top: 0;
+		transform: translate(0);
+	}
 }
 
 /* lg */
@@ -610,6 +631,7 @@ hr {
 }
 .circle{border-radius: 50% !important;}
 .clear{clear:both;}
+.pointer{cursor: pointer;}
 
 
 /* BOTONES */
@@ -680,25 +702,17 @@ header input[type=checkbox] + label span{
               opacity 0.55s ease;
 }
 header input[type=checkbox] + label span:nth-child(3){transform-origin: 0% 100%; margin-bottom: 0;}
-header input[type=checkbox]:checked + label span{
-  transform: rotate(45deg) translate(-2px, 0);
-  background: var(--orange);
-}
+header input[type=checkbox]:checked + label span{transform: rotate(45deg) translate(-2px, 0);background: var(--orange);}
 header input[type=checkbox]:checked + label span:nth-child(2){opacity: 0; transform: rotate(0deg) scale(0.2, 0.2);}
 header input[type=checkbox]:checked + label span:nth-child(3){transform: rotate(-45deg);}
 #burger{
 	display: block;
 	height: 0;
 	list-style-type: none;
-
-	overflow: hidden;
-	-webkit-font-smoothing: antialiased;
-	/* to stop flickering of text in safari */
 	background: rgba(0,0,0,0.6);
 	transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 	text-align: center;
 }
-
 
 /* 86px por opcion*/
 input:checked ~ #burger{height: 344px;}
@@ -708,3 +722,6 @@ input:checked ~ #burger{height: 344px;}
 /*la dilatación hace crece los blancos */
 /*pero el blanco gordo, no se ha perdido, se mantiene */
 /*crecían los negros, y los blancos desparecían*/
+
+.pop-up {transition: all .2s ease-in-out;}
+.pop-up:hover {transform: scale(1.1);}

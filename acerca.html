@@ -4,24 +4,40 @@
 	<meta charset="UTF-8">
 	<title>Revolucionaria página de recetas de cocina - INICIAR SESIÓN</title>
 	<link rel="stylesheet" href="CSS/Lightrap.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 </head>
 <body class="background">
-	<header class="container-fluid bg-dark text-white position-fixed z-100">
-		<div class="row">
-			<a href="index.html" class="col-2 py-3 col-lg-1 bg-orange">
-				Logo
-			</a>
-			<div class="col-5 col-lg-8">
-				<form action="buscar.html" method="get">
-					<p>
-						<input type="text" name="search_box" required>
-						<input type="submit" name="submit" value="Buscar">
-					</p>
+	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
+		<div class="row h-100 d-flex align-items-center">
+			<a href="index.html" class="logo col-2 col-md-4 col-lg-3 height-50px"></a>
+			<div class="Mh-100 col-8 col-md-5 col-lg-6 d-flex align-items-center justify-content-end h-header">
+				<form class="position-relative w-search" action="buscar.html" method="get">
+					<input style="border-radius: 30px" class="form-control mb-0" type="text" name="search_box" required>
+					<button class="search-btn m-auto t0 b0 r0 pr-2" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
 				</form>
 			</div>
-			<div class="col-2 py-3"><a>Login</a></div>
+			<div class="col-2 col-md-3 col-lg-3 d-none d-md-flex text-center p-0 align-items-center justify-content-center">
+				<a class="btn revers-a" href="login.html">Login</a>
+				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
+			</div>
+			<input id="ham" type="checkbox" class="d-none" />
+			<label for="ham" style="font-size: 30px;" class=" col-2 text-light text-center">
+
+				<span></span>
+				<span></span>
+				<span></span>
+
+			</label>
+			<div id="burger" class="col-12 h3 o-hidden">
+				<a class="revers-a d-block p-3" href="#">Home</a>
+				<div class="p-2">
+					<a class="btn revers-a" href="login.html">Login</a>
+					<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
+				</div>
+				<a class="revers-a d-block p-3" href="nueva-receta.html">Añadir receta</a>
+				<a class="revers-a d-block p-3" href="#">Logout</a>
+			</div>
 		</div>
 	</header>
 	<main class="container text-dark p-2 pt-150px pb-5">
@@ -65,7 +81,7 @@
 				</div>
 			</div>
 			<div class="col-6 text-center pt-3 h2 bg-dark-t text-light mx-2">
-				<img class="d-inline-block circle header-logo" src="Images/SLM.jpg" alt="pablomanez">
+				<img class="d-inline-block circle header-logo" src="Images/pablomanez.jpg" alt="pablomanez">
 				<p>
 					Pablo Máñez Fernández<br/>
 					<a href="">pablomanez@hotmail.com</a><br/>
@@ -74,7 +90,7 @@
 				</p>
 			</div>
 			<div class="col-6 text-center pt-3 h2 bg-dark-t text-light mx-2">
-				<img class="d-inline-block circle header-logo" src="Images/SMB.jpg" alt="Dan-sensei">
+				<img class="d-inline-block circle header-logo" src="Images/Dan-sensei.jpg" alt="Dan-sensei">
 				<p>
 					Danny Gabriel Rivera Solórzano<br/>
 					<a href="#">datrixz997@gmail.com</a><br/>
