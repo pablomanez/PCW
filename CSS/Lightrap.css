@@ -212,6 +212,7 @@ html, body{
 .height-200px {height: 200px !important;}
 .height-250px {height: 250px !important;}
 
+.h-search {min-height: 350px !important;}
 .mh-200px{min-height: 200px !important;}
 .mh-index{min-height: 300px !important;}
 .mh-100{min-height: 100% !important;}

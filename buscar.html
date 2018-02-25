@@ -48,17 +48,284 @@
 			<i class="fab fa-accessible-icon"></i> FILTRAME ESTA
 		</label>
 		<input id="filters" class="d-none" type="checkbox" />
-		<div class="float-left filter bg-orange p-2 ml--15px">
-			Filtros wapos aquí
-		</div>
-		<div class="row p-3 bg-blue">
-			<div class="col-4 mr-3 mb-3 bg-red pop-up box-shadow">1</div>
-			<div class="col-4 mr-3 mb-3 bg-red pop-up box-shadow">2</div>
-			<div class="col-4 mb-3 bg-red pop-up box-shadow">3</div>
 
-			<div class="col-4 mr-3 mb-3 bg-red pop-up box-shadow">1</div>
-			<div class="col-4 mr-3 mb-3 bg-red pop-up box-shadow">2</div>
-			<div class="col-4 mb-3 bg-red pop-up box-shadow">3</div>
+		<div class="float-left filter bg-orange p-2 ml--15px">
+			<form action="#" method="get">
+				<div class="p-1">
+					<label class="form-label" for="l_name">Nombre de la receta:</label>
+					<input class="form-control" type="text" name="name" id="l_name">
+				</div>
+
+				<div class="p-1">
+					<label class="form-label">Ingredientes:</label>
+					<ul contenteditable="true" class="bg-light">
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+
+				<label class="form-label" for="l_time">Tiempo de elaboración:</label>
+				<div class="p-1">
+					<label class="form-label" for="l_time_min">Mínimo:</label>
+					<input class="form-control" type="number" name="min_time" id="l_time_min" step="5" min="5" value="5">
+				</div>
+				<div class="p-1">
+					<label class="form-label" for="l_time_max">Máximo</label>
+					<input class="form-control" type="number" name="max_time" id="l_time_max" step="5" min="5" value="5">
+				</div>
+
+				<div class="p-1">
+					<label class="form-label" for="l_diff">Dificultad de elaboración:</label>
+					<select class="form-control" id="l_diff">
+						<option value="" disabled selected>Elige una opción</option>
+						<option value="baja">Baja</option>
+						<option value="media">Media</option>
+						<option value="alta">Alta</option>
+					</select>
+				</div>
+
+				<div class="p-1">
+					<label class="form-label" for="l_aut">Autor:</label>
+					<input class="form-control" type="text" name="author" id="l_aut">
+				</div>
+
+				<div class="p-1 pt-2">
+					<input class="form-control" type="submit" name="submit" value="Buscar">
+				</div>
+			</form>
+
+
+		</div>
+
+		<div class="row p-3 bg-dark-t">
+			<div style="background-image: url(Images/RECETA_1.jpg);" class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12 mr-3 mb-3 bg-red pop-up box-shadow bg-image h-search">
+				<div class="col-12 bg-dark-t text-center my-2">
+					<a href="receta.html" class="h2 revers-a">Pollo con chicharrón</a>
+					<div style="background-image: url(Images/Shut-up-and-take-my-money!.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
+					<a href="buscar.html">Pablomanez</a>
+				</div>
+
+				<!-- INICIO COMENTARIOS -->
+				<div class="col-12 bg-dark-t m-0">
+					<span class="text-orange">SLM</span>
+					<div class="text-light">Esto en daw no pasaba</div>
+				</div>
+				<!-- FIN COMENTARIOS -->
+
+				<div class="col-12 bg-dark-t text-center mx-4 mt-5 mb-2 text-light">
+					<div class="row">
+						<div class="col-6 d-flex align-items-center justify-content-center">
+							<time datetime="28/02/1864">28/02/1864</time>
+						</div>
+						<div class="col-6">
+							<div class="row text-center">
+								<div class="col-3">
+									<i class="fas fa-thumbs-up"></i>
+								</div>
+								<span class="col-9">65491</span>
+
+								<div class="col-3">
+									<i class="fas fa-thumbs-down"></i>
+								</div>
+								<span class="col-9">5</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+			<div style="background-image: url(Images/RECETA_2.jpg);" class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12 mr-3 mb-3 bg-red pop-up box-shadow bg-image h-search">
+				<div class="col-12 bg-dark-t text-center my-2">
+					<a href="receta.html" class="h2 revers-a">Costillas de cerdo BBQ</a>
+					<div style="background-image: url(Images/Sona_profile.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
+					<a href="buscar.html">Dan-sensei</a>
+				</div>
+
+				<!-- INICIO COMENTARIOS -->
+				<div class="col-12 bg-dark-t m-0">
+					<span class="text-orange">Beater</span>
+					<div class="text-light">Me comí una salchipapa!</div>
+				</div>
+				<!-- FIN COMENTARIOS -->
+
+				<div class="col-12 bg-dark-t text-center mx-4 mt-5 mb-2 text-light">
+					<div class="row">
+						<div class="col-6 d-flex align-items-center justify-content-center">
+							<time datetime="04/07/1964">04/07/1964</time>
+						</div>
+						<div class="col-6">
+							<div class="row text-center">
+								<div class="col-3">
+									<i class="fas fa-thumbs-up"></i>
+								</div>
+								<span class="col-9">65491</span>
+
+								<div class="col-3">
+									<i class="fas fa-thumbs-down"></i>
+								</div>
+								<span class="col-9">5</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div style="background-image: url(Images/RECETA_3.jpg);" class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12 mr-3 mb-3 bg-red pop-up box-shadow bg-image h-search">
+				<div class="col-12 bg-dark-t text-center my-2">
+					<a href="receta.html" class="h2 revers-a">Pollo al horno con salsa boletus</a>
+					<div style="background-image: url(Images/Shut-up-and-take-my-money!.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
+					<a href="buscar.html">Pablomanez</a>
+				</div>
+
+				<!-- INICIO COMENTARIOS -->
+				<div class="col-12 bg-dark-t m-0">
+					<span class="text-orange">Jabi</span>
+					<div class="text-light">Balla mierda de rezeta</div>
+				</div>
+				<!-- FIN COMENTARIOS -->
+
+				<div class="col-12 bg-dark-t text-center mx-4 mt-5 mb-2 text-light">
+					<div class="row">
+						<div class="col-6 d-flex align-items-center justify-content-center">
+							<time datetime="13/11/1994">13/11/1994</time>
+						</div>
+						<div class="col-6">
+							<div class="row text-center">
+								<div class="col-3">
+									<i class="fas fa-thumbs-up"></i>
+								</div>
+								<span class="col-9">43914</span>
+
+								<div class="col-3">
+									<i class="fas fa-thumbs-down"></i>
+								</div>
+								<span class="col-9">48</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div style="background-image: url(Images/RECETA_4.jpg);" class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12 mr-3 mb-3 bg-red pop-up box-shadow bg-image h-search">
+				<div class="col-12 bg-dark-t text-center my-2">
+					<a href="receta.html" class="h2 revers-a">Tortitas molonas</a>
+					<div style="background-image: url(Images/Sona_profile.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
+					<a href="buscar.html">Dan-sensei</a>
+				</div>
+
+				<!-- INICIO COMENTARIOS -->
+				<div class="col-12 bg-dark-t m-0">
+					<span class="text-orange">Dan-sensei</span>
+					<div class="text-light">Como vuelva a ver un br golpe de remo</div>
+				</div>
+				<!-- FIN COMENTARIOS -->
+
+				<div class="col-12 bg-dark-t text-center mx-4 mt-5 mb-2 text-light">
+					<div class="row">
+						<div class="col-6 d-flex align-items-center justify-content-center">
+							<time datetime="15/08/2017">15/08/2017</time>
+						</div>
+						<div class="col-6">
+							<div class="row text-center">
+								<div class="col-3">
+									<i class="fas fa-thumbs-up"></i>
+								</div>
+								<span class="col-9">785</span>
+
+								<div class="col-3">
+									<i class="fas fa-thumbs-down"></i>
+								</div>
+								<span class="col-9">75</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div style="background-image: url(Images/RECETA_5.jpg);" class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12 mr-3 mb-3 bg-red pop-up box-shadow bg-image h-search">
+				<div class="col-12 bg-dark-t text-center my-2">
+					<a href="receta.html" class="h2 revers-a">Helado de moras molón</a>
+					<div style="background-image: url(Images/Sona_profile.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
+					<a href="buscar.html">Dan-sensei</a>
+				</div>
+
+				<!-- INICIO COMENTARIOS -->
+				<div class="col-12 bg-dark-t m-0">
+					<span class="text-orange">Sin comentarios</span>
+					<div class="text-light"></div>
+				</div>
+				<!-- FIN COMENTARIOS -->
+
+				<div class="col-12 bg-dark-t text-center mx-4 mt-5 mb-2 text-light">
+					<div class="row">
+						<div class="col-6 d-flex align-items-center justify-content-center">
+							<time datetime="22/02/2018">22/02/2018</time>
+						</div>
+						<div class="col-6">
+							<div class="row text-center">
+								<div class="col-3">
+									<i class="fas fa-thumbs-up"></i>
+								</div>
+								<span class="col-9">91</span>
+
+								<div class="col-3">
+									<i class="fas fa-thumbs-down"></i>
+								</div>
+								<span class="col-9">57</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div style="background-image: url(Images/RECETA_6.jpg);" class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12 mr-3 mb-3 bg-red pop-up box-shadow bg-image h-search">
+				<div class="col-12 bg-dark-t text-center my-2">
+					<a href="receta.html" class="h2 revers-a">Burguer Cangreburguer</a>
+					<div style="background-image: url(Images/Shut-up-and-take-my-money!.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
+					<a href="buscar.html">Pablomanez</a>
+				</div>
+
+				<!-- INICIO COMENTARIOS -->
+				<div class="col-12 bg-dark-t m-0">
+					<span class="text-orange">Pablomanez</span>
+					<div class="text-light">PO-TEI-TOU!!</div>
+				</div>
+				<!-- FIN COMENTARIOS -->
+
+				<div class="col-12 bg-dark-t text-center mx-4 mt-5 mb-2 text-light">
+					<div class="row">
+						<div class="col-6 d-flex align-items-center justify-content-center">
+							<time datetime="01/01/3000">01/01/3000</time>
+						</div>
+						<div class="col-6">
+							<div class="row text-center">
+								<div class="col-3">
+									<i class="fas fa-thumbs-up"></i>
+								</div>
+								<span class="col-9">491</span>
+
+								<div class="col-3">
+									<i class="fas fa-thumbs-down"></i>
+								</div>
+								<span class="col-9">54</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
 		</div>
 	</main>
 
