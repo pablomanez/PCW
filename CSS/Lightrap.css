@@ -36,6 +36,7 @@ html, body{
 	background: url("../Images/THE_LEMON_ICON_FOCUS.png") no-repeat center; 
 	background-size: auto 100%;
 }
+.h-header{height: 50px;}
 
 .ml--15px{margin-left: -15px;}
 .filter{
@@ -109,12 +110,12 @@ html, body{
 }
 
 /* DISPLAY */
-.d-block {display: block;}
+.d-block {display: block !important;}
 .d-inline {display: inline;}
 .d-inline-block {display: inline-block;}
 .d-flex {display: flex;}
 .d-initial{display: initial;}
-.d-none{display: none;}
+.d-none{display: none !important;}
 
 /* ALINEAMIENTO VERTICAL Y HORIZONTAL */
 .align-items-start {align-items: flex-start;}
@@ -205,7 +206,7 @@ html, body{
 .h-75 {height: 75% !important;}
 .h-100 {height: 100% !important;}
 
-.height-50px {height: 50px !important;}
+.mheight-50px {min-height: 50px !important;}
 .height-75px {height: 75px !important;}
 .height-100px {height: 100px !important;}
 .height-150px {height: 150px !important;}
@@ -333,6 +334,48 @@ html, body{
 .huge-logo{width: 250px; height: 250px;}
 .flip{transform: scaleX(-1);}
 
+
+/* MENÚ DE HAMBURGUESA MOLÓN */
+header label{cursor:pointer;}
+
+header input[type=checkbox] + label span{
+  display: block;
+  margin: auto;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background: var(--light);
+  border-radius: 3px;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+header input[type=checkbox] + label span:nth-child(3){transform-origin: 0% 100%; margin-bottom: 0;}
+header input[type=checkbox]:checked + label span{transform: rotate(45deg) translate(-2px, 0);background: var(--orange);}
+header input[type=checkbox]:checked + label span:nth-child(2){opacity: 0; transform: rotate(0deg) scale(0.2, 0.2);}
+header input[type=checkbox]:checked + label span:nth-child(3){transform: rotate(-45deg);}
+#burger{
+	display: block;
+	height: 0;
+	list-style-type: none;
+	background: rgba(0,0,0,0.7);
+	transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+	text-align: center;
+}
+
+/* 86px por opcion*/
+input:checked ~ #burger{height: 430px;}
+#burger > a{
+	display: block;
+	padding: 30px;
+	font-size: 1.33em;
+	margin-right: 0;
+}
+#burger > div a{font-size: 1.33em;}
+
+
 /* CONTENEDOR */
 .container, .container-fluid{
 	margin-left: auto;
@@ -413,28 +456,26 @@ html, body{
 	.d-sm-initial{display: initial;}
 	.d-sm-flex{display: flex;}
 	.d-sm-none{display: none;}
-	.mw-1500px{min-width: 1500px;}	
-
 
 }
 
 /* md */
 @media (min-width: 768px) {
 
-	.h-header{height: 80px;}
+	.h-header{height: auto;}
 	header input[type=checkbox], header input[type=checkbox] ~ span, header #menu{display: none;}
 	header label{display: none !important;}
 
 	.logo{
 		background: url("../Images/THE_LEMON.png") no-repeat; 
-		background-position: 10%;
-		background-size: auto 100%;
+		background-position: 15% top;
+		background-size: auto 90%;
 		transition: background 0.4s ease-in-out;
 	}
 	.logo:hover, .logo:focus, .logo:active{ 
 		background: url("../Images/THE_LEMON_FOCUS.png") no-repeat;
-		background-position: 10%; 
-		background-size: auto 100%;
+		background-position: 15% top; 
+		background-size: auto 90%;
 	}
 	.w-logo{min-width: 300px;}
 	.pt-150px{padding-top: 150px;}
@@ -463,10 +504,10 @@ html, body{
 	.order-md-10 {order: 10;}
 	.order-md-11 {order: 11;}
 	.order-md-12 {order: 12;}
-
-	.d-md-initial{display: initial;}
-	.d-md-flex{display: flex;}
-	.d-md-none{display: none;}
+	
+	.d-md-initial{display: initial !important;}
+	.d-md-flex{display: flex !important;}
+	.d-md-none{display: none !important;}
 	.mh-index{min-height: 500px !important;}
 
 	.filter{
@@ -475,6 +516,14 @@ html, body{
 		margin-top: 0;
 		transform: translate(0);
 	}
+
+	.w-md-50{width: 50% !important;}
+	#burger{
+		height: auto !important;
+		background: none !important;
+		text-align: left;
+	}
+	#burger > a{display: inline-block !important; font-size: 1em; padding: 20px;}
 }
 
 /* lg */
@@ -507,9 +556,9 @@ html, body{
 	.order-lg-11 {order: 11;}
 	.order-lg-12 {order: 12;}
 
-	.d-lg-initial{display: initial;}
-	.d-lg-flex{display: flex;}
-	.d-lg-none{display: none;}
+	.d-lg-initial{display: initial !important;}
+	.d-lg-flex{display: flex !important;}
+	.d-lg-none{display: none !important;}
 }
 
 /* xl */
@@ -630,6 +679,12 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+.hr2 {
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.4);
+    margin: 0.2em 0;
+    padding: 0;
+}
 .circle{border-radius: 50% !important;}
 .clear{clear:both;}
 .pointer{cursor: pointer;}
@@ -685,38 +740,7 @@ hr {
 	color: var(--orange);
 }
 
-/* MENÚ DE HAMBURGUESA MOLÓN */
-header label{cursor:pointer;}
-header div:first-child {height: 50px;}
-header input[type=checkbox] + label span{
-  display: block;
-  margin: auto;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-  background: var(--light);
-  border-radius: 3px;
-  transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
-}
-header input[type=checkbox] + label span:nth-child(3){transform-origin: 0% 100%; margin-bottom: 0;}
-header input[type=checkbox]:checked + label span{transform: rotate(45deg) translate(-2px, 0);background: var(--orange);}
-header input[type=checkbox]:checked + label span:nth-child(2){opacity: 0; transform: rotate(0deg) scale(0.2, 0.2);}
-header input[type=checkbox]:checked + label span:nth-child(3){transform: rotate(-45deg);}
-#burger{
-	display: block;
-	height: 0;
-	list-style-type: none;
-	background: rgba(0,0,0,0.6);
-	transition: all 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-	text-align: center;
-}
 
-/* 86px por opcion*/
-input:checked ~ #burger{height: 344px;}
 
 /*puedo contruir una erosión a base de dilataciones*/
 /*si yo dilato, vuelvo a dilatar, y vuelvo a dilatar va a crecer... va a crece la zona blanca*/
@@ -725,4 +749,4 @@ input:checked ~ #burger{height: 344px;}
 /*crecían los negros, y los blancos desparecían*/
 
 .pop-up {transition: all .2s ease-in-out;}
-.pop-up:hover {transform: scale(1.1);}
+.pop-up:hover {transform: scale(1.05);}
