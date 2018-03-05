@@ -369,14 +369,14 @@ header input[type=checkbox]:checked + label span:nth-child(3){transform: rotate(
 }
 
 /* 86px por opcion*/
-input:checked ~ #burger{height: 430px;}
+input:checked ~ #burger{height: 400px;}
 #burger > a{
 	display: block;
 	padding: 30px;
-	font-size: 1.33em;
+	font-size: 1em;
 	margin-right: 0;
 }
-#burger > div a{font-size: 1.33em;}
+#burger > div a{font-size: 1em;}
 
 
 /* CONTENEDOR */
@@ -457,7 +457,7 @@ input:checked ~ #burger{height: 430px;}
 	.order-sm-12 {order: 12;}
 
 	.d-sm-initial{display: initial;}
-	.d-sm-flex{display: flex;}
+	.d-sm-flex{display: flex !important;}
 	.d-sm-none{display: none;}
 
 }

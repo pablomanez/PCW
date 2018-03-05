@@ -8,7 +8,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 </head>
 <body class="background d-block d-sm-flex align-items-center">
+
 	<main class="container text-light">
+		<a  href="index.html" class="bg-dark-t height-200px" >
+			<img src="Images/THE_LEMON.png">
+		</a>
 		<div class="row box-shadow">
 			<div class="col-12 col-md-7 bg-dark-t pt-3">
 				<form action="#" method="post">
@@ -19,30 +23,30 @@
 
 						<div class="col-12 col-sm-6">
 							<label class="form-label" for="l_user">Nombre de usuario:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="text" name="user" id="l_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus>
+							<input class="form-control" type="text" name="user" id="l_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus required>
 						</div>
 						<div class="col-12 col-sm-6 ">
 							<label class="form-label" for="l_email">Email:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="email" name="email" id="l_email">
+							<input class="form-control" type="email" name="email" id="l_email" required>
 						</div>
 						<div class="col-sm-6 col-12">
 							<label class="form-label" for="l_pwd">Contraseña:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">
+							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" required>
 						</div>
 
 						<div class="col-sm-6 col-12">
 							<label class="form-label" for="l_pwd">Repite la contraseña:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">
+							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" required>
 						</div>
 
 						<div class="col-12">
 							<label class="form-label" for="l_name">Nombre completo:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="text" name="name" id="l_name">
+							<input class="form-control" type="text" name="name" id="l_name" required>
 						</div>
 
 						<div class="col-sm-5 col-12">
 							<label class="form-label" for="l_date">Fecha de nacimiento:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="date" name="date" id="l_date">
+							<input class="form-control" type="date" name="date" id="l_date" required>
 						</div>
 
 
