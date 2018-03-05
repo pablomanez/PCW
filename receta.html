@@ -10,37 +10,70 @@
 </head>
 <body class="background">
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
-		<div class="row h-100 d-flex align-items-center">
-			<a href="index.html" class="logo col-2 col-md-4 col-lg-3 height-50px"></a>
-			<div class="Mh-100 col-8 col-md-5 col-lg-6 d-flex align-items-center justify-content-end h-header">
-				<form class="position-relative w-search" action="buscar.html" method="get">
-					<input style="border-radius: 30px" class="form-control mb-0" type="text" name="search_box" required>
-					<button class="search-btn m-auto t0 b0 r0 pr-2" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
-				</form>
-			</div>
-			<div class="col-2 col-md-3 col-lg-3 d-none d-md-flex text-center p-0 align-items-center justify-content-center">
+	<div class="row d-flex align-items-center">
+		
+		<a href="index.html" class="logo col-2 d-initial d-md-none mheight-50px"></a>
+
+		<!-- BARRA DE BÚSQUEDA -->
+		<div class="col-8 col-md-8 d-flex align-items-center mheight-50px">
+			<form class="position-relative w-search" action="buscar.html" method="get">
+				<input style="border-radius: 30px" class="form-control mb-0" type="text" name="search_box" required>
+				<button class="search-btn m-auto t0 b0 r0 pr-2" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
+			</form>
+		</div>
+
+		<!-- HAMBURGUESA D-NONE -->
+		<input id="ham" type="checkbox" class="d-none" />
+		<label for="ham" style="font-size: 30px;" class=" col-2 text-light text-center">
+
+			<span></span>
+			<span></span>
+			<span></span>
+
+		</label>
+		<!-- -->
+	
+
+		<!-- Login/Registro -->
+		<div class="col-4 text-right d-none d-md-initial">
+			<a class="btn revers-a ml-auto" href="login.html">Login</a>
+			<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
+		</div>
+		<div class="col-12">
+			
+		<hr class="hr2 d-none d-md-flex"/>
+		</div>
+
+		<a href="index.html" class="logo col-2 col-md-5 col-lg-4 col-xl-3 h-100"></a>
+		
+		<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden">
+
+			<a class="btn revers-a mr-3" href="index.html">
+				<span class="d-none d-md-initial d-lg-none h2"><i class="fas fa-home"></i></span>
+				<span class="d-initial d-md-none  d-lg-initial">Home</span>
+			</a>
+			<div class="p-2 d-block d-md-none">
 				<a class="btn revers-a" href="login.html">Login</a>
 				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 			</div>
-			<input id="ham" type="checkbox" class="d-none" />
-			<label for="ham" style="font-size: 30px;" class=" col-2 text-light text-center">
+			<a class="btn revers-a mr-3" href="nueva-receta.html">
+				<span class="d-none d-md-initial d-lg-none h2"><i class="fas fa-file"></i></span>
+				<span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>
+			</a>
+			<a class="btn revers-a mr-3" href="buscar.html">
+				<span class="d-none d-md-initial d-lg-none h2"><i class="fas fa-search-plus"></i></span>
+				<span class="d-initial d-md-none  d-lg-initial">Búsqueda avanzada</span>
+			</a>
+			<a class="btn revers-a" href="nueva-receta.html">
+				<span class="d-none d-md-initial d-lg-none h2"><i class="fas fa-info"></i></span>
+				<span class="d-initial d-md-none d-lg-initial">About</span>
+			</a>
 
-				<span></span>
-				<span></span>
-				<span></span>
-
-			</label>
-			<div id="burger" class="col-12 h3 o-hidden">
-				<a class="revers-a d-block p-3" href="#">Home</a>
-				<div class="p-2">
-					<a class="btn revers-a" href="login.html">Login</a>
-					<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
-				</div>
-				<a class="revers-a d-block p-3" href="nueva-receta.html">Añadir receta</a>
-				<a class="revers-a d-block p-3" href="#">Logout</a>
-			</div>
 		</div>
-	</header>
+		
+		
+	</div>
+</header>
 	
 	<main class="container pt-150px">
 		<div class="display-4 text-center py-3 shadow">Helado de moras molón</div>
@@ -146,7 +179,7 @@
 		<hr/>
 		<section id="Comentarios" class="row text-light h55 p-2">
 			
-			<img class="ml-auto col-2 col-sm-1 p-0 mr-2 circle mini-user-icon obj-fit mt-1" src="Images/SLM.jpg">
+			<img class="ml-auto col-2 col-sm-1 p-0 mr-2 circle mini-user-icon obj-fit mt-1" src="Images/pablomanez.jpg">
 			<div class="col-10 col-sm-11 p-2 bg-2 bg-dark-t position-relative mb-1">
 				<span class="text-orange h6">SLM</span><br/>
 				<strong class="h6">W3C es dios</strong>
