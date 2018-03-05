@@ -9,16 +9,77 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body class="background">
-	<main class="container-fluid">
+	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
+	<div class="row d-flex align-items-center">
+		
+		<a href="index.html" class="logo col-2 d-initial d-md-none mheight-50px"></a>
+
+		<!-- BARRA DE BÚSQUEDA -->
+		<div class="col-8 col-md-8 d-flex align-items-center mheight-50px">
+			<form class="position-relative w-search" action="buscar.html" method="get">
+				<input style="border-radius: 30px" class="form-control mb-0" type="text" name="search_box" required>
+				<button class="search-btn m-auto t0 b0 r0 pr-2" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
+			</form>
+		</div>
+
+		<!-- HAMBURGUESA D-NONE -->
+		<input id="ham" type="checkbox" class="d-none" />
+		<label for="ham" style="font-size: 30px;" class=" col-2 text-light text-center">
+
+			<span></span>
+			<span></span>
+			<span></span>
+
+		</label>
+		<!-- -->
+	
+
+		<!-- Login/Registro -->
+		<div class="col-4 text-right d-none d-md-initial">
+			<a class="btn revers-a ml-auto" href="login.html">Login</a>
+			<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
+		</div>
+		<div class="col-12">
+			
+		<hr class="hr2 d-none d-md-flex"/>
+		</div>
+
+		<a href="index.html" class="logo col-2 col-md-5 col-lg-4 col-xl-3 h-100 position-relative">
+			<span class="position-absolute b0 r0 mr-2 z-2 d-none d-md-initial">De cero a héroe en 3 chuletas</span>
+		</a>
+		
+		<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden h4">
+
+			<a class="btn revers-a mr-3" href="index.html">
+				<span class="d-none d-md-initial d-lg-none h2"><i class="fas fa-home"></i></span>
+				<span class="d-initial d-md-none  d-lg-initial">Home</span>
+			</a>
+			<div class="p-2 d-block d-md-none">
+				<a class="btn revers-a" href="login.html">Login</a>
+				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
+			</div>
+			<a class="btn revers-a mr-3" href="nueva-receta.html">
+				<span class="d-none d-md-initial d-lg-none h2"><i class="fas fa-file"></i></span>
+				<span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>
+			</a>
+			<a class="btn revers-a mr-3" href="buscar.html">
+				<span class="d-none d-md-initial d-lg-none h2"><i class="fas fa-search-plus"></i></span>
+				<span class="d-initial d-md-none  d-lg-initial">Búsqueda avanzada</span>
+			</a>
+			<a class="btn revers-a" href="nueva-receta.html">
+				<span class="d-none d-md-initial d-lg-none h2"><i class="fas fa-info"></i></span>
+				<span class="d-initial d-md-none d-lg-initial">About</span>
+			</a>
+
+		</div>
+		
+		
+	</div>
+</header>
+	<main class="container pt-150px">
+		<div class="display-4 text-center py-3 shadow">Nueva receta</div>
 		<form action="#" method="post">
-
-			<!--
-			xl: 1200
-			lg: 992
-			md: 768
-			sm: 576
-			-->
-
+		
 			<!-- DESCRIPCIÓN DE LA RECETA -->
 			<div class="row bg-dark-t2 p-3 box-shadow text-light">
 				<div class="col-12 justify-self-center">
@@ -65,95 +126,43 @@
 			</div>
 
 			<!-- ZONA DE INGREDIENTES -->
-			<div class="row bg-light-t p-3 pt-0 text-dark">
-				<div class="col-12">
-					<h2 class="display-4 text-center">Zona de ingredientes</h2>
-					<div class="col-12 text-center">
-						<button class="btn btn-outline-dark">Añadir ingrediente</button>
-					</div>
-					<p class="text-center">Pulsa "ENTER" para escribir más ingredientes</p>
+			<div class="row px-0 text-dark">
 
-				</div>
-				<div class="col-12 bg-dark-t text-light box-shadow">
-					<ul contenteditable="true" id="l_ingr" class="row">
-						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3">Un ingrediente</li>
-						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3">Otro ingrediente</li>
-						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3">Otro más</li>
-						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3"></li>
-						<li class="col-lg-3 col-md-4 col-sm-6 col-12 mr-3"></li>
-					</ul>
+				<div class="col-12 col-md-5 px-0">
+					<h2 class="display-4 text-center mb-0">Ingredientes</h2>
+					<hr/>
+					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light">
+						<label class="form-label" for="new_ingredient">Nombre</label>
+						<input class="form-control" type="text" name="new_ingredient">
+						<button class="btn btn-outline-orange ml-auto d-block">Añadir ingrediente</button>	
+						<p class="text-center">Pulsa "ENTER" para escribir más ingredientes</p>
+						<ul contenteditable="true" id="l_ingr" class="text-light">
+							<li  class="bg-orange p-2 mb-1"><span class="text-dark">Un ingrediente</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Otro ingrediente</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Otro más</span></li>
+						</ul>
+					</div>
 				</div>
 
 				<!-- SELECCIÓN DE FOTOS -->
-				<div class="d-flex align-items-center justify-self-center col-12">
-					<div class="row">
-						<div class="col-lg-9 col-md-8 col-sm-9 col-12 text-center">
-							<h2 class="display-4 d-inline-block text-center">Selección de fotos</h2>
-						</div>
 
-						<div class="col-lg-3 col-md-4 col-sm-3 col-12 m-auto">
-							<div class="btn btn-outline-dark">Añadir foto</div>
-						</div>
+				<div class="col-md-7 col-12 ml-2">
+					<h2 class="display-4 text-center mb-0">Selección de fotos</h2>
+					<hr/>
+				
+					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light mb-2">
 
-					</div>
+						<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
+						<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+						
+						<input class="Mw-100" type="file" name="foto" required>
+						<button class="btn btn-outline-orange ml-2 ">Añadir foto</button>
+			
+					</div>	
 				</div>
-
-				<div class="col-md-6 col-12 bg-dark-t box-shadow m-2">
-					<div class="col-12 m-2">
-						<input class="form-control Mw-100 justify-self-center" type="file" name="foto" required>
-					</div>
-
-					<div class="col-12 justify-self-center d-flex align-items-center p-2">
-						<div class="row">
-							<div class="col-lg-6 col-md-12 col-sm-6 col-12 m-auto">
-								<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-							</div>
-							<div class="col-lg-6 col-md-12 col-sm-6 col-12">
-								<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-12 bg-dark-t box-shadow m-2">
-					<div class="col-12 m-2">
-						<input class="form-control Mw-100 justify-self-center" type="file" name="foto" required>
-					</div>
-
-					<div class="col-12 justify-self-center d-flex align-items-center p-2">
-						<div class="row">
-							<div class="col-lg-6 col-md-12 col-sm-6 col-12 m-auto">
-								<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-							</div>
-							<div class="col-lg-6 col-md-12 col-sm-6 col-12">
-								<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-12 bg-dark-t box-shadow m-2">
-					<div class="col-12 m-2">
-						<input class="form-control Mw-100 justify-self-center" type="file" name="foto" required>
-					</div>
-
-					<div class="col-12 justify-self-center d-flex align-items-center p-2">
-						<div class="row">
-							<div class="col-lg-6 col-md-12 col-sm-6 col-12 m-auto">
-								<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-							</div>
-							<div class="col-lg-6 col-md-12 col-sm-6 col-12">
-								<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-
-				<div class="col-12 pt-4">
-					<input class="form-control" type="submit" name="submit" value="Crear receta">
-				</div>
+			
+				<button class="btn btn-outline-dark col-12 my-2" type="submit" name="submit">Crear receta </button>
+				
 			</div>
 
 		</form>
