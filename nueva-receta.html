@@ -38,7 +38,7 @@
 		<div class="col-4 col-md-5 text-right d-none d-md-initial">
 			<a class="btn revers-a ml-auto" href="login.html">Login</a>
 			<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
-			<a class=" btn btn-outline-orange" href="registro.html">Log out</a>
+			<a class=" btn btn-outline-orange" href="#">Log out</a>
 		</div>
 		<div class="col-12">
 			
@@ -153,14 +153,14 @@
 				<div class="col-md-8 col-12 ml-2">
 					<h2 class="display-4 text-center mb-0">Selección de fotos</h2>
 					<hr/>
-					<button class="btn btn-outline-dark ml-2 ">Añadir foto</button>
+						<input class="Mw-100" type="file" name="foto" required>
+					<button class="btn btn-outline-dark ml-2  mb-2">Añadir foto</button>
 					
-					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light mb-2">
-
+					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light mb-2 position-relative">
+						<span class="position-absolute pointer t0 r0 m-1 text-blood h3 z-2"><i class="fas fa-times"></i></span>
 						<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
 						<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
 						
-						<input class="Mw-100" type="file" name="foto" required>
 
 			
 					</div>	
