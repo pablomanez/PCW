@@ -14,7 +14,7 @@
 	--light: #F4F4F4;
 	--notsolight: #e2e2e2;
 	--white: #FFF;
-	--blood: #e10031;
+	--blood: #ff7575;
 }
 
 html, body{
@@ -27,13 +27,13 @@ html, body{
 }
 
 .logo{
-	background: url("../Images/THE_LEMON_ICON.png") no-repeat center; 
+	background: url("../Images/THE_LEMON_ICON.png") no-repeat center;
 	background-size: auto 100%;
 	transition: background 0.4s ease-in-out;
-	
+
 }
-.logo:hover, .logo:focus, .logo:active{ 
-	background: url("../Images/THE_LEMON_ICON_FOCUS.png") no-repeat center; 
+.logo:hover, .logo:focus, .logo:active{
+	background: url("../Images/THE_LEMON_ICON_FOCUS.png") no-repeat center;
 	background-size: auto 100%;
 }
 .h-header{height: 50px;}
@@ -169,7 +169,7 @@ html, body{
     background: #1b1b1b;
 
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
 	box-shadow: inset 0px 0px 0 2.1px #1b1b1b;
@@ -317,7 +317,7 @@ html, body{
 .index-button:hover{
 	width: 180px;
 	height: 180px;
-}					
+}
 .index-button + div{
 	opacity: 0;
 	margin-top: -10px;
@@ -440,7 +440,7 @@ input:checked ~ #burger{height: 430px;}
 	.col-sm-10{grid-column: span 10;}
 	.col-sm-11{grid-column: span 11;}
 	.col-sm-12{grid-column: span 12;}
-		
+
 	.order-sm-1 {order: 1;}
 	.order-sm-2 {order: 2;}
 	.order-sm-3 {order: 3;}
@@ -468,14 +468,14 @@ input:checked ~ #burger{height: 430px;}
 	header label{display: none !important;}
 
 	.logo{
-		background: url("../Images/THE_LEMON.png") no-repeat; 
+		background: url("../Images/THE_LEMON.png") no-repeat;
 		background-position: 15% top;
 		background-size: auto 90%;
 		transition: background 0.4s ease-in-out;
 	}
-	.logo:hover, .logo:focus, .logo:active{ 
+	.logo:hover, .logo:focus, .logo:active{
 		background: url("../Images/THE_LEMON_FOCUS.png") no-repeat;
-		background-position: 15% top; 
+		background-position: 15% top;
 		background-size: auto 90%;
 	}
 	.w-logo{min-width: 300px;}
@@ -492,7 +492,7 @@ input:checked ~ #burger{height: 430px;}
 	.col-md-10{grid-column: span 10;}
 	.col-md-11{grid-column: span 11;}
 	.col-md-12{grid-column: span 12;}
-	
+
 	.order-md-1 {order: 1;}
 	.order-md-2 {order: 2;}
 	.order-md-3 {order: 3;}
@@ -505,7 +505,7 @@ input:checked ~ #burger{height: 430px;}
 	.order-md-10 {order: 10;}
 	.order-md-11 {order: 11;}
 	.order-md-12 {order: 12;}
-	
+
 	.d-md-initial{display: initial !important;}
 	.d-md-flex{display: flex !important;}
 	.d-md-none{display: none !important;}
@@ -543,7 +543,7 @@ input:checked ~ #burger{height: 430px;}
 	.col-lg-10{grid-column: span 10;}
 	.col-lg-11{grid-column: span 11;}
 	.col-lg-12{grid-column: span 12;}
-	
+
 	.order-lg-1 {order: 1;}
 	.order-lg-2 {order: 2;}
 	.order-lg-3 {order: 3;}
@@ -576,7 +576,7 @@ input:checked ~ #burger{height: 430px;}
 	.col-xl-10{grid-column: span 10;}
 	.col-xl-11{grid-column: span 11;}
 	.col-xl-12{grid-column: span 12;}
-	
+
 	.order-xl-1 {order: 1;}
 	.order-xl-2 {order: 2;}
 	.order-xl-3 {order: 3;}
@@ -589,7 +589,7 @@ input:checked ~ #burger{height: 430px;}
 	.order-xl-10 {order: 10;}
 	.order-xl-11 {order: 11;}
 	.order-xl-12 {order: 12;}
-	
+
 	.d-xl-initial{display: initial;}
 	.d-xl-flex{display: flex;}
 	.d-xl-none{display: none;}
@@ -741,6 +741,9 @@ hr {
 	color: var(--orange);
 }
 
+.abbr {
+  text-decoration: none;
+}
 
 
 /*puedo contruir una erosión a base de dilataciones*/

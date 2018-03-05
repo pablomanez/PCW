@@ -1,0 +1,212 @@
+[1mdiff --git a/CSS/Lightrap.css b/CSS/Lightrap.css[m
+[1mindex 99eeabd..1f64582 100755[m
+[1m--- a/CSS/Lightrap.css[m
+[1m+++ b/CSS/Lightrap.css[m
+[36m@@ -14,7 +14,7 @@[m
+ 	--light: #F4F4F4;[m
+ 	--notsolight: #e2e2e2;[m
+ 	--white: #FFF;[m
+[31m-	--blood: #e10031;[m
+[32m+[m	[32m--blood: #ff7575;[m[41m[m
+ }[m
+ [m
+ html, body{[m
+[36m@@ -27,13 +27,13 @@[m [mhtml, body{[m
+ }[m
+ [m
+ .logo{[m
+[31m-	background: url("../Images/THE_LEMON_ICON.png") no-repeat center; [m
+[32m+[m	[32mbackground: url("../Images/THE_LEMON_ICON.png") no-repeat center;[m[41m[m
+ 	background-size: auto 100%;[m
+ 	transition: background 0.4s ease-in-out;[m
+[31m-	[m
+[32m+[m[41m[m
+ }[m
+[31m-.logo:hover, .logo:focus, .logo:active{ [m
+[31m-	background: url("../Images/THE_LEMON_ICON_FOCUS.png") no-repeat center; [m
+[32m+[m[32m.logo:hover, .logo:focus, .logo:active{[m[41m[m
+[32m+[m	[32mbackground: url("../Images/THE_LEMON_ICON_FOCUS.png") no-repeat center;[m[41m[m
+ 	background-size: auto 100%;[m
+ }[m
+ .h-header{height: 50px;}[m
+[36m@@ -169,7 +169,7 @@[m [mhtml, body{[m
+     background: #1b1b1b;[m
+ [m
+ }[m
+[31m- [m
+[32m+[m[41m[m
+ /* Handle */[m
+ ::-webkit-scrollbar-thumb {[m
+ 	box-shadow: inset 0px 0px 0 2.1px #1b1b1b;[m
+[36m@@ -317,7 +317,7 @@[m [mhtml, body{[m
+ .index-button:hover{[m
+ 	width: 180px;[m
+ 	height: 180px;[m
+[31m-}					[m
+[32m+[m[32m}[m[41m[m
+ .index-button + div{[m
+ 	opacity: 0;[m
+ 	margin-top: -10px;[m
+[36m@@ -440,7 +440,7 @@[m [minput:checked ~ #burger{height: 430px;}[m
+ 	.col-sm-10{grid-column: span 10;}[m
+ 	.col-sm-11{grid-column: span 11;}[m
+ 	.col-sm-12{grid-column: span 12;}[m
+[31m-		[m
+[32m+[m[41m[m
+ 	.order-sm-1 {order: 1;}[m
+ 	.order-sm-2 {order: 2;}[m
+ 	.order-sm-3 {order: 3;}[m
+[36m@@ -468,14 +468,14 @@[m [minput:checked ~ #burger{height: 430px;}[m
+ 	header label{display: none !important;}[m
+ [m
+ 	.logo{[m
+[31m-		background: url("../Images/THE_LEMON.png") no-repeat; [m
+[32m+[m		[32mbackground: url("../Images/THE_LEMON.png") no-repeat;[m[41m[m
+ 		background-position: 15% top;[m
+ 		background-size: auto 90%;[m
+ 		transition: background 0.4s ease-in-out;[m
+ 	}[m
+[31m-	.logo:hover, .logo:focus, .logo:active{ [m
+[32m+[m	[32m.logo:hover, .logo:focus, .logo:active{[m[41m[m
+ 		background: url("../Images/THE_LEMON_FOCUS.png") no-repeat;[m
+[31m-		background-position: 15% top; [m
+[32m+[m		[32mbackground-position: 15% top;[m[41m[m
+ 		background-size: auto 90%;[m
+ 	}[m
+ 	.w-logo{min-width: 300px;}[m
+[36m@@ -492,7 +492,7 @@[m [minput:checked ~ #burger{height: 430px;}[m
+ 	.col-md-10{grid-column: span 10;}[m
+ 	.col-md-11{grid-column: span 11;}[m
+ 	.col-md-12{grid-column: span 12;}[m
+[31m-	[m
+[32m+[m[41m[m
+ 	.order-md-1 {order: 1;}[m
+ 	.order-md-2 {order: 2;}[m
+ 	.order-md-3 {order: 3;}[m
+[36m@@ -505,7 +505,7 @@[m [minput:checked ~ #burger{height: 430px;}[m
+ 	.order-md-10 {order: 10;}[m
+ 	.order-md-11 {order: 11;}[m
+ 	.order-md-12 {order: 12;}[m
+[31m-	[m
+[32m+[m[41m[m
+ 	.d-md-initial{display: initial !important;}[m
+ 	.d-md-flex{display: flex !important;}[m
+ 	.d-md-none{display: none !important;}[m
+[36m@@ -543,7 +543,7 @@[m [minput:checked ~ #burger{height: 430px;}[m
+ 	.col-lg-10{grid-column: span 10;}[m
+ 	.col-lg-11{grid-column: span 11;}[m
+ 	.col-lg-12{grid-column: span 12;}[m
+[31m-	[m
+[32m+[m[41m[m
+ 	.order-lg-1 {order: 1;}[m
+ 	.order-lg-2 {order: 2;}[m
+ 	.order-lg-3 {order: 3;}[m
+[36m@@ -576,7 +576,7 @@[m [minput:checked ~ #burger{height: 430px;}[m
+ 	.col-xl-10{grid-column: span 10;}[m
+ 	.col-xl-11{grid-column: span 11;}[m
+ 	.col-xl-12{grid-column: span 12;}[m
+[31m-	[m
+[32m+[m[41m[m
+ 	.order-xl-1 {order: 1;}[m
+ 	.order-xl-2 {order: 2;}[m
+ 	.order-xl-3 {order: 3;}[m
+[36m@@ -589,7 +589,7 @@[m [minput:checked ~ #burger{height: 430px;}[m
+ 	.order-xl-10 {order: 10;}[m
+ 	.order-xl-11 {order: 11;}[m
+ 	.order-xl-12 {order: 12;}[m
+[31m-	[m
+[32m+[m[41m[m
+ 	.d-xl-initial{display: initial;}[m
+ 	.d-xl-flex{display: flex;}[m
+ 	.d-xl-none{display: none;}[m
+[36m@@ -741,6 +741,9 @@[m [mhr {[m
+ 	color: var(--orange);[m
+ }[m
+ [m
+[32m+[m[32m.abbr {[m[41m[m
+[32m+[m[32m  text-decoration: none;[m[41m[m
+[32m+[m[32m}[m[41m[m
+ [m
+ [m
+ /*puedo contruir una erosión a base de dilataciones*/[m
+[36m@@ -750,4 +753,4 @@[m [mhr {[m
+ /*crecían los negros, y los blancos desparecían*/[m
+ [m
+ .pop-up {transition: all .2s ease-in-out;}[m
+[31m-.pop-up:hover {transform: scale(1.05);}[m
+\ No newline at end of file[m
+[32m+[m[32m.pop-up:hover {transform: scale(1.05);}[m[41m[m
+[1mdiff --git a/registro.html b/registro.html[m
+[1mindex c9217a1..a6d8fb2 100644[m
+[1m--- a/registro.html[m
+[1m+++ b/registro.html[m
+[36m@@ -14,35 +14,38 @@[m
+ 				<form action="#" method="post">[m
+ 					<h1 class="text-center mt-0 display-4">Registro</h1>[m
+ 					<div class="row p-3">[m
+[32m+[m
+[32m+[m						[32m<div class="text-blood col-12">Los campos con * son obligatorios</div>[m
+[32m+[m
+ 						<div class="col-12 col-sm-6">[m
+[31m-							<label class="form-label" for="l_user">Nombre de usuario:</label>[m
+[32m+[m							[32m<label class="form-label" for="l_user">Nombre de usuario:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>[m
+ 							<input class="form-control" type="text" name="user" id="l_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus>[m
+[31m-						</div>	[m
+[32m+[m						[32m</div>[m
+ 						<div class="col-12 col-sm-6 ">[m
+[31m-							<label class="form-label" for="l_email">Email:</label>[m
+[32m+[m							[32m<label class="form-label" for="l_email">Email:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>[m
+ 							<input class="form-control" type="email" name="email" id="l_email">[m
+ 						</div>[m
+ 						<div class="col-sm-6 col-12">[m
+[31m-							<label class="form-label" for="l_pwd">Contraseña:</label>[m
+[32m+[m							[32m<label class="form-label" for="l_pwd">Contraseña:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>[m
+ 							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">[m
+ 						</div>[m
+[31m-						[m
+[32m+[m
+ 						<div class="col-sm-6 col-12">[m
+[31m-							<label class="form-label" for="l_pwd">Repite la contraseña:</label>[m
+[32m+[m							[32m<label class="form-label" for="l_pwd">Repite la contraseña:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>[m
+ 							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20">[m
+ 						</div>[m
+[31m-						[m
+[32m+[m
+ 						<div class="col-12">[m
+[31m-							<label class="form-label" for="l_name">Nombre completo:</label>[m
+[32m+[m							[32m<label class="form-label" for="l_name">Nombre completo:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>[m
+ 							<input class="form-control" type="text" name="name" id="l_name">[m
+ 						</div>[m
+[31m-						[m
+[32m+[m
+ 						<div class="col-sm-5 col-12">[m
+[31m-							<label class="form-label" for="l_date">Fecha de nacimiento:</label>[m
+[32m+[m							[32m<label class="form-label" for="l_date">Fecha de nacimiento:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>[m
+ 							<input class="form-control" type="date" name="date" id="l_date">[m
+ 						</div>[m
+[31m-						[m
+[31m-						[m
+[32m+[m
+[32m+[m
+ 						<div class="col-12 pt-4 px-3 text-center">[m
+ 							<button class="btn btn-outline-orange w-100" type="submit" name="submit">Registrarme</button>[m
+ 						</div>[m
+[36m@@ -50,7 +53,7 @@[m
+ 				</form>[m
+ 			</div>[m
+ 			<div class="col-12 col-md-5 bg-light-t d-flex align-items-center">[m
+[31m-				[m
+[32m+[m
+ 				<div class=" mx-2 shadow justify-content-center text-center p-2">[m
+ 					<img class="Mw-75 d-none d-md-initial" src="Images/Haha_Yes.png" alt="Haha Yes">[m
+ 					<div class="h1 text-center text-orange">¿Ya estás registrado?</div>[m
+[36m@@ -60,6 +63,6 @@[m
+ 			</div>[m
+ 		</div>[m
+ 	</main>[m
+[31m-	[m
+[32m+[m
+ </body>[m
+[31m-</html>[m
+\ No newline at end of file[m
+[32m+[m[32m</html>[m
