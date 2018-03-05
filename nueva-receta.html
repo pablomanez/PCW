@@ -11,7 +11,7 @@
 <body class="background">
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
 	<div class="row d-flex align-items-center">
-		
+
 		<a href="index.html" class="logo col-2 d-initial d-md-none mheight-50px"></a>
 
 		<!-- BARRA DE BÚSQUEDA -->
@@ -32,7 +32,7 @@
 
 		</label>
 		<!-- -->
-	
+
 
 		<!-- Login/Registro -->
 		<div class="col-4 col-md-5 text-right d-none d-md-initial">
@@ -41,14 +41,14 @@
 			<a class=" btn btn-outline-orange" href="registro.html">Log out</a>
 		</div>
 		<div class="col-12">
-			
+
 		<hr class="hr2 d-none d-md-flex"/>
 		</div>
 
 		<a href="index.html" class="logo col-2 col-md-5 col-lg-4 col-xl-3 h-100 position-relative">
 			<span class="position-absolute b0 r0 mr-2 z-2 d-none d-md-initial">De cero a héroe en 3 chuletas</span>
 		</a>
-		
+
 		<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden h4">
 
 			<a class="btn revers-a mr-3" href="index.html">
@@ -76,20 +76,21 @@
 			-->
 
 		</div>
-		
-		
+
+
 	</div>
 </header>
 	<main class="container pt-150px">
 		<div class="display-4 text-center py-3 shadow">Nueva receta</div>
 		<form action="#" method="post">
-		
+
 			<!-- DESCRIPCIÓN DE LA RECETA -->
 			<div class="row bg-dark-t2 p-3 box-shadow text-light">
+				<div class="text-blood col-12">Los campos con * son obligatorios</div>
 				<div class="col-12 justify-self-center">
 					<div class="row">
 						<div class="col-lg-2 col-md-3 col-sm-5 col-9">
-							<label class="form-label" for="l_namerecipe">Nombre de la receta:</label>
+							<label class="form-label" for="l_namerecipe">Nombre de la receta:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
 						</div>
 
 						<div class="col-lg-10 col-md-9 col-sm-12 col-12">
@@ -99,7 +100,7 @@
 				</div>
 
 				<div class="col-12 justify-self-center">
-					<label class="form-label" for="l_elab">Elaboración:</label>
+					<label class="form-label" for="l_elab">Elaboración:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
 
 					<textarea style="resize: none; height: auto;" class="form-control" rows="10" cols="130" name="elab" id="l_elab" placeholder="Escribe aquí la preparación de tu receta" required></textarea>
 				</div>
@@ -107,17 +108,17 @@
 				<div class="col-12 justify-self-center">
 					<div class="row">
 						<div class="col-md-4 col-sm-6 col-12">
-							<label class="form-label" for="l_comen">Número de comensales:</label>
+							<label class="form-label" for="l_comen">Número de comensales:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
 							<input class="form-control" type="number" name="comen" id="l_comen" step="1" min="1" value="1" required>
 						</div>
 
 						<div class="col-md-4 col-sm-6 col-12">
-							<label class="form-label" for="l_time">Tiempo de elaboración:</label>
+							<label class="form-label" for="l_time">Tiempo de elaboración:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
 							<input class="form-control" type="number" name="time" id="l_time" step="5" min="5" value="5" required>
 						</div>
 
 						<div class="col-md-4 col-12">
-							<label class="form-label" for="l_diff">Dificultad de elaboración:</label>
+							<label class="form-label" for="l_diff">Dificultad de elaboración:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
 							<select class="form-control" required id="l_diff">
 								<option value="" disabled selected>Elige una opción</option>
 								<option value="baja">Baja</option>
@@ -138,7 +139,7 @@
 					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light">
 						<label class="form-label" for="new_ingredient">Nombre</label>
 						<input class="form-control" type="text" name="new_ingredient">
-						<span class="btn btn-outline-orange ml-auto d-block">Añadir ingrediente</span>	
+						<span class="btn btn-outline-orange ml-auto d-block">Añadir ingrediente</span>
 						<p class="text-center">Pulsa "ENTER" para escribir más ingredientes</p>
 						<ul contenteditable="true" id="l_ingr" class="text-light">
 							<li  class="bg-orange p-2 mb-1"><span class="text-dark">Un ingrediente</span></li>
@@ -154,21 +155,21 @@
 					<h2 class="display-4 text-center mb-0">Selección de fotos</h2>
 					<hr/>
 					<button class="btn btn-outline-dark ml-2 ">Añadir foto</button>
-					
+
 					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light mb-2">
 
 						<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
 						<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
-						
+
 						<input class="Mw-100" type="file" name="foto" required>
 
-			
-					</div>	
-					
+
+					</div>
+
 				</div>
-			
+
 				<button class="btn btn-outline-dark col-12 my-2" type="submit" name="submit">Crear receta </button>
-				
+
 			</div>
 
 		</form>
@@ -186,7 +187,7 @@
 			<div class="text-light p-0 text-center">
 				<span class="h6">Todos los derechos reservados. Todas las marcas reservadas son de sus respectivos dueños.</span>
 			</div>
-			
+
 			<div class="text-center p-0 mt-2">
 				<a class="text-orange" href="acerca.html">ACERCA DE NOSOTROS</a>
 			</div>
