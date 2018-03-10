@@ -7,133 +7,153 @@
 	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 </head>
-<body class="background d-block d-sm-flex align-items-center">
-		<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header t0">
-	<div class="row d-flex align-items-center">
-		
-		<a href="index.html" class="logo col-2 d-initial d-md-none mheight-50px"></a>
-
-		<!-- BARRA DE BÚSQUEDA -->
-		<div class="col-8 col-md-7 d-flex align-items-center mheight-50px">
-			<form class="position-relative w-search" action="buscar.html" method="get">
-				<input style="border-radius: 30px" class="form-control mb-0" type="text" name="search_box" required>
-				<button class="search-btn m-auto t0 b0 r0 pr-2" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
-			</form>
-		</div>
-
-		<!-- HAMBURGUESA D-NONE -->
-		<input id="ham" type="checkbox" class="d-none" />
-		<label for="ham" style="font-size: 30px;" class=" col-2 text-light text-center">
-
-			<span></span>
-			<span></span>
-			<span></span>
-
-		</label>
-		<!-- -->
-	
-
-		<!-- Login/Registro -->
-		<div class="col-4 col-md-5 text-right d-none d-md-initial">
-			<a class="btn revers-a ml-auto" href="login.html">Login</a>
-			<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
-			<a class=" btn btn-outline-orange" href="#">Log out</a>
-		</div>
-		<div class="col-12">
+<body class="background d-block d-sm-flex">
+	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header t0">
+		<div class=" row align-items-center">
 			
-		<hr class="hr2 d-none d-md-flex"/>
-		</div>
+			<a href="index.html" class="logo col-2 d-initial d-md-none mheight-50px"></a>
 
-		<a href="index.html" class="logo col-2 col-md-5 col-lg-4 col-xl-3 h-100 position-relative">
-			<span class="position-absolute b0 r0 mr-2 z-2 d-none d-md-initial">De cero a héroe en 3 chuletas</span>
-		</a>
-		
-		<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden h4">
-
-			<a class="btn revers-a mr-3" href="index.html">
-				<span class="h2"><i class="fas fa-home"></i></span>
-				<span class="d-initial d-md-none  d-lg-initial">Inicio</span>
-			</a>
-			<div class="p-2 d-block d-md-none">
-				<a class="btn revers-a" href="login.html">Login</a>
-				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
-				<a class=" btn btn-outline-orange" href="registro.html">Logout</a>
-			</div>
-			<a class="btn revers-a mr-3" href="buscar.html">
-				<span class="h2"><i class="fas fa-search-plus"></i></span>
-				<span class="d-initial d-md-none  d-lg-initial">Búsqueda avanzada</span>
-			</a>
-			<a class="btn revers-a mr-3" href="nueva-receta.html">
-				<span class=" h2"><i class="fas fa-file"></i></span>
-				<span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>
-			</a>
-			<!--
-			<a class="btn revers-a" href="nueva-receta.html">
-				<span class="h2"><i class="fas fa-info"></i></span>
-				<span class="d-initial d-md-none d-lg-initial">About</span>
-			</a>
-			-->
-
-		</div>
-		
-		
-	</div>
-</header>
-	<main class="container text-light pt-150px">
-		<div class="row box-shadow">
-			<div class="col-12 col-md-7 bg-dark-t pt-3">
-				<form action="#" method="post">
-					<h1 class="text-center mt-0 display-4">Registro</h1>
-					<div class="row p-3">
-
-						<div class="text-blood col-12">Los campos con * son obligatorios</div>
-
-						<div class="col-12 col-sm-6">
-							<label class="form-label" for="l_user">Nombre de usuario:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="text" name="user" id="l_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus required>
-						</div>
-						<div class="col-12 col-sm-6 ">
-							<label class="form-label" for="l_email">Email:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="email" name="email" id="l_email" required>
-						</div>
-						<div class="col-sm-6 col-12">
-							<label class="form-label" for="l_pwd">Contraseña:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" required>
-						</div>
-
-						<div class="col-sm-6 col-12">
-							<label class="form-label" for="l_pwd">Repite la contraseña:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" required>
-						</div>
-
-						<div class="col-12">
-							<label class="form-label" for="l_name">Nombre completo:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="text" name="name" id="l_name" required>
-						</div>
-
-						<div class="col-sm-5 col-12">
-							<label class="form-label" for="l_date">Fecha de nacimiento:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="date" name="date" id="l_date" required>
-						</div>
-
-
-						<div class="col-12 pt-4 px-3 text-center">
-							<button class="btn btn-outline-orange w-100" type="submit" name="submit">Registrarme</button>
-						</div>
-					</div>
+			<!-- BARRA DE BÚSQUEDA -->
+			<div class="col-8 col-md-7 d-flex align-items-center mheight-50px">
+				<form class="position-relative w-search" action="buscar.html" method="get">
+					<input style="border-radius: 30px" class="form-control mb-0" type="text" name="search_box" required>
+					<button class="search-btn m-auto t0 b0 r0 pr-2" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
 				</form>
 			</div>
-			<div class="col-12 col-md-5 bg-light-t d-flex align-items-center">
 
-				<div class=" mx-2 shadow justify-content-center text-center p-2">
-					<img class="Mw-75 d-none d-md-initial" src="Images/Haha_Yes.png" alt="Haha Yes">
-					<div class="h1 text-center text-orange">¿Ya estás registrado?</div>
-					<div class="h3 text-center py-2">¡Conéctate!</div>
-					<a class="btn btn-outline-orange w-75" href="login.html">Iniciar sesion</a>
-				</div>
+			<!-- HAMBURGUESA D-NONE -->
+			<input id="ham" type="checkbox" class="d-none" />
+			<label for="ham" style="font-size: 30px;" class=" col-2 text-light text-center">
+
+				<span></span>
+				<span></span>
+				<span></span>
+
+			</label>
+			<!-- -->
+		
+
+			<!-- Login/Registro -->
+			<div class="col-4 col-md-5 text-right d-none d-md-initial">
+				<a class="btn revers-a ml-auto" href="login.html">Login</a>
+				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
+				<a class=" btn btn-outline-orange" href="#">Log out</a>
 			</div>
-		</div>
-	</main>
+			<div class="col-12">
+				
+			<hr class="hr2 d-none d-md-flex"/>
+			</div>
 
+			<a href="index.html" class="logo col-2 col-md-5 col-lg-4 col-xl-3 h-100 position-relative">
+				<span class="position-absolute b0 r0 mr-2 z-2 d-none d-md-initial">De cero a héroe en 3 chuletas</span>
+			</a>
+			
+			<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden h4">
+
+				<a class="btn revers-a mr-3" href="index.html">
+					<span class="h2"><i class="fas fa-home"></i></span>
+					<span class="d-initial d-md-none  d-lg-initial">Inicio</span>
+				</a>
+				<div class="p-2 d-block d-md-none">
+					<a class="btn revers-a" href="login.html">Login</a>
+					<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
+					<a class=" btn btn-outline-orange" href="registro.html">Logout</a>
+				</div>
+				<a class="btn revers-a mr-3" href="buscar.html">
+					<span class="h2"><i class="fas fa-search-plus"></i></span>
+					<span class="d-initial d-md-none  d-lg-initial">Búsqueda avanzada</span>
+				</a>
+				<a class="btn revers-a mr-3" href="nueva-receta.html">
+					<span class=" h2"><i class="fas fa-file"></i></span>
+					<span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>
+				</a>
+				<!--
+				<a class="btn revers-a" href="nueva-receta.html">
+					<span class="h2"><i class="fas fa-info"></i></span>
+					<span class="d-initial d-md-none d-lg-initial">About</span>
+				</a>
+				-->
+
+			</div>
+			
+			
+		</div>
+	</header>
+	<div class="container-fluid h-100">
+		<div class="row align-items-end h-100">
+			<main class="col-12 container text-light pt-150px justify-self-center mb-4">
+				<div class="row box-shadow">
+					<div class="col-12 col-md-7 bg-dark-t pt-3">
+						<form action="#" method="post">
+							<h1 class="text-center mt-0 display-4">Registro</h1>
+							<div class="row p-3">
+
+								<div class="text-red col-12">Los campos con * son obligatorios</div>
+
+								<div class="col-12 col-sm-6">
+									<label class="form-label" for="l_user">Nombre de usuario:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="text" name="user" id="l_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus required>
+								</div>
+								<div class="col-12 col-sm-6 ">
+									<label class="form-label" for="l_email">Email:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="email" name="email" id="l_email" required>
+								</div>
+								<div class="col-sm-6 col-12">
+									<label class="form-label" for="l_pwd">Contraseña:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" required>
+								</div>
+
+								<div class="col-sm-6 col-12">
+									<label class="form-label" for="l_pwd">Repite la contraseña:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" required>
+								</div>
+
+								<div class="col-12">
+									<label class="form-label" for="l_name">Nombre completo:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="text" name="name" id="l_name" required>
+								</div>
+
+								<div class="col-sm-5 col-12">
+									<label class="form-label" for="l_date">Fecha de nacimiento:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="date" name="date" id="l_date" required>
+								</div>
+
+
+								<div class="col-12 pt-4 px-3 text-center">
+									<button class="btn btn-outline-orange w-100" type="submit" name="submit">Registrarme</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-12 col-md-5 bg-light-t d-flex align-items-center justify-content-center">
+						<div class=" mx-2 shadow justify-content-center text-center p-2">
+							<img class="Mw-75 d-none d-md-initial" src="Images/Haha_Yes.png" alt="Haha Yes">
+							<div class="h1 text-center text-orange">¿Ya estás registrado?</div>
+							<div class="h3 text-center py-2">¡Conéctate!</div>
+							<a class="btn btn-outline-orange w-75" href="login.html">Iniciar sesion</a>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<footer class="col-12 container-fluid py-3 bg-dark position-relative">
+					<a href="#" class="btn btn-outline-orange position-absolute mt-2 mr-2 circle going-top d-flex align-items-center justify-content-center t0 r0 p-5">
+						<i style="font-size: 30px;" class="fas fa-chevron-up"></i>
+					</a>
+					<div style="background-image: url(Images/LOGO_1.jpeg);" class="circle justify-self-center footer-logo bg-image my-2"></div>
+					<div class="text-light p-0 text-center">
+						<span class="h6">&copy; <time datetime="2018">2018</time> </span>
+						<span class="h6">Revolucionaria página de cocina, ALL RIGHTS RESERVED</span>
+					</div>
+					<div class="text-light p-0 text-center">
+						<span class="h6">Todos los derechos reservados. Todas las marcas reservadas son de sus respectivos dueños.</span>
+					</div>
+					
+					<div class="text-center p-0 mt-2">
+						<a class="text-orange" href="acerca.html">ACERCA DE NOSOTROS</a>
+					</div>
+			</footer>
+		</div>
+	</div>
 </body>
 </html>

@@ -14,7 +14,8 @@
 	--light: #F4F4F4;
 	--notsolight: #e2e2e2;
 	--white: #FFF;
-	--blood: #ff7575;
+	--blood: #f21a1a;
+	--red: #ff7575;
 }
 
 html, body{
@@ -53,8 +54,6 @@ html, body{
 	transform: translate(0);
 }
 
-
-
 /* COLORES BACKGROUND */
 .bg-black{background: var(--black);}
 .bg-dark{background: var(--dark);}
@@ -66,6 +65,7 @@ html, body{
 .bg-notsolight{background: var(--notsolight);}
 .bg-light{background: var(--white);}
 .bg-light-t{background: rgba(43,43,43,0.4);}
+.bg-transparent{background: transparent;}
 
 /* COLORES TEXTO */
 .text-white {color: var(--white);}
@@ -78,6 +78,7 @@ html, body{
 .text-dark-t{color: rgba(0, 0, 0, 0.6);}
 .text-orange-t{color:rgba(249, 195, 0, 0.95);}
 .text-blood{color: var(--blood);}
+.text-red{color: var(--red);}
 
 /* TEXTO */
 .text-center{text-align: center;}
@@ -112,16 +113,17 @@ html, body{
 
 /* DISPLAY */
 .d-block {display: block !important;}
-.d-inline {display: inline;}
-.d-inline-block {display: inline-block;}
-.d-flex {display: flex;}
-.d-initial{display: initial;}
+.d-inline {display: inline !important;}
+.d-inline-block {display: inline-block !important;}
+.d-flex {display: flex !important;}
+.d-initial{display: initial !important;}
 .d-none{display: none !important;}
 
 /* ALINEAMIENTO VERTICAL Y HORIZONTAL */
 .align-items-start {align-items: flex-start;}
 .align-items-center {align-items: center;}
 .align-items-end {align-items: flex-end;}
+.align-self-center {align-self: center;}
 
 .justify-content-start {justify-content: flex-start;}
 .justify-content-center {justify-content: center;}
@@ -131,6 +133,7 @@ html, body{
 	margin-left: auto;
 	margin-right: auto;
 }
+.justify-self-center{align-self: center;}
 
 /* POSICION */
 .position-relative {position: relative;}
@@ -195,14 +198,11 @@ html, body{
 .w-75 {width: 75% !important;}
 .w-100 {width: 100% !important;}
 .w-search {width: 100%}
+.Mw-item-search{max-width: 350px;}
 
 .Mw-20 {max-width: 20% !important;}
 .Mw-100 {max-width: 100% !important;}
 
-.h-5 {height: 5% !important;}
-.h-10 {height: 10% !important;}
-.h-25 {height: 25% !important;}
-.h-35 {height: 35% !important;}
 .h-50 {height: 50% !important;}
 .h-75 {height: 75% !important;}
 .h-100 {height: 100% !important;}
@@ -286,8 +286,6 @@ html, body{
 .ml-4 {margin-left: 40px;}	.mr-4 {margin-right: 40px;}	.mt-4 {margin-top: 40px;}	.mb-4 {margin-bottom: 40px;}
 .ml-5 {margin-left: 60px;}	.mr-5 {margin-right: 60px;}	.mt-5 {margin-top: 60px;}	.mb-5 {margin-bottom: 60px;}
 
-.mt--150px{margin-top: -150px;}
-
 .mr-auto{margin-right: auto;}
 .ml-auto{margin-left: auto;}
 .m-auto{margin:auto;}
@@ -334,7 +332,6 @@ html, body{
 .footer-logo{height: 90px;width: 90px;}
 .header-logo{width: 150px;height: 150px;}
 .huge-logo{width: 250px; height: 250px;}
-.flip{transform: scaleX(-1);}
 
 
 /* MENÚ DE HAMBURGUESA MOLÓN */
@@ -428,8 +425,10 @@ input:checked ~ #burger{height: 400px;}
 .order-11 {order: 11;}
 .order-12 {order: 12;}
 
+
+#about .text-right, #about .text-left {text-align: justify;}
 /* sm */
-@media (min-width: 576px) {
+@media (min-width: 480px) {
 	.col-sm-1{grid-column: span 1;}
 	.col-sm-2{grid-column: span 2;}
 	.col-sm-3{grid-column: span 3;}
@@ -456,9 +455,9 @@ input:checked ~ #burger{height: 400px;}
 	.order-sm-11 {order: 11;}
 	.order-sm-12 {order: 12;}
 
-	.d-sm-initial{display: initial;}
+	.d-sm-initial{display: initial !important;}
 	.d-sm-flex{display: flex !important;}
-	.d-sm-none{display: none;}
+	.d-sm-none{display: none !important;}
 
 }
 
@@ -527,6 +526,7 @@ input:checked ~ #burger{height: 400px;}
 		text-align: left;
 	}
 	#burger > a{display: inline-block !important; font-size: 1em; padding: 20px;}
+	#about .text-right{text-align: right;} #about .text-left {text-align: left;}
 }
 
 /* lg */
@@ -592,13 +592,11 @@ input:checked ~ #burger{height: 400px;}
 	.order-xl-11 {order: 11;}
 	.order-xl-12 {order: 12;}
 
-	.d-xl-initial{display: initial;}
-	.d-xl-flex{display: flex;}
-	.d-xl-none{display: none;}
+	.d-xl-initial{display: initial !important;}
+	.d-xl-flex{display: flex !important;}
+	.d-xl-none{display: none !important;}
 	.mh-index{min-height: 800px !important;}
 }
-
-
 
 /* FORMS */
 .form-control{
@@ -726,7 +724,7 @@ hr {
 .btn-outline-dark:hover, .btn-outline-dark:focus {
 	color: var(--light);
 	background-color:  var(--dark);
-	border-color:  var(--light);
+	border-color:  var(--dark);
 }
 
 /* BOTON BÚSQUEDA (LUPA) */
@@ -747,12 +745,7 @@ hr {
   text-decoration: none;
 }
 
-
-/*puedo contruir una erosión a base de dilataciones*/
-/*si yo dilato, vuelvo a dilatar, y vuelvo a dilatar va a crecer... va a crece la zona blanca*/
-/*la dilatación hace crece los blancos */
-/*pero el blanco gordo, no se ha perdido, se mantiene */
-/*crecían los negros, y los blancos desparecían*/
-
 .pop-up {transition: all .2s ease-in-out;}
 .pop-up:hover {transform: scale(1.05);}
+
+ul:focus, textarea:focus{outline: none;}

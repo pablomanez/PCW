@@ -10,7 +10,7 @@
 </head>
 <body class="background">
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
-	<div class="row d-flex align-items-center">
+	<div class=" row align-items-center">
 
 		<a href="index.html" class="logo col-2 d-initial d-md-none mheight-50px"></a>
 
@@ -86,48 +86,44 @@
 
 			<!-- DESCRIPCIÓN DE LA RECETA -->
 			<div class="row bg-dark-t2 p-3 box-shadow text-light">
-				<div class="text-blood col-12">Los campos con * son obligatorios</div>
-				<div class="col-12 justify-self-center">
-					<div class="row">
-						<div class="col-lg-2 col-md-3 col-sm-5 col-9">
-							<label class="form-label" for="l_namerecipe">Nombre de la receta:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-						</div>
+				<div class="text-red col-12 mb-2">Los campos con * son obligatorios</div>
+				
+				<div class="col-md-2 col-sm-5 col-9">
+					<label class="form-label" for="l_namerecipe">Nombre:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+				</div>
 
-						<div class="col-lg-10 col-md-9 col-sm-12 col-12">
-							<input class="form-control" type="text" name="namerecipe" id="l_namerecipe" maxlength="200" required>
-						</div>
-					</div>
+				<div class="col-md-10 col-sm-12 col-12">
+					<input class="form-control" type="text" name="namerecipe" id="l_namerecipe" maxlength="200" required>
 				</div>
 
 				<div class="col-12 justify-self-center">
-					<label class="form-label" for="l_elab">Elaboración:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
+					<label class="form-label" for="l_elab">Elaboración:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
 
 					<textarea style="resize: none; height: auto;" class="form-control" rows="10" cols="130" name="elab" id="l_elab" placeholder="Escribe aquí la preparación de tu receta" required></textarea>
 				</div>
 
-				<div class="col-12 justify-self-center">
-					<div class="row">
-						<div class="col-md-4 col-sm-6 col-12">
-							<label class="form-label" for="l_comen">Número de comensales:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="number" name="comen" id="l_comen" step="1" min="1" value="1" required>
-						</div>
 
-						<div class="col-md-4 col-sm-6 col-12">
-							<label class="form-label" for="l_time">Tiempo de elaboración:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<input class="form-control" type="number" name="time" id="l_time" step="5" min="5" value="5" required>
-						</div>
-
-						<div class="col-md-4 col-12">
-							<label class="form-label" for="l_diff">Dificultad de elaboración:</label> <abbr title="Obligatorio" class="text-blood abbr">*</abbr>
-							<select class="form-control" required id="l_diff">
-								<option value="" disabled selected>Elige una opción</option>
-								<option value="baja">Baja</option>
-								<option value="media">Media</option>
-								<option value="alta">Alta</option>
-							</select>
-						</div>
-					</div>
+				<div class="col-md-4 col-sm-6 col-12">
+					<label class="form-label" for="l_comen">Número de comensales:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+					<input class="form-control" type="number" name="comen" id="l_comen" step="1" min="1" value="1" required>
 				</div>
+
+				<div class="col-md-4 col-sm-6 col-12">
+					<label class="form-label" for="l_time">Tiempo de elaboración (min):</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+					<input class="form-control" type="number" name="time" id="l_time" step="5" min="5" value="5" required>
+				</div>
+
+				<div class="col-md-4 col-12">
+					<label class="form-label" for="l_diff">Dificultad de elaboración:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+					<select class="form-control" required id="l_diff">
+						<option value="" disabled selected>Elige una opción</option>
+						<option value="baja">Baja</option>
+						<option value="media">Media</option>
+						<option value="alta">Alta</option>
+					</select>
+				</div>
+
+
 			</div>
 
 			<!-- ZONA DE INGREDIENTES -->
@@ -142,9 +138,22 @@
 						<span class="btn btn-outline-orange ml-auto d-block">Añadir ingrediente</span>
 						<p class="text-center">Pulsa "ENTER" para escribir más ingredientes</p>
 						<ul contenteditable="true" id="l_ingr" class="text-light">
-							<li  class="bg-orange p-2 mb-1"><span class="text-dark">Un ingrediente</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Otro ingrediente</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Otro más</span></li>
+							<li  class="bg-orange p-2 mb-1"><span class="text-dark">5kg de patatas</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">10kg de mortadela</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">3 Huevos</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">90 cortezas de pan</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">2 filetes de buey</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">1 Costilla de cerdo</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Otra costilla de cerdo</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Una tostada sin tostar</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Leche</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Azúcar</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Muchas cosas bonitas</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Ingrediente X</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Harina</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Media pizza barbacoa</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">Otra costilla de cerdo</span></li>
+							<li class="bg-orange p-2 mb-1"><span class="text-dark">GTX Titan X Pascal</span></li>
 						</ul>
 					</div>
 				</div>
@@ -154,23 +163,25 @@
 				<div class="col-md-8 col-12 ml-2">
 					<h2 class="display-4 text-center mb-0">Selección de fotos</h2>
 					<hr/>
-						<input class="Mw-100" type="file" name="foto" required>
-					<button class="btn btn-outline-dark ml-2  mb-2">Añadir foto</button>
+					<div class="bg-dark-t mb-2 d-flex align-items-center p-2">
+						<input class="Mw-100 text-light" type="file" name="foto" required>
+						<button class="btn btn-outline-orange ml-auto">Añadir foto</button>
+					</div>
 					
-					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light mb-2 position-relative">
-						<span class="position-absolute pointer t0 r0 m-1 text-blood h3 z-2"><i class="fas fa-times"></i></span>
+					<div class="bg-dark-t box-shadow p-4 text-light mb-2 position-relative">
+						<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="fas fa-times"></i></span>
 						<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-						<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+						<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
 					</div>
-					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light mb-2 position-relative">
-						<span class="position-absolute pointer t0 r0 m-1 text-blood h3 z-2"><i class="fas fa-times"></i></span>
+					<div class="bg-dark-t box-shadow p-4 text-light mb-2 position-relative">
+						<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="fas fa-times"></i></span>
 						<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-						<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+						<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
 					</div>
-					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light mb-2 position-relative">
-						<span class="position-absolute pointer t0 r0 m-1 text-blood h3 z-2"><i class="fas fa-times"></i></span>
+					<div class="bg-dark-t box-shadow p-4 text-light mb-2 position-relative">
+						<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="fas fa-times"></i></span>
 						<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-						<textarea style="resize: none; height: auto;" class="form-control col-12" rows="11" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+						<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
 					</div>
 
 				</div>
