@@ -1,3 +1,32 @@
 |===========================================|
 |     M E M O R I A  P R Á C T I C A  1     |
 |===========================================|
+
+
+Para la realización de la primera práctica de Programación del Cliente Web, hemos usado las principales características y ___ de los
+lenguajes de programación para páginas web, HTML y CSS.
+
+En cuanto al HTML, hemos usado las principales etiquetas que nos proporciona. De entre ellas, destacamos el uso de <div> y <span>,
+debido a que hemos utilizado un método peculiar a la hora de la implementación del CSS, de lo que hablaremos posteriormente.
+Además, queremos destacar también, el uso de la etiqueta <label>, que permite una mejor navegación a la hora de usar formularios, las etiquetas
+<header>,<section>,<footer>,<figure>,<figcaption>,<hr>,... que hemos utilizado para estructurar el contenido de la página web.
+
+En cuanto al código CSS, puesto que en el cuatrimestre pasado cursamos la asignatura de Diseño de Sistemas Multimedia y utilizamos Bootstrap,
+nos acomodamos a un sistema de maquetado, que consideramos "más fácil" aunque maś tedioso. Por lo tanto, construimos un CSS desde 0, en el
+que fuimos introduciendo las reglas que consideramos oportunas a la hora de la maquetación.
+
+[CAPTURA DEL CSS]
+
+Por lo que ésta es la forma con la que hemos maquetado la totalidad de los .html de la práctica.
+Debemos añadir que el CSS está adaptado para los dos navegadores más usados como son Google Chrome y Mozilla Firefox.
+Si nos movemos a Edge o Explorer, como hemos hecho uso del Grid Layout que aporta CSS, éstos navegadores no soportan su uso.
+
+[CAPTURA DEL CAN I USE]
+
+Referente a los puntos de la práctica, hemos implementado todos los que dice la práctica.
+De entre ellos, destacar el uso de una WebFont y de iconos de esta forma:
+
+      <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+      pene
