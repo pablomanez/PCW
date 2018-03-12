@@ -81,8 +81,8 @@
 </header>
 
 	<main id="about" class="container text-dark p-2 pt-150px pb-5">
-		<h1 class="elegant text-center text-orange shadow bg-dark-t py-1">Acerca de nosotros</h1>
 		<section class=" row">
+		<h1 class="col-12 elegant text-center text-orange shadow bg-dark-t py-1 h1 mx-2">Acerca de nosotros</h1>
 			<p class="order-2 order-md-1 col-12 col-md-8 d-flex align-items-center text-right h1 shadow">
 				Práctica 1 de la asignatura Programación del Cliente Web
 			</p>
@@ -113,15 +113,59 @@
 			</div>
 		</section>
 
-		<h2 class="elegant text-left text-orange shadow bg-dark-t py-1 pl-2">Implementación</h2>
 		<section class="row">
-			<div class="col-12">
+		<h2 class="col-12 elegant text-left text-orange shadow bg-dark-t py-1 pl-2 h2 mx-2">Implementación</h2>
+			<div style="line-height: 1.5" class="col-12 h4">
+				Para la realización de la primera práctica de Programación del Cliente Web, hemos usado las principales características y ventajas de los lenguajes de programación para páginas web, HTML y CSS.<br/>
+				<br/>
+				En cuanto al HTML, hemos usado las principales etiquetas que nos proporciona. De entre ellas, destacamos el uso de <span class="bg-dark-t2 p-1 text-orange code">&lt;div&gt;</span> y <span class="bg-dark-t2 p-1 text-orange code">&lt;span&gt;</span>, debido a que hemos utilizado un método peculiar a la hora de la implementación del CSS, de lo que hablaremos posteriormente.<br/>
+
+				Además, queremos destacar también, el uso de la etiqueta <span class="bg-dark-t2 p-1 text-orange code">&lt;label&gt;</span>, que permite una mejor navegación a la hora de usar formularios, las etiquetas
+				<span class="bg-dark-t2 p-1 text-orange code">&lt;header&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;section&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;footer&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;figure&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;figcaption&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;hr/&gt;</span>... que hemos utilizado para estructurar el contenido de la página web.<br/>
+				<br/>
 				
+				En cuanto al código CSS, puesto que en el cuatrimestre pasado cursamos la asignatura de Diseño de Sistemas Multimedia y utilizamos Bootstrap, nos acomodamos a un sistema de maquetado, que consideramos más flexible aunque maś tedioso. Por lo tanto, construimos un CSS desde 0, en el que fuimos introduciendo las reglas que consideramos oportunas a la hora de la maquetación.<br/>
+				<div class="d-flex justify-content-between">
+					<img src="Images/CSS.png" class="Mw-100 Mh-507px justify-self-center my-3" alt="Css">
+					<img src="Images/CSS2.png" class="Mw-100 Mh-507px justify-self-center my-3" alt="Css2">
+				</div>
+				<br/>
+				
+				El funcionamiento es similar a Bootstrap. La clase <span class="bg-dark-t2 p-1 text-orange code">&lt;row&gt;</span> divide su contenido en 12 columnas. Esta división se ha realizado con el grid de CSS.
+
+				<div class="row p-2">
+					<div class="col-12 col-md-8 col-lg-6 bg-dark-t2 text-light">
+						De manera que, si quisieramos crear un contendor con fondo oscuro que ocupara 6 columnas en pantallas de más de 992px, 8 en pantallas de 768px y las 12 en menores, usaríamos:<br/>
+						<span class="p-1 text-orange code">&lt;div class="col-12 col-md-6 col-lg-8 bg-dark-t2 text-light"&gt;</span>
+					</div>
+				</div>
+
+				<div class="row p-2">
+					<div class="col-12 col-md-8 col-lg-6 bg-orange text-dark">
+						Si quisiéramos que tuviera el fondo naranja y letras negras:<br/>
+						<span class="p-1 code">&lt;div class="col-12 col-md-6 col-lg-8 bg-orange text-dark"&gt;</span>
+					</div>
+				</div>
+
+				Por lo que ésta es la forma con la que hemos maquetado la totalidad de los .html de la práctica.
+				Debemos añadir que el CSS está adaptado para los dos navegadores más usados como son Google Chrome y Mozilla Firefox.
+				Si nos movemos a Explorer, como hemos hecho uso del Grid Layout que aporta CSS, éstos navegadores no soportan su uso.
+
+				<img src="Images/CANIUSE.png" class="Mw-100 Mh-507px justify-self-center my-3" alt="Can I use">
+
+				Referente a los puntos de la práctica, hemos implementado todos los que dice la práctica.
+				De entre ellos, destacar el uso de una WebFont y de iconos de esta forma:
+					
+				<br/>
+				<div class="pl-5 mt-2">
+					<span class="bg-dark-t2 p-1 text-orange code">&lt;link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"&gt;</span><br/>
+					<span class="bg-dark-t2 p-1 text-orange code">&lt;link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet"&gt;</span>
+				</div>
 			</div>
 		</section>
 
-		<h2 class="elegant text-left text-orange shadow bg-dark-t py-1 pl-2 mb-1">Autores</h2>
 		<section class="row">
+		<h2 class="col-12 elegant text-left text-orange shadow bg-dark-t py-1 pl-2 mb-1 h2 mx-2">Autores</h2>
 			<div class="order-8 col-12 col-md-6 mb-2 text-center pt-3 h2 bg-dark-t text-light mx-2">
 				<img class="d-inline-block circle header-logo" src="Images/pablomanez.jpg" alt="pablomanez">
 				<p>
@@ -140,6 +184,7 @@
 					Lunes 17:00 - 19:00<br/>
 				</p>
 			</div>
+		</section>
 	</main>
 	
 	<footer class="container-fluid py-3 bg-dark position-relative">

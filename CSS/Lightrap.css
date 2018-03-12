@@ -134,6 +134,7 @@ html, body{
 	margin-right: auto;
 }
 .justify-self-center{align-self: center;}
+.justify-content-between{justify-content:space-between; }
 
 /* POSICION */
 .position-relative {position: relative;}
