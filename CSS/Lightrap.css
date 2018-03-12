@@ -749,3 +749,4 @@ hr {
 .pop-up:hover {transform: scale(1.05);}
 
 ul:focus, textarea:focus{outline: none;}
+.code{font-family: monospace;}
