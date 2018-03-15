@@ -28,6 +28,7 @@ html, body{
 	min-width: 300px;
 }
 
+.logo span{transition: color 0.4s ease-in-out;}
 .logo{
 	background: url("../Images/THE_LEMON_ICON.png") no-repeat center;
 	background-size: auto 100%;
