@@ -39,9 +39,8 @@
 			<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 			<a class=" btn btn-outline-orange" href="#">Log out</a>
 		</div>
-		<div class="col-12">
-			
-		<hr class="hr2 d-none d-md-flex"/>
+		<div class="col-12">	
+			<hr class="hr2 d-none d-md-flex"/>
 		</div>
 
 		<a href="index.html" class="logo col-2 col-md-5 col-lg-4 col-xl-3 h-100 position-relative">
@@ -119,7 +118,7 @@
 				Para la realización de la primera práctica de Programación del Cliente Web, hemos usado las principales características y ventajas de los lenguajes de programación para páginas web, HTML y CSS.<br/>
 				<br/>
 				En cuanto al HTML, hemos usado las principales etiquetas que nos proporciona. De entre ellas, destacamos el uso de <span class="bg-dark-t2 p-1 text-orange code">&lt;div&gt;</span> y <span class="bg-dark-t2 p-1 text-orange code">&lt;span&gt;</span>, debido a que hemos utilizado un método peculiar a la hora de la implementación del CSS, de lo que hablaremos posteriormente.<br/>
-
+				<br/>
 				Además, queremos destacar también, el uso de la etiqueta <span class="bg-dark-t2 p-1 text-orange code">&lt;label&gt;</span>, que permite una mejor navegación a la hora de usar formularios, las etiquetas
 				<span class="bg-dark-t2 p-1 text-orange code">&lt;header&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;section&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;footer&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;figure&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;figcaption&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;hr/&gt;</span>... que hemos utilizado para estructurar el contenido de la página web.<br/>
 				<br/>
@@ -142,19 +141,24 @@
 
 				<div class="row p-2">
 					<div class="col-12 col-md-8 col-lg-6 bg-orange text-dark">
-						Si quisiéramos que tuviera el fondo naranja y letras negras:<br/>
+						Si quisiéramos que tuviera el fondo naranja y letras negras, bastaría con cambiar las etiquetas bg- y text-:<br/>
 						<span class="p-1 code">&lt;div class="col-12 col-md-6 col-lg-8 bg-orange text-dark"&gt;</span>
 					</div>
 				</div>
-
+				
+				Básicamente, añadimos las reglas que necesitamos para lograr el efecto deseado. De esta manera, en lugar de tener que crear reglas de CSS más complejas, hacemos uso de una combinación de varias reglas simples.<br/>
+				<br/>
+				También hemos cambiado los colores de selección y la barra de desplazamiento (ésta solo en Chrome), mediante las pseudoclases
+				<span class="bg-dark-t2 p-1 text-orange code">&lt;::-webkit-scrollbar&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;::-webkit-scrollbar-track&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;::-webkit-scrollbar-thumb&gt;</span>, <span class="bg-dark-t2 p-1 text-orange code">&lt;::selection&gt;</span> y <span class="bg-dark-t2 p-1 text-orange code">&lt;::-moz-selection&gt;</span>. <br/>
+				<br/>
 				Por lo que ésta es la forma con la que hemos maquetado la totalidad de los .html de la práctica.
 				Debemos añadir que el CSS está adaptado para los dos navegadores más usados como son Google Chrome y Mozilla Firefox.
-				Si nos movemos a Explorer, como hemos hecho uso del Grid Layout que aporta CSS, éstos navegadores no soportan su uso.
+				Si nos movemos a Explorer, como hemos hecho uso del Grid Layout que aporta CSS, éste navegador no soporta su uso.
 
 				<img src="Images/CANIUSE.png" class="Mw-100 Mh-507px justify-self-center my-3" alt="Can I use">
 
-				Referente a los puntos de la práctica, hemos implementado todos los que dice la práctica.
-				De entre ellos, destacar el uso de una WebFont y de iconos de esta forma:
+				Referente a los puntos de la práctica, hemos implementado todos los que figuran en ella.
+				De entre ellos, destacar el uso de una WebFont mediante Google Fonts, y de iconos con FontAwesome, incluyendo ambos en el header de la página:
 					
 				<br/>
 				<div class="pl-5 mt-2">
