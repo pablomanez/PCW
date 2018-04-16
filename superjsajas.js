@@ -7,6 +7,9 @@ TODO:
 	Al enviar la receta si no hay ninguna foto, sedebe de avisar al usuario
 
 	MÁS >> Punto c2
+
+
+	localhost/rest/get/receta/u=6      ULTIMAS 6 RECETAS
 */
 
 function ingrediente_masmas() {
@@ -26,13 +29,27 @@ function ingrediente_masmas() {
 	//LOG
 	//console.log("No, Muzska no ha subido video :(");
 	//console.log("Aunque has añadido un/una "+ingr);
+	pruebaFetch();
 }
 
 function foto_masmas(){
-	let file = document.getElementById("input_foto").value;
+	let file = document.getElementById("input_foto").files[0].name;
+	let size = document.getElementById("input_foto").files[0].size;
+	
+	/*
+	let reader = new FileReader();
+	reader.onload = function(e){
+		document.getElementById("input_foto").
+	}
+	*/
+
+	if(size >= 300000){
+		//console.log("ERROR: Tamaño de imagen excedido");
+		return;
+	}
 
 	if(file != ""){
-		console.log("RUTA: "+ file);
+		//console.log("RUTA: "+ file);
 
 		let list = document.getElementById("l_fotos");
 
@@ -46,12 +63,13 @@ function foto_masmas(){
 		i.setAttribute("class","fas fa-times");
 		span.appendChild(i);
 		span.setAttribute("class","position-absolute pointer t0 r0 m-2 text-blood h3 z-2");
+		span.setAttribute("onclick","borraFoto()");
 
 		//IMG
 		//<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
 		img.setAttribute("style","border-radius: 5px;");
 		img.setAttribute("class","mr-2 Mw-100");
-		img.setAttribute("src","Images/MILIBRO.jpg");
+		img.setAttribute("src","Images/"+file);
 		img.setAttribute("alt","Foto de la receta");
 
 		//TEXTAREA
@@ -75,6 +93,108 @@ function foto_masmas(){
 
 	}
 	else{
-		console.log("No has subido ninguna foto");
+		//console.log("No has subido ninguna foto");
 	}
+}
+
+function borraFoto(){
+
+
+
+
+
+	//LOG
+	console.log("BORRAR");
+}
+
+
+
+
+
+
+
+//EJEMPLO FETCH API
+function pruebaFetch(){
+	//let url = '../rest/receta/?u=6';
+	let url = '../rest/receta/?pag=0&lpag=6';		//PARA LA PAGINACION
+	//n=sal 	nombre
+	//d=sal 	descripcion
+	//t=sal 	por todo
+
+	//fetch(url).then(fOK,fMAL);
+	fetch(url).then(function(response){
+		//TODO HA IDO BIEN
+
+		if(!response.ok){	//!200
+			return false;
+		}
+
+		response.json().then(function(datos){
+			console.log(datos);
+
+			let html = "";
+
+			datos.FILAS.forEach(function(e){
+				html += `<li>${e.nombre}</li>`;
+			});
+
+			console.log(html);
+
+			//AÑADIR HTML DONDE SEA
+
+		});
+
+	},function(response){
+		//TODO HA IDO MAL
+	});
+
+}
+
+function hacerLogin(){
+	let url = "../rest/login/";
+	let fd = new FormData();
+
+	fd.append('login','usuario2');
+	fd.append('pwd','usuario2');
+
+	fetch(url,{'method':'POST','body':fd}).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			console.log(datos);
+			sessionStorage.setItem('usuario',JSON.stringify(datos));
+		});
+
+	},function(response){
+
+	});
+
+}
+
+function hacerComentario(){
+	let url = "../rest/receta/1/comentario/";
+	let fd = new FormData();
+	let usu = JSON.parse(sessionStorage.getItem('usuario'));
+
+	fd.append('l',usu.login);
+	fd.append('titulo','Lujan vuelve');
+	fd.append('texto','ESTO ES UN COMENTARIO CHACHI');
+
+
+	fetch(url,{'method':'POST','body':fd,'headers':{'Authorization':usu.clave}}).then(function(response){
+		if(!response.ok){
+			console.log("error");
+			return false;
+		}
+
+		response.json().then(function(datos){
+			console.log(datos);
+		});
+	},function(response){
+		//ERROROROROROROROR
+	});
+
+
 }
