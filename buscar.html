@@ -86,7 +86,7 @@
 		<input id="filters" class="d-none" type="checkbox" />
 
 		<div class="float-left filter bg-orange p-2 ml--15px z-2">
-			<form action="#" method="get">
+			<form action="#" method="get" onsubmit="return formBuscar(this);">
 				<div class="p-1">
 					<label class="form-label" for="l_name">Nombre de la receta:</label>
 					<input class="form-control" type="text" name="name" id="l_name">
@@ -143,6 +143,7 @@
 
 				<div class="p-1 pt-2">
 					<button class="btn btn-outline-dark w-100" type="submit" name="submit">Buscar</button>
+					<button class="btn btn-outline-dark w-100" type="reset" name="submit">Reiniciar</button>
 				</div>
 			</form>
 
