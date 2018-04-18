@@ -4,10 +4,15 @@ TODO:
 		Solamente acceder estando logueado
 		Al añadir un nuevo ingrediente que se añada al final de la lista automaticamente		HECHO
 		Lo de añadir las fotos 																	HECHO (FALTA LO DE LA RUTA)
-		Tamaño de imagen máximo para las fotos (300kb) >> MENSAJE MODAL O EMERGENTE
+		Tamaño de imagen máximo para las fotos (300kb) >> MENSAJE MODAL O EMERGENTE				HECHO
 		Al enviar la receta si no hay ninguna foto, sedebe de avisar al usuario
 
 		MÁS >> Punto c2
+
+		|-------------- FALLA EL POST --------------|
+
+	BUSCAR:
+
 
 
 	localhost/rest/get/receta/u=6      ULTIMAS 6 RECETAS
@@ -32,13 +37,13 @@ function ingrediente_masmas() {
 	//LOG
 	//console.log("No, Muzska no ha subido video :(");
 	//console.log("Aunque has añadido un/una "+ingr);
+
+	hacerLogin();
 }
 
 function foto_masmas(){
 	//AÑADE UNA FOTO MAS A LA LISTA DE FOTOS DE UNA RECETA
-	let file = document.getElementById("input_foto").files[0].name;
-	let size = document.getElementById("input_foto").files[0].size;
-	
+	let input = document.getElementById("input_foto").value;
 	/*
 	let reader = new FileReader();
 	reader.onload = function(e){
@@ -46,12 +51,15 @@ function foto_masmas(){
 	}
 	*/
 
-	if(size >= 300000){
-		//console.log("ERROR: Tamaño de imagen excedido");
-		return;
-	}
+	if(input != ""){
+		let file = document.getElementById("input_foto").files[0].name;
+		let size = document.getElementById("input_foto").files[0].size;
 
-	if(file != ""){
+		if(size >= 300000){
+			//console.log("ERROR: Tamaño de imagen excedido");
+			return;
+		}
+
 		//console.log("RUTA: "+ file);
 
 		let list = document.getElementById("l_fotos");
@@ -115,7 +123,7 @@ function borraFoto(id){
 	let n = id.substring(2);
 	
 	let div = document.getElementById("f_"+n);
-	console.log(div);
+	//console.log(div);
 
 	div.parentNode.removeChild(div);
 
@@ -123,11 +131,248 @@ function borraFoto(id){
 	//console.log("BORRAR");
 }
 
+function login(frm){
+	//EJEMPLO QUE PASÓ JUAN POR WHATSAPP
+	
+	let fd = new FormData(frm);
+	let xhr = new XMLHttpRequest();
+	let url = '../rest/login';
+	let u, clave;
+
+	xhr.open('POST',url,true);
+	xhr.onload = function(){
+		console.log(xhr.responseText);
+		let r = JSON.parse(xhr.responseText);
+
+		if(r.RESPUESTA = 'OK'){
+			console.log(r);
+			sessionStorage.setItem('usuario',xhr.responseText);
+			u = JSON.parse(sessionStorage['usuario']);
+			clave = u.clave;
+		}
+		else{
+			console.log("EROEOROEROEROERO");
+		}
+
+	};
+}
+
+function nuevaReceta(frm){
+	let name = document.getElementById("n").value;
+	let elab = document.getElementById("e").value;
+	let comen = document.getElementById("c").value;
+	let time = document.getElementById("t").value;
+	let diff = document.getElementById("d").value;
+
+	let ingr = document.getElementById("l_ingr").getElementsByTagName("span"); //LISTA DE INGREDIENTES
+	let img = document.getElementById("l_fotos").getElementsByTagName("img"); //LISTA DE FOTOS
+	let d_img = document.getElementById("l_fotos").getElementsByTagName("textarea"); //LISTA DE DESCRIPCIONES DE CADA FOTO
+
+	//LOGS
+	/*
+	console.log(name);
+	console.log(elab);
+	console.log(comen);
+	console.log(time);
+	console.log(diff);
+
+	for(let i=0 ; i<ingr.length ; i++){
+		console.log(ingr[i].innerHTML);
+	}
+	for(let i=0 ; i<img.length ; i++){
+		console.log(img[i].src + "-> DESCRIPCIÓN: " + d_img[0].value);
+	}
+	*/
+
+	//CREAR RECETA >>>> SUBIR INGREDIENTES >>>> SUBIR FOTOS DE LA RECETA
+	let fd = new FormData();
+	let url = 'rest/receta/';
+	let usu = JSON.parse(sessionStorage['usuario']);
+
+	fd.append('l',usu.login);
+	fd.append('n',name);
+	fd.append('e',elab);
+	fd.append('t',time);
+	fd.append('d',diff);
+	fd.append('c',comen);
+	/*
+	console.log(fd.get('l'));
+	console.log(fd.get('n'));
+	console.log(fd.get('e'));
+	console.log(fd.get('t'));
+	console.log(fd.get('d'));
+	console.log(fd.get('c'));
+	*/
+
+	let init = { 'method':'post', 'body':fd, 'headers':{'Authorization':usu.clave} };
+
+	fetch(url,init).then(function(response){
+		if(!response.ok){
+			console.log("ERROR CON CÓDIGO: " + response.status);
+			return false;
+		}
+		console.log("gilipollas");
+		
+		response.json().then(function(datos){
+			console.log(datos);
+		});
+
+	},function(response){
+		console.log("error");
+	});
+
+	/*
+	let url = 'rest/receta/';
+	//let fd = new FormData();
+	let xhr = new XMLHttpRequest();
+	let usu = JSON.parse(sessionStorage['usuario']);
+
+	let args = 'l='+usu.login+'&n='+name+'&e='+elab+'&t='+time+'&d='+diff+'&c='+comen;
+	console.log(args);
+	if(xhr){
+		xhr.open('POST',url,true);
+
+		xhr.send(args);
+	}
+	*/
+}
+
+function logueado(){
+
+	let usu = sessionStorage.getItem('usuario');
+
+	if(!usu){
+		console.log("Que no te has logueado chaval. ZOORROOOOOOOOOO");
+
+
+	}
+	else{
+		console.log("Estás logueado y puedes crear una receta");
+	}
+
+	//console.log("Hola");
+}
+
+function buscar_simple(frm){
+	//rest/receta/?t={texto1,texto2,...}
+	let fd = new FormData(frm);
+	let url = 'rest/receta/?t=';
+	url += fd.get('search_box');
+	console.log(url);
+
+	fetch(url).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			console.log(datos);
+			//AHORA DEBO TRATAR LA PETICION CON datos.FILAS[]
+
+
+
+
+		});
+
+	},function(response){
+		console.log("ERROR");
+	});
+}
+
+function ultimasSeis(){
+	let url = 'rest/receta/?u=6'; //LAS 6 RECETAS MAS RECIENTES
+	let div_recetas = document.getElementById("recetas");
+
+	fetch(url).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			console.log(datos);
+			//AHORA DEBO TRATAR LA PETICION CON datos.FILAS[]
+			//PARA CADA RECETA QUE HE SACADO TENGO QUE CREAR UN SUPER FIGURE Y AÑADIRLO A div_recetas, SUERTE!
+
+			
+			//SACO LAS FOTOS DE CADA RECETA
+			for(let i=0 ; i<1 ; i++){
+
+				//PARA CONSEGUIR EL USUARIO QUE HA HECHO LA RECETA DEBO DE SACAR TODA LA INFORMACIÓN DE LA RECETA, :clap:
+				let url_r = 'rest/receta/'+datos.FILAS[i].id; //rest/receta/i
+				fetch(url_r).then(function(response){
+					if(!response.ok){
+						return false;
+					}
+
+					response.json().then(function(datos2){
+						console.log(datos);
+						/*
+						<a href="receta.html" class="h2 revers-a">Pollo con chicharrón</a>
+						<a href="buscar.html" class="mt-3 d-block revers-a">
+							<div style="background-image: url(Images/Shut-up-and-take-my-money!.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
+							<span>Pablomanez</span>
+						</a>
+						*/
+
+						let div_foto_usu = document.createElement('div');
+						div_foto_usu.setAttribute("style","background-image: url(Images/Shut-up-and-take-my-money!.png);");
+						div_foto_usu.setAttribute("class","circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center");
+						
+						let span_usu = document.createElement('span');
+						span.createTextNode(datos2.FILAS[0].autor);
+
+						let a_buscar = document.createElement("a");
 
 
 
 
 
+
+
+
+
+
+						/*
+						let url_f = 'rest/receta/'+datos.FILAS[i].id+'/fotos';
+						fetch(url_f).then(function(response){
+							if(!response.ok){
+								return false;
+							}
+
+							response.json().then(function(datos){
+								console.log(datos);
+
+
+
+								
+							});
+						},function(response){
+							console.log("ERROR");
+						});
+						*/
+
+
+						
+					});
+				},function(response){
+					console.log("ERROR");
+				});
+
+
+
+				
+			}
+		});
+
+	},function(response){
+		console.log("ERROR");
+	});
+
+
+
+
+	console.log("hola");
+}
 
 //EJEMPLO FETCH API
 function pruebaFetch(){
@@ -167,7 +412,7 @@ function pruebaFetch(){
 }
 
 function hacerLogin(){
-	let url = "../rest/login/";
+	let url = "rest/login/";
 	let fd = new FormData();
 
 	fd.append('login','usuario2');
@@ -186,35 +431,6 @@ function hacerLogin(){
 	},function(response){
 
 	});
-
-}
-
-function hacerlogin2(frm){
-//EJEMPLO QUE PASÓ JUAN POR WHATSAPP
-	
-	let fd = new FormData();
-	let xhr = new XMLHttpRequest();
-	let url = '../rest/login';
-	let u, clave;
-
-	xhr.open('POST',url,true);
-	xhr.onload = function(){
-		console.log(xhr.responseText);
-		let r = JSON.parse(xhr.responseText);
-
-		if(r.RESPUESTA = 'OK'){
-			console.log(r);
-			sessionStorage.setItem('usuario',xhr.responseText);
-			u = JSON.parse(sessionStorage['usuario']);
-			clave = u.clave;
-		}
-		else{
-			console.log("EROEOROEROEROERO");
-		}
-
-	};
-
-
 
 }
 

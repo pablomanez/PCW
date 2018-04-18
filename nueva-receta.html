@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
-<body class="background">
+<body class="background" onload="logueado()">
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
 	<div class=" row align-items-center">
 
@@ -82,40 +82,40 @@
 </header>
 	<main class="container pt-150px">
 		<div class="display-4 text-center py-3 shadow">Nueva receta</div>
-		<form action="#" method="post">
+		<form action="#" method="POST" enctype="multipart/form-data" onsubmit="return nuevaReceta(this);" id="form">
 
 			<!-- DESCRIPCIÓN DE LA RECETA -->
 			<div class="row bg-dark-t2 p-3 box-shadow text-light">
 				<div class="text-red col-12 mb-2">Los campos con * son obligatorios</div>
 				
 				<div class="col-md-2 col-sm-5 col-9">
-					<label class="form-label" for="l_namerecipe">Nombre:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+					<label class="form-label" for="n">Nombre:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
 				</div>
 
 				<div class="col-md-10 col-sm-12 col-12">
-					<input class="form-control" type="text" name="namerecipe" id="l_namerecipe" maxlength="200" required>
+					<input class="form-control" type="text" name="namerecipe" id="n" maxlength="200" required>
 				</div>
 
 				<div class="col-12 justify-self-center">
-					<label class="form-label" for="l_elab">Elaboración:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+					<label class="form-label" for="e">Elaboración:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
 
-					<textarea style="resize: none; height: auto;" class="form-control" rows="10" cols="130" name="elab" id="l_elab" placeholder="Escribe aquí la preparación de tu receta" required></textarea>
+					<textarea style="resize: none; height: auto;" class="form-control" rows="10" cols="130" name="elab" id="e" placeholder="Escribe aquí la preparación de tu receta" required></textarea>
 				</div>
 
 
 				<div class="col-md-4 col-sm-6 col-12">
-					<label class="form-label" for="l_comen">Número de comensales:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
-					<input class="form-control" type="number" name="comen" id="l_comen" step="1" min="1" value="1" required>
+					<label class="form-label" for="c">Número de comensales:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+					<input class="form-control" type="number" name="comen" id="c" step="1" min="1" value="1" required>
 				</div>
 
 				<div class="col-md-4 col-sm-6 col-12">
-					<label class="form-label" for="l_time">Tiempo de elaboración (min):</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
-					<input class="form-control" type="number" name="time" id="l_time" step="5" min="5" value="5" required>
+					<label class="form-label" for="t">Tiempo de elaboración (min):</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+					<input class="form-control" type="number" name="time" id="t" step="5" min="5" value="5" required>
 				</div>
 
 				<div class="col-md-4 col-12">
-					<label class="form-label" for="l_diff">Dificultad de elaboración:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
-					<select class="form-control" required id="l_diff">
+					<label class="form-label" for="d">Dificultad de elaboración:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+					<select class="form-control" required id="d">
 						<option value="" disabled selected>Elige una opción</option>
 						<option value="baja">Baja</option>
 						<option value="media">Media</option>

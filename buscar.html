@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Revolucionaria página de recetas de cocina - ÍNDICE</title>
+	<title>Revolucionaria página de recetas de cocina - BÚSQUEDA AVANZADA</title>
 	<link rel="stylesheet" href="CSS/Lightrap.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
-<body class="background">
+<body class="background" onload="ultimasSeis()">
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
 	<div class=" row align-items-center">
 		
@@ -16,7 +16,7 @@
 
 		<!-- BARRA DE BÚSQUEDA -->
 		<div class="col-8 col-md-7 d-flex align-items-center mheight-50px">
-			<form class="position-relative w-search" action="buscar.html" method="get">
+			<form class="position-relative w-search" action="buscar.html" method="get" onsubmit="return buscar_simple(this);">
 				<input style="border-radius: 30px" class="form-control mb-0" type="text" name="search_box" required>
 				<button class="search-btn m-auto t0 b0 r0 pr-2" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
 			</form>
@@ -149,257 +149,10 @@
 
 		</div>
 
-		<div class="row p-2 bg-dark-t">
-
+		<div class="row p-2 bg-dark-t" id="recetas">
+			<!-- onload="ultimasSeis() SE ENCUENTRA EN LA ETIQUETA BODY -->
+			<!-- AQUI VAN LAS ULTIMAS 6 RECETAS, EN CASO DE QUE SE CARGUE buscar.html DIRECTAMENTE -->
 			
-
-			<figure class="col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block">
-				
-				<div style="background-image: url(Images/RECETA_1.jpg);" class="pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center">
-					<div class="col-12 bg-dark-t text-center my-2">
-						<a href="receta.html" class="h2 revers-a">Pollo con chicharrón</a>
-						<a href="buscar.html" class="mt-3 d-block revers-a">
-							<div style="background-image: url(Images/Shut-up-and-take-my-money!.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
-							<span>Pablomanez</span>
-						</a>
-					</div>
-
-					<!-- INICIO COMENTARIOS -->
-					<div class="col-12 bg-dark-t m-0 p-2 p-2">
-						<span class="text-orange">SLM</span>
-						<div class="text-light">Esto en daw no pasaba</div>
-					</div>
-					<!-- FIN COMENTARIOS -->
-
-					<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
-						<div class="row">
-							<div class="col-6 d-flex align-items-center justify-content-center">
-								<time datetime="1864-02-28">28/02/1864</time>
-							</div>
-							<div class="col-6">
-								<div class="row text-center">
-									<div class="col-2">
-										<i class="fas fa-thumbs-up"></i>
-									</div>
-									<span class="col-10">65491</span>
-
-									<div class="col-3">
-										<i class="fas fa-thumbs-down"></i>
-									</div>
-									<span class="col-9">5</span>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</figure>
-			
-			<figure class="col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block">
-			<div style="background-image: url(Images/RECETA_2.jpg);" class="pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center">
-				<div class="col-12 bg-dark-t text-center my-2">
-					<a href="receta.html" class="h2 revers-a">Costillas de cerdo BBQ</a>
-					<a href="buscar.html" class="mt-3 d-block revers-a">
-					<div style="background-image: url(Images/Sona_profile.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
-					<span>Dan-sensei</span>
-					</a>
-				</div>
-
-				<!-- INICIO COMENTARIOS -->
-				<div class="col-12 bg-dark-t m-0 p-2">
-					<span class="text-orange">Beater</span>
-					<div class="text-light">Me comí una salchipapa!</div>
-				</div>
-				<!-- FIN COMENTARIOS -->
-
-				<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
-					<div class="row">
-						<div class="col-6 d-flex align-items-center justify-content-center">
-							<time datetime="1964-07-04">04/07/1964</time>
-						</div>
-						<div class="col-6">
-							<div class="row text-center">
-								<div class="col-3">
-									<i class="fas fa-thumbs-up"></i>
-								</div>
-								<span class="col-9">65491</span>
-
-								<div class="col-3">
-									<i class="fas fa-thumbs-down"></i>
-								</div>
-								<span class="col-9">5</span>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-			</div>
-			</figure>
-			<figure class="col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block">
-				<div style="background-image: url(Images/RECETA_3.jpg);" class="pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center">
-					<div class="col-12 bg-dark-t text-center my-2">
-						<a href="receta.html" class="h2 revers-a">Pollo al horno con salsa boletus</a>
-						<a href="buscar.html" class="mt-3 d-block revers-a">
-							<div style="background-image: url(Images/Shut-up-and-take-my-money!.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
-							<span>Pablomanez</span>
-						</a>
-					</div>
-
-					<!-- INICIO COMENTARIOS -->
-					<div class="col-12 bg-dark-t m-0 p-2">
-						<span class="text-orange">Jabi</span>
-						<div class="text-light">Balla mierda de rezeta</div>
-					</div>
-					<!-- FIN COMENTARIOS -->
-
-					<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
-						<div class="row">
-							<div class="col-6 d-flex align-items-center justify-content-center">
-								<time datetime="1994-11-13">13/11/1994</time>
-							</div>
-							<div class="col-6">
-								<div class="row text-center">
-									<div class="col-3">
-										<i class="fas fa-thumbs-up"></i>
-									</div>
-									<span class="col-9">43914</span>
-
-									<div class="col-3">
-										<i class="fas fa-thumbs-down"></i>
-									</div>
-									<span class="col-9">48</span>
-								</div>
-
-							</div>
-						</div>
-					</div>
-
-				</div>
-		</figure>
-	<figure class="col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block">
-			<div style="background-image: url(Images/RECETA_4.jpg);" class="pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center">
-				<div class="col-12 bg-dark-t text-center my-2">
-					<a href="receta.html" class="h2 revers-a">Tortitas molonas</a>
-					<a href="buscar.html" class="mt-3 d-block revers-a">
-						<div style="background-image: url(Images/Sona_profile.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
-						<span>Dan-sensei</span>
-					</a>
-				</div>
-
-				<!-- INICIO COMENTARIOS -->
-				<div class="col-12 bg-dark-t m-0 p-2">
-					<span class="text-orange">Dan-sensei</span>
-					<div class="text-light">Como vuelva a ver un br golpe de remo</div>
-				</div>
-				<!-- FIN COMENTARIOS -->
-
-				<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
-					<div class="row">
-						<div class="col-6 d-flex align-items-center justify-content-center">
-							<time datetime="2017-08-15">15/08/2017</time>
-						</div>
-						<div class="col-6">
-							<div class="row text-center">
-								<div class="col-3">
-									<i class="fas fa-thumbs-up"></i>
-								</div>
-								<span class="col-9">785</span>
-
-								<div class="col-3">
-									<i class="fas fa-thumbs-down"></i>
-								</div>
-								<span class="col-9">75</span>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</figure>
-		<figure class="col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block">
-			<div style="background-image: url(Images/RECETA_5.jpg);" class="pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center">
-				<div class="col-12 bg-dark-t text-center my-2">
-					<a href="receta.html" class="h2 revers-a">Helado de moras molón</a>
-					<a href="buscar.html" class="mt-3 d-block revers-a">
-						<div style="background-image: url(Images/Sona_profile.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
-						<span>Dan-sensei</span>
-					</a>
-				</div>
-
-				<!-- INICIO COMENTARIOS -->
-				<div class="col-12 bg-dark-t m-0 p-2">
-					<span class="text-orange">Sin comentarios</span>
-					<div class="text-light"></div>
-				</div>
-				<!-- FIN COMENTARIOS -->
-
-				<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
-					<div class="row">
-						<div class="col-6 d-flex align-items-center justify-content-center">
-							<time datetime="2018-02-22">22/02/2018</time>
-						</div>
-						<div class="col-6">
-							<div class="row text-center">
-								<div class="col-3">
-									<i class="fas fa-thumbs-up"></i>
-								</div>
-								<span class="col-9">91</span>
-
-								<div class="col-3">
-									<i class="fas fa-thumbs-down"></i>
-								</div>
-								<span class="col-9">57</span>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</figure>
-		<figure class="col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block">
-			<div style="background-image: url(Images/RECETA_6.jpg);" class="pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center">
-				<div class="col-12 bg-dark-t text-center my-2">
-					<a href="receta.html" class="h2 revers-a">Burguer Cangreburguer</a>
-					<a href="buscar.html" class="mt-3 d-block revers-a">
-						<div style="background-image: url(Images/Shut-up-and-take-my-money!.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
-						<span>Pablomanez</span>
-					</a>
-				</div>
-
-				<!-- INICIO COMENTARIOS -->
-				<div class="col-12 bg-dark-t m-0 p-2">
-					<span class="text-orange">Pablomanez</span>
-					<div class="text-light">PO-TEI-TOU!!</div>
-				</div>
-				<!-- FIN COMENTARIOS -->
-
-				<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
-					<div class="row">
-						<div class="col-6 d-flex align-items-center justify-content-center">
-							<time datetime="2064-01-01">01/01/2064</time>
-						</div>
-						<div class="col-6">
-							<div class="row text-center">
-								<div class="col-3">
-									<i class="fas fa-thumbs-up"></i>
-								</div>
-								<span class="col-9">491</span>
-
-								<div class="col-3">
-									<i class="fas fa-thumbs-down"></i>
-								</div>
-								<span class="col-9">54</span>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</figure>
 		</div>
 		<div class=" my-5 p-3 text-center h2 bg-dark-t text-light">
 			<i class="fa fa-angle-double-left btn btn-outline-orange"></i>
@@ -429,4 +182,8 @@
 	</footer>
 	
 </body>
+
+<!--ESCRIP-->
+<script type="text/javascript" src="JS/superjsajas.js"></script>
+
 </html>
