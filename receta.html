@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
-<body class="background">
+<body class="background" onload="loadRecipe()">
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
 	<div class=" row align-items-center">
 		
@@ -81,11 +81,11 @@
 	</div>
 </header>
 	
-	<main class="container pt-150px">
-		<div class="display-4 text-center py-3 shadow">Helado de moras molón</div>
+	<main id="recipeContainer" class="container pt-150px">
+		<div id="name" class="display-4 text-center py-3 shadow"></div>
 		<div class="row text-light h55">
 			<div class="col-12 col-md-8 p-1">
-				<figure class="bg-dark justify-content-center m-0 mb-1 text-center position-relative">
+				<figure id="img_container" class="bg-dark justify-content-center m-0 mb-1 text-center position-relative">
 					<img class="Mw-100 Mh-507px d-block" src="Images/RECETA_5.jpg" alt="Helado de moras molón">
 					<figcaption class="position-absolute bg-dark-t b0 r0 l0 p-1">Foto número 1</figcaption>
 				</figure>
@@ -101,51 +101,46 @@
 			<div class="col-12 col-md-4 p-1 mx-2">
 				<a href="buscar.html" class="mx-2 div-link bg-dark-t p-2 row mb-1 align-items-center">
 					<div style="background-image: url(Images/Sona_profile.png);" class="circle bg-orange box-shadow bg-image footer-logo col-6 col-md-5 ml-auto"></div>
-					<div class="pl-2 col-6 col-md-7 h4">Dan-sensei</div>
+					<div id="autor" class="pl-2 col-6 col-md-7 h4"></div>
 				</a>
 
 				<!-- DATOS -->
 				<div class="bg-dark-t p-2 row mb-1">
 					<div class="col-6 text-right my-1">Dificultad: </div>
-					<div class="col-6 d-flex align-items-center text-orange my-1" style="font-size: 10px;">
-						<i class="fas fa-circle mr-1"></i>
-						<i class="fas fa-circle mr-1"></i>
-						<i class="fas fa-circle mr-1"></i>
-						<i class="fas fa-circle"></i>
+					<div id="dificultad" class="col-6 d-flex align-items-center text-orange my-1" style="font-size: 10px;">
+		
 					</div>
 					
 					<div class="col-6 text-right my-1">Publicada: </div>
 					<div class="col-6 d-flex align-items-center my-1" >
-						14/02/2017
+						<time id="fecha"></time>
 					</div>
 
 					<div class="col-6 text-right my-1">Tiempo: </div>
-					<div class="col-6 d-flex align-items-center my-1">
-						2 h 30 min
+					<div id="tiempo" class="col-6 d-flex align-items-center my-1">
+						
 					</div>
 
 					<div class="col-6 text-right my-1">Para: </div>
-					<div class="col-6 d-flex align-items-center my-1" style="font-size: 17px;">
-						<i class="fas fa-male mr-1"></i>
-						<i class="fas fa-male mr-1"></i>
-						<i class="fas fa-male mr-1"></i>
+					<div id="comensales" class="col-6 d-flex align-items-center my-1" style="font-size: 17px;">
+						
 					</div>
 				</div>
 
 				<!--  LIKES Y DISLIKES -->
 				<div class="bg-dark-t p-1 row mb-1">
-					<a href="#" class="col-12 row">
+					<a href="#" class="col-12 row revers-a">
 						<div class="col-6 text-right p-0 my-1" style="font-size: 30px;">
 							<i class="fas fa-thumbs-up"></i>
 						</div>
-						<div class="col-6 text-left pl-1 d-flex align-items-center my-1">65491</div>
+						<div id="likes" class="col-6 text-left pl-1 d-flex align-items-center my-1"></div>
 					</a>
 					
 					<a href="#" class="col-12 row revers-a">
 						<div class="col-6 text-right p-0 my-1" style="font-size: 30px;">
 							<i class="fas fa-thumbs-down"></i>
 						</div>
-						<div class="col-6 text-left pl-1 d-flex align-items-center my-1">5</div>
+						<div id="dislikes" class="col-6 text-left pl-1 d-flex align-items-center my-1"></div>
 					</a>
 				</div>
 
@@ -154,23 +149,14 @@
 					<div class="col-6 text-right p-0 my-1" style="font-size: 30px;">
 						<i class="fas fa-comments"></i>
 					</div>
-					<div class="col-6 text-left pl-1 d-flex align-items-center my-1">4</div>
+					<div id="n_comentarios" class="col-6 text-left pl-1 d-flex align-items-center my-1"></div>
 				</a>
 			</div>
 		</div>
 
 		<section class="row text-light h55 mb-5 px-2">
 			<h1 class="elegant text-dark col-12 h1 pl-0 mb-2">Preparación</h1>
-			<div class=" col-12 bg-dark-t p-2 text-justify">
-				
-					<span class="text-orange h3">1  </span>Ponemos en un bol las moras con el azúcar, y las batimos con la batidora hasta que se forme una crema. Añadimos poco a poco el queso cremoso y la leche, y seguimos batiendo con las varillas de la batidora.<br/>
-					<br/>
-					<span class="text-orange h3">2  </span>Tamizamos todo con la ayuda de un colador, para que así no nos encontremos con pepitas, y pasamos el helado a un molde de acero. Una vez lo tenemos, lo metemos en el congelador unas 4 horas, removiendo de vez en cuando con la ayuda de un tenedor para que no se formen cristales de hielo.<br/>
-					<br/>
-					<span class="text-orange h3">3  </span>Una vez ha pasado ese tiempo, antes de consumirlo, lo sacamos unos 15-20 minutos antes de tomarlo para que esté más cremoso.<br/>
-					<br/>
-					<span class="text-orange h3">4  </span>Lo preparamos sobre barquillos y lo decoramos con trocitos de chocolate y unas moras.
-					<br/>
+			<div id="preparacion" class=" col-12 bg-dark-t p-2 text-justify">
 				
 			</div>
 		</section> 
@@ -291,4 +277,7 @@
 	</footer>
 	
 </body>
+<!--ESCRIP-->
+<script type="text/javascript" src="JS/superjsajas.js"></script>
+
 </html>

@@ -655,3 +655,216 @@ function hacerComentario(){
 
 
 }
+
+
+function indexLastSix(){
+	let url = 'rest/receta/?u=6';
+	fetch(url).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			//console.log(datos);
+			
+			for(let i=0 ; i<datos.FILAS.length; i++){
+
+				let date = new Date(datos.FILAS[i].fecha);
+				let month = date.getMonth()+1;
+
+				var figure = 
+				`<figure class="col-12 col-md-4 col-xl-2 bg-dark mh-index d-flex justify-content-center p-0 position-relative o-hidden">
+					<img class="index-img position-absolute h-100 w-100" src="fotos/`+ datos.FILAS[i].fichero +`" alt="Costillas de cerdo BBQ">
+					<div class="z-1 text-center p-1 pt-5 mh-100 w-100">
+						<a href="receta.html?id=`+datos.FILAS[i].id+`" class="h-10 d-block text-shadow justify-self-center h2 justify-content-center mt-2 mb-5 h-10">	
+							<span class="d-block tag">` + datos.FILAS[i].nombre + `</span>							<!-- TÍTULO -->
+						</a>
+						<div class="row m-0">
+							<div class="col-12 col-sm-6 col-md-12">
+								<a href="buscar.html" class="index-button">
+									<div style="background-image: url(Images/Sona_profile.png);" class="circle bg-orange justify-self-center box-shadow bg-image d-flex align-items-end justify-content-center">
+									</div>
+									<div class="h3 text-shadow text-white">`+ datos.FILAS[i].autor +`</div>		<!-- USUARIO -->
+								</a>
+							</div>
+							<div class="col-12 col-sm-6 col-md-12 row m-0">			
+								<div class="col-12 mt-3 text-shadow h3"><time datetime="`+ datos.FILAS[i].fecha +`">` +date.getDate()+`/`+month +`/`+ date.getFullYear()+ `</time></div>		<!-- FECHA -->
+								<div class="col-12 h3 my-3 text-shadow">
+									<div class="row height-75px">
+										<div class="col-5 text-right p-0">
+											<i class="fas fa-thumbs-up"></i>
+										</div>
+										<div class="col-7 text-left pl-1">` + datos.FILAS[i].positivos + `</div>				<!-- LIKES -->
+
+										<div class="col-5 text-right p-0">
+											<i class="fas fa-thumbs-down"></i>
+										</div>
+										<div class="col-7 text-left pl-1">` + datos.FILAS[i].negativos + `</div>					<!-- DISLIKES -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="comment_tab" class="pb-2">
+
+						</div>
+					</div>
+				</figure>`;
+
+				$("#recipes").append(figure);
+				
+				let url_c = 'rest/receta/'+datos.FILAS[i].id+'/comentarios'; //rest/receta/i/comentarios
+				fetch(url_c).then(function(response){
+					if(!response.ok){
+						return false;
+					}
+
+					response.json().then(function(comments){
+						console.log("FILAS DE COMMENTS " + comments.FILAS.length);
+						for(let j=0 ; j<comments.FILAS.length ; j++){
+							
+							let comment =  `<div class="bg-dark-t text-left px-2 py-1 mb-1">				<!-- COMENTARIO -->
+											<span class="text-orange h6">`+comments.FILAS[j].autor+`</span>
+											<div class="h5">`+comments.FILAS[j].texto+`</div>
+										</div>`;
+							$(".comment_tab")[i].append(comment);
+						}
+					});
+				});
+				
+			}
+
+		});
+
+	},function(response){
+		console.log("ERROR");
+	});
+}
+
+
+function loadRecipe(){
+	let url = window.location.href;
+	let id = getUrlParameter(url, "id");
+
+	if(id == null)
+		window.location.href = "http://localhost/index.html";
+
+	let consulta = "rest/receta/"+id;
+	fetch(consulta).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			if(datos.FILAS.length == 0){
+				console.log("404 NOT FOUND")
+			}
+			console.log(datos);
+
+			let circle = `<i class="fas fa-circle mr-1"></i>`;
+			let dude = `<i class="fas fa-male mr-1"></i>`;
+
+			let date = new Date(datos.FILAS[0].fecha);
+			let month = date.getMonth()+1;
+			$("#name").append(datos.FILAS[0].nombre);
+			$("#autor").append(datos.FILAS[0].autor);
+			for(let i = 0; i < datos.FILAS[0].dificultad; i++){
+				$("#dificultad").append(circle);
+			}
+
+			$("#fecha").attr("datetime", datos.FILAS[0].fecha);
+			$("#fecha").append(date.getDate()+"/"+month+"/"+date.getFullYear());
+			$("#tiempo").append(datos.FILAS[0].tiempo+" minutos");
+			for(let i = 0; i < datos.FILAS[0].comensales; i++){
+				$("#comensales").append(dude);
+			}
+			$("#likes").append(datos.FILAS[0].positivos);
+			$("#dislikes").append(datos.FILAS[0].negativos);
+			$("#n_comentarios").append(datos.FILAS[0].comentarios);
+			
+
+			console.log(datos.FILAS[0].elaboracion);
+			let string = datos.FILAS[0].elaboracion;
+
+			if(string.match(/[0-9]+[)]/g).length > 1){
+				let res = string.match(/[0-9]+[)]/);
+				let sub = string.substring(0, res.index);
+				string = string.substr(res.index+res[0].length+1);
+
+				console.log(string);
+
+				
+				
+				while(res){
+					$("#preparacion").append(sub+"<br><br>");
+					$("#preparacion").append(`<span class="text-orange h3">`+res[0].substr(0, res[0].length-1) + `&nbsp;&nbsp;<span>`);
+					res = string.match(/[0-9]+[)]/);
+					console.log(res);
+					sub = string.substring(0, res.index);
+					string = string.substr(res.index+res[0].length+1);
+					console.log(string);
+				}
+				
+			}
+		});
+	},function(response){
+		console.log("ERROR");
+	});
+	console.log(id);
+}
+
+// Devuelve un elemento dado su id
+function $(id){
+	let target = document.querySelectorAll(id);
+	if(target.length == 1)
+		return target[0];
+	else
+		return target;
+}
+
+// Añade código HTML a un elemento
+HTMLElement.prototype.append = function(obj){
+	this.innerHTML += obj;
+}
+
+NodeList.prototype.append = function(obj){
+	this.innerHTML += obj;
+}
+
+// Atributos
+HTMLElement.prototype.attr = function(attribute, value){
+	this.setAttribute(attribute, value);
+}
+
+NodeList.prototype.attr = function(attribute, value){
+	this.setAttribute(attribute, value);
+}
+
+// Atributos
+HTMLElement.prototype.removeClass = function(classname){
+	this.classList.remove(classname);
+}
+
+NodeList.prototype.removeClass = function(classname){
+	this.classList.remove(classname);
+}
+
+function getUrlParameter(url, p){
+	let params = url.split("?")[1];
+
+	if(params == undefined)
+		return null
+
+	let begin = params.indexOf(p);
+	let substring = params.substr(begin);
+	let end = substring.indexOf("&");
+
+	if(end != -1){
+		substring = substring.substr(0, end);
+	}
+
+	let value = substring.split("=")[1];
+	if(value == undefined)
+		return null;
+
+	return value;
+}
