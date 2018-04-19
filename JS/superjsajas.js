@@ -4,10 +4,16 @@ TODO:
 		Solamente acceder estando logueado
 		Al añadir un nuevo ingrediente que se añada al final de la lista automaticamente		HECHO
 		Lo de añadir las fotos 																	HECHO (FALTA LO DE LA RUTA)
-		Tamaño de imagen máximo para las fotos (300kb) >> MENSAJE MODAL O EMERGENTE
+		Tamaño de imagen máximo para las fotos (300kb) >> MENSAJE MODAL O EMERGENTE				HECHO
 		Al enviar la receta si no hay ninguna foto, sedebe de avisar al usuario
 
 		MÁS >> Punto c2
+
+		|-------------- FALLA EL POST --------------|
+
+	BUSCAR:
+		CAMBIAR FORMULARIO DE BUSCAR Y AÑADIR MÁS CAMPOS
+
 
 
 	localhost/rest/get/receta/u=6      ULTIMAS 6 RECETAS
@@ -32,13 +38,13 @@ function ingrediente_masmas() {
 	//LOG
 	//console.log("No, Muzska no ha subido video :(");
 	//console.log("Aunque has añadido un/una "+ingr);
+
+	hacerLogin();
 }
 
 function foto_masmas(){
 	//AÑADE UNA FOTO MAS A LA LISTA DE FOTOS DE UNA RECETA
-	let file = document.getElementById("input_foto").files[0].name;
-	let size = document.getElementById("input_foto").files[0].size;
-	
+	let input = document.getElementById("input_foto").value;
 	/*
 	let reader = new FileReader();
 	reader.onload = function(e){
@@ -46,12 +52,15 @@ function foto_masmas(){
 	}
 	*/
 
-	if(size >= 300000){
-		//console.log("ERROR: Tamaño de imagen excedido");
-		return;
-	}
+	if(input != ""){
+		let file = document.getElementById("input_foto").files[0].name;
+		let size = document.getElementById("input_foto").files[0].size;
 
-	if(file != ""){
+		if(size >= 300000){
+			//console.log("ERROR: Tamaño de imagen excedido");
+			return;
+		}
+
 		//console.log("RUTA: "+ file);
 
 		let list = document.getElementById("l_fotos");
@@ -115,7 +124,7 @@ function borraFoto(id){
 	let n = id.substring(2);
 	
 	let div = document.getElementById("f_"+n);
-	console.log(div);
+	//console.log(div);
 
 	div.parentNode.removeChild(div);
 
@@ -123,11 +132,443 @@ function borraFoto(id){
 	//console.log("BORRAR");
 }
 
+function login(frm){
+	//EJEMPLO QUE PASÓ JUAN POR WHATSAPP
+	
+	let fd = new FormData(frm);
+	let xhr = new XMLHttpRequest();
+	let url = '../rest/login';
+	let u, clave;
+
+	xhr.open('POST',url,true);
+	xhr.onload = function(){
+		console.log(xhr.responseText);
+		let r = JSON.parse(xhr.responseText);
+
+		if(r.RESPUESTA = 'OK'){
+			console.log(r);
+			sessionStorage.setItem('usuario',xhr.responseText);
+			u = JSON.parse(sessionStorage['usuario']);
+			clave = u.clave;
+		}
+		else{
+			console.log("EROEOROEROEROERO");
+		}
+
+	};
+}
+
+function nuevaReceta(frm){
+	let name = document.getElementById("n").value;
+	let elab = document.getElementById("e").value;
+	let comen = document.getElementById("c").value;
+	let time = document.getElementById("t").value;
+	let diff = document.getElementById("d").value;
+
+	let ingr = document.getElementById("l_ingr").getElementsByTagName("span"); //LISTA DE INGREDIENTES
+	let img = document.getElementById("l_fotos").getElementsByTagName("img"); //LISTA DE FOTOS
+	let d_img = document.getElementById("l_fotos").getElementsByTagName("textarea"); //LISTA DE DESCRIPCIONES DE CADA FOTO
+
+	//LOGS
+	/*
+	console.log(name);
+	console.log(elab);
+	console.log(comen);
+	console.log(time);
+	console.log(diff);
+
+	for(let i=0 ; i<ingr.length ; i++){
+		console.log(ingr[i].innerHTML);
+	}
+	for(let i=0 ; i<img.length ; i++){
+		console.log(img[i].src + "-> DESCRIPCIÓN: " + d_img[0].value);
+	}
+	*/
+
+	//CREAR RECETA >>>> SUBIR INGREDIENTES >>>> SUBIR FOTOS DE LA RECETA
+	let fd = new FormData();
+	let url = 'rest/receta/';
+	let usu = JSON.parse(sessionStorage['usuario']);
+
+	fd.append('l',usu.login);
+	fd.append('n',name);
+	fd.append('e',elab);
+	fd.append('t',time);
+	fd.append('d',diff);
+	fd.append('c',comen);
+	/*
+	console.log(fd.get('l'));
+	console.log(fd.get('n'));
+	console.log(fd.get('e'));
+	console.log(fd.get('t'));
+	console.log(fd.get('d'));
+	console.log(fd.get('c'));
+	*/
+
+	let init = { 'method':'post', 'body':fd, 'headers':{'Authorization':usu.clave} };
+
+	fetch(url,init).then(function(response){
+		if(!response.ok){
+			console.log("ERROR CON CÓDIGO: " + response.status);
+			return false;
+		}
+		console.log("gilipollas");
+		
+		response.json().then(function(datos){
+			console.log(datos);
+		});
+
+	},function(response){
+		console.log("error");
+	});
+
+	/*
+	let url = 'rest/receta/';
+	//let fd = new FormData();
+	let xhr = new XMLHttpRequest();
+	let usu = JSON.parse(sessionStorage['usuario']);
+
+	let args = 'l='+usu.login+'&n='+name+'&e='+elab+'&t='+time+'&d='+diff+'&c='+comen;
+	console.log(args);
+	if(xhr){
+		xhr.open('POST',url,true);
+
+		xhr.send(args);
+	}
+	*/
+}
+
+function logueado(){
+
+	let usu = sessionStorage.getItem('usuario');
+
+	if(!usu){
+		console.log("Que no te has logueado chaval. ZOORROOOOOOOOOO");
+
+
+	}
+	else{
+		console.log("Estás logueado y puedes crear una receta");
+	}
+
+	//console.log("Hola");
+}
+
+function buscar_simple(frm){
+	//rest/receta/?t={texto1,texto2,...}
+	let fd = new FormData(frm);
+	let url = 'rest/receta/?t=';
+	url += fd.get('search_box');
+	console.log(url);
+
+	fetch(url).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			console.log(datos);
+			//AHORA DEBO TRATAR LA PETICION CON datos.FILAS[]
 
 
 
 
+		});
 
+	},function(response){
+		console.log("ERROR");
+	});
+}
+
+function ultimasSeis(){
+
+	if(window.location.search && window.location.search[window.location.search.length-1]!='#'){
+		//LLEVA ARGUMENTOS
+		formBuscar();
+		return;
+	}
+
+
+	let url = 'rest/receta/?u=6'; //LAS 6 RECETAS MAS RECIENTES
+	let div_recetas = document.getElementById("recetas");
+
+	fetch(url).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			//console.log(datos);
+
+			//AHORA DEBO TRATAR LA PETICION CON datos.FILAS[]
+			//PARA CADA RECETA QUE HE SACADO TENGO QUE CREAR UN SUPER FIGURE Y AÑADIRLO A div_recetas, SUERTE!
+
+			
+			//SACO LAS FOTOS DE CADA RECETA
+			for(let i=0 ; i<datos.FILAS.length ; i++){
+
+				/*
+				//USUARIO
+				<div class="col-12 bg-dark-t text-center my-2">
+					<a href="receta.html" class="h2 revers-a">Pollo con chicharrón</a>
+					<a href="buscar.html" class="mt-3 d-block revers-a">
+						<div style="background-image: url(Images/Shut-up-and-take-my-money!.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
+						<span>Pablomanez</span>
+					</a>
+				</div>
+
+				//COMENTARIOS
+				<div class="col-12 bg-dark-t m-0 p-2 p-2">
+					<span class="text-orange">SLM</span>
+					<div class="text-light">Esto en daw no pasaba</div>
+				</div>
+
+				//FECHA+LIKES+DISLIKES
+				<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
+					<div class="row">
+						<div class="col-6 d-flex align-items-center justify-content-center">
+							<time datetime="1864-02-28">28/02/1864</time>
+						</div>
+						<div class="col-6">
+							<div class="row text-center">
+								<div class="col-2">
+									<i class="fas fa-thumbs-up"></i>
+								</div>
+								<span class="col-10">65491</span>
+
+								<div class="col-3">
+									<i class="fas fa-thumbs-down"></i>
+								</div>
+								<span class="col-9">5</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				*/
+
+				//USUARIO
+				let div_foto_usu = document.createElement('div');
+					div_foto_usu.setAttribute("style","background-image: url(Images/Shut-up-and-take-my-money!.png);");
+					div_foto_usu.setAttribute("class","circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center");
+				
+				let span_usu = document.createElement('span');
+				//span.createTextNode(datos2.FILAS[0].autor);
+				span_usu.appendChild(document.createTextNode(datos.FILAS[i].autor));
+
+				let a_buscar = document.createElement("a");
+					a_buscar.setAttribute("href","buscar.html");
+					a_buscar.setAttribute("class","mt-3 d-block revers-a");
+
+			a_buscar.appendChild(div_foto_usu);
+			a_buscar.appendChild(span_usu);
+
+				let a_receta = document.createElement("a");
+					a_receta.setAttribute("href","receta.html");
+					a_receta.setAttribute("class","h2 revers-a");
+				a_receta.appendChild(document.createTextNode(datos.FILAS[i].nombre));
+
+				let div_usu = document.createElement('div');
+					div_usu.setAttribute("class","col-12 bg-dark-t text-center my-2");
+			div_usu.appendChild(a_receta);
+			div_usu.appendChild(a_buscar);
+
+				let abs_div = document.createElement("div");
+					abs_div.setAttribute("style","background-image: url(fotos/"+datos.FILAS[i].fichero+");");
+					abs_div.setAttribute("class","pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center");
+
+			abs_div.appendChild(div_usu);
+
+				//COMENTARIOS
+
+				let url_c = 'rest/receta/'+datos.FILAS[i].id+'/comentarios'; //rest/receta/i/comentarios
+				fetch(url_c).then(function(response){
+					if(!response.ok){
+						return false;
+					}
+
+					response.json().then(function(datos2){
+						//console.log(datos2);
+
+						/*
+						<div class="col-12 bg-dark-t m-0 p-2 p-2">
+							<span class="text-orange">SLM</span>
+							<div class="text-light">Esto en daw no pasaba</div>
+						</div>
+						*/
+
+						let div_c = document.createElement("div");
+							div_c.setAttribute("class","col-12 bg-dark-t m-0 p-2 p-2");
+
+
+						for(let j=0 ; j<datos2.FILAS.length ; j++){
+
+							let div_tit_c = document.createElement("div");
+								div_tit_c.setAttribute("class","text-light");
+
+							div_tit_c.appendChild(document.createTextNode(datos2.FILAS[j].texto));
+
+							let span_usu_c = document.createElement("span");
+								span_usu_c.setAttribute("class","text-orange");
+
+							span_usu_c.appendChild(document.createTextNode(datos2.FILAS[j].autor));
+
+
+						div_c.appendChild(span_usu_c);
+						div_c.appendChild(div_tit_c);
+
+						}
+
+						abs_div.appendChild(div_c);
+
+						/*
+						<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
+							<div class="row">
+								<div class="col-6 d-flex align-items-center justify-content-center">
+									<time datetime="1864-02-28">28/02/1864</time>
+								</div>
+
+
+
+								<div class="col-6">
+									<div class="row text-center">
+										<div class="col-2">
+											<i class="fas fa-thumbs-up"></i>
+										</div>
+										<span class="col-10">65491</span>
+
+										<div class="col-3">
+											<i class="fas fa-thumbs-down"></i>
+										</div>
+										<span class="col-9">5</span>
+									</div>
+
+								</div>
+
+
+							</div>
+						</div>
+						*/
+
+						//LIKES+DISLIKES
+						let i_like = document.createElement("i");
+							i_like.setAttribute("class","fas fa-thumbs-up");
+
+						let div_like = document.createElement("div");
+							div_like.setAttribute("class","col-2");
+
+					div_like.appendChild(i_like);
+
+						let span_like = document.createElement("span");
+							span_like.setAttribute("class","col-10");
+
+					span_like.appendChild(document.createTextNode(datos.FILAS[i].positivos));
+
+						let i_dislike = document.createElement("i");
+							i_dislike.setAttribute("class","fas fa-thumbs-up");
+
+						let div_dislike = document.createElement("div");
+							div_dislike.setAttribute("class","col-3");
+
+					div_dislike.appendChild(i_dislike);
+
+						let span_dislike = document.createElement("span");
+							span_dislike.setAttribute("class","col-9");
+
+					span_dislike.appendChild(document.createTextNode(datos.FILAS[i].negativos));
+
+						let div_opinion = document.createElement("div");
+							div_opinion.setAttribute("class","row text-center");
+
+						let div_opinion2 = document.createElement("div");
+							div_opinion2.setAttribute("class","col-6");
+
+					div_opinion.appendChild(div_like);
+					div_opinion.appendChild(span_like);
+					div_opinion.appendChild(div_dislike);
+					div_opinion.appendChild(span_dislike);
+
+					div_opinion2.appendChild(div_opinion);
+
+						//FECHA
+						let time = document.createElement("time");
+							time.setAttribute("datetime",datos.FILAS[i].fecha);
+
+						time.appendChild(document.createTextNode(datos.FILAS[i].fecha));
+
+						let div_time = document.createElement("div");
+							div_time.setAttribute("class","col-6 d-flex align-items-center justify-content-center");
+
+					div_time.appendChild(time);
+
+						let div_b1 = document.createElement("div");
+							div_b1.setAttribute("class","row");
+
+					div_b1.appendChild(div_time);
+					div_b1.appendChild(div_opinion2);
+
+						let div_b2 = document.createElement("div");
+							div_b2.setAttribute("class","col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light");
+
+					div_b2.appendChild(div_b1);
+
+					abs_div.appendChild(div_b2);
+
+						/*
+						<figure class="col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block">
+							<div style="background-image: url(Images/RECETA_1.jpg);" class="pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center">
+							
+								=> USUARIO
+								=> COMENTARIOS
+								=> FECHA+LIKES+DISLIKES
+							
+							</div>
+						</figure>
+						*/
+
+
+						let figure = document.createElement("figure");
+							figure.setAttribute("class","col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block");
+
+						figure.appendChild(abs_div);
+
+						div_recetas.appendChild(figure);
+						
+					});
+				},function(response){
+					console.log("ERROR");
+				});
+
+			} //FOR
+		});
+
+	},function(response){
+		console.log("ERROR");
+	});
+}
+
+function formBuscar(frm){
+	
+	if(frm){
+		console.log("HAY FORMULARIO");
+	}
+	else{
+		console.log("NO HAY FORMULARIO");
+
+		let args = window.location.search;
+			args = args.substr(1,args.length);
+		let aa = args.split("&");
+
+		for(let i=0 ; i<aa.length ; i++){
+			console.log(aa[i]);
+		}
+
+
+	}
+
+
+}
 
 //EJEMPLO FETCH API
 function pruebaFetch(){
@@ -167,7 +608,7 @@ function pruebaFetch(){
 }
 
 function hacerLogin(){
-	let url = "../rest/login/";
+	let url = "rest/login/";
 	let fd = new FormData();
 
 	fd.append('login','usuario2');
@@ -186,35 +627,6 @@ function hacerLogin(){
 	},function(response){
 
 	});
-
-}
-
-function hacerlogin2(frm){
-//EJEMPLO QUE PASÓ JUAN POR WHATSAPP
-	
-	let fd = new FormData();
-	let xhr = new XMLHttpRequest();
-	let url = '../rest/login';
-	let u, clave;
-
-	xhr.open('POST',url,true);
-	xhr.onload = function(){
-		console.log(xhr.responseText);
-		let r = JSON.parse(xhr.responseText);
-
-		if(r.RESPUESTA = 'OK'){
-			console.log(r);
-			sessionStorage.setItem('usuario',xhr.responseText);
-			u = JSON.parse(sessionStorage['usuario']);
-			clave = u.clave;
-		}
-		else{
-			console.log("EROEOROEROEROERO");
-		}
-
-	};
-
-
 
 }
 
