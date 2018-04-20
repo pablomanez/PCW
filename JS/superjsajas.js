@@ -19,6 +19,16 @@ TODO:
 	localhost/rest/get/receta/u=6      ULTIMAS 6 RECETAS
 */
 
+var dayList = new Array(7);
+dayList[0] =  "domingo";
+dayList[1] = "lunes";
+dayList[2] = "martes";
+dayList[3] = "miércoles";
+dayList[4] = "jueves";
+dayList[5] = "viernes";
+dayList[6] = "sábado";
+
+
 function ingrediente_masmas() {
 	//AÑADE UN INGREDIENTE MAS A LA LISTA DE NUEVA RECETA
 
@@ -789,8 +799,6 @@ function loadRecipe(){
 				$("#preparacion").append(sections[i]+"<br><br>");
 			}
 
-			$("#name").load("includes/test.html");
-/*
 
 		
 			// Comentarios
@@ -801,19 +809,34 @@ function loadRecipe(){
 				}
 
 				response.json().then(function(comments){
-					console.log("FILAS DE COMMENTS " + comments.FILAS.length);
+					
 					for(let j=0 ; j<comments.FILAS.length ; j++){
-						
-						let comment =  `<div class="bg-dark-t text-left px-2 py-1 mb-1">				<!-- COMENTARIO -->
-										<span class="text-orange h6">`+comments.FILAS[j].autor+`</span>
-										<div class="h5">`+comments.FILAS[j].texto+`</div>
-									</div>`;
-						$(".comment_tab")[i].append(comment);
+						// HACEMOS UNA PETICION DEL FICHERO
+						let request = new XMLHttpRequest();
+						request.open("GET", "includes/comentarioReceta.html", true);
+						let node = this;
+						request.onreadystatechange = function(oEvent){
+							if(request.readyState == 4){
+								if(request.status == 200){
+									//AQUI SABEMOS EL FICHERO HA CARGADO
+									$("#Comentarios").append(request.responseText);
+									$(".commentU")[j].append(comments.FILAS[j].autor);
+									$(".commentT")[j].append(comments.FILAS[j].titulo);
+									$(".commentM")[j].append(comments.FILAS[j].texto);
+
+									let date = new Date(comments.FILAS[j].fecha);
+									let month = date.getMonth()+1;
+									$(".commentFecha")[j].attr("datetime", comments.FILAS[j].fecha);
+									$(".commentFecha")[j].append("ñ"+dayList[date.getDay()]+", "+date.getDate()+"/"+month +"/"+ date.getFullYear() + " "+date.getHours()+":"+date.getMinutes() );
+								}
+							}
+						}
+						request.send(null);
 					}
 				});
 			});
-	
-*/
+
+
 
 		});
 	},function(response){
@@ -825,7 +848,7 @@ function loadRecipe(){
 // Devuelve un elemento dado su id
 function $(id){
 	let target = document.querySelectorAll(id);
-	if(target.length == 1)
+	if(target.length == 1 && id.substr(0,1) != ".")
 		return target[0];
 	else
 		return target;
@@ -865,10 +888,11 @@ HTMLElement.prototype.load = function(url){
 	let node = this;
 	request.onreadystatechange = function(oEvent){
 		if(request.readyState == 4){
-			node.innerHTML += request.responseText;
+			if(request.status == 200){
+				node.innerHTML += request.responseText;
+			}
 		}
 	}
-
 	request.send(null);
 }
 
@@ -878,10 +902,11 @@ NodeList.prototype.load = function(url){
 	let node = this;
 	request.onreadystatechange = function(oEvent){
 		if(request.readyState == 4){
-			node.innerHTML += request.responseText;
+			if(request.status == 200){
+				node.innerHTML += request.responseText;
+			}
 		}
 	}
-
 	request.send(null);
 }
 
