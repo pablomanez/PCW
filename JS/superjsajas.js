@@ -768,7 +768,7 @@ function loadRecipe(){
 			if(datos.FILAS.length == 0){
 				console.log("404 NOT FOUND")
 			}
-			console.log(datos);
+			//console.log(datos);
 
 			let circle = `<i class="fas fa-circle mr-1"></i>`;
 			let dude = `<i class="fas fa-male mr-1"></i>`;
@@ -776,6 +776,9 @@ function loadRecipe(){
 			let date = new Date(datos.FILAS[0].fecha);
 			let month = date.getMonth()+1;
 			$("#name").append(datos.FILAS[0].nombre);
+
+			getPhotos(datos.FILAS[0].id);
+
 			$("#autor").append(datos.FILAS[0].autor);
 			for(let i = 0; i < datos.FILAS[0].dificultad; i++){
 				$("#dificultad").append(circle);
@@ -800,42 +803,8 @@ function loadRecipe(){
 			}
 
 
-		
-			// Comentarios
-			let url_c = 'rest/receta/'+datos.FILAS[0].id+'/comentarios'; //rest/receta/i/comentarios
-			fetch(url_c).then(function(response){
-				if(!response.ok){
-					return false;
-				}
-
-				response.json().then(function(comments){
-					
-					for(let j=0 ; j<comments.FILAS.length ; j++){
-						// HACEMOS UNA PETICION DEL FICHERO
-						let request = new XMLHttpRequest();
-						request.open("GET", "includes/comentarioReceta.html", true);
-						let node = this;
-						request.onreadystatechange = function(oEvent){
-							if(request.readyState == 4){
-								if(request.status == 200){
-									//AQUI SABEMOS EL FICHERO HA CARGADO
-									$("#Comentarios").append(request.responseText);
-									$(".commentU")[j].append(comments.FILAS[j].autor);
-									$(".commentT")[j].append(comments.FILAS[j].titulo);
-									$(".commentM")[j].append(comments.FILAS[j].texto);
-
-									let date = new Date(comments.FILAS[j].fecha);
-									let month = date.getMonth()+1;
-									$(".commentFecha")[j].attr("datetime", comments.FILAS[j].fecha);
-									$(".commentFecha")[j].append("ñ"+dayList[date.getDay()]+", "+date.getDate()+"/"+month +"/"+ date.getFullYear() + " "+date.getHours()+":"+date.getMinutes() );
-								}
-							}
-						}
-						request.send(null);
-					}
-				});
-			});
-
+			getIngredients(datos.FILAS[0].id);
+			getComments(datos.FILAS[0].id);
 
 
 		});
@@ -844,6 +813,159 @@ function loadRecipe(){
 	});
 	console.log(id);
 }
+
+
+function getIngredients(id){
+	let url_c = 'rest/receta/'+id+'/ingredientes';
+	fetch(url_c).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(ingredients){
+			if(ingredients.FILAS.length == 0){
+				$("#ingredientes").append("No se necesitan ingredientes para esta receta");
+			}
+			else{
+				for(let j=0 ; j<ingredients.FILAS.length ; j++){
+					// HACEMOS UNA PETICION DEL FICHERO
+					//console.log(ingredients.FILAS[j]);
+					let request = new XMLHttpRequest();
+					request.open("GET", "includes/ingredient-tag.html", true);
+					let node = this;
+					request.onreadystatechange = function(oEvent){
+						if(request.readyState == 4){
+							if(request.status == 200){
+								//AQUI SABEMOS QUE EL FICHERO HA CARGADO
+								$("#ingredientes").append(request.responseText);
+								let fix = $(".ingredient-tag").length-1;
+								$(".ingredient-tag")[fix].append(ingredients.FILAS[j].nombre);
+							}
+						}
+					}
+					request.send(null);
+				}
+			}
+		});
+	});
+}
+
+
+function getComments(id){
+	let url_c = 'rest/receta/'+id+'/comentarios'; //rest/receta/i/comentarios
+	fetch(url_c).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(comments){
+			if(comments.FILAS.length == 0){
+				$("#Comentarios").load("includes/no-comments.html");
+			}
+			else{
+				for(let j=0 ; j<comments.FILAS.length ; j++){
+					// HACEMOS UNA PETICION DEL FICHERO
+					//console.log(comments.FILAS[j]);
+					let request = new XMLHttpRequest();
+					request.open("GET", "includes/commentRecipe.html", true);
+					let node = this;
+					request.onreadystatechange = function(oEvent){
+						if(request.readyState == 4){
+							if(request.status == 200){
+								//AQUI SABEMOS QUE EL FICHERO HA CARGADO
+								$("#Comentarios").append(request.responseText);
+								let fix = $(".commentUsuario").length-1;
+								$(".commentUsuario")[fix].append(comments.FILAS[j].autor);
+								$(".commentTitulo")[fix].append(comments.FILAS[j].titulo);
+								$(".commentMensaje")[fix].append(comments.FILAS[j].texto);
+
+								let date = new Date(comments.FILAS[j].fecha);
+								let month = date.getMonth()+1;
+								$(".commentFecha")[fix].attr("datetime", comments.FILAS[j].fecha);
+								$(".commentFecha")[fix].append(dayList[date.getDay()]+", "+date.getDate()+"/"+month +"/"+ date.getFullYear() + " "+date.getHours()+":"+date.getMinutes() );
+							}
+						}
+					}
+					request.send(null);
+				}
+			}
+		});
+	});
+}
+
+let photo = 0;
+
+function nextPhoto(){
+	$(".recipeImg")[photo].addClass("d-none");
+	$(".imageFigcaption")[photo].addClass("d-none");
+	photo++;
+	if(photo > $(".recipeImg").length-1){
+		photo = 0;
+	}
+	$(".recipeImg")[photo].removeClass("d-none");
+	$(".imageFigcaption")[photo].removeClass("d-none");
+}
+
+function prevPhoto(){
+	$(".recipeImg")[photo].addClass("d-none");
+	$(".imageFigcaption")[photo].addClass("d-none");
+	photo--;
+	if(photo < 0){
+		photo = $(".recipeImg").length-1;
+	}
+	$(".recipeImg")[photo].removeClass("d-none");
+	$(".imageFigcaption")[photo].removeClass("d-none");
+}
+
+function getPhotos(id){
+	let url_c = 'rest/receta/'+id+'/fotos';
+	fetch(url_c).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(photos){
+			if(photos.FILAS.length == 0){
+				//$("#Comentarios").load("includes/no-comments.html");
+			}
+			else{
+				if(photos.FILAS.length == 1){
+					$("#img_container").attr("style", "height: 452px; object-fit: cover;");
+					$("#control_arrows").addClass("d-none");
+				}
+				for(let j=0 ; j<photos.FILAS.length ; j++){
+					// HACEMOS UNA PETICION DEL FICHERO
+					console.log(photos.FILAS[j]);
+					
+					let request = new XMLHttpRequest();
+					request.open("GET", "includes/recipeImgCap.html", true);
+					let node = this;
+					request.onreadystatechange = function(oEvent){
+						if(request.readyState == 4){
+							if(request.status == 200){
+								//AQUI SABEMOS QUE EL FICHERO HA CARGADO
+								$("#img_container").append(request.responseText);
+								let fix = $(".recipeImg").length-1;
+								$(".recipeImg")[fix].attr("style", "background: url('fotos/"+photos.FILAS[j].fichero+"') center; background-size: cover;");
+								//$(".recipeImg")[fix].attr("src", "fotos/"+photos.FILAS[j].fichero);
+								//$(".recipeImg")[fix].attr("alt", photos.FILAS[j].texto);
+								$(".imageFigcaption")[fix].append(photos.FILAS[j].texto);
+								if(fix > 0){
+									$(".recipeImg")[fix].addClass("d-none");
+									$(".imageFigcaption")[fix].addClass("d-none");
+								}
+							}
+						}
+					}
+					request.send(null);
+					
+				}
+			}
+		});
+	});
+}
+
+//JQUERY_L ===============================================
 
 // Devuelve un elemento dado su id
 function $(id){
@@ -879,6 +1001,15 @@ HTMLElement.prototype.removeClass = function(classname){
 
 NodeList.prototype.removeClass = function(classname){
 	this.classList.remove(classname);
+}
+
+// Añade clase 
+HTMLElement.prototype.addClass = function(classname){
+	this.classList.add(classname);
+}
+
+NodeList.prototype.addClass = function(classname){
+	this.classList.add(classname);
 }
 
 // Load
