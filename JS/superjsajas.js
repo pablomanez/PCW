@@ -789,9 +789,10 @@ function loadRecipe(){
 				$("#preparacion").append(sections[i]+"<br><br>");
 			}
 
+			$("#name").load("includes/test.html");
+/*
 
-
-		/*
+		
 			// Comentarios
 			let url_c = 'rest/receta/'+datos.FILAS[0].id+'/comentarios'; //rest/receta/i/comentarios
 			fetch(url_c).then(function(response){
@@ -811,7 +812,8 @@ function loadRecipe(){
 					}
 				});
 			});
-	*/
+	
+*/
 
 		});
 	},function(response){
@@ -847,7 +849,7 @@ NodeList.prototype.attr = function(attribute, value){
 	this.setAttribute(attribute, value);
 }
 
-// Atributos
+// Elimina clase
 HTMLElement.prototype.removeClass = function(classname){
 	this.classList.remove(classname);
 }
@@ -859,18 +861,28 @@ NodeList.prototype.removeClass = function(classname){
 // Load
 HTMLElement.prototype.load = function(url){
 	let request = new XMLHttpRequest();
-	request.open("GET", url, false);
-	request.send(null);
+	request.open("GET", url, true);
+	let node = this;
+	request.onreadystatechange = function(oEvent){
+		if(request.readyState == 4){
+			node.innerHTML += request.responseText;
+		}
+	}
 
-	this.innerHTML += request.responseText;
+	request.send(null);
 }
 
 NodeList.prototype.load = function(url){
 	let request = new XMLHttpRequest();
-	request.open("GET", url, false);
-	request.send(null);
+	request.open("GET", url, true);
+	let node = this;
+	request.onreadystatechange = function(oEvent){
+		if(request.readyState == 4){
+			node.innerHTML += request.responseText;
+		}
+	}
 
-	this.innerHTML += request.responseText;
+	request.send(null);
 }
 
 function getUrlParameter(url, p){
