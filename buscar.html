@@ -94,7 +94,7 @@
 
 				<div class="p-1">
 					<label class="form-label">Ingredientes:</label>
-					<ul contenteditable="true" class="bg-light" name="ingredientes">
+					<ul contenteditable="true" class="bg-light" id="form_ingredientes">
 						<li></li>
 						<li></li>
 					</ul>
@@ -113,10 +113,10 @@
 				<div class="p-1">
 					<label class="form-label" for="l_diff">Dificultad de elaboración:</label>
 					<select class="form-control" id="l_diff">
-						<option value="" disabled selected>Elige una opción</option>
-						<option value="baja">Baja</option>
-						<option value="media">Media</option>
-						<option value="alta">Alta</option>
+						<option value="-" disabled selected>Elige una opción</option>
+						<option value="0">Baja</option>
+						<option value="1">Media</option>
+						<option value="2">Alta</option>
 					</select>
 				</div>
 
@@ -124,7 +124,7 @@
 					<label class="form-label" for="l_aut">Autor:</label>
 					<input class="form-control" type="text" name="author" id="l_aut">
 				</div>
-				
+				<!--
 				<div class="p-1">	
 					<select class="form-control">
 						<option disabled selected>Orden de aparición</option>
@@ -139,7 +139,7 @@
 						<option>Según fecha</option>
 					</select>
 				</div>
-
+				-->
 
 				<div class="p-1 pt-2">
 					<button class="btn btn-outline-dark w-100" type="submit" name="submit">Buscar</button>

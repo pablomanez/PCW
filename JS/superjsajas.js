@@ -385,18 +385,62 @@ function formBuscar(frm){
 	if(frm){
 		console.log("HAY FORMULARIO");
 		
+		let vacion = true;
+		let url = '/rest/receta/?';
 		let fd = new FormData(frm);
 		resetBuscar();
-
-		//console.log(fd.get('name'));
-		for(let pair of fd.entries()) {
-			console.log(pair[0]+ ', '+ pair[1]); 
+		
+		if(frm.elements[0].value != ""){
+			let name = 'n='+frm.elements[0].value+'&';
+			url += name;
+		}
+		if(frm.elements[1].value != ""){
+			let t_min = 'di='+frm.elements[1].value+'&';
+			url += t_min;
+		}
+		if(frm.elements[2].value != ""){
+			let t_max = 'df='+frm.elements[2].value+'&';
+			url += t_max;
+		}
+		if(frm.elements[3].value != "-"){
+			let diff = 'd='+frm.elements[3].value+'&';
+			url += diff;
+		}
+		if(frm.elements[4].value != ""){
+			let autor = 'a='+frm.elements[4].value+'&';
+			url += autor;
 		}
 
-		//for(let i=0 ; i<frm.)
+		let ingr = document.getElementById('form_ingredientes').getElementsByTagName('li');
+		url += 'i=';
+		for(let i=0 ; i<ingr.length ; i++){
+			if(ingr[i].innerText != ""){
+				url += ingr[i].innerText+',';
+			}
+			console.log(ingr[i].innerText);
+		}
 
+		console.log(url);
+		if(url[url.length-1] == ','){
+			url = url.substr(0,url.length-1);
+		}
+		if(url[url.length-1] == '='){
+			//SI NO SE HA COLOCADO NINGUN INGREDIENTE
+			url = url.substr(0,url.length-2);
+		}
+		if(url[url.length-1] == '&'){
+			url = url.substr(0,url.length-1);
+		}
 
-
+		console.log(url);
+		/*
+		console.log(name);
+		console.log(ingr);
+		console.log(t_min);
+		console.log(t_max);
+		console.log(diff);
+		console.log(autor);
+		*/
 
 	}
 	else{
