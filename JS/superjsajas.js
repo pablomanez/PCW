@@ -266,31 +266,22 @@ function logueado(){
 
 function buscar_simple(frm){
 	//rest/receta/?t={texto1,texto2,...}
+
+	//BORRO PRIMERO LOS RESULTADOS EN EL CASO QUE HUBIERAN
+	resetBuscar();
+
 	let fd = new FormData(frm);
 	let url = 'rest/receta/?t=';
 	url += fd.get('search_box');
-	console.log(url);
+	console.log("URL DE BÚSQUEDA SIMPLE: " + url);
 
-	fetch(url).then(function(response){
-		if(!response.ok){
-			return false;
-		}
+	buscarRecetas(url);
 
-		response.json().then(function(datos){
-			console.log(datos);
-			//AHORA DEBO TRATAR LA PETICION CON datos.FILAS[]
-
-
-
-
-		});
-
-	},function(response){
-		console.log("ERROR");
-	});
+	return false;
 }
 
 function ultimasSeis(){
+	console.log("ultimasSeis()");
 
 	if(window.location.search && window.location.search[window.location.search.length-1]!='#'){
 		//LLEVA ARGUMENTOS
@@ -298,10 +289,14 @@ function ultimasSeis(){
 		return;
 	}
 
-
 	let url = 'rest/receta/?u=6'; //LAS 6 RECETAS MAS RECIENTES
-	let div_recetas = document.getElementById("recetas");
+	buscarRecetas(url);
+}
 
+function buscarRecetas(url){
+	console.log("buscarRecetas("+url+")");
+	//PASAS UNA PETICION COMO url
+	//PARA LA PÁGINA buscar.html
 	fetch(url).then(function(response){
 		if(!response.ok){
 			return false;
@@ -311,244 +306,63 @@ function ultimasSeis(){
 			//console.log(datos);
 
 			//AHORA DEBO TRATAR LA PETICION CON datos.FILAS[]
-			//PARA CADA RECETA QUE HE SACADO TENGO QUE CREAR UN SUPER FIGURE Y AÑADIRLO A div_recetas, SUERTE!
 
 			
 			//SACO LAS FOTOS DE CADA RECETA
 			for(let i=0 ; i<datos.FILAS.length ; i++){
+				//PETIÇAO DEL FICHERO
+				let request = new XMLHttpRequest();
+				request.open("GET", "includes/search_recipe.html", true);
+				let node = this;
+				request.onreadystatechange = function(oEvent){	
+					if(request.readyState == 4){
+						if(request.status == 200){
+							//console.log(datos.FILAS[i]);
+							$("#recetas").innerHTML += request.responseText;
+							$(".receta_title")[i].append(datos.FILAS[i].nombre);
+							$(".receta_autor")[i].append(datos.FILAS[i].autor);
+							$(".receta_fecha")[i].append(datos.FILAS[i].fecha);
+							$(".receta_pos")[i].append(datos.FILAS[i].positivos);
+							$(".receta_neg")[i].append(datos.FILAS[i].negativos);
+							//style="background-image: url(Images/RECETA_1.jpg);"
+							$(".receta_img")[i].attr("style","background-image: url(fotos/"+datos.FILAS[i].fichero+");");
 
-				/*
-				//USUARIO
-				<div class="col-12 bg-dark-t text-center my-2">
-					<a href="receta.html" class="h2 revers-a">Pollo con chicharrón</a>
-					<a href="buscar.html" class="mt-3 d-block revers-a">
-						<div style="background-image: url(Images/Shut-up-and-take-my-money!.png);" class="circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center"></div>
-						<span>Pablomanez</span>
-					</a>
-				</div>
-
-				//COMENTARIOS
-				<div class="col-12 bg-dark-t m-0 p-2 p-2">
-					<span class="text-orange">SLM</span>
-					<div class="text-light">Esto en daw no pasaba</div>
-				</div>
-
-				//FECHA+LIKES+DISLIKES
-				<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
-					<div class="row">
-						<div class="col-6 d-flex align-items-center justify-content-center">
-							<time datetime="1864-02-28">28/02/1864</time>
-						</div>
-						<div class="col-6">
-							<div class="row text-center">
-								<div class="col-2">
-									<i class="fas fa-thumbs-up"></i>
-								</div>
-								<span class="col-10">65491</span>
-
-								<div class="col-3">
-									<i class="fas fa-thumbs-down"></i>
-								</div>
-								<span class="col-9">5</span>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-				*/
-
-				//USUARIO
-				let div_foto_usu = document.createElement('div');
-					div_foto_usu.setAttribute("style","background-image: url(Images/Shut-up-and-take-my-money!.png);");
-					div_foto_usu.setAttribute("class","circle bg-orange justify-self-center box-shadow footer-logo bg-image d-flex align-items-end justify-content-center");
 				
-				let span_usu = document.createElement('span');
-				//span.createTextNode(datos2.FILAS[0].autor);
-				span_usu.appendChild(document.createTextNode(datos.FILAS[i].autor));
+							let url_c = 'rest/receta/'+datos.FILAS[i].id+'/comentarios'; //rest/receta/i/comentarios
+							fetch(url_c).then(function(response){
+								if(!response.ok){
+									return false;
+								}
 
-				let a_buscar = document.createElement("a");
-					a_buscar.setAttribute("href","buscar.html");
-					a_buscar.setAttribute("class","mt-3 d-block revers-a");
+								response.json().then(function(comments){
+									//console.log(datos2);
+									let div_comments = "";
 
-			a_buscar.appendChild(div_foto_usu);
-			a_buscar.appendChild(span_usu);
+									for(let j=0 ; j<comments.FILAS.length ; j++){
+										let comment = 
+										`<div class="col-12 bg-dark-t m-0 p-2 p-2">
+											<span class="text-orange">`+comments.FILAS[j].autor+`</span>
+											<div class="text-light">`+comments.FILAS[j].texto+`</div>
+										</div>`;
+										div_comments += comment;
+									}
 
-				let a_receta = document.createElement("a");
-					a_receta.setAttribute("href","receta.html");
-					a_receta.setAttribute("class","h2 revers-a");
-				a_receta.appendChild(document.createTextNode(datos.FILAS[i].nombre));
-
-				let div_usu = document.createElement('div');
-					div_usu.setAttribute("class","col-12 bg-dark-t text-center my-2");
-			div_usu.appendChild(a_receta);
-			div_usu.appendChild(a_buscar);
-
-				let abs_div = document.createElement("div");
-					abs_div.setAttribute("style","background-image: url(fotos/"+datos.FILAS[i].fichero+");");
-					abs_div.setAttribute("class","pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center");
-
-			abs_div.appendChild(div_usu);
-
-				//COMENTARIOS
-
-				let url_c = 'rest/receta/'+datos.FILAS[i].id+'/comentarios'; //rest/receta/i/comentarios
-				fetch(url_c).then(function(response){
-					if(!response.ok){
-						return false;
-					}
-
-					response.json().then(function(datos2){
-						//console.log(datos2);
-
-						/*
-						<div class="col-12 bg-dark-t m-0 p-2 p-2">
-							<span class="text-orange">SLM</span>
-							<div class="text-light">Esto en daw no pasaba</div>
-						</div>
-						*/
-
-						let div_c = document.createElement("div");
-							div_c.setAttribute("class","col-12 bg-dark-t m-0 p-2 p-2");
-
-
-						for(let j=0 ; j<datos2.FILAS.length ; j++){
-
-							let div_tit_c = document.createElement("div");
-								div_tit_c.setAttribute("class","text-light");
-
-							div_tit_c.appendChild(document.createTextNode(datos2.FILAS[j].texto));
-
-							let span_usu_c = document.createElement("span");
-								span_usu_c.setAttribute("class","text-orange");
-
-							span_usu_c.appendChild(document.createTextNode(datos2.FILAS[j].autor));
-
-
-						div_c.appendChild(span_usu_c);
-						div_c.appendChild(div_tit_c);
+									if($(".receta_comentarios")[i] != undefined){
+										$(".receta_comentarios")[i].innerHTML += div_comments;
+									}
+									else{
+										console.log("ERROR EN: "+datos.FILAS[i].nombre);
+									}
+									
+								});
+							},function(response){
+								console.log("ERROR");
+							});
 
 						}
-
-						abs_div.appendChild(div_c);
-
-						/*
-						<div class="col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light">
-							<div class="row">
-								<div class="col-6 d-flex align-items-center justify-content-center">
-									<time datetime="1864-02-28">28/02/1864</time>
-								</div>
-
-
-
-								<div class="col-6">
-									<div class="row text-center">
-										<div class="col-2">
-											<i class="fas fa-thumbs-up"></i>
-										</div>
-										<span class="col-10">65491</span>
-
-										<div class="col-3">
-											<i class="fas fa-thumbs-down"></i>
-										</div>
-										<span class="col-9">5</span>
-									</div>
-
-								</div>
-
-
-							</div>
-						</div>
-						*/
-
-						//LIKES+DISLIKES
-						let i_like = document.createElement("i");
-							i_like.setAttribute("class","fas fa-thumbs-up");
-
-						let div_like = document.createElement("div");
-							div_like.setAttribute("class","col-2");
-
-					div_like.appendChild(i_like);
-
-						let span_like = document.createElement("span");
-							span_like.setAttribute("class","col-10");
-
-					span_like.appendChild(document.createTextNode(datos.FILAS[i].positivos));
-
-						let i_dislike = document.createElement("i");
-							i_dislike.setAttribute("class","fas fa-thumbs-up");
-
-						let div_dislike = document.createElement("div");
-							div_dislike.setAttribute("class","col-3");
-
-					div_dislike.appendChild(i_dislike);
-
-						let span_dislike = document.createElement("span");
-							span_dislike.setAttribute("class","col-9");
-
-					span_dislike.appendChild(document.createTextNode(datos.FILAS[i].negativos));
-
-						let div_opinion = document.createElement("div");
-							div_opinion.setAttribute("class","row text-center");
-
-						let div_opinion2 = document.createElement("div");
-							div_opinion2.setAttribute("class","col-6");
-
-					div_opinion.appendChild(div_like);
-					div_opinion.appendChild(span_like);
-					div_opinion.appendChild(div_dislike);
-					div_opinion.appendChild(span_dislike);
-
-					div_opinion2.appendChild(div_opinion);
-
-						//FECHA
-						let time = document.createElement("time");
-							time.setAttribute("datetime",datos.FILAS[i].fecha);
-
-						time.appendChild(document.createTextNode(datos.FILAS[i].fecha));
-
-						let div_time = document.createElement("div");
-							div_time.setAttribute("class","col-6 d-flex align-items-center justify-content-center");
-
-					div_time.appendChild(time);
-
-						let div_b1 = document.createElement("div");
-							div_b1.setAttribute("class","row");
-
-					div_b1.appendChild(div_time);
-					div_b1.appendChild(div_opinion2);
-
-						let div_b2 = document.createElement("div");
-							div_b2.setAttribute("class","col-12 bg-dark-t text-center mt-5 mb-2 py-1 text-light");
-
-					div_b2.appendChild(div_b1);
-
-					abs_div.appendChild(div_b2);
-
-						/*
-						<figure class="col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block">
-							<div style="background-image: url(Images/RECETA_1.jpg);" class="pop-up box-shadow bg-image h-search p-2 mh-400px Mw-item-search justify-self-center">
-							
-								=> USUARIO
-								=> COMENTARIOS
-								=> FECHA+LIKES+DISLIKES
-							
-							</div>
-						</figure>
-						*/
-
-
-						let figure = document.createElement("figure");
-							figure.setAttribute("class","col-12 col-lg-6 col-xl-4 m-0 p-2 d-inline-block");
-
-						figure.appendChild(abs_div);
-
-						div_recetas.appendChild(figure);
-						
-					});
-				},function(response){
-					console.log("ERROR");
-				});
+					}
+				}
+				request.send(null);
 
 			} //FOR
 		});
@@ -558,14 +372,80 @@ function ultimasSeis(){
 	});
 }
 
+function resetBuscar(){
+	let recetas = document.getElementById("recetas");
+	while(recetas.firstChild){
+		recetas.removeChild(recetas.firstChild);
+	}
+}
+
+
 function formBuscar(frm){
 	
 	if(frm){
 		console.log("HAY FORMULARIO");
+		
+		let vacion = true;
+		let url = '/rest/receta/?';
+		let fd = new FormData(frm);
+		resetBuscar();
+		
+		if(frm.elements[0].value != ""){
+			let name = 'n='+frm.elements[0].value+'&';
+			url += name;
+		}
+		if(frm.elements[1].value != ""){
+			let t_min = 'di='+frm.elements[1].value+'&';
+			url += t_min;
+		}
+		if(frm.elements[2].value != ""){
+			let t_max = 'df='+frm.elements[2].value+'&';
+			url += t_max;
+		}
+		if(frm.elements[3].value != "-"){
+			let diff = 'd='+frm.elements[3].value+'&';
+			url += diff;
+		}
+		if(frm.elements[4].value != ""){
+			let autor = 'a='+frm.elements[4].value+'&';
+			url += autor;
+		}
+
+		let ingr = document.getElementById('form_ingredientes').getElementsByTagName('li');
+		url += 'i=';
+		for(let i=0 ; i<ingr.length ; i++){
+			if(ingr[i].innerText != ""){
+				url += ingr[i].innerText+',';
+			}
+			console.log(ingr[i].innerText);
+		}
+
+		console.log(url);
+		if(url[url.length-1] == ','){
+			url = url.substr(0,url.length-1);
+		}
+		if(url[url.length-1] == '='){
+			//SI NO SE HA COLOCADO NINGUN INGREDIENTE
+			url = url.substr(0,url.length-2);
+		}
+		if(url[url.length-1] == '&'){
+			url = url.substr(0,url.length-1);
+		}
+
+		console.log(url);
+		/*
+		console.log(name);
+		console.log(ingr);
+		console.log(t_min);
+		console.log(t_max);
+		console.log(diff);
+		console.log(autor);
+		*/
+
 	}
 	else{
-		console.log("NO HAY FORMULARIO");
-
+		//console.log("NO HAY FORMULARIO");
+		/*
 		let args = window.location.search;
 			args = args.substr(1,args.length);
 		let aa = args.split("&");
@@ -573,8 +453,7 @@ function formBuscar(frm){
 		for(let i=0 ; i<aa.length ; i++){
 			console.log(aa[i]);
 		}
-
-
+		*/
 	}
 
 
