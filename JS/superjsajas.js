@@ -782,29 +782,37 @@ function loadRecipe(){
 			$("#n_comentarios").append(datos.FILAS[0].comentarios);
 			
 
-			console.log(datos.FILAS[0].elaboracion);
-			let string = datos.FILAS[0].elaboracion;
+			let elaboracion = datos.FILAS[0].elaboracion;
+			let sections = elaboracion.split("<br>");
 
-			if(string.match(/[0-9]+[)]/g).length > 1){
-				let res = string.match(/[0-9]+[)]/);
-				let sub = string.substring(0, res.index);
-				string = string.substr(res.index+res[0].length+1);
-
-				console.log(string);
-
-				
-				
-				while(res){
-					$("#preparacion").append(sub+"<br><br>");
-					$("#preparacion").append(`<span class="text-orange h3">`+res[0].substr(0, res[0].length-1) + `&nbsp;&nbsp;<span>`);
-					res = string.match(/[0-9]+[)]/);
-					console.log(res);
-					sub = string.substring(0, res.index);
-					string = string.substr(res.index+res[0].length+1);
-					console.log(string);
-				}
-				
+			for(let i = 0; i < sections.length; i++){
+				$("#preparacion").append(sections[i]+"<br><br>");
 			}
+
+
+
+		/*
+			// Comentarios
+			let url_c = 'rest/receta/'+datos.FILAS[0].id+'/comentarios'; //rest/receta/i/comentarios
+			fetch(url_c).then(function(response){
+				if(!response.ok){
+					return false;
+				}
+
+				response.json().then(function(comments){
+					console.log("FILAS DE COMMENTS " + comments.FILAS.length);
+					for(let j=0 ; j<comments.FILAS.length ; j++){
+						
+						let comment =  `<div class="bg-dark-t text-left px-2 py-1 mb-1">				<!-- COMENTARIO -->
+										<span class="text-orange h6">`+comments.FILAS[j].autor+`</span>
+										<div class="h5">`+comments.FILAS[j].texto+`</div>
+									</div>`;
+						$(".comment_tab")[i].append(comment);
+					}
+				});
+			});
+	*/
+
 		});
 	},function(response){
 		console.log("ERROR");
@@ -846,6 +854,23 @@ HTMLElement.prototype.removeClass = function(classname){
 
 NodeList.prototype.removeClass = function(classname){
 	this.classList.remove(classname);
+}
+
+// Load
+HTMLElement.prototype.load = function(url){
+	let request = new XMLHttpRequest();
+	request.open("GET", url, false);
+	request.send(null);
+
+	this.innerHTML += request.responseText;
+}
+
+NodeList.prototype.load = function(url){
+	let request = new XMLHttpRequest();
+	request.open("GET", url, false);
+	request.send(null);
+
+	this.innerHTML += request.responseText;
 }
 
 function getUrlParameter(url, p){
