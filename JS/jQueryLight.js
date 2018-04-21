@@ -1,8 +1,33 @@
 //JQUERY_L ===============================================
+var dayList = new Array(7);
+dayList[0] =  "domingo";
+dayList[1] = "lunes";
+dayList[2] = "martes";
+dayList[3] = "miércoles";
+dayList[4] = "jueves";
+dayList[5] = "viernes";
+dayList[6] = "sábado";
 
 // Devuelve un elemento dado su id
 function $(id){
 	let target = document.querySelectorAll(id);
+	if(target.length == 1 && id.substr(0,1) != ".")
+		return target[0];
+	else
+		return target;
+}
+
+// Devuelve un elemento concreto dentro de otro
+HTMLElement.prototype.$ = function(id){
+	let target = this.querySelectorAll(id);
+	if(target.length == 1 && id.substr(0,1) != ".")
+		return target[0];
+	else
+		return target;
+}
+
+NodeList.prototype.$ = function(id){
+	let target = this.querySelectorAll(id);
 	if(target.length == 1 && id.substr(0,1) != ".")
 		return target[0];
 	else
@@ -93,4 +118,20 @@ function getUrlParameter(url, p){
 		return null;
 
 	return value;
+}
+
+
+
+function logueado(){
+
+	let usu = sessionStorage.getItem('usuario');
+
+	if(!usu){
+		return false;
+	}
+	else{
+		return true;
+	}
+
+	//console.log("Hola");
 }

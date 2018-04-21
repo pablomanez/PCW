@@ -51,6 +51,15 @@ function loadRecipe(){
 
 
 			getIngredients(datos.FILAS[0].id);
+
+			if(!logueado()){
+				$("#cuerpo").load("includes/Receta/Botones_like.html");
+				$("#formulario_comentario").load("includes/Receta/Formulario_comentario.html");
+			}
+			else{
+
+				$("#formulario_comentario").load("includes/Receta/Mensaje_comentario_no_logueado.html");
+			}
 			getComments(datos.FILAS[0].id);
 
 
@@ -79,7 +88,6 @@ function getIngredients(id){
 					//console.log(ingredients.FILAS[j]);
 					let request = new XMLHttpRequest();
 					request.open("GET", "includes/Receta/Ingrediente.html", true);
-					let node = this;
 					request.onreadystatechange = function(oEvent){
 						if(request.readyState == 4){
 							if(request.status == 200){

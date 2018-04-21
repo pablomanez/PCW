@@ -19,14 +19,7 @@ TODO:
 	localhost/rest/get/receta/u=6      ULTIMAS 6 RECETAS
 */
 
-var dayList = new Array(7);
-dayList[0] =  "domingo";
-dayList[1] = "lunes";
-dayList[2] = "martes";
-dayList[3] = "miércoles";
-dayList[4] = "jueves";
-dayList[5] = "viernes";
-dayList[6] = "sábado";
+
 
 
 function ingrediente_masmas() {
@@ -546,85 +539,3 @@ function hacerComentario(){
 }
 
 
-function indexLastSix(){
-	let url = 'rest/receta/?u=6';
-	fetch(url).then(function(response){
-		if(!response.ok){
-			return false;
-		}
-
-		response.json().then(function(datos){
-			//console.log(datos);
-			
-			for(let i=0 ; i<datos.FILAS.length; i++){
-
-				let date = new Date(datos.FILAS[i].fecha);
-				let month = date.getMonth()+1;
-
-				var figure = 
-				`<figure class="col-12 col-md-4 col-xl-2 bg-dark mh-index d-flex justify-content-center p-0 position-relative o-hidden">
-					<img class="index-img position-absolute h-100 w-100" src="fotos/`+ datos.FILAS[i].fichero +`" alt="Costillas de cerdo BBQ">
-					<div class="z-1 text-center p-1 pt-5 mh-100 w-100">
-						<a href="receta.html?id=`+datos.FILAS[i].id+`" class="h-10 d-block text-shadow justify-self-center h2 justify-content-center mt-2 mb-5 h-10">	
-							<span class="d-block tag">` + datos.FILAS[i].nombre + `</span>							<!-- TÍTULO -->
-						</a>
-						<div class="row m-0">
-							<div class="col-12 col-sm-6 col-md-12">
-								<a href="buscar.html" class="index-button">
-									<div style="background-image: url(Images/Sona_profile.png);" class="circle bg-orange justify-self-center box-shadow bg-image d-flex align-items-end justify-content-center">
-									</div>
-									<div class="h3 text-shadow text-white">`+ datos.FILAS[i].autor +`</div>		<!-- USUARIO -->
-								</a>
-							</div>
-							<div class="col-12 col-sm-6 col-md-12 row m-0">			
-								<div class="col-12 mt-3 text-shadow h3"><time datetime="`+ datos.FILAS[i].fecha +`">` +date.getDate()+`/`+month +`/`+ date.getFullYear()+ `</time></div>		<!-- FECHA -->
-								<div class="col-12 h3 my-3 text-shadow">
-									<div class="row height-75px">
-										<div class="col-5 text-right p-0">
-											<i class="fas fa-thumbs-up"></i>
-										</div>
-										<div class="col-7 text-left pl-1">` + datos.FILAS[i].positivos + `</div>				<!-- LIKES -->
-
-										<div class="col-5 text-right p-0">
-											<i class="fas fa-thumbs-down"></i>
-										</div>
-										<div class="col-7 text-left pl-1">` + datos.FILAS[i].negativos + `</div>					<!-- DISLIKES -->
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="comment_tab" class="pb-2">
-
-						</div>
-					</div>
-				</figure>`;
-
-				$("#recipes").append(figure);
-				
-				let url_c = 'rest/receta/'+datos.FILAS[i].id+'/comentarios'; //rest/receta/i/comentarios
-				fetch(url_c).then(function(response){
-					if(!response.ok){
-						return false;
-					}
-
-					response.json().then(function(comments){
-						console.log("FILAS DE COMMENTS " + comments.FILAS.length);
-						for(let j=0 ; j<comments.FILAS.length ; j++){
-							
-							let comment =  `<div class="bg-dark-t text-left px-2 py-1 mb-1">				<!-- COMENTARIO -->
-											<span class="text-orange h6">`+comments.FILAS[j].autor+`</span>
-											<div class="h5">`+comments.FILAS[j].texto+`</div>
-										</div>`;
-							$(".comment_tab")[i].append(comment);
-						}
-					});
-				});
-				
-			}
-
-		});
-
-	},function(response){
-		console.log("ERROR");
-	});
-}
