@@ -9,17 +9,12 @@ TODO:
 
 		MÁS >> Punto c2
 
-		|-------------- FALLA EL POST --------------|
+		PODER ELIMINAR LOS INGREDIENTES DE LA RECETA
 
-	BUSCAR:
-		CAMBIAR FORMULARIO DE BUSCAR Y AÑADIR MÁS CAMPOS
-
-
-
-	localhost/rest/get/receta/u=6      ULTIMAS 6 RECETAS
 */
 
-
+var url_paginacion = "";
+var num_paginacion = "1/1";
 
 
 function ingrediente_masmas() {
@@ -38,23 +33,52 @@ function ingrediente_masmas() {
 		
 	list.appendChild(li);
 
+	document.getElementById("new_ingredient").value = "";
+
 	//LOG
 	//console.log("No, Muzska no ha subido video :(");
 	//console.log("Aunque has añadido un/una "+ingr);
 
-	hacerLogin();
+	//hacerLogin();
 }
 
 function foto_masmas(){
 	//AÑADE UNA FOTO MAS A LA LISTA DE FOTOS DE UNA RECETA
-	let input = document.getElementById("input_foto").value;
+	//let input = document.getElementById("input_foto").value;
 	/*
 	let reader = new FileReader();
 	reader.onload = function(e){
 		document.getElementById("input_foto").
 	}
 	*/
+	let request = new XMLHttpRequest();
+	request.open("GET", "includes/foto_nuevareceta.html", true);
+	let node = this;
+	request.onreadystatechange = function(oEvent){
+		if(request.readyState == 4){
+			if(request.status == 200){
+				let div = document.createElement("div");
+				div.innerHTML = request.responseText;
 
+				let i = 0;
+				while(true){
+					if(!document.getElementById("f_"+i)){
+						break;
+					}
+					i++;
+				}
+				div.id = "f_"+i;
+
+				div.getElementsByTagName("span")[0].id = "b_"+i;
+
+				//console.log(div.getElementsByTagName("input")[0]);
+				document.getElementById("l_fotos").appendChild(div);
+			}
+		}
+	}
+	request.send(null);
+
+/*
 	if(input != ""){
 		let file = document.getElementById("input_foto").files[0].name;
 		let size = document.getElementById("input_foto").files[0].size;
@@ -120,45 +144,11 @@ function foto_masmas(){
 	else{
 		//console.log("No has subido ninguna foto");
 	}
+*/
 }
 
-function borraFoto(id){
-	//BORRAR UNA FOTO DE LA LISTA DE UNA RECETA
-	let n = id.substring(2);
-	
-	let div = document.getElementById("f_"+n);
-	//console.log(div);
-
-	div.parentNode.removeChild(div);
-
-	//LOG
-	//console.log("BORRAR");
-}
-
-function login(frm){
-	//EJEMPLO QUE PASÓ JUAN POR WHATSAPP
-	
-	let fd = new FormData(frm);
-	let xhr = new XMLHttpRequest();
-	let url = '../rest/login';
-	let u, clave;
-
-	xhr.open('POST',url,true);
-	xhr.onload = function(){
-		console.log(xhr.responseText);
-		let r = JSON.parse(xhr.responseText);
-
-		if(r.RESPUESTA = 'OK'){
-			console.log(r);
-			sessionStorage.setItem('usuario',xhr.responseText);
-			u = JSON.parse(sessionStorage['usuario']);
-			clave = u.clave;
-		}
-		else{
-			console.log("EROEOROEROEROERO");
-		}
-
-	};
+function muestraFoto(input){
+	//console.log("MOSTRAR FOTO");
 }
 
 function nuevaReceta(frm){
@@ -172,22 +162,6 @@ function nuevaReceta(frm){
 	let img = document.getElementById("l_fotos").getElementsByTagName("img"); //LISTA DE FOTOS
 	let d_img = document.getElementById("l_fotos").getElementsByTagName("textarea"); //LISTA DE DESCRIPCIONES DE CADA FOTO
 
-	//LOGS
-	/*
-	console.log(name);
-	console.log(elab);
-	console.log(comen);
-	console.log(time);
-	console.log(diff);
-
-	for(let i=0 ; i<ingr.length ; i++){
-		console.log(ingr[i].innerHTML);
-	}
-	for(let i=0 ; i<img.length ; i++){
-		console.log(img[i].src + "-> DESCRIPCIÓN: " + d_img[0].value);
-	}
-	*/
-
 	//CREAR RECETA >>>> SUBIR INGREDIENTES >>>> SUBIR FOTOS DE LA RECETA
 	let fd = new FormData();
 	let url = 'rest/receta/';
@@ -199,15 +173,11 @@ function nuevaReceta(frm){
 	fd.append('t',time);
 	fd.append('d',diff);
 	fd.append('c',comen);
-	/*
-	console.log(fd.get('l'));
-	console.log(fd.get('n'));
-	console.log(fd.get('e'));
-	console.log(fd.get('t'));
-	console.log(fd.get('d'));
-	console.log(fd.get('c'));
-	*/
 
+	for(var pair of fd.entries()) {
+	   console.log(pair[0]+ ', '+ pair[1]); 
+	}
+	/*
 	let init = { 'method':'post', 'body':fd, 'headers':{'Authorization':usu.clave} };
 
 	fetch(url,init).then(function(response){
@@ -224,21 +194,68 @@ function nuevaReceta(frm){
 	},function(response){
 		console.log("error");
 	});
-
-	/*
-	let url = 'rest/receta/';
-	//let fd = new FormData();
-	let xhr = new XMLHttpRequest();
-	let usu = JSON.parse(sessionStorage['usuario']);
-
-	let args = 'l='+usu.login+'&n='+name+'&e='+elab+'&t='+time+'&d='+diff+'&c='+comen;
-	console.log(args);
-	if(xhr){
-		xhr.open('POST',url,true);
-
-		xhr.send(args);
-	}
 	*/
+}
+
+function borraFoto(id){
+	//BORRAR UNA FOTO DE LA LISTA DE UNA RECETA
+	let n = id.substring(2);
+	
+	let div = document.getElementById("f_"+n);
+	//console.log(div);
+
+	div.parentNode.removeChild(div);
+
+	//LOG
+	//console.log("BORRAR");
+}
+
+//EJEMPLO QUE PASÓ JUAN POR WHATSAPP
+function login(frm){
+	
+	let fd = new FormData(frm);
+	let xhr = new XMLHttpRequest();
+	let url = '../rest/login';
+	let u, clave;
+
+	xhr.open('POST',url,true);
+	xhr.onload = function(){
+		console.log(xhr.responseText);
+		let r = JSON.parse(xhr.responseText);
+
+		if(r.RESPUESTA = 'OK'){
+			console.log(r);
+			sessionStorage.setItem('usuario',xhr.responseText);
+			u = JSON.parse(sessionStorage['usuario']);
+			clave = u.clave;
+
+			sessionStorage.setItem('login',u.login);
+			sessionStorage.setItem('clave',u.clave);
+		}
+		else{
+			console.log("EROEOROEROEROERO");
+		}
+
+	};
+	xhr.setRequestheader('Authorization',clave);
+	xhr.send(fd);
+}
+
+function loginControl(){
+	//FUNCION QUE PONE DIVS EN SU SITIO EN EL CASO QUE ESTES O NO LOGUEADO
+	let login 		= '<a class="btn revers-a ml-auto" href="login.html">Login</a>';
+	let registro 	= '<a class=" btn btn-outline-orange" href="registro.html">Registro</a>';
+	let logout 		= '<a class=" btn btn-outline-orange" href="index.html">Log out</a>';
+	let newRecipe 	= '<span class=" h2"><i class="fas fa-file"></i></span><span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>';
+	if(logueado()){
+		document.getElementById("sign_div_noH").innerHTML = logout;
+		document.getElementById("sign_div_siH").innerHTML = logout;
+		document.getElementById("new_recipe").innerHTML = newRecipe;
+	}
+	else{
+		document.getElementById("sign_div_noH").innerHTML = login+registro;
+		document.getElementById("sign_div_siH").innerHTML = login+registro;
+	}
 }
 
 function logueado(){
@@ -246,12 +263,14 @@ function logueado(){
 	let usu = sessionStorage.getItem('usuario');
 
 	if(!usu){
-		console.log("Que no te has logueado chaval. ZOORROOOOOOOOOO");
+		console.log("Ste men que no está logueado");
 
-
+		return false;
 	}
 	else{
-		console.log("Estás logueado y puedes crear una receta");
+		console.log("Así me gusta, logueado, siguiendo los pasos del gran E");
+
+		return true;
 	}
 
 	//console.log("Hola");
@@ -266,15 +285,16 @@ function buscar_simple(frm){
 	let fd = new FormData(frm);
 	let url = 'rest/receta/?t=';
 	url += fd.get('search_box');
+	url += '&pag=0&lpag=6';
 	console.log("URL DE BÚSQUEDA SIMPLE: " + url);
 
 	buscarRecetas(url);
-
+	updatePags();
 	return false;
 }
 
 function ultimasSeis(){
-	console.log("ultimasSeis()");
+	//console.log("ultimasSeis()");
 
 	if(window.location.search && window.location.search[window.location.search.length-1]!='#'){
 		//LLEVA ARGUMENTOS
@@ -284,12 +304,18 @@ function ultimasSeis(){
 
 	let url = 'rest/receta/?u=6'; //LAS 6 RECETAS MAS RECIENTES
 	buscarRecetas(url);
+	updatePags();
 }
 
 function buscarRecetas(url){
-	console.log("buscarRecetas("+url+")");
+	//console.log("buscarRecetas("+url+")");
 	//PASAS UNA PETICION COMO url
 	//PARA LA PÁGINA buscar.html
+
+
+	url_paginacion = url.split("&l")[0];
+	//console.log("url_paginacion: "+url_paginacion);
+
 	fetch(url).then(function(response){
 		if(!response.ok){
 			return false;
@@ -372,14 +398,14 @@ function resetBuscar(){
 	}
 }
 
-
 function formBuscar(frm){
 	
 	if(frm){
 		console.log("HAY FORMULARIO");
 		
+		let id = []; //ARRAY DE LOS ID DE LAS RECETAS
 		let vacion = true;
-		let url = '/rest/receta/?';
+		let url = 'rest/receta/?';
 		let fd = new FormData(frm);
 		resetBuscar();
 		
@@ -387,11 +413,11 @@ function formBuscar(frm){
 			let name = 'n='+frm.elements[0].value+'&';
 			url += name;
 		}
-		if(frm.elements[1].value != ""){
+		if(frm.elements[1].value != "0"){
 			let t_min = 'di='+frm.elements[1].value+'&';
 			url += t_min;
 		}
-		if(frm.elements[2].value != ""){
+		if(frm.elements[2].value != "0"){
 			let t_max = 'df='+frm.elements[2].value+'&';
 			url += t_max;
 		}
@@ -412,8 +438,7 @@ function formBuscar(frm){
 			}
 			console.log(ingr[i].innerText);
 		}
-
-		console.log(url);
+		
 		if(url[url.length-1] == ','){
 			url = url.substr(0,url.length-1);
 		}
@@ -424,9 +449,14 @@ function formBuscar(frm){
 		if(url[url.length-1] == '&'){
 			url = url.substr(0,url.length-1);
 		}
-
-		console.log(url);
+		
+		url += '&pag=0&lpag=6';
+		//console.log(url);
+		
+		buscarRecetas(url);
+			
 		/*
+		console.log(url);
 		console.log(name);
 		console.log(ingr);
 		console.log(t_min);
@@ -435,6 +465,7 @@ function formBuscar(frm){
 		console.log(autor);
 		*/
 
+		return false;
 	}
 	else{
 		//console.log("NO HAY FORMULARIO");
@@ -448,7 +479,131 @@ function formBuscar(frm){
 		}
 		*/
 	}
+}
 
+function limpiaIngredientes(){
+	//AL HACER RESET DEL FORMULARIO DE BÚSQUEDA TAMBIÉN SE REINICIAN LOS INGREDIENTES
+	let ingr = document.getElementById("form_ingredientes");
+	while(ingr.firstElementChild){
+		ingr.removeChild(ingr.firstElementChild);
+	}
+	let li = 
+	`<li></li>
+	<li></li>`;
+
+	$("#form_ingredientes").innerHTML += li;
+}
+
+function updatePags(){
+	//ACTUALIZA LOS NUMEROS DE LA PAGINACION
+	//console.log("Actualizo la paginacion con: "+url_paginacion);
+	
+	fetch(url_paginacion).then(function(response){
+		//TODO HA IDO BIEN
+		if(!response.ok){	//!200
+			return false;
+		}
+		
+		response.json().then(function(datos){
+			//console.log(datos);
+			let min = 1;
+			let max;
+
+			let regs = datos.FILAS.length;
+			//console.log(regs);
+
+			if(regs > 6){
+				//console.log("MAS DE 6");
+				if(regs/6 >= 1.5){
+					max = regs/6;
+					max = max.toFixed();
+				}
+				else{
+					max = regs/6;
+					max = max.toFixed();
+					max++;
+				}
+				num_paginacion = min +"/"+ max;
+
+			}
+			document.getElementById("pags").innerText = num_paginacion;
+
+		});
+		
+	},function(response){
+		//TODO HA IDO MAL
+	});
+}
+
+function rePag(bool){
+	let aux = num_paginacion;
+	let min = parseInt(aux[0]);
+	let max = parseInt(aux[2]);
+
+	let url = url_paginacion;
+
+	if(!bool){
+		//VOY A LA PAGINA SIGUIENTE, SI HUBIERA
+		if(min-1 > 0){
+			//HAY PÁGINA
+			url = url.split('&pag')[0];
+			url += '&pag='+(min-2)+'&lpag=6';
+
+			resetBuscar();
+			buscarRecetas(url);
+
+			num_paginacion = (min-1)+'/'+max;
+			document.getElementById("pags").innerText = num_paginacion;
+		}
+	}
+	else{
+		//VOY A LA ÚLTIMA PÁGINA, SI NO ESTOY EN ELLA
+		if(max == min){
+			//NO ESTOY EN LA ULTIMA PÁGINA
+			url = url.split('&pag')[0];
+			url += '&pag=0&lpag=6';
+
+			resetBuscar();
+			buscarRecetas(url);
+
+			num_paginacion = 1+'/'+max;
+			document.getElementById("pags").innerText = num_paginacion;
+		}
+	}
+}
+
+function avPag(bool){
+	let aux = num_paginacion;
+	let min = parseInt(aux[0]);
+	let max = parseInt(aux[2]);
+	let url = url_paginacion;
+
+	if(!bool){
+		//VOY A LA PAGINA SIGUIENTE, SI HUBIERA
+		if(max-min != 0){
+			//HAY PÁGINA
+			url += '&pag='+(min)+'&lpag=6';
+
+			resetBuscar();
+			buscarRecetas(url);
+
+			num_paginacion = (min+1)+'/'+max;
+			document.getElementById("pags").innerText = num_paginacion;
+		}
+	}
+	else{
+		//VOY A LA ÚLTIMA PÁGINA, SI NO ESTOY EN ELLA
+		if(max != min){
+			//NO ESTOY EN LA ULTIMA PÁGINA
+			url += '&pag='+(max-1)+'&lpag=6';
+
+			resetBuscar();
+			buscarRecetas(url);
+
+			num_paginacion = (max)+'/'+max;
+			document.getElementById("pags").innerText = num_paginacion;
+		}
+	}
 
 }
 

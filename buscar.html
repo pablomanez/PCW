@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
-<body class="background" onload="if(!window.location.search){ultimasSeis()}">
+<body class="background" onload="if(!window.location.search){ultimasSeis()} loginControl();">
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
 	<div class=" row align-items-center">
 		
@@ -35,10 +35,12 @@
 	
 
 		<!-- Login/Registro -->
-		<div class="col-4 col-md-5 text-right d-none d-md-initial">
+		<div class="col-4 col-md-5 text-right d-none d-md-initial" id="sign_div_noH">
+			<!--
 			<a class="btn revers-a ml-auto" href="login.html">Login</a>
 			<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 			<a class=" btn btn-outline-orange" href="#">Log out</a>
+			-->
 		</div>
 		<div class="col-12">
 			
@@ -51,22 +53,26 @@
 		
 		<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden h4">
 
-			<a class="btn revers-a mr-3" href="index.html">
+			<a class="btn revers-a mr-3" href="index.html" id="index">
 				<span class="h2"><i class="fas fa-home"></i></span>
 				<span class="d-initial d-md-none  d-lg-initial">Inicio</span>
 			</a>
-			<div class="p-2 d-block d-md-none">
+			<div class="p-2 d-block d-md-none" id="sign_div_siH">
+				<!--
 				<a class="btn revers-a" href="login.html">Login</a>
 				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 				<a class=" btn btn-outline-orange" href="registro.html">Logout</a>
+				-->
 			</div>
-			<a class="btn revers-a mr-3" href="buscar.html">
-				<span class="h2"><i class="fas fa-search-plus"></i></span>
-				<span class="d-initial d-md-none  d-lg-initial">Búsqueda avanzada</span>
+			<a class="btn revers-a mr-3" href="buscar.html" id="adv_search">
+				<span class="h2"><i class="fas fa-search-plus text-orange"></i></span>
+				<span class="d-initial d-md-none d-lg-initial text-orange">Búsqueda avanzada</span>
 			</a>
-			<a class="btn revers-a mr-3" href="nueva-receta.html">
+			<a class="btn revers-a mr-3" href="nueva-receta.html" id="new_recipe">
+				<!--
 				<span class=" h2"><i class="fas fa-file"></i></span>
 				<span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>
+				-->
 			</a>
 			<!--
 			<a class="btn revers-a" href="nueva-receta.html">
@@ -103,11 +109,11 @@
 				<label class="form-label" for="l_time_min">Tiempo de elaboración:</label>
 				<div class="p-1">
 					<label class="form-label" for="l_time_min">Mínimo:</label>
-					<input class="form-control" type="number" name="min_time" id="l_time_min" step="5" min="5" value="5">
+					<input class="form-control" type="number" name="min_time" id="l_time_min" step="5" min="0" value="0">
 				</div>
 				<div class="p-1">
 					<label class="form-label" for="l_time_max">Máximo</label>
-					<input class="form-control" type="number" name="max_time" id="l_time_max" step="5" min="5" value="5">
+					<input class="form-control" type="number" name="max_time" id="l_time_max" step="5" min="0" value="0">
 				</div>
 
 				<div class="p-1">
@@ -143,7 +149,7 @@
 
 				<div class="p-1 pt-2">
 					<button class="btn btn-outline-dark w-100" type="submit" name="submit">Buscar</button>
-					<button class="btn btn-outline-dark w-100" type="reset" name="submit">Reiniciar</button>
+					<button class="btn btn-outline-dark w-100" type="reset" name="clean_form" onclick="limpiaIngredientes()">Reiniciar</button>
 				</div>
 			</form>
 
@@ -156,11 +162,12 @@
 			
 		</div>
 		<div class=" my-5 p-3 text-center h2 bg-dark-t text-light">
-			<i class="fa fa-angle-double-left btn btn-outline-orange"></i>
-			<i class="fa fa-angle-left btn btn-outline-orange"></i>
-			2/10
-			<i class="fa fa-angle-right btn btn-outline-orange"></i>
-			<i class="fa fa-angle-double-right btn btn-outline-orange"></i>
+			<i class="fa fa-angle-double-left btn btn-outline-orange" onclick="rePag(true)"></i>
+			<i class="fa fa-angle-left btn btn-outline-orange" onclick="rePag(false)"></i>
+			<div id="pags">
+			</div>
+			<i class="fa fa-angle-right btn btn-outline-orange" onclick="avPag(false)"></i>
+			<i class="fa fa-angle-double-right btn btn-outline-orange" onclick="avPag(true)"></i>
 		</div>
 	</main>
 
