@@ -9,14 +9,8 @@ TODO:
 
 		MÁS >> Punto c2
 
-		|-------------- FALLA EL POST --------------|
+		PODER ELIMINAR LOS INGREDIENTES DE LA RECETA
 
-	BUSCAR:
-		CAMBIAR FORMULARIO DE BUSCAR Y AÑADIR MÁS CAMPOS
-
-
-
-	localhost/rest/get/receta/u=6      ULTIMAS 6 RECETAS
 */
 
 var url_paginacion = "";
@@ -48,23 +42,52 @@ function ingrediente_masmas() {
 		
 	list.appendChild(li);
 
+	document.getElementById("new_ingredient").value = "";
+
 	//LOG
 	//console.log("No, Muzska no ha subido video :(");
 	//console.log("Aunque has añadido un/una "+ingr);
 
-	hacerLogin();
+	//hacerLogin();
 }
 
 function foto_masmas(){
 	//AÑADE UNA FOTO MAS A LA LISTA DE FOTOS DE UNA RECETA
-	let input = document.getElementById("input_foto").value;
+	//let input = document.getElementById("input_foto").value;
 	/*
 	let reader = new FileReader();
 	reader.onload = function(e){
 		document.getElementById("input_foto").
 	}
 	*/
+	let request = new XMLHttpRequest();
+	request.open("GET", "includes/foto_nuevareceta.html", true);
+	let node = this;
+	request.onreadystatechange = function(oEvent){
+		if(request.readyState == 4){
+			if(request.status == 200){
+				let div = document.createElement("div");
+				div.innerHTML = request.responseText;
 
+				let i = 0;
+				while(true){
+					if(!document.getElementById("f_"+i)){
+						break;
+					}
+					i++;
+				}
+				div.id = "f_"+i;
+
+				div.getElementsByTagName("span")[0].id = "b_"+i;
+
+				//console.log(div.getElementsByTagName("input")[0]);
+				document.getElementById("l_fotos").appendChild(div);
+			}
+		}
+	}
+	request.send(null);
+
+/*
 	if(input != ""){
 		let file = document.getElementById("input_foto").files[0].name;
 		let size = document.getElementById("input_foto").files[0].size;
@@ -130,6 +153,57 @@ function foto_masmas(){
 	else{
 		//console.log("No has subido ninguna foto");
 	}
+*/
+}
+
+function muestraFoto(input){
+	//console.log("MOSTRAR FOTO");
+}
+
+function nuevaReceta(frm){
+	let name = document.getElementById("n").value;
+	let elab = document.getElementById("e").value;
+	let comen = document.getElementById("c").value;
+	let time = document.getElementById("t").value;
+	let diff = document.getElementById("d").value;
+
+	let ingr = document.getElementById("l_ingr").getElementsByTagName("span"); //LISTA DE INGREDIENTES
+	let img = document.getElementById("l_fotos").getElementsByTagName("img"); //LISTA DE FOTOS
+	let d_img = document.getElementById("l_fotos").getElementsByTagName("textarea"); //LISTA DE DESCRIPCIONES DE CADA FOTO
+
+	//CREAR RECETA >>>> SUBIR INGREDIENTES >>>> SUBIR FOTOS DE LA RECETA
+	let fd = new FormData();
+	let url = 'rest/receta/';
+	let usu = JSON.parse(sessionStorage['usuario']);
+
+	fd.append('l',usu.login);
+	fd.append('n',name);
+	fd.append('e',elab);
+	fd.append('t',time);
+	fd.append('d',diff);
+	fd.append('c',comen);
+
+	for(var pair of fd.entries()) {
+	   console.log(pair[0]+ ', '+ pair[1]); 
+	}
+	/*
+	let init = { 'method':'post', 'body':fd, 'headers':{'Authorization':usu.clave} };
+
+	fetch(url,init).then(function(response){
+		if(!response.ok){
+			console.log("ERROR CON CÓDIGO: " + response.status);
+			return false;
+		}
+		console.log("gilipollas");
+		
+		response.json().then(function(datos){
+			console.log(datos);
+		});
+
+	},function(response){
+		console.log("error");
+	});
+	*/
 }
 
 function borraFoto(id){
@@ -145,8 +219,8 @@ function borraFoto(id){
 	//console.log("BORRAR");
 }
 
+//EJEMPLO QUE PASÓ JUAN POR WHATSAPP
 function login(frm){
-	//EJEMPLO QUE PASÓ JUAN POR WHATSAPP
 	
 	let fd = new FormData(frm);
 	let xhr = new XMLHttpRequest();
@@ -163,12 +237,17 @@ function login(frm){
 			sessionStorage.setItem('usuario',xhr.responseText);
 			u = JSON.parse(sessionStorage['usuario']);
 			clave = u.clave;
+
+			sessionStorage.setItem('login',u.login);
+			sessionStorage.setItem('clave',u.clave);
 		}
 		else{
 			console.log("EROEOROEROEROERO");
 		}
 
 	};
+	xhr.setRequestheader('Authorization',clave);
+	xhr.send(fd);
 }
 
 function loginControl(){
@@ -186,90 +265,6 @@ function loginControl(){
 		document.getElementById("sign_div_noH").innerHTML = login+registro;
 		document.getElementById("sign_div_siH").innerHTML = login+registro;
 	}
-}
-
-function anaranja(){
-	//PONE EN NARANJA EL ICONO/TEXTO SEGÚN DONDE ESTÉS
-}
-
-function nuevaReceta(frm){
-	let name = document.getElementById("n").value;
-	let elab = document.getElementById("e").value;
-	let comen = document.getElementById("c").value;
-	let time = document.getElementById("t").value;
-	let diff = document.getElementById("d").value;
-
-	let ingr = document.getElementById("l_ingr").getElementsByTagName("span"); //LISTA DE INGREDIENTES
-	let img = document.getElementById("l_fotos").getElementsByTagName("img"); //LISTA DE FOTOS
-	let d_img = document.getElementById("l_fotos").getElementsByTagName("textarea"); //LISTA DE DESCRIPCIONES DE CADA FOTO
-
-	//LOGS
-	/*
-	console.log(name);
-	console.log(elab);
-	console.log(comen);
-	console.log(time);
-	console.log(diff);
-
-	for(let i=0 ; i<ingr.length ; i++){
-		console.log(ingr[i].innerHTML);
-	}
-	for(let i=0 ; i<img.length ; i++){
-		console.log(img[i].src + "-> DESCRIPCIÓN: " + d_img[0].value);
-	}
-	*/
-
-	//CREAR RECETA >>>> SUBIR INGREDIENTES >>>> SUBIR FOTOS DE LA RECETA
-	let fd = new FormData();
-	let url = 'rest/receta/';
-	let usu = JSON.parse(sessionStorage['usuario']);
-
-	fd.append('l',usu.login);
-	fd.append('n',name);
-	fd.append('e',elab);
-	fd.append('t',time);
-	fd.append('d',diff);
-	fd.append('c',comen);
-	/*
-	console.log(fd.get('l'));
-	console.log(fd.get('n'));
-	console.log(fd.get('e'));
-	console.log(fd.get('t'));
-	console.log(fd.get('d'));
-	console.log(fd.get('c'));
-	*/
-
-	let init = { 'method':'post', 'body':fd, 'headers':{'Authorization':usu.clave} };
-
-	fetch(url,init).then(function(response){
-		if(!response.ok){
-			console.log("ERROR CON CÓDIGO: " + response.status);
-			return false;
-		}
-		console.log("gilipollas");
-		
-		response.json().then(function(datos){
-			console.log(datos);
-		});
-
-	},function(response){
-		console.log("error");
-	});
-
-	/*
-	let url = 'rest/receta/';
-	//let fd = new FormData();
-	let xhr = new XMLHttpRequest();
-	let usu = JSON.parse(sessionStorage['usuario']);
-
-	let args = 'l='+usu.login+'&n='+name+'&e='+elab+'&t='+time+'&d='+diff+'&c='+comen;
-	console.log(args);
-	if(xhr){
-		xhr.open('POST',url,true);
-
-		xhr.send(args);
-	}
-	*/
 }
 
 function logueado(){

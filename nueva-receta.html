@@ -82,7 +82,7 @@
 </header>
 	<main class="container pt-150px">
 		<div class="display-4 text-center py-3 shadow">Nueva receta</div>
-		<form action="#" method="POST" enctype="multipart/form-data" onsubmit="return nuevaReceta(this);" id="form">
+		<form action="#" method="post" enctype="multipart/form-data" onsubmit="return nuevaReceta(this);" id="form">
 
 			<!-- DESCRIPCIÓN DE LA RECETA -->
 			<div class="row bg-dark-t2 p-3 box-shadow text-light">
@@ -117,9 +117,9 @@
 					<label class="form-label" for="d">Dificultad de elaboración:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
 					<select class="form-control" required id="d">
 						<option value="" disabled selected>Elige una opción</option>
-						<option value="baja">Baja</option>
-						<option value="media">Media</option>
-						<option value="alta">Alta</option>
+						<option value="0">Baja</option>
+						<option value="1">Media</option>
+						<option value="2">Alta</option>
 					</select>
 				</div>
 
@@ -138,10 +138,10 @@
 						<span class="btn btn-outline-orange ml-auto d-block" onclick="ingrediente_masmas()">Añadir ingrediente</span>
 						<p class="text-center">Pulsa "ENTER" para escribir más ingredientes</p>
 						<ul contenteditable="true" id="l_ingr" class="text-light">
+						<!--
 							<li class="bg-orange p-2 mb-1"><span class="text-dark">5kg de patatas</span></li>
 							<li class="bg-orange p-2 mb-1"><span class="text-dark">10kg de mortadela</span></li>
 							<li class="bg-orange p-2 mb-1"><span class="text-dark">3 Huevos</span></li>
-						<!--
 							<li class="bg-orange p-2 mb-1"><span class="text-dark">90 cortezas de pan</span></li>
 							<li class="bg-orange p-2 mb-1"><span class="text-dark">2 filetes de buey</span></li>
 							<li class="bg-orange p-2 mb-1"><span class="text-dark">1 Costilla de cerdo</span></li>
@@ -162,35 +162,38 @@
 
 				<!-- SELECCIÓN DE FOTOS -->
 
-				<div class="col-md-8 col-12 ml-2" id="l_fotos">
+				<div class="col-md-8 col-12 ml-2">
 					<h2 class="display-4 text-center mb-0">Selección de fotos</h2>
 					<hr/>
 					<div class="bg-dark-t mb-2 p-2 align-items-center row m-0">
+							<!--
 						<div class="col-12 col-md-8 py-1">
-							<input class="text-light Mw-100" type="file" name="foto" id="input_foto" required>
+								<input class="text-light Mw-100" type="file" name="foto" id="input_foto" required>
 						</div>
-						<div class="col-12 col-md-4 justify-content-end py-1">
+							-->
+						<div class="col-12 col-md-12 justify-content-end py-1">
 							<span class="btn btn-outline-orange ml-auto d-block" onclick="foto_masmas()">Añadir foto</span>
 						</div>
 					</div>
-					
-				<!--
-					<div class="bg-dark-t box-shadow p-4 text-light mb-2 position-relative">
-						<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2" onclick="borraFoto()"><i class="fas fa-times"></i></span>
-						<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-						<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+					<div id="l_fotos">
+					<!--
+						<div class="bg-dark-t box-shadow p-4 text-light mb-2 position-relative">
+							<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2" onclick="borraFoto()"><i class="fas fa-times"></i></span>
+							<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
+							<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+						</div>
+						<div class="bg-dark-t box-shadow p-4 text-light mb-2 position-relative">
+							<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="fas fa-times"></i></span>
+							<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
+							<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+						</div>
+						<div class="bg-dark-t box-shadow p-4 text-light mb-2 position-relative">
+							<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="fas fa-times"></i></span>
+							<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
+							<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
+						</div>
+					-->
 					</div>
-					<div class="bg-dark-t box-shadow p-4 text-light mb-2 position-relative">
-						<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="fas fa-times"></i></span>
-						<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-						<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
-					</div>
-					<div class="bg-dark-t box-shadow p-4 text-light mb-2 position-relative">
-						<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="fas fa-times"></i></span>
-						<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-						<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
-					</div>
-				-->
 
 				</div>
 
