@@ -171,6 +171,27 @@ function login(frm){
 	};
 }
 
+function loginControl(){
+	//FUNCION QUE PONE DIVS EN SU SITIO EN EL CASO QUE ESTES O NO LOGUEADO
+	let login 		= '<a class="btn revers-a ml-auto" href="login.html">Login</a>';
+	let registro 	= '<a class=" btn btn-outline-orange" href="registro.html">Registro</a>';
+	let logout 		= '<a class=" btn btn-outline-orange" href="index.html">Log out</a>';
+	let newRecipe 	= '<span class=" h2"><i class="fas fa-file"></i></span><span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>';
+	if(logueado()){
+		document.getElementById("sign_div_noH").innerHTML = logout;
+		document.getElementById("sign_div_siH").innerHTML = logout;
+		document.getElementById("new_recipe").innerHTML = newRecipe;
+	}
+	else{
+		document.getElementById("sign_div_noH").innerHTML = login+registro;
+		document.getElementById("sign_div_siH").innerHTML = login+registro;
+	}
+}
+
+function anaranja(){
+	//PONE EN NARANJA EL ICONO/TEXTO SEGÚN DONDE ESTÉS
+}
+
 function nuevaReceta(frm){
 	let name = document.getElementById("n").value;
 	let elab = document.getElementById("e").value;
@@ -256,12 +277,14 @@ function logueado(){
 	let usu = sessionStorage.getItem('usuario');
 
 	if(!usu){
-		console.log("Que no te has logueado chaval. ZOORROOOOOOOOOO");
+		console.log("Ste men que no está logueado");
 
-
+		return false;
 	}
 	else{
-		console.log("Estás logueado y puedes crear una receta");
+		console.log("Así me gusta, logueado, siguiendo los pasos del gran E");
+
+		return true;
 	}
 
 	//console.log("Hola");
@@ -487,7 +510,7 @@ function limpiaIngredientes(){
 
 function updatePags(){
 	//ACTUALIZA LOS NUMEROS DE LA PAGINACION
-	console.log("Actualizo la paginacion con: "+url_paginacion);
+	//console.log("Actualizo la paginacion con: "+url_paginacion);
 	
 	fetch(url_paginacion).then(function(response){
 		//TODO HA IDO BIEN
