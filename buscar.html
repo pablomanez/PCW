@@ -103,11 +103,11 @@
 				<label class="form-label" for="l_time_min">Tiempo de elaboración:</label>
 				<div class="p-1">
 					<label class="form-label" for="l_time_min">Mínimo:</label>
-					<input class="form-control" type="number" name="min_time" id="l_time_min" step="5" min="5" value="5">
+					<input class="form-control" type="number" name="min_time" id="l_time_min" step="5" min="0" value="0">
 				</div>
 				<div class="p-1">
 					<label class="form-label" for="l_time_max">Máximo</label>
-					<input class="form-control" type="number" name="max_time" id="l_time_max" step="5" min="5" value="5">
+					<input class="form-control" type="number" name="max_time" id="l_time_max" step="5" min="0" value="0">
 				</div>
 
 				<div class="p-1">
@@ -143,7 +143,7 @@
 
 				<div class="p-1 pt-2">
 					<button class="btn btn-outline-dark w-100" type="submit" name="submit">Buscar</button>
-					<button class="btn btn-outline-dark w-100" type="reset" name="submit">Reiniciar</button>
+					<button class="btn btn-outline-dark w-100" type="reset" name="clean_form" onclick="limpiaIngredientes()">Reiniciar</button>
 				</div>
 			</form>
 
@@ -156,11 +156,12 @@
 			
 		</div>
 		<div class=" my-5 p-3 text-center h2 bg-dark-t text-light">
-			<i class="fa fa-angle-double-left btn btn-outline-orange"></i>
-			<i class="fa fa-angle-left btn btn-outline-orange"></i>
-			2/10
-			<i class="fa fa-angle-right btn btn-outline-orange"></i>
-			<i class="fa fa-angle-double-right btn btn-outline-orange"></i>
+			<i class="fa fa-angle-double-left btn btn-outline-orange" onclick="rePag(true)"></i>
+			<i class="fa fa-angle-left btn btn-outline-orange" onclick="rePag(false)"></i>
+			<div id="pags">
+			</div>
+			<i class="fa fa-angle-right btn btn-outline-orange" onclick="avPag(false)"></i>
+			<i class="fa fa-angle-double-right btn btn-outline-orange" onclick="avPag(true)"></i>
 		</div>
 	</main>
 

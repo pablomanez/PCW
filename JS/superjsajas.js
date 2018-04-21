@@ -19,6 +19,9 @@ TODO:
 	localhost/rest/get/receta/u=6      ULTIMAS 6 RECETAS
 */
 
+var url_paginacion = "";
+var num_paginacion = "1/1";
+
 var dayList = new Array(7);
 dayList[0] =  "domingo";
 dayList[1] = "lunes";
@@ -273,15 +276,16 @@ function buscar_simple(frm){
 	let fd = new FormData(frm);
 	let url = 'rest/receta/?t=';
 	url += fd.get('search_box');
+	url += '&pag=0&lpag=6';
 	console.log("URL DE BÚSQUEDA SIMPLE: " + url);
 
 	buscarRecetas(url);
-
+	updatePags();
 	return false;
 }
 
 function ultimasSeis(){
-	console.log("ultimasSeis()");
+	//console.log("ultimasSeis()");
 
 	if(window.location.search && window.location.search[window.location.search.length-1]!='#'){
 		//LLEVA ARGUMENTOS
@@ -291,12 +295,18 @@ function ultimasSeis(){
 
 	let url = 'rest/receta/?u=6'; //LAS 6 RECETAS MAS RECIENTES
 	buscarRecetas(url);
+	updatePags();
 }
 
 function buscarRecetas(url){
-	console.log("buscarRecetas("+url+")");
+	//console.log("buscarRecetas("+url+")");
 	//PASAS UNA PETICION COMO url
 	//PARA LA PÁGINA buscar.html
+
+
+	url_paginacion = url.split("&l")[0];
+	//console.log("url_paginacion: "+url_paginacion);
+
 	fetch(url).then(function(response){
 		if(!response.ok){
 			return false;
@@ -379,14 +389,14 @@ function resetBuscar(){
 	}
 }
 
-
 function formBuscar(frm){
 	
 	if(frm){
 		console.log("HAY FORMULARIO");
 		
+		let id = []; //ARRAY DE LOS ID DE LAS RECETAS
 		let vacion = true;
-		let url = '/rest/receta/?';
+		let url = 'rest/receta/?';
 		let fd = new FormData(frm);
 		resetBuscar();
 		
@@ -394,11 +404,11 @@ function formBuscar(frm){
 			let name = 'n='+frm.elements[0].value+'&';
 			url += name;
 		}
-		if(frm.elements[1].value != ""){
+		if(frm.elements[1].value != "0"){
 			let t_min = 'di='+frm.elements[1].value+'&';
 			url += t_min;
 		}
-		if(frm.elements[2].value != ""){
+		if(frm.elements[2].value != "0"){
 			let t_max = 'df='+frm.elements[2].value+'&';
 			url += t_max;
 		}
@@ -419,8 +429,7 @@ function formBuscar(frm){
 			}
 			console.log(ingr[i].innerText);
 		}
-
-		console.log(url);
+		
 		if(url[url.length-1] == ','){
 			url = url.substr(0,url.length-1);
 		}
@@ -431,9 +440,14 @@ function formBuscar(frm){
 		if(url[url.length-1] == '&'){
 			url = url.substr(0,url.length-1);
 		}
-
-		console.log(url);
+		
+		url += '&pag=0&lpag=6';
+		//console.log(url);
+		
+		buscarRecetas(url);
+			
 		/*
+		console.log(url);
 		console.log(name);
 		console.log(ingr);
 		console.log(t_min);
@@ -442,6 +456,7 @@ function formBuscar(frm){
 		console.log(autor);
 		*/
 
+		return false;
 	}
 	else{
 		//console.log("NO HAY FORMULARIO");
@@ -455,7 +470,131 @@ function formBuscar(frm){
 		}
 		*/
 	}
+}
 
+function limpiaIngredientes(){
+	//AL HACER RESET DEL FORMULARIO DE BÚSQUEDA TAMBIÉN SE REINICIAN LOS INGREDIENTES
+	let ingr = document.getElementById("form_ingredientes");
+	while(ingr.firstElementChild){
+		ingr.removeChild(ingr.firstElementChild);
+	}
+	let li = 
+	`<li></li>
+	<li></li>`;
+
+	$("#form_ingredientes").innerHTML += li;
+}
+
+function updatePags(){
+	//ACTUALIZA LOS NUMEROS DE LA PAGINACION
+	console.log("Actualizo la paginacion con: "+url_paginacion);
+	
+	fetch(url_paginacion).then(function(response){
+		//TODO HA IDO BIEN
+		if(!response.ok){	//!200
+			return false;
+		}
+		
+		response.json().then(function(datos){
+			//console.log(datos);
+			let min = 1;
+			let max;
+
+			let regs = datos.FILAS.length;
+			//console.log(regs);
+
+			if(regs > 6){
+				//console.log("MAS DE 6");
+				if(regs/6 >= 1.5){
+					max = regs/6;
+					max = max.toFixed();
+				}
+				else{
+					max = regs/6;
+					max = max.toFixed();
+					max++;
+				}
+				num_paginacion = min +"/"+ max;
+
+			}
+			document.getElementById("pags").innerText = num_paginacion;
+
+		});
+		
+	},function(response){
+		//TODO HA IDO MAL
+	});
+}
+
+function rePag(bool){
+	let aux = num_paginacion;
+	let min = parseInt(aux[0]);
+	let max = parseInt(aux[2]);
+
+	let url = url_paginacion;
+
+	if(!bool){
+		//VOY A LA PAGINA SIGUIENTE, SI HUBIERA
+		if(min-1 > 0){
+			//HAY PÁGINA
+			url = url.split('&pag')[0];
+			url += '&pag='+(min-2)+'&lpag=6';
+
+			resetBuscar();
+			buscarRecetas(url);
+
+			num_paginacion = (min-1)+'/'+max;
+			document.getElementById("pags").innerText = num_paginacion;
+		}
+	}
+	else{
+		//VOY A LA ÚLTIMA PÁGINA, SI NO ESTOY EN ELLA
+		if(max == min){
+			//NO ESTOY EN LA ULTIMA PÁGINA
+			url = url.split('&pag')[0];
+			url += '&pag=0&lpag=6';
+
+			resetBuscar();
+			buscarRecetas(url);
+
+			num_paginacion = 1+'/'+max;
+			document.getElementById("pags").innerText = num_paginacion;
+		}
+	}
+}
+
+function avPag(bool){
+	let aux = num_paginacion;
+	let min = parseInt(aux[0]);
+	let max = parseInt(aux[2]);
+	let url = url_paginacion;
+
+	if(!bool){
+		//VOY A LA PAGINA SIGUIENTE, SI HUBIERA
+		if(max-min != 0){
+			//HAY PÁGINA
+			url += '&pag='+(min)+'&lpag=6';
+
+			resetBuscar();
+			buscarRecetas(url);
+
+			num_paginacion = (min+1)+'/'+max;
+			document.getElementById("pags").innerText = num_paginacion;
+		}
+	}
+	else{
+		//VOY A LA ÚLTIMA PÁGINA, SI NO ESTOY EN ELLA
+		if(max != min){
+			//NO ESTOY EN LA ULTIMA PÁGINA
+			url += '&pag='+(max-1)+'&lpag=6';
+
+			resetBuscar();
+			buscarRecetas(url);
+
+			num_paginacion = (max)+'/'+max;
+			document.getElementById("pags").innerText = num_paginacion;
+		}
+	}
 
 }
 
