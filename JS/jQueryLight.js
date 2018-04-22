@@ -45,14 +45,14 @@ NodeList.prototype.append = function(obj){
 
 // Añade o devuelve el código HTML de un elemento
 HTMLElement.prototype.val = function(val){
-	if(val)
+	if(val == "" || val)
 		this.value = obj;
 	else
 		return this.value;
 }
 
 NodeList.prototype.val = function(val){
-	if(val)
+	if(val == "" || val)
 		this.value = obj;
 	else
 		return this.value;

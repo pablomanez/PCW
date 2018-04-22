@@ -433,6 +433,10 @@ input:checked ~ #burger{height: 370px;}
 #Comentarios > div {padding-top: 30px !important;}
 #about .text-right, #about .text-left {text-align: justify;}
 
+.form-text {
+	font-size: 14px;
+}
+
 /* sm */
 @media (min-width: 480px) {
 	.col-sm-1{grid-column: span 1;}

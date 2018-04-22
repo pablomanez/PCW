@@ -88,34 +88,36 @@
 							<h1 class="text-center mt-0 display-4">Registro</h1>
 							<div class="row p-3">
 
-								<div class="text-red col-12">Los campos con * son obligatorios</div>
+								<div class="text-red col-12 pb-2">Los campos con * son obligatorios</div>
 
-								<div class="col-12 col-sm-6">
-									<label class="form-label" for="l_user">Nombre de usuario:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
-									<input class="form-control" type="text" name="user" id="l_user" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" autofocus required>
+								<div class="col-12 col-sm-6 pb-2">
+									<label class="form-label" for="login">Nombre de usuario:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="text" name="login" id="login" pattern="^[a-zA-Z][a-zA-Z0-9]{5,19}$" minlength="6" maxlength="20" onkeyup="checkUsername()" autofocus required>
+									<span id="callbackName" class="form-text"></span>
 								</div>
 								<div class="col-12 col-sm-6 ">
-									<label class="form-label" for="l_email">Email:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
-									<input class="form-control" type="email" name="email" id="l_email" required>
+									<label class="form-label" for="email">Email:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="email" name="email" id="email" required>
 								</div>
-								<div class="col-sm-6 col-12">
+								<div class="col-sm-6 col-12 pb-2">
 									<label class="form-label" for="l_pwd">Contraseña:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
-									<input class="form-control" type="password" name="pwd" id="l_pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" required>
+									<input class="form-control" type="password" name="pwd" id="pwd" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" onkeyup="checkPasswords();" required>
+									<span id="callbackPassword" class="form-text text-red"></span>
 								</div>
 
 								<div class="col-sm-6 col-12">
-									<label class="form-label" for="l_pwd2">Repite la contraseña:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
-									<input class="form-control" type="password" name="pwd2" id="l_pwd2" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" required>
+									<label class="form-label" for="pwd2">Repite la contraseña:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="password" name="pwd2" id="pwd2" pattern="^[a-zA-Z][a-zA-Z0-9/-/_]{7,19}$" minlength="8" maxlength="20" onkeyup="checkPasswords();" required>
 								</div>
 
 								<div class="col-12">
-									<label class="form-label" for="l_name">Nombre completo:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
-									<input class="form-control" type="text" name="name" id="l_name" required>
+									<label class="form-label" for="nombre">Nombre completo:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="text" name="nombre" id="nombre" required>
 								</div>
 
 								<div class="col-sm-5 col-12">
-									<label class="form-label" for="l_date">Fecha de nacimiento:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
-									<input class="form-control" type="date" name="date" id="l_date" required>
+									<label class="form-label" for="fnac">Fecha de nacimiento:</label> <abbr title="Obligatorio" class="text-red abbr">*</abbr>
+									<input class="form-control" type="date" name="fnac" id="fnac" required>
 								</div>
 
 
@@ -156,4 +158,9 @@
 		</div>
 	</div>
 </body>
+
+<!--ESCRIP-->
+<script type="text/javascript" src="JS/jQueryLight.js"></script>
+<script type="text/javascript" src="JS/Registro.js"></script>
+
 </html>

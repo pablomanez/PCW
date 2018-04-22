@@ -27,6 +27,7 @@ function loadRecipe(){
 
 			getPhotos(datos.FILAS[0].id);
 
+			$("#enlace_autor").attr("href", "buscar.html?a="+datos.FILAS[0].autor);
 			$("#autor").append(datos.FILAS[0].autor);
 			for(let i = 0; i < datos.FILAS[0].dificultad; i++){
 				$("#dificultad").append(circle);

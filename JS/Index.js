@@ -3,15 +3,18 @@ let total_pages;
 let recetas_a_mostrar = 6;
 
 function totalP(){
-	// Peticion de las 6 últimas recetas
+	// Obtengo todas las recetas
 	let url = 'rest/receta/?';
 	fetch(url).then(function(response){
 		if(!response.ok){
 			return false;
 		}
 		response.json().then(function(datos){
-			console.log(datos);
+			
+			// Calculo el total de páginas en función del número de recetas a mostrar por página
 			total_pages = Math.floor(datos.FILAS.length/recetas_a_mostrar);
+
+			// Las muestro sumando 1 para que en lugar de Página 0 de 1, ponga Página 1 de 2
 			$("#current_page").html(current_page+1);
 			$("#total_pages").html(total_pages+1);
 
@@ -50,7 +53,7 @@ function indexLastSix(){
 									return false;
 								}
 								response.json().then(function(datos){
-									console.log(datos);
+									//console.log(datos);
 									
 									for(let i=0 ; i<datos.FILAS.length; i++){
 
@@ -81,7 +84,7 @@ function indexLastSix(){
 												return false;
 											}
 											response.json().then(function(comments){
-												console.log(comments.FILAS);
+												//console.log(comments.FILAS);
 												for(let j=0 ; j < Math.min(1, comments.FILAS.length) ; j++){
 													$(".comment_tab")[i].append(bloqueComentario);
 													let lastC = $(".THE_FIGURE")[i].$(".THE_COMMENT").length-1;
