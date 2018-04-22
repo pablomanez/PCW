@@ -20,6 +20,14 @@ var num_paginacion = "1/1";
 function ingrediente_masmas() {
 	//AÑADE UN INGREDIENTE MAS A LA LISTA DE NUEVA RECETA
 
+	let j = 0;
+	while(true){
+		if(!document.getElementById("i_"+j)){
+			break
+		}
+		j++;
+	}
+
 	let ingr = document.getElementById("new_ingredient").value; //EL INGREDIENTE
 	let list = document.getElementById("l_ingr"); 				//LA LISTA
 	let li = document.createElement("li");						//CREO EL LI
@@ -28,9 +36,24 @@ function ingrediente_masmas() {
 	
 	span.appendChild(textnode);									//<span>Chirimoya</span>
 	span.setAttribute("class","text-dark");						//<span class="text-dark">Chirimoya</span>
-	li.appendChild(span);										//<li><span class="text-dark">Chirimoya</span></li>
 	li.setAttribute("class","bg-orange p-2 mb-1");				//<li class="bg-orange p-2 mb-1"><span class="text-dark">Chirimoya</span></li>
-		
+	li.setAttribute("id","i_"+j);
+			
+	//<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2" onclick="borraFoto(id)"><i class="fas fa-times"></i></span>
+	let i = document.createElement("i");
+	i.setAttribute("class","fas fa-times");
+
+	let span2 = document.createElement("span");
+	span2.setAttribute("class","pointer t0 r0 m-2 text-blood h3 z-2");
+	span2.setAttribute("id","bi_"+j);
+	span2.setAttribute("onclick","borraIngrediente(id)");
+	//span.onclick = "";
+
+	span2.appendChild(i);
+	li.appendChild(span2);
+	li.appendChild(span);										//<li><span class="text-dark">Chirimoya</span></li>
+
+
 	list.appendChild(li);
 
 	document.getElementById("new_ingredient").value = "";
@@ -52,7 +75,7 @@ function foto_masmas(){
 	}
 	*/
 	let request = new XMLHttpRequest();
-	request.open("GET", "includes/foto_nuevareceta.html", true);
+	request.open("GET", "includes/nuevafoto_nuevareceta.html", true);
 	let node = this;
 	request.onreadystatechange = function(oEvent){
 		if(request.readyState == 4){
@@ -68,6 +91,7 @@ function foto_masmas(){
 					i++;
 				}
 				div.id = "f_"+i;
+				div.setAttribute("class","div_supremo_fotos");
 
 				div.getElementsByTagName("span")[0].id = "b_"+i;
 
@@ -77,78 +101,37 @@ function foto_masmas(){
 		}
 	}
 	request.send(null);
+}
 
-/*
-	if(input != ""){
-		let file = document.getElementById("input_foto").files[0].name;
-		let size = document.getElementById("input_foto").files[0].size;
+function borraIngrediente(id){
+	//id = bi_0
+	id = id.substring(3);
+	//console.log(id);
 
-		if(size >= 300000){
-			//console.log("ERROR: Tamaño de imagen excedido");
-			return;
-		}
+	let ingr = document.getElementById("i_"+id);
 
-		//console.log("RUTA: "+ file);
+	ingr.parentNode.removeChild(ingr);
+}
 
-		let list = document.getElementById("l_fotos");
+function borraFoto(id){
+	//BORRAR UNA FOTO DE LA LISTA DE UNA RECETA
+	let n = id.substring(2);
+	
+	let div = document.getElementById("f_"+n);
+	//console.log(div);
 
-		let div = document.createElement("div");
-		let span = document.createElement("span");
-		let img = document.createElement("img");
-		let textarea = document.createElement("textarea");
+	div.parentNode.removeChild(div);
 
-		let j = 0;
-		while(true){
-			if(!document.getElementById("f_"+j)){
-				break;
-			}
-			j++;
-		}
-
-		//SPAN
-		let i = document.createElement("i");
-		i.setAttribute("class","fas fa-times");
-		span.appendChild(i);
-		span.setAttribute("class","position-absolute pointer t0 r0 m-2 text-blood h3 z-2");
-		span.setAttribute("id","b_"+j);
-		span.setAttribute("onclick","borraFoto(id)");
-
-		//IMG
-		//<img style="border-radius: 5px;" class="mr-2 Mw-100" src="Images/EL_LOGO.jpg" alt="Foto de la receta">
-		img.setAttribute("style","border-radius: 5px;");
-		img.setAttribute("class","mr-2 Mw-100");
-		img.setAttribute("src","Images/"+file);
-		img.setAttribute("alt","Foto de la receta");
-
-		//TEXTAREA
-		//<textarea style="resize: none; height: auto; border: none;" class="form-control" rows="5" cols="35" name="d_foto" placeholder="Escribe una descripción de la foto" maxlength="250" required></textarea>
-		textarea.setAttribute("style","resize: none; height: auto; border: none;");
-		textarea.setAttribute("class","form-control");
-		textarea.setAttribute("rows","5");
-		textarea.setAttribute("cols","35");
-		textarea.setAttribute("name","d_foto");
-		textarea.setAttribute("placeholder","Escribe una descripción de la foto");
-		textarea.setAttribute("maxlength","250");
-		textarea.setAttribute("required","true");
-
-		//DIV
-		div.appendChild(span);
-		div.appendChild(img);
-		div.appendChild(textarea);
-		div.setAttribute("class","bg-dark-t box-shadow p-4 text-light mb-2 position-relative");
-		div.setAttribute("id","f_"+j)
-
-		list.appendChild(div);
-
-	}
-	else{
-		//console.log("No has subido ninguna foto");
-	}
-*/
+	//LOG
+	//console.log("BORRAR");
 }
 
 function muestraFoto(input){
 	//console.log("MOSTRAR FOTO");
+	//console.log(input);
+
+	//NOMBRE DE LA IMAGEN, SIN LA RUTA
+	//input.files[0].name
 }
 
 function nuevaReceta(frm){
@@ -174,40 +157,104 @@ function nuevaReceta(frm){
 	fd.append('d',diff);
 	fd.append('c',comen);
 
+	/*
 	for(var pair of fd.entries()) {
 	   console.log(pair[0]+ ', '+ pair[1]); 
 	}
-	/*
+	*/
+	
 	let init = { 'method':'post', 'body':fd, 'headers':{'Authorization':usu.clave} };
 
 	fetch(url,init).then(function(response){
 		if(!response.ok){
-			console.log("ERROR CON CÓDIGO: " + response.status);
 			return false;
 		}
-		console.log("gilipollas");
-		
+
 		response.json().then(function(datos){
-			console.log(datos);
+			//console.log(datos);
+			//SE HAN SUBIDO LOS DATOS DE LA RECETA CORRECTAMENTE
+
+			//datos.ID -> ID DE LA RECETA
+			let id_receta = datos.ID;
+			let fd2 = new FormData();
+			let list = document.getElementById('l_ingr').getElementsByTagName("li");
+			let ingr = '[';
+
+			//VECTOR DE INGREDIENTES EN FORMATO JSON ["ingr1","ingr2",...]
+
+			for(let i=0 ; i<list.length ; i++){
+				let node = list[i].getElementsByTagName("span")[1].innerText;
+				//ingr.push(list[i].getElementsByTagName("span")[1].innerText);
+				
+				i==0? ingr += '"'+node+'"' : ingr += ',"'+node+'"';
+			}
+			ingr += ']';
+			//console.log(ingr);
+
+			fd2.append('l',usu.login);
+			fd2.append("i",ingr);
+
+			let url2 = 'rest/receta/'+id_receta+'/ingredientes';
+			let init2 = { 'method':'post', 'body':fd2, 'headers':{'Authorization':usu.clave} };
+
+			fetch(url2,init2).then(function(response){
+				if(!response.ok){
+					return false;
+				}
+
+				response.json().then(function(datos){
+					console.log(datos);
+					//SE HAN SUBIDO LOS INGREDIENTES CORRECTAMENTE
+					
+					let div_fotos = document.getElementById('l_fotos').getElementsByTagName('textarea');
+					//let div_fotos = document.getElementById('l_fotos').getElementsByClassName("div_supremo_fotos");
+
+
+					for(let i=0 ; i<div_fotos.length ; i++){
+						let fd3 = new FormData(div_fotos[i]);
+						let url3 = 'rest/receta/'+id_receta+'/foto';
+
+						fd3.append("l",usu.login);
+						fd3.append("t",div_fotos[i].value);
+						fd3.append("f","f");
+
+						for(var pair of fd3.entries()) {
+						   console.log(pair[0]+ ', '+ pair[1]);
+						}
+						
+						let init3 = { 'method':'post', 'body':fd3, 'headers':{'Authorization':usu.clave} };
+						fetch(url3,init3).then(function(response){
+							if(!response.ok){
+								console.log(response.code);
+								return false;
+
+							}
+
+							response.json().then(function(datos){
+								console.log(datos);
+								//SE HA SUBIDO LA FOTO CORRECTAMENTE
+
+							});
+
+						},function(response){
+							console.log("error");
+						});//FETCH DE LAS FOTOS
+
+					}//FOR
+
+				});
+
+			},function(response){
+				console.log("error");
+			});//FETCH DE LOS INGREDIENTES
+
 		});
 
 	},function(response){
 		console.log("error");
-	});
-	*/
-}
+	});//FETCH DE LOS DATOS
 
-function borraFoto(id){
-	//BORRAR UNA FOTO DE LA LISTA DE UNA RECETA
-	let n = id.substring(2);
-	
-	let div = document.getElementById("f_"+n);
-	//console.log(div);
-
-	div.parentNode.removeChild(div);
-
-	//LOG
-	//console.log("BORRAR");
+	return false;
 }
 
 //EJEMPLO QUE PASÓ JUAN POR WHATSAPP
@@ -241,25 +288,29 @@ function login(frm){
 	xhr.send(fd);
 }
 
+//FUNCION QUE PONE DIVS EN SU SITIO EN EL CASO QUE ESTES O NO LOGUEADO
 function loginControl(){
-	//FUNCION QUE PONE DIVS EN SU SITIO EN EL CASO QUE ESTES O NO LOGUEADO
 	let login 		= '<a class="btn revers-a ml-auto" href="login.html">Login</a>';
 	let registro 	= '<a class=" btn btn-outline-orange" href="registro.html">Registro</a>';
 	let logout 		= '<a class=" btn btn-outline-orange" href="index.html">Log out</a>';
-	let newRecipe 	= '<span class=" h2"><i class="fas fa-file"></i></span><span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>';
+	let newRecipe 	= '<span class=" h2"><i class="fas fa-file text-orange"></i></span><span class="d-initial d-md-none  d-lg-initial text-orange">Nueva receta</span>';
 	if(logueado()){
 		document.getElementById("sign_div_noH").innerHTML = logout;
 		document.getElementById("sign_div_siH").innerHTML = logout;
 		document.getElementById("new_recipe").innerHTML = newRecipe;
 	}
 	else{
+		if(document.location.pathname == '/nueva-receta.html'){
+			window.location.replace("http://localhost/registro.html");
+		}
+		
 		document.getElementById("sign_div_noH").innerHTML = login+registro;
 		document.getElementById("sign_div_siH").innerHTML = login+registro;
 	}
 }
 
+//TRUE: LOGUEADO
 function logueado(){
-
 	let usu = sessionStorage.getItem('usuario');
 
 	if(!usu){
@@ -607,7 +658,16 @@ function avPag(bool){
 
 }
 
-//EJEMPLO FETCH API
+
+
+
+
+
+
+
+
+//EJEMPLO PROFESOR
+//hacerLogin() es funcional
 function pruebaFetch(){
 	//let url = '../rest/receta/?u=6';
 	let url = '../rest/receta/?pag=0&lpag=6';		//PARA LA PAGINACION
