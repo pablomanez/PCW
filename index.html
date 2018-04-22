@@ -57,14 +57,14 @@
 		
 		<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden h4">
 
-			<a class="btn revers-a mr-3" href="index.html">
+			<a class="btn mr-3" href="index.html">
 				<span class="h2"><i class="fas fa-home"></i></span>
-				<span class="d-initial d-md-none  d-lg-initial">Inicio</span>
+				<span class="d-initial d-md-none d-lg-initial">Inicio</span>
 			</a>
 			<div class="p-2 d-block d-md-none">
-				<a class="btn revers-a" href="login.html">Login</a>
-				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
-				<a class=" btn btn-outline-orange" href="registro.html">Logout</a>
+				<a id="login" class="btn revers-a" href="login.html">Login</a>
+				<a id="registro" class=" btn btn-outline-orange" href="registro.html">Registro</a>
+				<a id="logout" class=" btn btn-outline-orange" href="registro.html">Logout</a>
 			</div>
 			<a class="btn revers-a mr-3" href="buscar.html">
 				<span class="h2"><i class="fas fa-search-plus"></i></span>
@@ -104,10 +104,10 @@
 			</div>
 			<div class="col-12 z-2 container">
 				<div class="row">	
-					<div class="col-12 position-relative d-flex align-items-center">
-						<input type="text" class="form-control" placeholder="Galleta...">
+					<form action="#" class="col-12 position-relative d-flex align-items-center" onsubmit="redirige(); return false;">
+						<input id="busqueda_index" type="text" class="form-control" placeholder="Galleta...">
 						<button class="search-btn m-auto  r0 pr-3 pb-1" type="submit"><i style="font-size: 22px;" class="fas fa-search"></i></button>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -119,11 +119,11 @@
 			
 		</nav>
 		<div class=" my-5 p-3 text-center h2 bg-dark-t text-light">
-			<i class="fa fa-angle-double-left btn btn-outline-orange"></i>
-			<i class="fa fa-angle-left btn btn-outline-orange"></i>
-			Página 2 de 10
-			<i class="fa fa-angle-right btn btn-outline-orange"></i>
-			<i class="fa fa-angle-double-right btn btn-outline-orange"></i>
+			<i class="fa fa-angle-double-left btn btn-outline-orange" onclick="pagination(0);"></i>
+			<i class="fa fa-angle-left btn btn-outline-orange" onclick="pagination(-1);"></i>
+			Página <span id="current_page" class="text-orange"></span> de <span id="total_pages" class="text-orange"></span>
+			<i class="fa fa-angle-right btn btn-outline-orange" onclick="pagination(1);"></i>
+			<i class="fa fa-angle-double-right btn btn-outline-orange" onclick="pagination(2);"></i>
 		</div>
 	</main>
 
