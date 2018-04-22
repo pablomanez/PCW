@@ -43,6 +43,36 @@ NodeList.prototype.append = function(obj){
 	this.innerHTML += obj;
 }
 
+// Añade o devuelve el código HTML de un elemento
+HTMLElement.prototype.val = function(val){
+	if(val)
+		this.value = obj;
+	else
+		return this.value;
+}
+
+NodeList.prototype.val = function(val){
+	if(val)
+		this.value = obj;
+	else
+		return this.value;
+}
+
+// Cambia o devuelve el código HTML de un elemento
+HTMLElement.prototype.html = function(obj){
+	if(obj == "" || obj)
+		this.innerHTML = obj;
+	else
+		return this.innerHTML;
+}
+
+NodeList.prototype.html = function(obj){
+	if(obj == "" || obj)
+		this.innerHTML = obj;
+	else
+		return this.innerHTML;
+}
+
 // Atributos
 HTMLElement.prototype.attr = function(attribute, value){
 	this.setAttribute(attribute, value);
@@ -114,7 +144,8 @@ function getUrlParameter(url, p){
 	}
 
 	let value = substring.split("=")[1];
-	if(value == undefined)
+
+	if(!value)
 		return null;
 
 	return value;
@@ -122,6 +153,7 @@ function getUrlParameter(url, p){
 
 
 
+// Funciones globales
 function logueado(){
 
 	let usu = sessionStorage.getItem('usuario');
@@ -135,3 +167,4 @@ function logueado(){
 
 	//console.log("Hola");
 }
+

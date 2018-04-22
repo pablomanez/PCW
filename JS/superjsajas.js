@@ -296,13 +296,11 @@ function buscar_simple(frm){
 function ultimasSeis(){
 	//console.log("ultimasSeis()");
 
+	let url = 'rest/receta/?u=6'; //LAS 6 RECETAS MAS RECIENTES+
 	if(window.location.search && window.location.search[window.location.search.length-1]!='#'){
-		//LLEVA ARGUMENTOS
-		formBuscar();
-		return;
+		url = 'rest/receta/'+window.location.search+'&pag=0&lpag=6';
 	}
 
-	let url = 'rest/receta/?u=6'; //LAS 6 RECETAS MAS RECIENTES
 	buscarRecetas(url);
 	updatePags();
 }
@@ -311,10 +309,11 @@ function buscarRecetas(url){
 	//console.log("buscarRecetas("+url+")");
 	//PASAS UNA PETICION COMO url
 	//PARA LA PÁGINA buscar.html
-
-
+	// res/receta/?a=usuario2&pag=0&lpag=6
+	// res/receta/?a=usuario2&pag=0&lpag=6
+	console.log("CAMBIANDO URL DE PAGINACION");
 	url_paginacion = url.split("&l")[0];
-	//console.log("url_paginacion: "+url_paginacion);
+	console.log("url_paginacion: "+url_paginacion);
 
 	fetch(url).then(function(response){
 		if(!response.ok){
@@ -322,7 +321,7 @@ function buscarRecetas(url){
 		}
 
 		response.json().then(function(datos){
-			//console.log(datos);
+			console.log(datos);
 
 			//AHORA DEBO TRATAR LA PETICION CON datos.FILAS[]
 
@@ -402,11 +401,11 @@ function formBuscar(frm){
 	
 	if(frm){
 		console.log("HAY FORMULARIO");
-		
 		let id = []; //ARRAY DE LOS ID DE LAS RECETAS
 		let vacion = true;
 		let url = 'rest/receta/?';
 		let fd = new FormData(frm);
+		console.log(fd);
 		resetBuscar();
 		
 		if(frm.elements[0].value != ""){
@@ -451,7 +450,7 @@ function formBuscar(frm){
 		}
 		
 		url += '&pag=0&lpag=6';
-		//console.log(url);
+		console.log(url);
 		
 		buscarRecetas(url);
 			
