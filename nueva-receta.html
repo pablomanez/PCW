@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
-<body class="background" onload="logueado()">
+<body class="background" onload="loginControl()">
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
 	<div class=" row align-items-center">
 
@@ -35,10 +35,12 @@
 
 
 		<!-- Login/Registro -->
-		<div class="col-4 col-md-5 text-right d-none d-md-initial">
+		<div class="col-4 col-md-5 text-right d-none d-md-initial" id="sign_div_noH">
+			<!--
 			<a class="btn revers-a ml-auto" href="login.html">Login</a>
 			<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 			<a class=" btn btn-outline-orange" href="#">Log out</a>
+			-->
 		</div>
 		<div class="col-12">
 
@@ -51,22 +53,26 @@
 
 		<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden h4">
 
-			<a class="btn revers-a mr-3" href="index.html">
+			<a class="btn revers-a mr-3" href="index.html" id="index">
 				<span class="h2"><i class="fas fa-home"></i></span>
 				<span class="d-initial d-md-none  d-lg-initial">Inicio</span>
 			</a>
-			<div class="p-2 d-block d-md-none">
+			<div class="p-2 d-block d-md-none" id="sign_div_siH">
+				<!--
 				<a class="btn revers-a" href="login.html">Login</a>
 				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 				<a class=" btn btn-outline-orange" href="registro.html">Logout</a>
+				-->
 			</div>
-			<a class="btn revers-a mr-3" href="buscar.html">
+			<a class="btn revers-a mr-3" href="buscar.html" id="adv_search">
 				<span class="h2"><i class="fas fa-search-plus"></i></span>
-				<span class="d-initial d-md-none  d-lg-initial">Búsqueda avanzada</span>
+				<span class="d-initial d-md-none d-lg-initial">Búsqueda avanzada</span>
 			</a>
-			<a class="btn revers-a mr-3" href="nueva-receta.html">
+			<a class="btn revers-a mr-3" href="nueva-receta.html" id="new_recipe">
+				<!--
 				<span class=" h2"><i class="fas fa-file"></i></span>
 				<span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>
+				-->
 			</a>
 			<!--
 			<a class="btn revers-a" href="nueva-receta.html">
@@ -137,25 +143,27 @@
 						<input class="form-control" type="text" name="new_ingredient" id="new_ingredient">
 						<span class="btn btn-outline-orange ml-auto d-block" onclick="ingrediente_masmas()">Añadir ingrediente</span>
 						<p class="text-center">Pulsa "ENTER" para escribir más ingredientes</p>
-						<ul contenteditable="true" id="l_ingr" class="text-light">
-						<!--
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">5kg de patatas</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">10kg de mortadela</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">3 Huevos</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">90 cortezas de pan</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">2 filetes de buey</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">1 Costilla de cerdo</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Otra costilla de cerdo</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Una tostada sin tostar</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Leche</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Azúcar</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Muchas cosas bonitas</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Ingrediente X</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Harina</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Media pizza barbacoa</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">Otra costilla de cerdo</span></li>
-							<li class="bg-orange p-2 mb-1"><span class="text-dark">GTX Titan X Pascal</span></li>
-						-->
+						<ul contenteditable="true" class="text-light">
+							<div id="l_ingr">
+							<!--
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">5kg de patatas</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">10kg de mortadela</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">3 Huevos</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">90 cortezas de pan</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">2 filetes de buey</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">1 Costilla de cerdo</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">Otra costilla de cerdo</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">Una tostada sin tostar</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">Leche</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">Azúcar</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">Muchas cosas bonitas</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">Ingrediente X</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">Harina</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">Media pizza barbacoa</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">Otra costilla de cerdo</span></li>
+								<li class="bg-orange p-2 mb-1"><span class="text-dark">GTX Titan X Pascal</span></li>
+							-->
+							</div>
 						</ul>
 					</div>
 				</div>
