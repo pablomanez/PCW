@@ -9,6 +9,9 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body class="background" onload="loginControl()">
+	<div id="popap">
+		
+	</div>	
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
 	<div class=" row align-items-center">
 
@@ -141,7 +144,7 @@
 					<div class="bg-dark-t box-shadow pl-2 pr-3 py-2 text-light">
 						<label class="form-label" for="new_ingredient">Nombre</label>
 						<input class="form-control" type="text" name="new_ingredient" id="new_ingredient">
-						<span class="btn btn-outline-orange ml-auto d-block" onclick="ingrediente_masmas()">Añadir ingrediente</span>
+						<span class="btn btn-outline-orange ml-auto d-block" onclick="ingrediente_masmas();">Añadir ingrediente</span>
 						<p class="text-center">Pulsa "ENTER" para escribir más ingredientes</p>
 						<ul contenteditable="true" class="text-light">
 							<div id="l_ingr">

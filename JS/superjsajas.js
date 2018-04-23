@@ -16,6 +16,15 @@ TODO:
 var url_paginacion = "";
 var num_paginacion = "1/1";
 
+function muestraPopap(msg){
+	let div = document.getElementById("popap");
+	let popap =
+	`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100"> 
+		<div style="width: 300px; height: 200px;" class="bg-light d-flex align-items-center justify-content-center box-shadow-light">`+msg+`</div>
+	</div>`;
+
+	div.innerHTML = popap;
+}
 
 function ingrediente_masmas() {
 	//AÑADE UN INGREDIENTE MAS A LA LISTA DE NUEVA RECETA
@@ -207,16 +216,17 @@ function nuevaReceta(frm){
 					//SE HAN SUBIDO LOS INGREDIENTES CORRECTAMENTE
 					
 					let div_fotos = document.getElementById('l_fotos').getElementsByTagName('textarea');
+					let input_fotos = document.getElementById('l_fotos').getElementsByTagName('input');
 					//let div_fotos = document.getElementById('l_fotos').getElementsByClassName("div_supremo_fotos");
 
 
 					for(let i=0 ; i<div_fotos.length ; i++){
-						let fd3 = new FormData(div_fotos[i]);
+						let fd3 = new FormData();
 						let url3 = 'rest/receta/'+id_receta+'/foto';
 
 						fd3.append("l",usu.login);
 						fd3.append("t",div_fotos[i].value);
-						fd3.append("f","f");
+						fd3.append("f",input_fotos[i].files[0]);
 
 						for(var pair of fd3.entries()) {
 						   console.log(pair[0]+ ', '+ pair[1]);
@@ -225,7 +235,7 @@ function nuevaReceta(frm){
 						let init3 = { 'method':'post', 'body':fd3, 'headers':{'Authorization':usu.clave} };
 						fetch(url3,init3).then(function(response){
 							if(!response.ok){
-								console.log(response.code);
+								//console.log(response.code);
 								return false;
 
 							}
@@ -239,6 +249,9 @@ function nuevaReceta(frm){
 						},function(response){
 							console.log("error");
 						});//FETCH DE LAS FOTOS
+
+						//SE HA SUBIDO TODO CORRECTAMENTE
+						muestraPopap("La receta "+name+" se ha subido correctamente");
 
 					}//FOR
 
@@ -654,9 +667,37 @@ function avPag(bool){
 			document.getElementById("pags").innerText = num_paginacion;
 		}
 	}
-
 }
 
+function hacerLogin(frm){
+	let url = "rest/login/";
+	let fd = new FormData(frm);
+
+	//console.log("ME LOGUEO");
+	console.log(fd.get("login"));
+	console.log(fd.get("pwd"));
+	//fd.append('login',);
+	//fd.append('pwd',);
+
+	fetch(url,{'method':'POST','body':fd}).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			console.log(datos);
+			sessionStorage.setItem('usuario',JSON.stringify(datos));
+
+			window.location.replace("http://localhost/index.html");
+		});
+
+	},function(response){
+
+	});
+	
+
+
+}
 
 
 
@@ -703,28 +744,6 @@ function pruebaFetch(){
 
 }
 
-function hacerLogin(){
-	let url = "rest/login/";
-	let fd = new FormData();
-
-	fd.append('login','usuario2');
-	fd.append('pwd','usuario2');
-
-	fetch(url,{'method':'POST','body':fd}).then(function(response){
-		if(!response.ok){
-			return false;
-		}
-
-		response.json().then(function(datos){
-			console.log(datos);
-			sessionStorage.setItem('usuario',JSON.stringify(datos));
-		});
-
-	},function(response){
-
-	});
-
-}
 
 function hacerComentario(){
 	let url = "../rest/receta/1/comentario/";
