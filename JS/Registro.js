@@ -1,4 +1,6 @@
 let ocUsername = false;
+let ocPass1 = false;
+let ocPass2 = false;
 
 function checkUsername(){
 	let username = $("#login").val();
@@ -44,4 +46,33 @@ function checkPasswords(){
 			$("#callbackPassword").html("");
 	}
 
+}
+
+
+function registrame(){
+	let url = "rest/usuario/";
+	let fd = new FormData();
+
+
+
+	fd.append('login', 	$("#login").val() 	);
+	fd.append('pwd',	$("#pwd").val()		);
+	fd.append('pwd2',	$("#pwd2").val()	);
+	fd.append('nombre',	$("#nombre").val()	);
+	fd.append('email',	$("#email").val()	);
+	fd.append('fnac',	$("#fnac").val()	);
+
+	fetch(url,{'method':'POST','body':fd}).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			console.log(datos);
+			//sessionStorage.setItem('usuario',JSON.stringify(datos));
+		});
+
+	},function(response){
+
+	});
 }

@@ -190,7 +190,7 @@ function getPhotos(id){
 		if(request.readyState == 4){
 			if(request.status == 200){
 
-
+				// Petición de las fotos
 				let url_c = 'rest/receta/'+id+'/fotos';
 				fetch(url_c).then(function(response){
 					if(!response.ok){

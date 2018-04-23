@@ -1,6 +1,6 @@
 //JQUERY_L ===============================================
 var dayList = new Array(7);
-dayList[0] =  "domingo";
+dayList[0] = "domingo";
 dayList[1] = "lunes";
 dayList[2] = "martes";
 dayList[3] = "miércoles";
