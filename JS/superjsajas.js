@@ -375,9 +375,10 @@ function buscarRecetas(url){
 	//PARA LA PÁGINA buscar.html
 	// res/receta/?a=usuario2&pag=0&lpag=6
 	// res/receta/?a=usuario2&pag=0&lpag=6
-	console.log("CAMBIANDO URL DE PAGINACION");
+	
+	//console.log("CAMBIANDO URL DE PAGINACION");
 	url_paginacion = url.split("&l")[0];
-	console.log("url_paginacion: "+url_paginacion);
+	//console.log("url_paginacion: "+url_paginacion);
 
 	fetch(url).then(function(response){
 		if(!response.ok){
@@ -394,7 +395,7 @@ function buscarRecetas(url){
 			for(let i=0 ; i<datos.FILAS.length ; i++){
 				//PETIÇAO DEL FICHERO
 				let request = new XMLHttpRequest();
-				request.open("GET", "includes/search_recipe.html", true);
+				request.open("GET", "includes/newsearch_recipe.html", true);
 				let node = this;
 				request.onreadystatechange = function(oEvent){	
 					if(request.readyState == 4){
@@ -408,8 +409,9 @@ function buscarRecetas(url){
 							$(".receta_neg")[i].append(datos.FILAS[i].negativos);
 							//style="background-image: url(Images/RECETA_1.jpg);"
 							$(".receta_img")[i].attr("style","background-image: url(fotos/"+datos.FILAS[i].fichero+");");
+							$(".receta_title")[i].attr("href","receta.html?id="+datos.FILAS[i].id);
+							$(".autor_href")[i].attr("href","buscar.html?a="+datos.FILAS[i].autor);
 
-				
 							let url_c = 'rest/receta/'+datos.FILAS[i].id+'/comentarios'; //rest/receta/i/comentarios
 							fetch(url_c).then(function(response){
 								if(!response.ok){
