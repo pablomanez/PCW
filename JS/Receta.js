@@ -54,7 +54,7 @@ function loadRecipe(){
 
 			getIngredients(datos.FILAS[0].id);
 
-			if(!logueado()){
+			if(logueado()){
 				$("#cuerpo").load("includes/Receta/Botones_like.html");
 				$("#formulario_comentario").load("includes/Receta/Formulario_comentario.html");
 			}
