@@ -36,8 +36,14 @@ function loadRecipe(){
 			$("#fecha").attr("datetime", datos.FILAS[0].fecha);
 			$("#fecha").append(date.getDate()+"/"+month+"/"+date.getFullYear());
 			$("#tiempo").append(datos.FILAS[0].tiempo+" minutos");
-			for(let i = 0; i < datos.FILAS[0].comensales; i++){
-				$("#comensales").append(dude);
+			if(datos.FILAS[0].comensales > 6){
+				$("#comensales").append(dude+"x"+datos.FILAS[0].comensales);
+			}
+			else{
+
+				for(let i = 0; i < datos.FILAS[0].comensales; i++){
+					$("#comensales").append(dude);
+				}
 			}
 			$("#likes").append(datos.FILAS[0].positivos);
 			$("#dislikes").append(datos.FILAS[0].negativos);

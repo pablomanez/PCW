@@ -168,3 +168,13 @@ function logueado(){
 	//console.log("Hola");
 }
 
+function muestraPopap(msg){
+
+	let popap =
+	`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100"> 
+		<div style="width: 300px; height: 200px;" class="bg-light d-flex align-items-center justify-content-center box-shadow-light">`+msg+`</div>
+	</div>`;
+
+	$("#popap").html(popap);
+}
+
