@@ -29,7 +29,7 @@ function loadRecipe(){
 
 			$("#enlace_autor").attr("href", "buscar.html?a="+datos.FILAS[0].autor);
 			$("#autor").append(datos.FILAS[0].autor);
-			for(let i = 0; i < datos.FILAS[0].dificultad; i++){
+			for(let i = 0; i < datos.FILAS[0].dificultad+1; i++){
 				$("#dificultad").append(circle);
 			}
 
