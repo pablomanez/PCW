@@ -1,29 +1,36 @@
-/*
-TODO:
-	NUEVARECETA:
-		Solamente acceder estando logueado
-		Al añadir un nuevo ingrediente que se añada al final de la lista automaticamente		HECHO
-		Lo de añadir las fotos 																	HECHO (FALTA LO DE LA RUTA)
-		Tamaño de imagen máximo para las fotos (300kb) >> MENSAJE MODAL O EMERGENTE				HECHO
-		Al enviar la receta si no hay ninguna foto, sedebe de avisar al usuario
-
-		MÁS >> Punto c2
-
-		PODER ELIMINAR LOS INGREDIENTES DE LA RECETA
-
-*/
-
 var url_paginacion = "";
 var num_paginacion = "1/1";
 
-function muestraPopap(msg){
+function muestraPopap(msg,url,elim){
+	//SI ELIM ES TRUE: SE ELIMINA EL POPUP
 	let div = document.getElementById("popap");
-	let popap =
-	`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100"> 
-		<div style="width: 300px; height: 200px;" class="bg-light d-flex align-items-center justify-content-center box-shadow-light">`+msg+`</div>
-	</div>`;
+	let popap;
+
+	if(!elim){
+		popap =
+		`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100 text-center" id="EL_POPAP">
+			<div style="width: 300px; height: 200px;" class="position-relative bg-light d-flex align-items-center justify-content-center box-shadow-light">
+				`+msg+`
+				<a href="`+url+`"><span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="fas fa-times"></i></span></a>
+			</div>
+		</div>`;
+	}
+	else{
+		popap =
+		`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100 text-center" id="EL_POPAP">
+			<div style="width: 300px; height: 200px;" class="position-relative bg-light d-flex align-items-center justify-content-center box-shadow-light">
+				`+msg+`
+				<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2" onclick="eliminaPopap();"><i class="fas fa-times"></i></span>
+			</div>
+		</div>`;
+	}
 
 	div.innerHTML = popap;
+}
+
+function eliminaPopap(){
+	let popap = document.getElementById("EL_POPAP");
+	popap.parentNode.removeChild(popap);
 }
 
 function ingrediente_masmas() {
@@ -84,7 +91,7 @@ function foto_masmas(){
 	}
 	*/
 	let request = new XMLHttpRequest();
-	request.open("GET", "includes/nuevafoto_nuevareceta.html", true);
+	request.open("GET", "includes/foto_nuevareceta.html", true);
 	let node = this;
 	request.onreadystatechange = function(oEvent){
 		if(request.readyState == 4){
@@ -136,8 +143,14 @@ function borraFoto(id){
 }
 
 function muestraFoto(input){
-	let imgNode = input.nextElementSibling.nextElementSibling;
-	imgNode.attr("src", URL.createObjectURL(input.files[0]));
+	if(input && input.files[0].size < 300000){
+		let imgNode = input.nextElementSibling.nextElementSibling;
+		imgNode = imgNode.getElementsByTagName("img")[0];
+		imgNode.attr("src", URL.createObjectURL(input.files[0]));
+	}
+	else{
+		muestraPopap("La fotos supera el tamaño máximo de 300kb","#",true);
+	}
 }
 
 function nuevaReceta(frm){
@@ -168,7 +181,7 @@ function nuevaReceta(frm){
 	   console.log(pair[0]+ ', '+ pair[1]); 
 	}
 	*/
-	
+
 	let init = { 'method':'post', 'body':fd, 'headers':{'Authorization':usu.clave} };
 
 	fetch(url,init).then(function(response){
@@ -211,13 +224,16 @@ function nuevaReceta(frm){
 				response.json().then(function(datos){
 					console.log(datos);
 					//SE HAN SUBIDO LOS INGREDIENTES CORRECTAMENTE
-					
+					let b_fotos = true;
 					let div_fotos = document.getElementById('l_fotos').getElementsByTagName('textarea');
 					let input_fotos = document.getElementById('l_fotos').getElementsByTagName('input');
 					//let div_fotos = document.getElementById('l_fotos').getElementsByClassName("div_supremo_fotos");
 
+					if(div_fotos.length == 0 || input_fotos.length == 0){
+						b_fotos = false;
+					}
 
-					for(let i=0 ; i<div_fotos.length ; i++){
+					for(let i=0 ; i<div_fotos.length && b_fotos ; i++){
 						let fd3 = new FormData();
 						let url3 = 'rest/receta/'+id_receta+'/foto';
 
@@ -245,12 +261,20 @@ function nuevaReceta(frm){
 
 						},function(response){
 							console.log("error");
+							b_fotos = false;
 						});//FETCH DE LAS FOTOS
 
-						//SE HA SUBIDO TODO CORRECTAMENTE
-						muestraPopap("La receta "+name+" se ha subido correctamente");
 
 					}//FOR
+
+					//SE HA SUBIDO TODO CORRECTAMENTE
+					if(b_fotos){
+						//SI NO ENTRA AQUÍ ES QUE NO SE HA SUBIDO BIEN ALGUNA FOTO
+						muestraPopap("La receta "+name+" se ha creado óptimamente","index.html",false);
+					}
+					else{
+						muestraPopap("No has introducido ninguna foto para la receta","#",true);
+					}
 
 				});
 
@@ -298,19 +322,17 @@ function login(frm){
 	xhr.send(fd);
 }
 
-
-
 //TRUE: LOGUEADO
 function logueado(){
 	let usu = sessionStorage.getItem('usuario');
 
 	if(!usu){
-		console.log("Ste men que no está logueado");
+		//console.log("Ste men que no está logueado");
 
 		return false;
 	}
 	else{
-		console.log("Así me gusta, logueado, siguiendo los pasos del gran E");
+		//console.log("Así me gusta, logueado, siguiendo los pasos del gran E");
 
 		return true;
 	}
@@ -326,13 +348,13 @@ function buscar_simple(frm){
 
 	let fd = new FormData(frm);
 	let url = 'rest/receta/?t=';
-	url += fd.get('search_box');
+	url += fd.get('t');
 	url += '&pag=0&lpag=6';
 	console.log("URL DE BÚSQUEDA SIMPLE: " + url);
 
 	buscarRecetas(url);
 	updatePags();
-	return false;
+	//return false;
 }
 
 function ultimasSeis(){
@@ -348,7 +370,7 @@ function ultimasSeis(){
 }
 
 function buscarRecetas(url){
-	//console.log("buscarRecetas("+url+")");
+	console.log("buscarRecetas("+url+")");
 	//PASAS UNA PETICION COMO url
 	//PARA LA PÁGINA buscar.html
 	// res/receta/?a=usuario2&pag=0&lpag=6
@@ -357,6 +379,7 @@ function buscarRecetas(url){
 	//console.log("CAMBIANDO URL DE PAGINACION");
 	url_paginacion = url.split("&l")[0];
 	//console.log("url_paginacion: "+url_paginacion);
+	let resultado = false;
 
 	fetch(url).then(function(response){
 		if(!response.ok){
@@ -364,13 +387,14 @@ function buscarRecetas(url){
 		}
 
 		response.json().then(function(datos){
-			console.log(datos);
+			//console.log(datos);
 
 			//AHORA DEBO TRATAR LA PETICION CON datos.FILAS[]
 
 			
 			//SACO LAS FOTOS DE CADA RECETA
 			for(let i=0 ; i<datos.FILAS.length ; i++){
+				resultado = true;
 				//PETIÇAO DEL FICHERO
 				let request = new XMLHttpRequest();
 				request.open("GET", "includes/newsearch_recipe.html", true);
@@ -386,6 +410,7 @@ function buscarRecetas(url){
 							$(".receta_pos")[i].append(datos.FILAS[i].positivos);
 							$(".receta_neg")[i].append(datos.FILAS[i].negativos);
 							//style="background-image: url(Images/RECETA_1.jpg);"
+							$(".receta_fecha")[i].attr("datetime",datos.FILAS[i].fecha);
 							$(".receta_img")[i].attr("style","background-image: url(fotos/"+datos.FILAS[i].fichero+");");
 							$(".receta_title")[i].attr("href","receta.html?id="+datos.FILAS[i].id);
 							$(".autor_href")[i].attr("href","buscar.html?a="+datos.FILAS[i].autor);
@@ -427,8 +452,12 @@ function buscarRecetas(url){
 				request.send(null);
 
 			} //FOR
+			
+			if(!resultado){
+				muestraPopap("No se han encontrado resultados de la búsqueda realizada","buscar.html",false);
+			
+			}
 		});
-
 	},function(response){
 		console.log("ERROR");
 	});
@@ -668,15 +697,15 @@ function hacerLogin(frm){
 			console.log(datos);
 			sessionStorage.setItem('usuario',JSON.stringify(datos));
 
-			window.location.replace("http://localhost/index.html");
+			//window.location.replace("http://localhost/index.html");
+
+			muestraPopap("Bienvenido de nuevo "+fd.get("login")+" a The Lemon. Adelante, comienza a cocinar","index.html",false);
 		});
 
 	},function(response){
 
 	});
-	
-
-
+	return false;
 }
 
 
