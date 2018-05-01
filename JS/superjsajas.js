@@ -1,15 +1,7 @@
 /*
 TODO:
 	NUEVARECETA:
-		Solamente acceder estando logueado
-		Al añadir un nuevo ingrediente que se añada al final de la lista automaticamente		HECHO
-		Lo de añadir las fotos 																	HECHO (FALTA LO DE LA RUTA)
-		Tamaño de imagen máximo para las fotos (300kb) >> MENSAJE MODAL O EMERGENTE				HECHO
 		Al enviar la receta si no hay ninguna foto, sedebe de avisar al usuario
-
-		MÁS >> Punto c2
-
-		PODER ELIMINAR LOS INGREDIENTES DE LA RECETA
 
 */
 
