@@ -1,11 +1,14 @@
-function loadRecipe(){
-	let url = window.location.href;
-	let id = getUrlParameter(url, "id");
+ID = parseInt(getUrlParameter(window.location.href, "id"));
 
-	if(id == null)
+LIKES = 0;
+DISLIKES = 0;
+
+function loadRecipe(){
+
+	if(ID == null)
 		window.location.href = "http://localhost/index.html";
 
-	let consulta = "rest/receta/"+id;
+	let consulta = "rest/receta/"+ID;
 	fetch(consulta).then(function(response){
 		if(!response.ok){
 			return false;
@@ -17,7 +20,7 @@ function loadRecipe(){
 				console.log("404 NOT FOUND")
 			}
 			//console.log(datos);
-
+			let emptyCircle = `<i class="far fa-circle"></i>`;
 			let circle = `<i class="fas fa-circle mr-1"></i>`;
 			let dude = `<i class="fas fa-male mr-1"></i>`;
 
@@ -26,15 +29,21 @@ function loadRecipe(){
 			$("#name").append(datos.FILAS[0].nombre);
 
 			getPhotos(datos.FILAS[0].id);
-
 			$("#enlace_autor").attr("href", "buscar.html?a="+datos.FILAS[0].autor);
 			$("#autor").append(datos.FILAS[0].autor);
-			for(let i = 0; i < datos.FILAS[0].dificultad+1; i++){
-				$("#dificultad").append(circle);
+			if(parseInt(datos.FILAS[0].dificultad) > 6){
+				$("#dificultad").append(cicle+"x"+datos.FILAS[0].dificultad);
+			}
+			else if(parseInt(datos.FILAS[0].dificultad) == 0){
+				$("#dificultad").append(emptyCircle);
+			}
+			else{
+				for(let i = 0; i < parseInt(datos.FILAS[0].dificultad); i++){
+					$("#dificultad").append(circle);
+				}
 			}
 
-			$("#fecha").attr("datetime", datos.FILAS[0].fecha);
-			$("#fecha").append(date.getDate()+"/"+month+"/"+date.getFullYear());
+			$("#fecha").append("<time datetime="+datos.FILAS[0].fecha+">"+date.getDate()+"/"+month+"/"+date.getFullYear() + "</time>");
 			$("#tiempo").append(datos.FILAS[0].tiempo+" minutos");
 			if(datos.FILAS[0].comensales > 6){
 				$("#comensales").append(dude+"x"+datos.FILAS[0].comensales);
@@ -75,7 +84,6 @@ function loadRecipe(){
 	},function(response){
 		console.log("ERROR");
 	});
-	console.log(id);
 }
 
 
@@ -239,4 +247,184 @@ function getPhotos(id){
 		}
 	}
 	request.send(null);
+}
+
+function like(){
+
+	let user = JSON.parse(sessionStorage['usuario']);
+	console.log(user);
+	let url = "rest/receta/"+ID+"/voto/1";
+	let fd = new FormData();
+	fd.append('l', user.login);
+	console.log(url);
+
+	let post = { 'method':'post', 'body':fd, 'headers':{'Authorization':user.clave} };
+
+	fetch(url, post).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+
+			$("#messageLikes").removeClass("d-none");
+			LIKES = LIKES+1;
+
+			if(LIKES > 1)
+				$("#contadorLikes").html(" x"+LIKES);
+
+			let consulta = "rest/receta/"+ID;
+			fetch(consulta).then(function(response){
+				if(!response.ok){
+					return false;
+				}
+
+				response.json().then(function(datos){
+					$("#likes").html(datos.FILAS[0].positivos);
+				});
+
+			},function(response){
+					console.log("ERROR");
+			});
+
+		});
+
+	},function(response){
+
+	});
+}
+
+function dislike(){
+
+	let user = JSON.parse(sessionStorage['usuario']);
+	let url = "rest/receta/"+ID+"/voto/0";
+	let fd = new FormData();
+	fd.append('l', user.login);
+
+	let post = { 'method':'post', 'body':fd, 'headers':{'Authorization':user.clave} };
+
+	fetch(url, post).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			
+
+			$("#messageDislikes").removeClass("d-none");
+			DISLIKES = DISLIKES+1;
+
+			console.log("DISLIKES "+DISLIKES);
+			if(DISLIKES > 1)
+				$("#contadorDislikes").html(" x"+DISLIKES);
+
+			// Actualizo la info
+			let consulta = "rest/receta/"+ID;
+			fetch(consulta).then(function(response){
+				if(!response.ok){
+					return false;
+				}
+
+				response.json().then(function(datos){
+					$("#dislikes").html(datos.FILAS[0].negativos);
+				});
+
+			},function(response){
+					console.log("ERROR");
+			});
+
+		});
+
+	},function(response){
+
+	});
+}
+
+function destroyLikeMessage(){
+	$("#messageLikes").addClass("d-none");
+	LIKES = 0;
+	$("#contadorLikes").html("");
+}
+
+function destroyDislikeMessage(){
+	$("#messageDislikes").addClass("d-none");
+	DISLIKES = 0;
+	$("#contadorDislikes").html("");
+}
+
+function comenta(){
+	let user = JSON.parse(sessionStorage['usuario']);
+
+	let url = "rest/receta/"+ID+"/comentario";
+	let fd = new FormData();
+	fd.append('l', user.login);
+	fd.append('titulo', $("#formCommentTitulo").val());
+	fd.append('texto', $("#formCommentMessage").val());
+
+	let post = { 'method':'post', 'body':fd, 'headers':{'Authorization':user.clave} };
+
+	fetch(url, post).then(function(response){
+		if(!response.ok){
+			return false;
+		}
+
+		response.json().then(function(datos){
+			console.log(datos.RESULTADO);
+			if(datos.RESULTADO == "OK"){
+
+				muestraPopUpReceta("Mensaje posteado óptimamente.", 1);
+				
+				// Actualizo la info
+				let consulta = "rest/receta/"+ID;
+				fetch(consulta).then(function(response2){
+					if(!response2.ok){
+						return false;
+					}
+
+					response2.json().then(function(datos2){
+						$("#Comentarios").html("");
+						getComments(datos2.FILAS[0].id);
+					});
+
+				},function(response2){
+						console.log("ERROR");
+				});
+			}
+			else{
+				muestraPopUpReceta("Hubo un error al postear el comentario.", 2);
+			}
+
+		});
+
+	},function(response){
+		console.log("why");
+	});
+}
+
+function muestraPopUpReceta(msg, type){
+	let popap =
+	`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100"> 
+			<div class="position-relative">
+				<div onclick="destroyPopUPType`+type+`();"class="position-absolute t0 r0 bg-darkt-t p-1 div-link pointer h4 text-blood">
+					<i class="far fa-times-circle"></i>
+				</div>
+				<div  class="bg-light d-flex align-items-center justify-content-center box-shadow-light text-center p-3 t-2">
+					`+msg+`
+				</div>
+			</div>
+		</div>`;
+
+	$("#popap").html(popap);
+}
+
+
+function destroyPopUPType1(){
+	$("#formCommentTitulo").val("");
+	$("#formCommentMessage").val("");
+	$("#popap").html("");
+}
+
+function destroyPopUPType2(){
+	$("#formCommentTitulo").focus();
+	$("#popap").html("");
 }

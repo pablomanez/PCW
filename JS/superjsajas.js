@@ -298,26 +298,7 @@ function login(frm){
 	xhr.send(fd);
 }
 
-//FUNCION QUE PONE DIVS EN SU SITIO EN EL CASO QUE ESTES O NO LOGUEADO
-function loginControl(){
-	let login 		= '<a class="btn revers-a ml-auto" href="login.html">Login</a>';
-	let registro 	= '<a class=" btn btn-outline-orange" href="registro.html">Registro</a>';
-	let logout 		= '<a class=" btn btn-outline-orange" href="index.html">Log out</a>';
-	let newRecipe 	= '<span class=" h2"><i class="fas fa-file text-orange"></i></span><span class="d-initial d-md-none  d-lg-initial text-orange">Nueva receta</span>';
-	if(logueado()){
-		document.getElementById("sign_div_noH").innerHTML = logout;
-		document.getElementById("sign_div_siH").innerHTML = logout;
-		document.getElementById("new_recipe").innerHTML = newRecipe;
-	}
-	else{
-		if(document.location.pathname == '/nueva-receta.html'){
-			window.location.replace("http://localhost/registro.html");
-		}
-		
-		document.getElementById("sign_div_noH").innerHTML = login+registro;
-		document.getElementById("sign_div_siH").innerHTML = login+registro;
-	}
-}
+
 
 //TRUE: LOGUEADO
 function logueado(){

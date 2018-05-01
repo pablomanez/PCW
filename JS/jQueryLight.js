@@ -46,14 +46,14 @@ NodeList.prototype.append = function(obj){
 // Añade o devuelve el código HTML de un elemento
 HTMLElement.prototype.val = function(val){
 	if(val == "" || val)
-		this.value = obj;
+		this.value = val;
 	else
 		return this.value;
 }
 
 NodeList.prototype.val = function(val){
 	if(val == "" || val)
-		this.value = obj;
+		this.value = val;
 	else
 		return this.value;
 }
@@ -168,13 +168,51 @@ function logueado(){
 	//console.log("Hola");
 }
 
-function muestraPopap(msg){
-
+function muestraPopUp(msg){
 	let popap =
 	`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100"> 
-		<div style="width: 300px; height: 200px;" class="bg-light d-flex align-items-center justify-content-center box-shadow-light">`+msg+`</div>
-	</div>`;
+			<div class="position-relative">
+				<div onclick="destroyPopUP();"class="position-absolute t0 r0 bg-darkt-t p-1 div-link pointer h4 text-blood">
+					<i class="far fa-times-circle"></i>
+				</div>
+				<div  class="bg-light d-flex align-items-center justify-content-center box-shadow-light text-center p-3 t-2">
+					`+msg+`
+				</div>
+			</div>
+		</div>`;
 
 	$("#popap").html(popap);
 }
 
+
+function destroyPopUP(){
+	$("#popap").html("");
+}
+
+
+//FUNCION QUE PONE DIVS EN SU SITIO EN EL CASO QUE ESTES O NO LOGUEADO
+function loginControl(){
+	let login 		= '<a class="btn revers-a ml-auto" href="login.html">Login</a>';
+	let registro 	= '<a class=" btn btn-outline-orange" href="registro.html">Registro</a>';
+	let logout 		= '<a onclick="logout();" class=" btn btn-outline-orange" href="index.html">Log out</a>';
+	let newRecipe 	= '<span class=" h2"><i class="fas fa-file text-orange"></i></span><span class="d-initial d-md-none d-lg-initial text-orange"> Nueva receta</span>';
+	if(logueado()){
+		let username = JSON.parse(sessionStorage.getItem('usuario')).login;
+		$("#sign_div_noH").html("Hola, <span class='text-orange'>"+username+" </span>"+logout);
+		$("#sign_div_siH").html("Hola, <span class='text-orange'>"+username+" </span>"+logout);
+		$("#new_recipe").attr("style", "");
+	}
+	else{
+		if(document.location.pathname == '/nueva-receta.html'){
+			window.location.replace("http://localhost/registro.html");
+		}
+		
+		document.getElementById("sign_div_noH").innerHTML = login+registro;
+		document.getElementById("sign_div_siH").innerHTML = login+registro;
+	}
+}
+
+function logout(){
+	sessionStorage.clear();
+	window.location.href = "http://localhost/index.html";
+}

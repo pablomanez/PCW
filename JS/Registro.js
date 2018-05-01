@@ -70,8 +70,14 @@ function registrame(){
 			}
 
 			response.json().then(function(datos){
-				console.log(datos);
-				muestraPopap("Resgistro efectuado correctamente.")
+				$("#login").val("");
+				$("#pwd").val("");
+				$("#pwd2").val("");
+				$("#nombre").val("");
+				$("#email").val("");
+				$("#fnac").val("");
+				$("#callbackName").html("");
+				muestraPopUpRegitro("Registro efectuado óptimamente.");
 				//sessionStorage.setItem('usuario',JSON.stringify(datos));
 			});
 
@@ -81,4 +87,26 @@ function registrame(){
 	}
 }
 
-functio refirige
+
+function muestraPopUpRegitro(msg){
+	let popap =
+	`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100"> 
+			<div class="position-relative">
+				<div onclick="destroyPopUPRegistro();"class="position-absolute t0 r0 bg-darkt-t p-1 div-link pointer h4 text-blood">
+					<i class="far fa-times-circle"></i>
+				</div>
+				<div  class="bg-light d-flex align-items-center justify-content-center box-shadow-light text-center p-3 t-2">
+					`+msg+`
+				</div>
+			</div>
+		</div>`;
+
+	$("#popap").html(popap);
+}
+
+
+function destroyPopUPRegistro(){
+	
+
+	window.location.href = "http://localhost/login.html";
+}

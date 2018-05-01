@@ -8,10 +8,15 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
-<body class="background" onload="loadRecipe()">
+<body class="background" onload="loadRecipe(); loginControl();">
+	
+	<div id="popap">
+		
+	</div>
+
 	<header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
 	<div class=" row align-items-center">
-		
+
 		<a href="index.html" class="logo col-2 d-initial d-md-none mheight-50px"></a>
 
 		<!-- BARRA DE BÚSQUEDA -->
@@ -32,41 +37,47 @@
 
 		</label>
 		<!-- -->
-	
+
 
 		<!-- Login/Registro -->
-		<div class="col-4 col-md-5 text-right d-none d-md-initial">
+		<div class="col-4 col-md-5 text-right d-none d-md-initial text-light h5" id="sign_div_noH">
+			<!--
 			<a class="btn revers-a ml-auto" href="login.html">Login</a>
 			<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 			<a class=" btn btn-outline-orange" href="#">Log out</a>
+			-->
 		</div>
 		<div class="col-12">
-			
+
 		<hr class="hr2 d-none d-md-flex"/>
 		</div>
 
 		<a href="index.html" class="logo col-2 col-md-5 col-lg-4 col-xl-3 h-100 position-relative">
 			<span class="position-absolute b0 r0 mr-2 z-2 d-none d-md-initial">De cero a héroe en 3 chuletas</span>
 		</a>
-		
+
 		<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden h4">
 
-			<a class="btn revers-a mr-3" href="index.html">
+			<a class="btn revers-a mr-3" href="index.html" id="index">
 				<span class="h2"><i class="fas fa-home"></i></span>
 				<span class="d-initial d-md-none  d-lg-initial">Inicio</span>
 			</a>
-			<div class="p-2 d-block d-md-none">
+			<div class="p-2 d-block d-md-none text-light h5" id="sign_div_siH">
+				<!--
 				<a class="btn revers-a" href="login.html">Login</a>
 				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 				<a class=" btn btn-outline-orange" href="registro.html">Logout</a>
+				-->
 			</div>
-			<a class="btn revers-a mr-3" href="buscar.html">
+			<a class="btn revers-a mr-3" href="buscar.html" id="adv_search">
 				<span class="h2"><i class="fas fa-search-plus"></i></span>
-				<span class="d-initial d-md-none  d-lg-initial">Búsqueda avanzada</span>
+				<span class="d-initial d-md-none d-lg-initial">Búsqueda avanzada</span>
 			</a>
-			<a class="btn revers-a mr-3" href="nueva-receta.html">
+			<a style="display: none !important;" class="btn revers-a mr-3" href="nueva-receta.html" id="new_recipe">
+				
 				<span class=" h2"><i class="fas fa-file"></i></span>
 				<span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>
+				
 			</a>
 			<!--
 			<a class="btn revers-a" href="nueva-receta.html">
@@ -76,8 +87,8 @@
 			-->
 
 		</div>
-		
-		
+
+
 	</div>
 </header>
 	
@@ -93,12 +104,12 @@
 				<!--        -->
 
 				<div id="control_arrows" class="row text-center px-2" style="font-size: 35px;">
-					<a href="#" class="col-6 bg-dark d-block div-link mr-2" onclick="prevPhoto()">	
+					<div class="pointer col-6 bg-dark d-block div-link mr-2 text-orange" onclick="prevPhoto()">	
 						<i class="fas fa-chevron-left"></i>		
-					</a>
-					<a href="#" class="col-6 bg-dark d-block div-link" onclick="nextPhoto()">	
+					</div>
+					<div class="pointer col-6 bg-dark d-block div-link text-orange" onclick="nextPhoto()">	
 						<i class="fas fa-chevron-right"></i>		
-					</a>
+					</div>
 				</div>
 			</div>
 			<div class="col-12 col-md-4 p-1 mx-2">
@@ -115,8 +126,8 @@
 					</div>
 					
 					<div class="col-6 text-right my-1">Publicada: </div>
-					<div class="col-6 d-flex align-items-center my-1" >
-						<time id="fecha"></time>
+					<div id="fecha" class="col-6 d-flex align-items-center my-1" >
+						
 					</div>
 
 					<div class="col-6 text-right my-1">Tiempo: </div>
@@ -207,9 +218,9 @@
 			</div>
 	</footer>
 	
+	<!--ESCRIP-->
+	<script src="JS/jQueryLight.js"></script>
+	<script src="JS/Receta.js"></script>
 </body>
-<!--ESCRIP-->
-<script type="text/javascript" src="JS/jQueryLight.js"></script>
-<script type="text/javascript" src="JS/Receta.js"></script>
 
 </html>

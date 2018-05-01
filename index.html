@@ -12,7 +12,7 @@
 	<script src="JS/Index.js"></script>
 
 </head>
-<body class="background o-visible" onload="indexLastSix()">
+<body class="background o-visible" onload="indexLastSix(); loginControl();">
 
 	<!-- HOME BÚSQUEDA LOGIN/REGISTRO LOGOUT AÑADIR-RECETA 
 	<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100"> 
@@ -21,7 +21,7 @@
 -->
 <header class="container-fluid bg-dark-t2 position-fixed z-5 h-header">
 	<div class=" row align-items-center">
-		
+
 		<a href="index.html" class="logo col-2 d-initial d-md-none mheight-50px"></a>
 
 		<!-- BARRA DE BÚSQUEDA -->
@@ -42,41 +42,47 @@
 
 		</label>
 		<!-- -->
-	
+
 
 		<!-- Login/Registro -->
-		<div class="col-4 col-md-5 text-right d-none d-md-initial">
+		<div class="col-4 col-md-5 text-right d-none d-md-initial text-light h5" id="sign_div_noH">
+			<!--
 			<a class="btn revers-a ml-auto" href="login.html">Login</a>
 			<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
 			<a class=" btn btn-outline-orange" href="#">Log out</a>
+			-->
 		</div>
 		<div class="col-12">
-			
+
 		<hr class="hr2 d-none d-md-flex"/>
 		</div>
 
 		<a href="index.html" class="logo col-2 col-md-5 col-lg-4 col-xl-3 h-100 position-relative">
 			<span class="position-absolute b0 r0 mr-2 z-2 d-none d-md-initial">De cero a héroe en 3 chuletas</span>
 		</a>
-		
+
 		<div id="burger" class="col-12 col-md-7 col-lg-8 col-xl-9 o-hidden h4">
 
-			<a class="btn mr-3" href="index.html">
+			<a class="btn mr-3" href="index.html" id="index">
 				<span class="h2"><i class="fas fa-home"></i></span>
-				<span class="d-initial d-md-none d-lg-initial">Inicio</span>
+				<span class="d-initial d-md-none  d-lg-initial">Inicio</span>
 			</a>
-			<div class="p-2 d-block d-md-none">
-				<a id="login" class="btn revers-a" href="login.html">Login</a>
-				<a id="registro" class=" btn btn-outline-orange" href="registro.html">Registro</a>
-				<a id="logout" class=" btn btn-outline-orange" href="registro.html">Logout</a>
+			<div class="p-2 d-block d-md-none text-light h5" id="sign_div_siH">
+				<!--
+				<a class="btn revers-a" href="login.html">Login</a>
+				<a class=" btn btn-outline-orange" href="registro.html">Registro</a>
+				<a class=" btn btn-outline-orange" href="registro.html">Logout</a>
+				-->
 			</div>
-			<a class="btn revers-a mr-3" href="buscar.html">
+			<a class="btn revers-a mr-3" href="buscar.html" id="adv_search">
 				<span class="h2"><i class="fas fa-search-plus"></i></span>
-				<span class="d-initial d-md-none  d-lg-initial">Búsqueda avanzada</span>
+				<span class="d-initial d-md-none d-lg-initial">Búsqueda avanzada</span>
 			</a>
-			<a class="btn revers-a mr-3" href="nueva-receta.html">
+			<a style="display: none !important;" class="btn revers-a mr-3" href="nueva-receta.html" id="new_recipe">
+				
 				<span class=" h2"><i class="fas fa-file"></i></span>
 				<span class="d-initial d-md-none  d-lg-initial">Nueva receta</span>
+				
 			</a>
 			<!--
 			<a class="btn revers-a" href="nueva-receta.html">
@@ -86,8 +92,8 @@
 			-->
 
 		</div>
-		
-		
+
+
 	</div>
 </header>
 
