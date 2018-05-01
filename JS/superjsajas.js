@@ -128,11 +128,8 @@ function borraFoto(id){
 }
 
 function muestraFoto(input){
-	//console.log("MOSTRAR FOTO");
-	//console.log(input);
-
-	//NOMBRE DE LA IMAGEN, SIN LA RUTA
-	//input.files[0].name
+	let imgNode = input.nextElementSibling.nextElementSibling;
+	imgNode.attr("src", URL.createObjectURL(input.files[0]));
 }
 
 function nuevaReceta(frm){
