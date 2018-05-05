@@ -11,7 +11,7 @@ function muestraPopap(msg,url,elim){
 		`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100 text-center" id="EL_POPAP">
 			<div style="width: 300px; height: 200px;" class="position-relative bg-light d-flex align-items-center justify-content-center box-shadow-light">
 				`+msg+`
-				<a href="`+url+`"><span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="fas fa-times"></i></span></a>
+				<a href="`+url+`"><span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2"><i class="far fa-times-circle"></i></span></a>
 			</div>
 		</div>`;
 	}
@@ -20,7 +20,7 @@ function muestraPopap(msg,url,elim){
 		`<div class="bg-dark-t2 w-100 h-100 d-flex align-items-center justify-content-center position-fixed z-100 text-center" id="EL_POPAP">
 			<div style="width: 300px; height: 200px;" class="position-relative bg-light d-flex align-items-center justify-content-center box-shadow-light">
 				`+msg+`
-				<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2" onclick="eliminaPopap();"><i class="fas fa-times"></i></span>
+				<span class="position-absolute pointer t0 r0 m-2 text-blood h3 z-2" onclick="eliminaPopap();"><i class="far fa-times-circle"></i></span>
 			</div>
 		</div>`;
 	}
@@ -110,6 +110,8 @@ function foto_masmas(){
 				div.setAttribute("class","div_supremo_fotos");
 
 				div.getElementsByTagName("span")[0].id = "b_"+i;
+				div.getElementsByTagName("input")[0].id = "l_input_foto_"+i;
+				div.getElementsByTagName("label")[0].setAttribute("for","l_input_foto_"+i);
 
 				//console.log(div.getElementsByTagName("input")[0]);
 				document.getElementById("l_fotos").appendChild(div);
@@ -182,111 +184,112 @@ function nuevaReceta(frm){
 	}
 	*/
 
-	let init = { 'method':'post', 'body':fd, 'headers':{'Authorization':usu.clave} };
+	//COMPRUEBO SI HAY FOTOS PARA SUBIR
+	let b_fotos = true;
+	let div_fotos = document.getElementById('l_fotos').getElementsByTagName('textarea');
+	let input_fotos = document.getElementById('l_fotos').getElementsByTagName('input');
+	//let div_fotos = document.getElementById('l_fotos').getElementsByClassName("div_supremo_fotos");
 
-	fetch(url,init).then(function(response){
-		if(!response.ok){
-			return false;
-		}
+	if(div_fotos.length == 0 || input_fotos.length == 0){
+		b_fotos = false;
+	}
 
-		response.json().then(function(datos){
-			//console.log(datos);
-			//SE HAN SUBIDO LOS DATOS DE LA RECETA CORRECTAMENTE
+	if(b_fotos){
+		let init = { 'method':'post', 'body':fd, 'headers':{'Authorization':usu.clave} };
 
-			//datos.ID -> ID DE LA RECETA
-			let id_receta = datos.ID;
-			let fd2 = new FormData();
-			let list = document.getElementById('l_ingr').getElementsByTagName("li");
-			let ingr = '[';
-
-			//VECTOR DE INGREDIENTES EN FORMATO JSON ["ingr1","ingr2",...]
-
-			for(let i=0 ; i<list.length ; i++){
-				let node = list[i].getElementsByTagName("span")[1].innerText;
-				//ingr.push(list[i].getElementsByTagName("span")[1].innerText);
-				
-				i==0? ingr += '"'+node+'"' : ingr += ',"'+node+'"';
+		fetch(url,init).then(function(response){
+			if(!response.ok){
+				return false;
 			}
-			ingr += ']';
-			//console.log(ingr);
 
-			fd2.append('l',usu.login);
-			fd2.append("i",ingr);
+			response.json().then(function(datos){
+				//console.log(datos);
+				//SE HAN SUBIDO LOS DATOS DE LA RECETA CORRECTAMENTE
 
-			let url2 = 'rest/receta/'+id_receta+'/ingredientes';
-			let init2 = { 'method':'post', 'body':fd2, 'headers':{'Authorization':usu.clave} };
+				//datos.ID -> ID DE LA RECETA
+				let id_receta = datos.ID;
+				let fd2 = new FormData();
+				let list = document.getElementById('l_ingr').getElementsByTagName("li");
+				let ingr = '[';
 
-			fetch(url2,init2).then(function(response){
-				if(!response.ok){
-					return false;
+				//VECTOR DE INGREDIENTES EN FORMATO JSON ["ingr1","ingr2",...]
+
+				for(let i=0 ; i<list.length ; i++){
+					let node = list[i].getElementsByTagName("span")[1].innerText;
+					//ingr.push(list[i].getElementsByTagName("span")[1].innerText);
+					
+					i==0? ingr += '"'+node+'"' : ingr += ',"'+node+'"';
 				}
+				ingr += ']';
+				//console.log(ingr);
 
-				response.json().then(function(datos){
-					console.log(datos);
-					//SE HAN SUBIDO LOS INGREDIENTES CORRECTAMENTE
-					let b_fotos = true;
-					let div_fotos = document.getElementById('l_fotos').getElementsByTagName('textarea');
-					let input_fotos = document.getElementById('l_fotos').getElementsByTagName('input');
-					//let div_fotos = document.getElementById('l_fotos').getElementsByClassName("div_supremo_fotos");
+				fd2.append('l',usu.login);
+				fd2.append("i",ingr);
 
-					if(div_fotos.length == 0 || input_fotos.length == 0){
-						b_fotos = false;
+				let url2 = 'rest/receta/'+id_receta+'/ingredientes';
+				let init2 = { 'method':'post', 'body':fd2, 'headers':{'Authorization':usu.clave} };
+
+				fetch(url2,init2).then(function(response){
+					if(!response.ok){
+						return false;
 					}
 
-					for(let i=0 ; i<div_fotos.length && b_fotos ; i++){
-						let fd3 = new FormData();
-						let url3 = 'rest/receta/'+id_receta+'/foto';
+					response.json().then(function(datos){
+						console.log(datos);
+						//SE HAN SUBIDO LOS INGREDIENTES CORRECTAMENTE
 
-						fd3.append("l",usu.login);
-						fd3.append("t",div_fotos[i].value);
-						fd3.append("f",input_fotos[i].files[0]);
+						for(let i=0 ; i<div_fotos.length && b_fotos ; i++){
+							let fd3 = new FormData();
+							let url3 = 'rest/receta/'+id_receta+'/foto';
 
-						for(var pair of fd3.entries()) {
-						   console.log(pair[0]+ ', '+ pair[1]);
-						}
-						
-						let init3 = { 'method':'post', 'body':fd3, 'headers':{'Authorization':usu.clave} };
-						fetch(url3,init3).then(function(response){
-							if(!response.ok){
-								//console.log(response.code);
-								return false;
+							fd3.append("l",usu.login);
+							fd3.append("t",div_fotos[i].value);
+							fd3.append("f",input_fotos[i].files[0]);
 
+							for(var pair of fd3.entries()) {
+							   console.log(pair[0]+ ', '+ pair[1]);
 							}
+							
+							let init3 = { 'method':'post', 'body':fd3, 'headers':{'Authorization':usu.clave} };
+							fetch(url3,init3).then(function(response){
+								if(!response.ok){
+									//console.log(response.code);
+									return false;
 
-							response.json().then(function(datos){
-								console.log(datos);
-								//SE HA SUBIDO LA FOTO CORRECTAMENTE
+								}
 
-							});
+								response.json().then(function(datos){
+									console.log(datos);
+									//SE HA SUBIDO LA FOTO CORRECTAMENTE
 
-						},function(response){
-							console.log("error");
-							b_fotos = false;
-						});//FETCH DE LAS FOTOS
+								});
+
+							},function(response){
+								console.log("error");
+								b_fotos = false;
+							});//FETCH DE LAS FOTOS
 
 
-					}//FOR
+						}//FOR
 
-					//SE HA SUBIDO TODO CORRECTAMENTE
-					if(b_fotos){
-						//SI NO ENTRA AQUÍ ES QUE NO SE HA SUBIDO BIEN ALGUNA FOTO
+						//SE HA SUBIDO TODO CORRECTAMENTE
 						muestraPopap("La receta "+name+" se ha creado óptimamente","index.html",false);
-					}
-					else{
-						muestraPopap("No has introducido ninguna foto para la receta","#",true);
-					}
 
-				});
+					});
 
-			},function(response){
-				console.log("error");
-			});//FETCH DE LOS INGREDIENTES
+				},function(response){
+					console.log("error");
+				});//FETCH DE LOS INGREDIENTES
 
-		});
+			});
 
-	},function(response){
-		console.log("error");
-	});//FETCH DE LOS DATOS
+		},function(response){
+			console.log("error");
+		});//FETCH DE LOS DATOS
+	}
+	else{
+		muestraPopap("No has introducido ninguna foto para la receta","#",true);
+	}
 
 	return false;
 }
