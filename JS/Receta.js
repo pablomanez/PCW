@@ -42,7 +42,7 @@ function loadRecipe(){
 					$("#dificultad").append(circle);
 				}
 			}
-			console.log(datos.FILAS[0].fecha);
+
 			$("#fecha").append("<time datetime='"+datos.FILAS[0].fecha+"'>"+date.getDate()+"/"+month+"/"+date.getFullYear() + "</time>");
 			$("#tiempo").append(datos.FILAS[0].tiempo+" minutos");
 			if(datos.FILAS[0].comensales > 6){
