@@ -42,8 +42,8 @@ function loadRecipe(){
 					$("#dificultad").append(circle);
 				}
 			}
-
-			$("#fecha").append("<time datetime="+datos.FILAS[0].fecha+">"+date.getDate()+"/"+month+"/"+date.getFullYear() + "</time>");
+			console.log(datos.FILAS[0].fecha);
+			$("#fecha").append("<time datetime='"+datos.FILAS[0].fecha+"'>"+date.getDate()+"/"+month+"/"+date.getFullYear() + "</time>");
 			$("#tiempo").append(datos.FILAS[0].tiempo+" minutos");
 			if(datos.FILAS[0].comensales > 6){
 				$("#comensales").append(dude+"x"+datos.FILAS[0].comensales);
