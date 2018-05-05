@@ -481,7 +481,7 @@ function formBuscar(frm){
 		let vacion = true;
 		let url = 'rest/receta/?';
 		let fd = new FormData(frm);
-		console.log(fd);
+		//console.log(fd);
 		resetBuscar();
 		
 		if(frm.elements[0].value != ""){
@@ -529,6 +529,7 @@ function formBuscar(frm){
 		console.log(url);
 		
 		buscarRecetas(url);
+		updatePags();
 			
 		/*
 		console.log(url);
@@ -571,7 +572,7 @@ function limpiaIngredientes(){
 
 function updatePags(){
 	//ACTUALIZA LOS NUMEROS DE LA PAGINACION
-	//console.log("Actualizo la paginacion con: "+url_paginacion);
+	console.log("Actualizo la paginacion con: "+url_paginacion);
 	
 	fetch(url_paginacion).then(function(response){
 		//TODO HA IDO BIEN
