@@ -476,6 +476,8 @@ function resetBuscar(){
 function formBuscar(frm){
 	
 	if(frm){
+		//document.location.href = "http://localhost/buscar.html";
+
 		console.log("HAY FORMULARIO");
 		let id = []; //ARRAY DE LOS ID DE LAS RECETAS
 		let vacion = true;
@@ -694,6 +696,7 @@ function hacerLogin(frm){
 
 	fetch(url,{'method':'POST','body':fd}).then(function(response){
 		if(!response.ok){
+			muestraPopap("Login incorrecto","#",true);
 			return false;
 		}
 
