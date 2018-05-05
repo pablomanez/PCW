@@ -10,9 +10,11 @@ function totalP(){
 			return false;
 		}
 		response.json().then(function(datos){
-			
+
 			// Calculo el total de páginas en función del número de recetas a mostrar por página
 			total_pages = Math.floor(datos.FILAS.length/recetas_a_mostrar);
+			if(datos.FILAS.length % recetas_a_mostrar == 0)
+				total_pages--;
 
 			// Las muestro sumando 1 para que en lugar de Página 0 de 1, ponga Página 1 de 2
 			$("#current_page").html(current_page+1);
