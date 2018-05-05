@@ -1,4 +1,4 @@
-ID = parseInt(getUrlParameter(window.location.href, "id"));
+ID = getUrlParameter(window.location.href, "id") == null ? null : parseInt(getUrlParameter(window.location.href, "id"));
 
 LIKES = 0;
 DISLIKES = 0;
