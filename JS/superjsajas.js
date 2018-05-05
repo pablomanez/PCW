@@ -393,73 +393,73 @@ function buscarRecetas(url){
 			//console.log(datos);
 
 			//AHORA DEBO TRATAR LA PETICION CON datos.FILAS[]
-
+			let request = new XMLHttpRequest();
+			request.open("GET", "includes/newsearch_recipe.html", true);
+			let node = this;
+			request.onreadystatechange = function(oEvent){	
+				if(request.readyState == 4){
+					if(request.status == 200){
 			
-			//SACO LAS FOTOS DE CADA RECETA
-			for(let i=0 ; i<datos.FILAS.length ; i++){
-				resultado = true;
-				//PETIÇAO DEL FICHERO
-				let request = new XMLHttpRequest();
-				request.open("GET", "includes/newsearch_recipe.html", true);
-				let node = this;
-				request.onreadystatechange = function(oEvent){	
-					if(request.readyState == 4){
-						if(request.status == 200){
-							//console.log(datos.FILAS[i]);
-							$("#recetas").innerHTML += request.responseText;
-							$(".receta_title")[i].append(datos.FILAS[i].nombre);
-							$(".receta_autor")[i].append(datos.FILAS[i].autor);
-							$(".receta_fecha")[i].append(datos.FILAS[i].fecha);
-							$(".receta_pos")[i].append(datos.FILAS[i].positivos);
-							$(".receta_neg")[i].append(datos.FILAS[i].negativos);
-							//style="background-image: url(Images/RECETA_1.jpg);"
-							$(".receta_fecha")[i].attr("datetime",datos.FILAS[i].fecha);
-							$(".receta_img")[i].attr("style","background-image: url(fotos/"+datos.FILAS[i].fichero+");");
-							$(".receta_title")[i].attr("href","receta.html?id="+datos.FILAS[i].id);
-							$(".autor_href")[i].attr("href","buscar.html?a="+datos.FILAS[i].autor);
+						//SACO LAS FOTOS DE CADA RECETA
+						for(let i=0 ; i<datos.FILAS.length ; i++){
+							resultado = true;
+							//PETIÇAO DEL FICHERO
+							
+								//console.log(datos.FILAS[i]);
+								$("#recetas").innerHTML += request.responseText;
+								$(".receta_title")[i].append(datos.FILAS[i].nombre);
+								$(".receta_autor")[i].append(datos.FILAS[i].autor);
+								$(".receta_fecha")[i].append(datos.FILAS[i].fecha);
+								$(".receta_pos")[i].append(datos.FILAS[i].positivos);
+								$(".receta_neg")[i].append(datos.FILAS[i].negativos);
+								//style="background-image: url(Images/RECETA_1.jpg);"
+								$(".receta_fecha")[i].attr("datetime",datos.FILAS[i].fecha);
+								$(".receta_img")[i].attr("style","background-image: url(fotos/"+datos.FILAS[i].fichero+");");
+								$(".receta_title")[i].attr("href","receta.html?id="+datos.FILAS[i].id);
+								$(".autor_href")[i].attr("href","buscar.html?a="+datos.FILAS[i].autor);
 
-							let url_c = 'rest/receta/'+datos.FILAS[i].id+'/comentarios'; //rest/receta/i/comentarios
-							fetch(url_c).then(function(response){
-								if(!response.ok){
-									return false;
-								}
-
-								response.json().then(function(comments){
-									//console.log(datos2);
-									let div_comments = "";
-
-									for(let j=0 ; j<comments.FILAS.length ; j++){
-										let comment = 
-										`<div class="col-12 bg-dark-t m-0 p-2 p-2">
-											<span class="text-orange">`+comments.FILAS[j].autor+`</span>
-											<div class="text-light">`+comments.FILAS[j].texto+`</div>
-										</div>`;
-										div_comments += comment;
+								let url_c = 'rest/receta/'+datos.FILAS[i].id+'/comentarios'; //rest/receta/i/comentarios
+								fetch(url_c).then(function(response){
+									if(!response.ok){
+										return false;
 									}
 
-									if($(".receta_comentarios")[i] != undefined){
-										$(".receta_comentarios")[i].innerHTML += div_comments;
-									}
-									else{
-										console.log("ERROR EN: "+datos.FILAS[i].nombre);
-									}
-									
+									response.json().then(function(comments){
+										//console.log(datos2);
+										let div_comments = "";
+
+										for(let j=0 ; j<comments.FILAS.length ; j++){
+											let comment = 
+											`<div class="col-12 bg-dark-t m-0 p-2 p-2">
+												<span class="text-orange">`+comments.FILAS[j].autor+`</span>
+												<div class="text-light">`+comments.FILAS[j].texto+`</div>
+											</div>`;
+											div_comments += comment;
+										}
+
+										if($(".receta_comentarios")[i] != undefined){
+											$(".receta_comentarios")[i].innerHTML += div_comments;
+										}
+										else{
+											console.log("ERROR EN: "+datos.FILAS[i].nombre);
+										}
+										
+									});
+								},function(response){
+									console.log("ERROR");
 								});
-							},function(response){
-								console.log("ERROR");
-							});
 
+
+						} //FOR
+						if(!resultado){
+							muestraPopap("No se han encontrado resultados de la búsqueda realizada","buscar.html",false);
 						}
 					}
 				}
-				request.send(null);
-
-			} //FOR
-			
-			if(!resultado){
-				muestraPopap("No se han encontrado resultados de la búsqueda realizada","buscar.html",false);
-			
 			}
+			request.send(null);
+
+
 		});
 	},function(response){
 		console.log("ERROR");
