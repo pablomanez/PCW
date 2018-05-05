@@ -317,7 +317,7 @@ function login(frm){
 			sessionStorage.setItem('clave',u.clave);
 		}
 		else{
-			console.log("EROEOROEROEROERO");
+			
 		}
 
 	};

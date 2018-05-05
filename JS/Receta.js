@@ -132,8 +132,9 @@ function getComments(id){
 	request.onreadystatechange = function(oEvent){
 		if(request.readyState == 4){
 			if(request.status == 200){
+				
 
-
+				//FICHERO CARGADO
 				let url_c = 'rest/receta/'+id+'/comentarios'; //rest/receta/i/comentarios
 				fetch(url_c).then(function(response){
 					if(!response.ok){
@@ -163,9 +164,6 @@ function getComments(id){
 						}
 					});
 				});
-
-
-
 			}
 		}
 	}
