@@ -196,6 +196,7 @@ function releaseKey(event){
 
 }
 
+/*
 function move() {
 
 

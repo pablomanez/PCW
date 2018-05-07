@@ -13,7 +13,7 @@
 		
 		<header>
 			<div>
-				<a href="index.html">
+				<a id="INICIO" href="index.html">
 					Inicio
 				</a>
 				<a href="index.html">
@@ -22,44 +22,49 @@
 					</div>
 						
 				</a>
-				<a href="index.html">
+				<a id="ACERCA" href="index.html">
 					Acerca
 				</a>
 			</div>
 			<div>
 				<h1 class="title"><span style="color: orange;">BIT</span>RECONNECT</h1><br/>
-				Termina el puzzle si quieres vivir
+				Monta el puzzle en menos de 3:00 si quieres vivir
 			</div>
 		</header>
 		<main>
 			<div>
-				<h2>LA IMAGEN</h2>
+				<div class="cab">LA IMAGEN</div>
 				<label for="l_img">
 					<canvas id="c1""></canvas>
 				<label>
-				<input type="file" name="image" id="l_img" accept="image/*" onchange="cargaImg(this);">
+				<div class="control">
+					<input type="file" name="image" id="l_img" accept="image/*" onchange="cargaImg(this);">
+				</div>
 			</div>
 			<div>
-				<h2>EL PUZZLE</h2>
+				<div class="cab">EL PUZZLE</div>
 				<canvas id="c2">
 				
 				</canvas>
-				<input type="color" name="color_lines" id="color" onchange="copiarCanvas();">
-				<select id="diff">
-					<option value="0">Nivel fácil</option>
-					<option value="1">Nivel medio</option>
-					<option value="2">Nivel difícil</option>
-				</select>
-				<button>Empezar</button>
-				<button>Terminar</button>
-				<button>Aiuda</button>
+				<div class="control">
+					<input type="color" name="color_lines" id="color" onchange="copiarCanvas();">
+					<select id="diff">
+						<option value="0">Nivel fácil</option>
+						<option value="1">Nivel medio</option>
+						<option value="2">Nivel difícil</option>
+					</select>
+					<button>Empezar</button>
+					<button>Terminar</button>
+					<button>Aiuda</button>
+				</div>
 			</div>
 		</main>
-		<footer>
-			UEEEEEEEEEE
-		</footer>
+		
 
 	</div>
+	<footer>
+			&copy; <time datetime="2018">2018 </time> &nbsp; BITRECONNECT, ALL RIGHTS RESERVED
+		</footer>
 	<script src="jQueryLight.js"></script>
 	<script src="canvas.js"></script>
 	<script>
