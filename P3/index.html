@@ -13,7 +13,7 @@
 		
 		<header>
 			<div>
-				<a href="index.html">
+				<a id="INICIO" href="index.html">
 					Inicio
 				</a>
 				<a href="index.html">
@@ -22,7 +22,7 @@
 					</div>
 						
 				</a>
-				<a href="index.html">
+				<a id="ACERCA" href="index.html">
 					Acerca
 				</a>
 			</div>
@@ -32,18 +32,23 @@
 			</div>
 		</header>
 		<main>
-			<canvas id="c1">
-			
-			</canvas>
-			<canvas id="c2">
-			
-			</canvas>
+			<div>
+				<div class="cab">IMAGEN</div>
+				<canvas id="c1"></canvas>
+				<div class="control"><input type="file"></div>		
+			</div>
+			<div>
+				<div class="cab">PUZZLE</div>
+				<canvas id="c2"></canvas>
+				<div class="control"></div>
+			</div>
 		</main>
-		<footer>
-			&copy; <time datetime="2018">2018 </time> &nbsp; BITRECONNECT, ALL RIGHTS RESERVED
-		</footer>
+		
 
 	</div>
+	<footer>
+			&copy; <time datetime="2018">2018 </time> &nbsp; BITRECONNECT, ALL RIGHTS RESERVED
+		</footer>
 	<script src="jQueryLight.js"></script>
 	<script src="canvas.js"></script>
 	<script>
