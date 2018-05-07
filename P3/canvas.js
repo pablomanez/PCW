@@ -44,6 +44,7 @@ function releaseKey(event){
 
 }
 
+/*
 function move() {
 
 
@@ -89,3 +90,4 @@ else if(Y2 <= 0)
 dibujarRect();
 setTimeout('move()',2);
 }
+*/
