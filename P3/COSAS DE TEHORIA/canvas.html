@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>CANVVAS</title>
+	<link rel="stylesheet" type="text/css" href="canvas.css">
+	<script src="canvas.js"></script>
+</head>
+<body>
+	<h1>Ejemplo de canvas</h1>
+	<!--secion*2>h1{Canvas 0$}+canvas-->
+	<section>
+		<h2>Canvas 01</h2>
+		<canvas id="cv01"></canvas>
+		<footer>
+			<button onclick="prueba01();">Prueba1</button>
+			<button onclick="trasladar();">Translate</button>
+			<button onclick="escalar();">Scale</button>
+			<button onclick="rotar();">Rotation</button>
+			<button onclick="limpiar();">Limpiar</button>
+			<br>
+			<button onclick="pintar1();">Imagen1</button>
+			<button onclick="pintar2();">Imagen2</button>
+			<button onclick="copiarCanvas();">Copiar</button>
+		</footer>
+	</section>
+	<section>
+		<h2>Canvas 02</h2>
+		<canvas id="cv02"></canvas>
+		<footer>
+			<button onclick="dibujarLineas();">Lineas</button>
+		</footer>
+	</section>
+
+
+	<script>
+		prepararCanvas();
+	</script>
+</body>
+</html>
