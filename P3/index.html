@@ -32,12 +32,28 @@
 			</div>
 		</header>
 		<main>
-			<canvas id="c1">
-			
-			</canvas>
-			<canvas id="c2">
-			
-			</canvas>
+			<div>
+				<h2>LA IMAGEN</h2>
+				<label for="l_img">
+					<canvas id="c1""></canvas>
+				<label>
+				<input type="file" name="image" id="l_img" accept="image/*" onchange="cargaImg(this);">
+			</div>
+			<div>
+				<h2>EL PUZZLE</h2>
+				<canvas id="c2">
+				
+				</canvas>
+				<input type="color" name="color_lines" id="color" onchange="copiarCanvas();">
+				<select id="diff">
+					<option value="0">Nivel fácil</option>
+					<option value="1">Nivel medio</option>
+					<option value="2">Nivel difícil</option>
+				</select>
+				<button>Empezar</button>
+				<button>Terminar</button>
+				<button>Aiuda</button>
+			</div>
 		</main>
 		<footer>
 			UEEEEEEEEEE
