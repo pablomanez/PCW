@@ -6,7 +6,9 @@
 	<link rel="stylesheet" href="CSS/canvas.css">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 </head>
-<body  onkeydown="pressKey(event);" onkeyup="releaseKey(event);" onload="canvea(); move();">
+<!--
+<body  onkeydown="pressKey(event);" onkeyup="releaseKey(event);" onload="canvea(); move();">-->
+<body>
 	<div id="container">
 		
 		<header>
@@ -33,6 +35,9 @@
 			<canvas id="c1">
 			
 			</canvas>
+			<canvas id="c2">
+			
+			</canvas>
 		</main>
 		<footer>
 			&copy; <time datetime="2018">2018 </time> &nbsp; BITRECONNECT, ALL RIGHTS RESERVED
@@ -41,5 +46,8 @@
 	</div>
 	<script src="jQueryLight.js"></script>
 	<script src="canvas.js"></script>
+	<script>
+		prepararCanvases();
+	</script>
 </body>
 </html>

@@ -1,3 +1,69 @@
+const _ANCHO = 360;
+const _ALTO = 240;
+
+function getCTX(query){
+	let cv = document.querySelector(query);
+
+	return cv.getContext('2d');
+}
+
+function getCV(query){
+	return document.querySelector(query);
+}
+
+function prepararCanvases(){
+	let cvs = document.querySelectorAll("canvas");
+	
+	cvs.forEach(function(e){
+		e.width 	= _ANCHO;
+		e.height 	= _ALTO;
+	});
+
+	//derrapa&dropea
+	let c1 = document.querySelector('#c1');
+	c1.ondragover = function(e){
+		e.stopPropagation();
+		e.preventDefault(); //return false;
+		console.log("DERRAPANDO");
+	};
+
+	c1.ondrop = function(e){
+		e.stopPropagation();
+		e.preventDefault(); //return false;	
+
+		let fichero = e.dataTransfer.files[0];
+		let fr = new FileReader();
+
+		fr.onload = function(){
+			let img = new Image();
+			img.onload = function(){
+				let ctx = c1.getContext('2d');
+				ctx.drawImage(img,0,0,c1.width,c1.height);
+			};
+			img.src = fr.result;
+		};
+		fr.readAsDataURL(fichero);
+		copiarCanvas();
+	};
+}
+
+function copiarCanvas(){
+	let query = '#c1';
+		let cv1 = getCV(query);
+		let ctx1 = getCTX(query);
+
+	query = '#c2';
+		let cv2 = getCV(query);
+		let ctx2 = getCTX(query);
+
+
+	let imgData = ctx1.getImageData(0,0,cv1.width,cv1.height);
+
+	ctx2.putImageData(imgData,0,0);
+}
+
+//<TRON>
+/*
 ANCHO = 360;
 ALTO = 240;
 cv = $("#c1");
@@ -91,3 +157,4 @@ dibujarRect();
 setTimeout('move()',2);
 }
 */
+//</TRON>
