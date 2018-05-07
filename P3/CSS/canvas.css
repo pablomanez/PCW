@@ -4,6 +4,7 @@
 	--turquesa: #00ddbc;
 	--grey: #3d3d3d;
 	--grey2: #565656;
+	--silver: #e8e8e8;
 	--dark: #2b2b2b;
 }
 
@@ -120,7 +121,6 @@ footer{
 	font-weight: bold;
 }
 
-
 .control{
 	display: flex;
 	align-items: center;
@@ -128,4 +128,50 @@ footer{
 	height: 100px;
 	background: var(--grey2);
 	color: white;
+}
+
+.form-control{
+	border: none;
+	outline: none;
+	padding: 10px;
+	background: var(--silver);
+}
+
+.player-area > div{
+	width: 50%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.player-area > div > div{
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	justify-content: center;
+	text-align: center;
+}
+
+.player-area > div > div input{
+	height: 30px;
+}
+.player-area > div > div input, .player-area > div > div select{
+	width: 100%;
+	border: none;
+	outline: none;
+}
+
+.bg-turquesa{
+	background: var(--turquesa);
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+.aiuda{
+	width: 90%;
+	background: #ffbbb7;
 }
