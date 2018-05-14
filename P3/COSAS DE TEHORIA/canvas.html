@@ -17,7 +17,7 @@
 			<button onclick="trasladar();">Translate</button>
 			<button onclick="escalar();">Scale</button>
 			<button onclick="rotar();">Rotation</button>
-			<button onclick="limpiar();">Limpiar</button>
+			<button onclick="limpiar(event);">Limpiar</button>
 			<br>
 			<button onclick="pintar1();">Imagen1</button>
 			<button onclick="pintar2();">Imagen2</button>
@@ -26,10 +26,21 @@
 	</section>
 	<section>
 		<h2>Canvas 02</h2>
-		<canvas id="cv02"></canvas>
-		<footer>
-			<button onclick="dibujarLineas();">Lineas</button>
-		</footer>
+		<div>
+			<canvas id="cv02"></canvas>
+			<footer>
+				<button onclick="limpiar(event);">Limpiar</button>
+				<button onclick="dibujarLineas();">Lineas</button>
+				<br>
+				<div><span>POSICION ACTUAL (x,y): </span><output id="posXY"></output></div>
+				<div><span>POSICION ENTRADA (x,y): </span><output id="posXYe"></output></div>
+				<div><span>POSICION SALIDA (x,y): </span><output id="posXYs"></output></div>
+				<div><span>POSICION CLICK (x,y): </span><output id="posXYc"></output></div>
+				<div><span>POSICION CLICKDOWN (x,y): </span><output id="posXYcd"></output></div>
+				<div><span>POSICION CLICKUP (x,y): </span><output id="posXYcu"></output></div>
+				<div><span>FILA,COLUMNA: </span><output id="rc"></output></div>
+			</footer>
+		</div>
 	</section>
 
 

@@ -1,5 +1,16 @@
 const _ANCHO = 360;
 const _ALTO = 360;
+var ncols = 5;
+
+function sacarFilaColumna(e){
+	let x = e.offsetX;	
+	let y = e.offsetY;
+	let dim = e.target.width / ncols;
+	let col = Math.floor(x / dim);
+	let row = Math.floor(y / dim);
+
+	return [col,row];
+}
 
 function getCTX(query){
 	let cv = document.querySelector(query);
@@ -21,6 +32,7 @@ function prepararCanvas(){
 
 	//derrapa&dropea
 	let cv01 = document.querySelector('#cv01');
+
 	cv01.ondragover = function(e){
 		e.stopPropagation();
 		e.preventDefault(); //return false;
@@ -44,6 +56,85 @@ function prepararCanvas(){
 		};
 		fr.readAsDataURL(fichero);
 	};
+
+	//EVENTOS DEL MAUS
+	let cv02 = document.querySelector('#cv02');
+	
+	cv02.onmousemove = function(e){
+		let x = e.offsetX;
+		let y = e.offsetY;
+		let dim = e.target.width / ncols;
+		let [col,row] = sacarFilaColumna(e);
+		let ctx02 = cv02.getContext('2d');
+
+		document.querySelector('#posXY').innerHTML = `(${x},${y})`;
+
+		if(!cv02.getAttribute('data-FC')){
+			let FC = {'col':col,'row':row};
+			cv02.setAttribute('data-FC',JSON.stringify(FC));
+		}
+		else{
+			let FC = JSON.parse(cv02.getAttribute('data-FC'));
+			if(FC.row == row && FC.col = col){
+				return;
+			}
+		}
+		cv02.width = cv02.width;
+		ctx02.drawImage(cv01,col*dim,row*dim,
+						dim,dim,
+						col*dim,row*dim,
+						dim,dim);
+		//dibujarLineas();
+	};
+
+	//ondragenter,ondragleave
+	cv02.onmouseenter = function(e){
+		let x = e.offsetX;	
+		let y = e.offsetY;
+
+		document.querySelector('#posXYe').innerHTML = `(${x},${y})`;
+	};
+
+	cv02.onmouseleave = function(e){
+		let x = e.offsetX;	
+		let y = e.offsetY;
+
+		document.querySelector('#posXYs').innerHTML = `(${x},${y})`;
+	};
+
+	cv02.onclick = function(e){
+		let x = e.offsetX;	
+		let y = e.offsetY;
+
+		document.querySelector('#posXYc').innerHTML = `(${x},${y})`;
+
+		//SACAR FILA Y COLUMNA
+		let [col,row] = sacarFilaColumna(e);
+		let dim = e.target.width / ncols;
+		document.querySelector('#rc').innerHTML = `(${row},${col})`;
+		
+		//NO PARA LA PRÁCTICA !!!
+		let ctx01 = cv01.getContext('2d');
+		let ctx02 = cv02.getContext('2d');
+		let imgData = ctx01.getImageData(col*dim,row*dim,dim,dim);
+		ctx02.putImageData(imgData,col*dim,row*dim);
+		dibujarLineas();
+	};
+
+	cv02.onmousedown = function(e){
+		let x = e.offsetX;	
+		let y = e.offsetY;
+
+		document.querySelector('#posXYcd').innerHTML = `(${x},${y})`;
+	};
+
+	cv02.onmouseup = function(e){
+		let x = e.offsetX;	
+		let y = e.offsetY;
+
+		document.querySelector('#posXYcu').innerHTML = `(${x},${y})`;
+	};
+
 }
 
 function prueba01(){
@@ -78,8 +169,11 @@ function rotar(){
 	ctx.rotate(Math.PI*(ang/180));
 }
 
-function limpiar(){
-	let cv = document.querySelector('#cv01');
+function limpiar(e){
+	//let cv = document.querySelector('#cv01');
+	let footer = e.target.parentNode;
+	let section = footer.parentNode;
+	let cv = section.querySelector('canvas');
 
 	cv.width = cv.width;
 }
@@ -134,7 +228,6 @@ function dibujarLineas(){
 	let cv = getCV(query);
 	let ctx = getCTX(query);
 
-	let ncols = 3;
 	let dim = cv.width/ncols;
 
 	ctx.beginPath();
