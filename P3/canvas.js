@@ -1,6 +1,9 @@
 const _ANCHO = 360;
 const _ALTO = 240;
 
+var ncols;
+var nrows;
+
 function getCTX(query){
 	let cv = document.querySelector(query);
 
@@ -71,44 +74,24 @@ function dibujarLineas(){
 	let cv = getCV(query);
 	let ctx = getCTX(query);
 
-	let ncols;
-	let nrows;
 	let diff = document.querySelector("#diff");
-	console.log(diff.value);
 	if(diff.value == 0){
+		ncols = 4;
+		nrows = 6;
+	}
+	else if(diff.value == 1){
 		ncols = 6;
-		nrows = 4;
+		nrows = 9;	
 	}
-	else if(diff.value == 0){
-		ncols = 9;
-		nrows = 6;	
-	}
-	else if(diff.value == 0){
-		ncols = 12;
-		nrows = 8;
+	else if(diff.value == 2){
+		ncols = 8;
+		nrows = 12;
 	}
 	else{
 		ncols = 4;
 		nrows = 3;
 	}
-	switch(diff.value){
-		case 0:
-			ncols = 6;
-			nrows = 4;
-			break;
-		case 1:
-			ncols = 9;
-			nrows = 6;
-			break;
-		case 2:
-			ncols = 12;
-			nrows = 8;
-			break;
-		default:
-			ncols = 3;
-			nrows = 3;
-			break;
-	}
+
 	let dimy = cv.width/nrows;
 	let dimx = cv.height/ncols;
 

@@ -21,7 +21,7 @@ html, body{
 }
 
 #c1,#c2{
-	border: 2px solid white;
+	border: 2px solid var(--turquesa);
 }
 
 a{
