@@ -46,16 +46,24 @@
 				<canvas id="c2">
 				
 				</canvas>
-				<div class="control">
-					<input type="color" name="color_lines" id="color" onchange="copiarCanvas();">
-					<select id="diff">
-						<option value="0">Nivel fácil</option>
-						<option value="1">Nivel medio</option>
-						<option value="2">Nivel difícil</option>
-					</select>
-					<button>Empezar</button>
-					<button>Terminar</button>
-					<button>Aiuda</button>
+				<div class="control player-area">
+					<div>
+						<div>
+							<input type="color" name="color_lines" id="color" onchange="copiarCanvas();">
+						</div>
+						<div>
+							<select class="form-control" id="diff">
+								<option value="0">Nivel fácil</option>
+								<option value="1">Nivel medio</option>
+								<option value="2">Nivel difícil</option>
+							</select>
+						</div>
+					</div>
+					<div class="bg-turquesa">
+						<button class="form-control pointer">Empezar</button>
+						<button class="form-control pointer">Terminar</button>
+						<button class="form-control pointer aiuda">Aiuda</button>
+					</div>
 				</div>
 			</div>
 		</main>
