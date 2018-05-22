@@ -153,10 +153,6 @@ function creaArrayPiezas(){
 	let query = '#c1';
 		let cv1 = getCV(query);
 		let ctx1 = getCTX(query);
-	
-	query = '#c2';
-		let cv2 = getCV(query);
-		let ctx2 = getCTX(query);
 
 	piezas = [];
 	let imgData;
@@ -182,6 +178,7 @@ function comiensaElPusle(){
 		console.log("Se ha cargado una imagen y puedes empezar");
 
 		deshordena();
+		dibujaPiezas();
 	}
 	else{
 		console.log("Como no cargues una imagen, golpe de remo");
@@ -212,12 +209,47 @@ function deshordena(){
 		aux2 = -1;
 	}
 
-	console.log(piezas);
+	//console.log(piezas);
 }
 
 //DEVUELVE UN NUMERO RANDOM ENTRE min Y max INCLUIDOS
 function getRandom(min,max){
 	return Math.floor((Math.random() * (max+1)) + min);
+}
+
+//DIBUJA LAS PIEZAS UNA VEZ HA EMPEZADO EL JUEGO
+//EL ARRAY PIEZAS ESTA YA DESORDENADO
+function dibujaPiezas(){
+	let query = '#c1';
+		let cv1 = getCV(query);
+		let ctx1 = getCTX(query);
+	
+	query = '#c2';
+		let cv2 = getCV(query);
+		let ctx2 = getCTX(query);
+
+	let imgData;
+	let x = cv1.width/nrows;
+	let y = cv1.height/ncols;
+	let k = 0;
+
+	for(let i=0 ; i<ncols ; i++){
+		for(let j=0 ; j<nrows ; j++){
+			let xp = piezas[k][0];
+			let yp = piezas[k][1];
+			let w = piezas[k][2];
+			let h = piezas[k][3];
+			
+			imgData = ctx1.getImageData(xp,yp,w,h);
+			ctx2.putImageData(imgData,x*j,y*i);
+
+			k++;
+		}
+	}
+
+	dibujarLineas();
+
+
 }
 
 
