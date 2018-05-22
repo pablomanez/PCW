@@ -10,6 +10,7 @@ var imgCargada = false;
 // DE TODOS LOS CUADROS DEL PUZZLE
 // PARA DESPUES INVOCAR EL getImageData(...) 
 var piezas = [];
+var readyToChange = -1;
 
 function getCTX(query){
 	let cv = document.querySelector(query);
@@ -57,6 +58,8 @@ function prepararCanvases(){
 		};
 		fr.readAsDataURL(fichero);
 	};
+
+	
 }
 
 //FUNCION PRINCIPAL
@@ -75,6 +78,24 @@ function copiarCanvas(){
 
 		ctx2.putImageData(imgData,0,0);
 
+
+		$("#c2").onclick = function(e){
+			let [row,col] = sacarFilaColumna(e);
+
+			document.querySelector('#posXY').innerHTML = `(${row},${col})`;
+			if(readyToChange == -1){
+				readyToChange = row*ncols + col;
+			}
+			else{
+				let aux = piezas[readyToChange];
+				piezas[readyToChange] = piezas[row*ncols + col];
+				piezas[row*ncols + col] = aux;
+				readyToChange = -1;
+			}
+
+			dibujaPiezas();
+		};
+
 		//CREO LAS LINEAS
 		dibujarLineas();
 
@@ -90,35 +111,35 @@ function dibujarLineas(){
 
 		let diff = document.querySelector("#diff");
 		if(diff.value == 0){
-			ncols = 4;
-			nrows = 6;
+			nrows = 4;
+			ncols = 6;
 		}
 		else if(diff.value == 1){
-			ncols = 6;
-			nrows = 9;	
+			nrows = 6;
+			ncols = 9;	
 		}
 		else if(diff.value == 2){
-			ncols = 8;
-			nrows = 12;
+			nrows = 8;
+			ncols = 12;
 		}
 		else{
-			ncols = 4;
-			nrows = 3;
+			nrows = 4;
+			ncols = 3;
 		}
 
-		let dimy = cv.width/nrows;
-		let dimx = cv.height/ncols;
+		let dimx = cv.width/ncols;
+		let dimy = cv.height/nrows;
 
 		ctx.beginPath();
 		ctx.strokeStyle = document.querySelector("#color").value;
-		ctx.lineWidth = 5;
+		ctx.lineWidth = 2;
 
-		for(let i=0 ; i<ncols ; i++){
+		for(let i=0 ; i<nrows ; i++){
 			ctx.moveTo(0, i*dimx);
 			ctx.lineTo(cv.width, i*dimx);
 		}
 		
-		for(let i=0 ; i<nrows ; i++){
+		for(let i=0 ; i<ncols ; i++){
 			ctx.moveTo(i*dimy, 0);
 			ctx.lineTo(i*dimy, cv.height);
 		}
@@ -157,12 +178,12 @@ function creaArrayPiezas(){
 	piezas = [];
 	let imgData;
 
-	let x = cv1.width/nrows;
-	let y = cv1.height/ncols;
+	let x = cv1.width/ncols;
+	let y = cv1.height/nrows;
 
 	//FILAS > COLUMNAS
-	for(let i=0 ; i<ncols ; i++){
-		for(let j=0 ; j<nrows ; j++){
+	for(let i=0 ; i<nrows; i++){
+		for(let j=0 ; j<ncols ; j++){
 			//imgData = ctx1.getImageData(x*j,y*i,x,y);
 			imgData = [x*j,y*i,x,y];
 
@@ -170,7 +191,7 @@ function creaArrayPiezas(){
 		}
 	}
 
-	//console.log(piezas);
+	console.log(piezas);
 }
 
 function comiensaElPusle(){
@@ -203,8 +224,6 @@ function deshordena(){
 		piezas[aux] = piezas[aux2];
 		piezas[aux2] = p_aux;
 
-
-
 		aux = -1;
 		aux2 = -1;
 	}
@@ -229,12 +248,12 @@ function dibujaPiezas(){
 		let ctx2 = getCTX(query);
 
 	let imgData;
-	let x = cv1.width/nrows;
-	let y = cv1.height/ncols;
+	let x = cv1.width/ncols;
+	let y = cv1.height/nrows;
 	let k = 0;
 
-	for(let i=0 ; i<ncols ; i++){
-		for(let j=0 ; j<nrows ; j++){
+	for(let i=0 ; i<nrows ; i++){
+		for(let j=0 ; j<ncols ; j++){
 			let xp = piezas[k][0];
 			let yp = piezas[k][1];
 			let w = piezas[k][2];
@@ -248,10 +267,30 @@ function dibujaPiezas(){
 	}
 
 	dibujarLineas();
-
-
 }
 
+
+function sacarFilaColumna(e){
+	let x = e.offsetX;	
+	let y = e.offsetY;
+	let dimX = e.target.width / ncols;
+	let dimY = e.target.height / nrows;
+
+	let col = Math.floor(x / dimX);
+	let row = Math.floor(y / dimY);
+
+	if(col < 0)
+		col = 0;
+	else if(col > ncols-1)
+		col = ncols-1;
+
+	if(row < 0)
+		row = 0;
+	else if(row > nrows-1)
+		row = nrows-1;
+
+	return [row,col];
+}
 
 //<TRON>
 /*
