@@ -10,7 +10,12 @@ var imgCargada = false;
 // DE TODOS LOS CUADROS DEL PUZZLE
 // PARA DESPUES INVOCAR EL getImageData(...) 
 var piezas = [];
+var piezasOriginal = []
 var readyToChange = -1;
+var TIMER;
+var elapsedSeconds = 0;
+
+var SEACEPTANFOTOS = true;
 
 function getCTX(query){
 	let cv = document.querySelector(query);
@@ -41,22 +46,25 @@ function prepararCanvases(){
 	c1.ondrop = function(e){
 		e.stopPropagation();
 		e.preventDefault(); //return false;	
+		if(SEACEPTANFOTOS){
 
-		let fichero = e.dataTransfer.files[0];
-		let fr = new FileReader();
+			let fichero = e.dataTransfer.files[0];
+			let fr = new FileReader();
 
-		fr.onload = function(){
-			let img = new Image();
-			img.onload = function(){
-				let ctx = c1.getContext('2d');
-				ctx.drawImage(img,0,0,c1.width,c1.height);
-				imgCargada = true;
+			fr.onload = function(){
+				let img = new Image();
+				img.onload = function(){
+					let ctx = c1.getContext('2d');
+					ctx.drawImage(img,0,0,c1.width,c1.height);
+					imgCargada = true;
 
-				copiarCanvas();	//CARGA DE FORMA ASÍNCRONA ÓPTIMA :ok_hand:
+					copiarCanvas();	//CARGA DE FORMA ASÍNCRONA ÓPTIMA :ok_hand:
+				};
+				img.src = fr.result;
 			};
-			img.src = fr.result;
-		};
-		fr.readAsDataURL(fichero);
+			fr.readAsDataURL(fichero);
+			SEACEPTANFOTOS = false;
+		}
 	};
 
 	
@@ -81,8 +89,8 @@ function copiarCanvas(){
 
 		$("#c2").onclick = function(e){
 			let [row,col] = sacarFilaColumna(e);
-
-			document.querySelector('#posXY').innerHTML = `(${row},${col})`;
+			//Debug
+			//document.querySelector('#posXY').innerHTML = `(${row},${col})`;
 			if(readyToChange == -1){
 				readyToChange = row*ncols + col;
 			}
@@ -150,22 +158,26 @@ function dibujarLineas(){
 }
 
 function cargaImg(input){
-	let query = '#c1';
-		let cv = getCV(query);
-		let ctx = getCTX(query);
+	if(SEACEPTANFOTOS){
 
-	let img = new Image();
+		let query = '#c1';
+			let cv = getCV(query);
+			let ctx = getCTX(query);
 
-	img.onload = function(){
-		//PROBAR CON LOCALHOST
-		ctx.drawImage(img,0,0,c1.width,c1.height);
+		let img = new Image();
 
-		imgCargada = true;
+		img.onload = function(){
+			//PROBAR CON LOCALHOST
+			ctx.drawImage(img,0,0,c1.width,c1.height);
 
-		copiarCanvas();
-	};
-	img.src = URL.createObjectURL(input.files[0]);
+			imgCargada = true;
 
+			copiarCanvas();
+		};
+		img.src = URL.createObjectURL(input.files[0]);
+
+		SEACEPTANFOTOS = false;
+	}
 	//console.log(input.files[0]);
 }
 
@@ -200,6 +212,18 @@ function comiensaElPusle(){
 
 		deshordena();
 		dibujaPiezas();
+		$("#timer > div").attr("style", "margin-top: 0;");
+		$("#buttonStarto").attr("disabled","true");
+		$("#buttonStarto").removeClass("pointer");
+		$("#buttonEndo").removeAttr("disabled");
+		$("#buttonEndo").addClass("pointer");
+		$("#Aiuuuudame").removeAttr("disabled");
+		$("#Aiuuuudame").addClass("pointer");
+		$("input[type=file]").attr("disabled","true");
+		$("input[type=color]").attr("disabled","true");
+		$("select").attr("disabled","true");
+
+		timea();
 	}
 	else{
 		console.log("Como no cargues una imagen, golpe de remo");
@@ -290,6 +314,23 @@ function sacarFilaColumna(e){
 		row = nrows-1;
 
 	return [row,col];
+}
+
+
+function timea() {
+	TIMER = setInterval(function(){
+		let ZeroS = "";
+		let ZeroM = "";
+
+		elapsedSeconds++;
+
+		$("#seconds").html(elapsedSeconds);
+	}, 1000);
+}
+
+function stopTimer(){
+	clearInterval(TIMER);
+	elapsedSeconds = 0;
 }
 
 //<TRON>
