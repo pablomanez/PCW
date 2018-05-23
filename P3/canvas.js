@@ -72,41 +72,43 @@ function prepararCanvases(){
 	let cv1 = getCV("#c1");
 	let cv2 = getCV("#c2");
 
-	cv2.onmousemove = function(e){
-		let x = e.offsetX;
-		let y = e.offsetY;
-		let dim = e.target.width / ncols;
-		if(ncols != -1){
-			let [row,col] = sacarFilaColumna(e);
-			let ctx2 = cv2.getContext('2d');
+	if(!SEACEPTANFOTOS){
+		cv2.onmousemove = function(e){
+			let x = e.offsetX;
+			let y = e.offsetY;
+			let dim = e.target.width / ncols;
+			if(ncols != -1){
+				let [row,col] = sacarFilaColumna(e);
+				let ctx2 = cv2.getContext('2d');
 
 
-			//document.querySelector('#posXY').innerHTML = `(${x},${y})`;
+				//document.querySelector('#posXY').innerHTML = `(${x},${y})`;
 
-			/*
-			if(!cv02.getAttribute('data-FC')){
-				let FC = {'col':col,'row':row};
-				cv02.setAttribute('data-FC',JSON.stringify(FC));
-			}
-			else{
-				let FC = JSON.parse(cv02.getAttribute('data-FC'));
-				if(FC.row == row && FC.col = col){
-					return;
+				/*
+				if(!cv02.getAttribute('data-FC')){
+					let FC = {'col':col,'row':row};
+					cv02.setAttribute('data-FC',JSON.stringify(FC));
 				}
+				else{
+					let FC = JSON.parse(cv02.getAttribute('data-FC'));
+					if(FC.row == row && FC.col = col){
+						return;
+					}
+				}
+				*/
+				cv2.width = cv2.width;
+
+				let img = new Image();
+				img.src = 'Images/BITCONNEEEEECT.png';
+
+				//console.log("("+col*dim+","+row*dim+")");
+
+				dibujaPiezas();
+				ctx2.drawImage(img,col*dim,row*dim,dim,dim);
+				dibujarLineas();
 			}
-			*/
-			cv2.width = cv2.width;
-
-			let img = new Image();
-			img.src = 'Images/BITCONNEEEEECT.png';
-
-			//console.log("("+col*dim+","+row*dim+")");
-
-			dibujaPiezas();
-			ctx2.drawImage(img,col*dim,row*dim,dim,dim);
-			dibujarLineas();
-		}
-	};
+		};
+	}
 	
 }
 
