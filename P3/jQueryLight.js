@@ -82,6 +82,15 @@ NodeList.prototype.attr = function(attribute, value){
 	this.setAttribute(attribute, value);
 }
 
+// Quitar atributos
+HTMLElement.prototype.removeAttr = function(attribute){
+	this.removeAttribute(attribute);
+}
+
+NodeList.prototype.removeAttr = function(attribute){
+	this.removeAttribute(attribute);
+}
+
 // Elimina clase
 HTMLElement.prototype.removeClass = function(classname){
 	this.classList.remove(classname);

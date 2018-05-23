@@ -10,7 +10,14 @@ var imgCargada = false;
 // DE TODOS LOS CUADROS DEL PUZZLE
 // PARA DESPUES INVOCAR EL getImageData(...) 
 var piezas = [];
+var solucion = []
+
 var readyToChange = -1;
+var TIMER;
+var elapsedSeconds = 0;
+
+var SEACEPTANFOTOS = true;
+var aiudando = false;
 
 function getCTX(query){
 	let cv = document.querySelector(query);
@@ -41,22 +48,25 @@ function prepararCanvases(){
 	c1.ondrop = function(e){
 		e.stopPropagation();
 		e.preventDefault(); //return false;	
+		if(SEACEPTANFOTOS){
 
-		let fichero = e.dataTransfer.files[0];
-		let fr = new FileReader();
+			let fichero = e.dataTransfer.files[0];
+			let fr = new FileReader();
 
-		fr.onload = function(){
-			let img = new Image();
-			img.onload = function(){
-				let ctx = c1.getContext('2d');
-				ctx.drawImage(img,0,0,c1.width,c1.height);
-				imgCargada = true;
+			fr.onload = function(){
+				let img = new Image();
+				img.onload = function(){
+					let ctx = c1.getContext('2d');
+					ctx.drawImage(img,0,0,c1.width,c1.height);
+					imgCargada = true;
 
-				copiarCanvas();	//CARGA DE FORMA ASÍNCRONA ÓPTIMA :ok_hand:
+					copiarCanvas();	//CARGA DE FORMA ASÍNCRONA ÓPTIMA :ok_hand:
+				};
+				img.src = fr.result;
 			};
-			img.src = fr.result;
-		};
-		fr.readAsDataURL(fichero);
+			fr.readAsDataURL(fichero);
+			SEACEPTANFOTOS = false;
+		}
 	};
 
 	let cv1 = getCV("#c1");
@@ -115,12 +125,18 @@ function copiarCanvas(){
 		let imgData = ctx1.getImageData(0,0,cv1.width,cv1.height);
 
 		ctx2.putImageData(imgData,0,0);
-
+		
+		$("#c2").onmouseover = function(e){
+			if(aiudando){
+				dibujaPiezas();
+				aiudando = false;
+			}
+		};
 
 		$("#c2").onclick = function(e){
 			let [row,col] = sacarFilaColumna(e);
-
-			document.querySelector('#posXY').innerHTML = `(${row},${col})`;
+			//Debug
+			//document.querySelector('#posXY').innerHTML = `(${row},${col})`;
 			if(readyToChange == -1){
 				readyToChange = row*ncols + col;
 			}
@@ -188,47 +204,58 @@ function dibujarLineas(){
 }
 
 function cargaImg(input){
-	let query = '#c1';
-		let cv = getCV(query);
-		let ctx = getCTX(query);
+	if(SEACEPTANFOTOS){
 
-	let img = new Image();
+		let query = '#c1';
+			let cv = getCV(query);
+			let ctx = getCTX(query);
 
-	img.onload = function(){
-		//PROBAR CON LOCALHOST
-		ctx.drawImage(img,0,0,c1.width,c1.height);
+		let img = new Image();
 
-		imgCargada = true;
+		img.onload = function(){
+			//PROBAR CON LOCALHOST
+			ctx.drawImage(img,0,0,c1.width,c1.height);
 
-		copiarCanvas();
-	};
-	img.src = URL.createObjectURL(input.files[0]);
+			imgCargada = true;
 
+			copiarCanvas();
+		};
+		img.src = URL.createObjectURL(input.files[0]);
+
+		SEACEPTANFOTOS = false;
+	}
 	//console.log(input.files[0]);
 }
 
 //SE LLAMA DESDE COPIARCANVAS
 function creaArrayPiezas(){
 	let query = '#c1';
-		let cv1 = getCV(query);
-		let ctx1 = getCTX(query);
+	let cv1 = getCV(query);
+	let ctx1 = getCTX(query);
 
 	piezas = [];
-	let imgData;
+	let pieza;
 
 	let x = cv1.width/ncols;
 	let y = cv1.height/nrows;
 
+	let target = 0;
 	//FILAS > COLUMNAS
 	for(let i=0 ; i<nrows; i++){
 		for(let j=0 ; j<ncols ; j++){
 			//imgData = ctx1.getImageData(x*j,y*i,x,y);
-			imgData = [x*j,y*i,x,y];
 
-			piezas.push(imgData);
+			pieza ={
+				'id': target,
+				'imgData': [x*j,y*i,x,y]
+			}
+			piezas.push(pieza);
+			solucion.push(pieza);
+			++target;
 		}
 	}
 
+	console.log(solucion);
 	console.log(piezas);
 }
 
@@ -238,6 +265,22 @@ function comiensaElPusle(){
 
 		deshordena();
 		dibujaPiezas();
+
+		$("#c1").removeClass("pointer");
+		$("#c2").addClass("pointer");
+
+		$("#timer > div").attr("style", "margin-top: 0;");
+		$("#buttonStarto").attr("disabled","true");
+		$("#buttonStarto").removeClass("pointer");
+		$("#buttonEndo").removeAttr("disabled");
+		$("#buttonEndo").addClass("pointer");
+		$("#Aiuuuudame").removeAttr("disabled");
+		$("#Aiuuuudame").addClass("pointer");
+		$("input[type=file]").attr("disabled","true");
+		$("input[type=color]").attr("disabled","true");
+		$("select").attr("disabled","true");
+
+		timea();
 	}
 	else{
 		console.log("Como no cargues una imagen, golpe de remo");
@@ -266,7 +309,8 @@ function deshordena(){
 		aux2 = -1;
 	}
 
-	//console.log(piezas);
+	console.log(piezas);
+	console.log(solucion);
 }
 
 //DEVUELVE UN NUMERO RANDOM ENTRE min Y max INCLUIDOS
@@ -292,10 +336,10 @@ function dibujaPiezas(){
 
 	for(let i=0 ; i<nrows ; i++){
 		for(let j=0 ; j<ncols ; j++){
-			let xp = piezas[k][0];
-			let yp = piezas[k][1];
-			let w = piezas[k][2];
-			let h = piezas[k][3];
+			let xp = piezas[k].imgData[0];
+			let yp = piezas[k].imgData[1];
+			let w = piezas[k].imgData[2];
+			let h = piezas[k].imgData[3];
 			
 			imgData = ctx1.getImageData(xp,yp,w,h);
 			ctx2.putImageData(imgData,x*j,y*i);
@@ -328,6 +372,86 @@ function sacarFilaColumna(e){
 		row = nrows-1;
 
 	return [row,col];
+}
+
+
+function timea() {
+	TIMER = setInterval(function(){
+		let ZeroS = "";
+		let ZeroM = "";
+
+		elapsedSeconds++;
+
+		$("#seconds").html(elapsedSeconds);
+	}, 1000);
+}
+
+function stopTimer(){
+	clearInterval(TIMER);
+	elapsedSeconds = 0;
+}
+
+function aiuda(){
+	if(!aiudando){
+		aiudando = true;
+		let k = 0;
+		let ctx = $("#c2").getContext('2d');
+		for(let i = 0; i < nrows; ++i){
+			for(let j = 0; j < ncols; ++j){
+
+				if(piezas[k].id != solucion[k].id){
+				
+					let xp = piezas[k].imgData[0];
+					let yp = piezas[k].imgData[1];
+					let w = piezas[k].imgData[2];
+					let h = piezas[k].imgData[3];
+					ctx.globalAlpha = 0.6;
+					ctx.fillStyle = "#ff8800";
+					ctx.fillRect(xp,yp,w,h);
+					ctx.globalAlpha = 1.0;
+					dibujarLineas();
+				}
+				else{
+					let xp = piezas[k].imgData[0];
+					let yp = piezas[k].imgData[1];
+					let w = piezas[k].imgData[2];
+					let h = piezas[k].imgData[3];
+					ctx.globalAlpha = 0.4;
+					ctx.fillStyle = "#00ddbc";
+					ctx.fillRect(xp,yp,w,h);
+					ctx.globalAlpha = 1.0;
+					dibujarLineas();
+				}
+				++k;
+			}
+		}
+	}
+}
+
+function endo(){
+	stopTimer();
+	$("#overlap-left").attr("style", "width:50%; background: #008470;");
+	$("#overlap-right").attr("style", "width:50%; background: #008470;");
+
+	setTimeout(function() {
+	    $("#endMessageArea").removeClass("d-none");
+	}, 250);
+	setTimeout(function() {
+	    $("#title").attr("style", "font-size: 150px; color: rgba(255,255,255,1);");
+	    $("#container").addClass("d-none");
+	}, 750);
+	setTimeout(function() {
+	    $("#infoEnd").attr("style", "color: rgba(255,255,255,1);");
+	    let spans = $("#endMessageArea #infoEnd span");
+	    for(let i = 0; i < spans.length; ++i)
+	    	$("#endMessageArea #infoEnd span")[i].attr("style", "color: orange;");
+	}, 1250);
+	setTimeout(function() {
+		
+	    $("#Again").attr("style", "color: rgba(255,255,255,1);");
+	    $("#endMessageArea #Again img").attr("style", "opacity: 1;");
+
+	}, 1750);
 }
 
 //<TRON>

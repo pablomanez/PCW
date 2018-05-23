@@ -31,11 +31,18 @@
 				Monta el puzzle en menos de 3:00 si quieres vivir
 			</div>
 		</header>
+		<div id="timer">
+			<div style="margin-top: -300px;">
+				<div id="seconds" class="timerBox">0</div>&nbsp;s
+			</div>
+		</div>
 		<main>
+			
 			<div>
 				<div class="cab">LA IMAGEN</div>
 				<label for="l_img">
-					<canvas id="c1""></canvas>
+					<canvas id="c1" class="pointer"></canvas>
+					
 				<label>
 				<div class="control">
 					<input type="file" name="image" id="l_img" accept="image/*" onchange="cargaImg(this);">
@@ -48,6 +55,7 @@
 				</canvas>
 				<div style="color: white;" id="posXY"> </div>
 				<div class="control player-area">
+
 					<div>
 						<div>
 							<input type="color" name="color_lines" id="color" value="#00ddbc" onchange="dibujarLineas();">
@@ -61,9 +69,9 @@
 						</div>
 					</div>
 					<div class="bg-turquesa">
-						<button class="form-control pointer" onclick="comiensaElPusle();">Empezar</button>
-						<button class="form-control" disabled>Terminar</button>
-						<button class="form-control aiuda" disabled>Aiuda</button>
+						<button id="buttonStarto" class="form-control pointer" onclick="comiensaElPusle();">Empezar</button>
+						<button id="buttonEndo" onclick="endo();" class="form-control" disabled>Terminar</button>
+						<button id="Aiuuuudame" onclick="aiuda();" class="form-control aiuda" disabled>Aiuda</button>
 					</div>
 				</div>
 			</div>
@@ -72,8 +80,18 @@
 
 	</div>
 	<footer>
-			&copy; <time datetime="2018">2018 </time> &nbsp; BITRECONNECT, ALL RIGHTS RESERVED
-		</footer>
+		&copy; <time datetime="2018">2018 </time> &nbsp; BITRECONNECT, ALL RIGHTS RESERVED
+	</footer>
+
+	<div id="overlap-left" style="width: 0; background: #00ddbc;"></div>
+	<div id="overlap-right" style="width: 0; background: #00ddbc;"></div>
+	<div id="endMessageArea" class="d-none">
+		<div>
+			<div id="title">Victoria</div>
+			<div id="infoEnd">Has dejado <span id="piezasRestantes">12</span> piezas por colocar bien después de <span id="movimientos">26</span> movimientos y has empleado <span id="tiempoEmpleado">76</span> segundos.</div>
+			<div id="Again"><img src="Images/redo.svg" alt="Again"/> Again?</div>
+		</div>
+	</div>
 	<script src="jQueryLight.js"></script>
 	<script src="canvas.js"></script>
 	<script>
