@@ -70,7 +70,7 @@
 					</div>
 					<div class="bg-turquesa">
 						<button id="buttonStarto" class="form-control pointer" onclick="comiensaElPusle();">Empezar</button>
-						<button id="buttonEndo" onclick="stopTimer();" class="form-control" disabled>Terminar</button>
+						<button id="buttonEndo" onclick="endo();" class="form-control" disabled>Terminar</button>
 						<button id="Aiuuuudame" onclick="aiuda();" class="form-control aiuda" disabled>Aiuda</button>
 					</div>
 				</div>
@@ -80,8 +80,18 @@
 
 	</div>
 	<footer>
-			&copy; <time datetime="2018">2018 </time> &nbsp; BITRECONNECT, ALL RIGHTS RESERVED
-		</footer>
+		&copy; <time datetime="2018">2018 </time> &nbsp; BITRECONNECT, ALL RIGHTS RESERVED
+	</footer>
+
+	<div id="overlap-left" style="width: 0; background: #00ddbc;"></div>
+	<div id="overlap-right" style="width: 0; background: #00ddbc;"></div>
+	<div id="endMessageArea" class="d-none">
+		<div>
+			<div id="title">Victoria</div>
+			<div id="infoEnd">Has dejado <span id="piezasRestantes">12</span> piezas por colocar bien después de <span id="movimientos">26</span> movimientos y has empleado <span id="tiempoEmpleado">76</span> segundos.</div>
+			<div id="Again"><img src="Images/redo.svg" alt="Again"/> Again?</div>
+		</div>
+	</div>
 	<script src="jQueryLight.js"></script>
 	<script src="canvas.js"></script>
 	<script>

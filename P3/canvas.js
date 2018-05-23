@@ -68,8 +68,6 @@ function prepararCanvases(){
 			SEACEPTANFOTOS = false;
 		}
 	};
-
-	
 }
 
 //FUNCION PRINCIPAL
@@ -89,8 +87,10 @@ function copiarCanvas(){
 		ctx2.putImageData(imgData,0,0);
 		
 		$("#c2").onmouseover = function(e){
-			if(aiudando)
+			if(aiudando){
 				dibujaPiezas();
+				aiudando = false;
+			}
 		};
 
 		$("#c2").onclick = function(e){
@@ -352,29 +352,66 @@ function stopTimer(){
 }
 
 function aiuda(){
-	console.log(piezas);
-	console.log(solucion);
-	aiudando = true;
-	let k = 0;
-	let ctx = $("#c2").getContext('2d');
-	for(let i = 0; i < nrows; ++i){
-		for(let j = 0; j < ncols; ++j){
+	if(!aiudando){
+		aiudando = true;
+		let k = 0;
+		let ctx = $("#c2").getContext('2d');
+		for(let i = 0; i < nrows; ++i){
+			for(let j = 0; j < ncols; ++j){
 
-			if(piezas[k].id != solucion[k].id){
-			
-				let xp = piezas[k].imgData[0];
-				let yp = piezas[k].imgData[1];
-				let w = piezas[k].imgData[2];
-				let h = piezas[k].imgData[3];
-				ctx.globalAlpha = 0.7;
-				ctx.fillStyle = "#ff8800";
-				ctx.fillRect(xp,yp,w,h);
-				ctx.globalAlpha = 1.0;
-				dibujarLineas();
+				if(piezas[k].id != solucion[k].id){
+				
+					let xp = piezas[k].imgData[0];
+					let yp = piezas[k].imgData[1];
+					let w = piezas[k].imgData[2];
+					let h = piezas[k].imgData[3];
+					ctx.globalAlpha = 0.6;
+					ctx.fillStyle = "#ff8800";
+					ctx.fillRect(xp,yp,w,h);
+					ctx.globalAlpha = 1.0;
+					dibujarLineas();
+				}
+				else{
+					let xp = piezas[k].imgData[0];
+					let yp = piezas[k].imgData[1];
+					let w = piezas[k].imgData[2];
+					let h = piezas[k].imgData[3];
+					ctx.globalAlpha = 0.4;
+					ctx.fillStyle = "#00ddbc";
+					ctx.fillRect(xp,yp,w,h);
+					ctx.globalAlpha = 1.0;
+					dibujarLineas();
+				}
+				++k;
 			}
-			++k;
 		}
 	}
+}
+
+function endo(){
+	stopTimer();
+	$("#overlap-left").attr("style", "width:50%; background: #008470;");
+	$("#overlap-right").attr("style", "width:50%; background: #008470;");
+
+	setTimeout(function() {
+	    $("#endMessageArea").removeClass("d-none");
+	}, 250);
+	setTimeout(function() {
+	    $("#title").attr("style", "font-size: 150px; color: rgba(255,255,255,1);");
+	    $("#container").addClass("d-none");
+	}, 750);
+	setTimeout(function() {
+	    $("#infoEnd").attr("style", "color: rgba(255,255,255,1);");
+	    let spans = $("#endMessageArea #infoEnd span");
+	    for(let i = 0; i < spans.length; ++i)
+	    	$("#endMessageArea #infoEnd span")[i].attr("style", "color: orange;");
+	}, 1250);
+	setTimeout(function() {
+		
+	    $("#Again").attr("style", "color: rgba(255,255,255,1);");
+	    $("#endMessageArea #Again img").attr("style", "opacity: 1;");
+
+	}, 1750);
 }
 
 //<TRON>
