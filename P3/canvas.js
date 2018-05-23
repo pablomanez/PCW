@@ -65,7 +65,7 @@ function prepararCanvases(){
 				img.src = fr.result;
 			};
 			fr.readAsDataURL(fichero);
-			SEACEPTANFOTOS = false;
+
 		}
 	};
 
@@ -222,7 +222,6 @@ function cargaImg(input){
 		};
 		img.src = URL.createObjectURL(input.files[0]);
 
-		SEACEPTANFOTOS = false;
 	}
 	//console.log(input.files[0]);
 }
@@ -262,7 +261,7 @@ function creaArrayPiezas(){
 function comiensaElPusle(){
 	if(imgCargada){
 		console.log("Se ha cargado una imagen y puedes empezar");
-
+		SEACEPTANFOTOS = false;
 		deshordena();
 		dibujaPiezas();
 
