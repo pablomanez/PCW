@@ -303,6 +303,8 @@ function creaArrayPiezas(){
 	let x = cv1.width/ncols;
 	let y = cv1.height/nrows;
 
+	console.log(ncols+' , '+nrows);
+
 	let target = 0;
 	//FILAS > COLUMNAS
 	for(let i=0 ; i<nrows; i++){
