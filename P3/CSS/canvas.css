@@ -251,9 +251,10 @@ footer{
 	color: rgba(255, 255, 255, 0);
 	font-size: 40px;
 	margin-top: 20px 0;
-	transition: color 0.5s ease-in-out;
-	padding: 20px;
-	border: 2px solid green;
+	transition: color 0.5s ease-in-out, background 0.5s ease-in-out, opacity 0.5s ease-in-out;
+	padding: 20px 0;
+	width: 400px;
+	margin: 0 auto;
 }
 
 #endMessageArea #Again img{
@@ -267,3 +268,21 @@ footer{
 .d-none{display: none !important;}
 .w-0{width: 0;}
 .w-50{width: 50%;}
+
+.again_red{
+	background: #630000;
+	color: white;
+}
+
+.again_red:hover, .again_red:focus{
+	background: #e50000;
+	color: black;
+}
+
+.again_green{
+	background: #005e50;
+}
+
+.again_green:hover, .again_green:focus{
+	background: #00e5c3;
+}

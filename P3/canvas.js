@@ -136,24 +136,26 @@ function copiarCanvas(){
 		};
 
 		$("#c2").onclick = function(e){
-			let [row,col] = sacarFilaColumna(e);
-			//Debug
-			//document.querySelector('#posXY').innerHTML = `(${row},${col})`;
-			if(readyToChange == -1){
-				readyToChange = row*ncols + col;
-			}
-			else{
-				let aux = piezas[readyToChange];
-				piezas[readyToChange] = piezas[row*ncols + col];
-				piezas[row*ncols + col] = aux;
-				readyToChange = -1;
-				let WINNER = checkWin();
-				if(WINNER == true){
-					endo(true);
+			if(!SEACEPTANFOTOS){
+				let [row,col] = sacarFilaColumna(e);
+				//Debug
+				//document.querySelector('#posXY').innerHTML = `(${row},${col})`;
+				if(readyToChange == -1){
+					readyToChange = row*ncols + col;
 				}
-			}
+				else{
+					let aux = piezas[readyToChange];
+					piezas[readyToChange] = piezas[row*ncols + col];
+					piezas[row*ncols + col] = aux;
+					readyToChange = -1;
+					let WINNER = checkWin();
+					if(WINNER == true){
+						endo(true);
+					}
+				}
 
-			dibujaPiezas();
+				dibujaPiezas();
+			}
 		};
 
 		//CREO LAS LINEAS
@@ -438,11 +440,15 @@ function endo(flag){
 	let color = "background: #930000;";
 	let title = "Derrota";
 	let message = "Paquete has perdido";
+	$("#Again").removeClass("again_green");
+	$("#Again").addClass("again_red");
 
 	if(flag){
 		color = "background: #008470;";
 		title = "Victoria";
 		message = "Has dejado 12 piezas por colocar bien después de 26 movimientos y has empleado 76 segundos."
+		$("#Again").removeClass("again_red");
+		$("#Again").addClass("again_green");
 	}
 
 	stopTimer();
@@ -470,7 +476,7 @@ function endo(flag){
 	}, 1250);
 	setTimeout(function() {
 		
-	    $("#Again").attr("style", "color: rgba(255,255,255,1);");
+	    $("#Again").attr("style", "color: rgba(255,255,255,1); opacity: 1;");
 	    $("#endMessageArea #Again img").attr("style", "opacity: 1;");
 
 	}, 1750);
@@ -528,9 +534,11 @@ function reset(){
 
     $("#title").attr("style", "font-size: 150px; color: rgba(255,255,255, 0);");
     $("#infoEnd").attr("style", "color: rgba(255,255,255,0);");
-    $("#Again").attr("style", "color: rgba(255,255,255,0);");
+    $("#Again").attr("style", "color: rgba(255,255,255,0); opacity: 0;");
 	$("#endMessageArea #Again img").attr("style", "opacity: 0;");
+	$("input[type=file]").val("");
 	$("#seconds").html("0");
+
 	setTimeout(function() {
 		$("#overlap-left").addClass("w-0");
 		$("#overlap-left").removeClass("w-50");
