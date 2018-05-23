@@ -120,8 +120,8 @@ function copiarCanvas(){
 			let ctx1 = getCTX(query);
 
 		query = '#c2';
-			let cv2 = getCV(query);
-			let ctx2 = getCTX(query);
+		let cv2 = getCV(query);
+		let ctx2 = getCTX(query);
 
 
 		let imgData = ctx1.getImageData(0,0,cv1.width,cv1.height);
@@ -147,6 +147,10 @@ function copiarCanvas(){
 				piezas[readyToChange] = piezas[row*ncols + col];
 				piezas[row*ncols + col] = aux;
 				readyToChange = -1;
+				let WINNER = checkWin();
+				if(WINNER == true){
+					endo(true);
+				}
 			}
 
 			dibujaPiezas();
@@ -323,12 +327,12 @@ function getRandom(min,max){
 //EL ARRAY PIEZAS ESTA YA DESORDENADO
 function dibujaPiezas(){
 	let query = '#c1';
-		let cv1 = getCV(query);
-		let ctx1 = getCTX(query);
+	let cv1 = getCV(query);
+	let ctx1 = getCTX(query);
 	
 	query = '#c2';
-		let cv2 = getCV(query);
-		let ctx2 = getCTX(query);
+	let cv2 = getCV(query);
+	let ctx2 = getCTX(query);
 
 	let imgData;
 	let x = cv1.width/ncols;
@@ -429,19 +433,36 @@ function aiuda(){
 	}
 }
 
-function endo(){
+function endo(flag){
+
+	let color = "background: #930000;";
+	let title = "Derrota";
+	let message = "Paquete has perdido";
+
+	if(flag){
+		color = "background: #008470;";
+		title = "Victoria";
+		message = "Has dejado 12 piezas por colocar bien después de 26 movimientos y has empleado 76 segundos."
+	}
+
 	stopTimer();
-	$("#overlap-left").attr("style", "width:50%; background: #008470;");
-	$("#overlap-right").attr("style", "width:50%; background: #008470;");
+	$("#overlap-left").attr("style", color);
+	$("#overlap-left").removeClass("w-0");
+	$("#overlap-left").addClass("w-50");
+	$("#overlap-right").attr("style", color);
+	$("#overlap-right").removeClass("w-0");
+	$("#overlap-right").addClass("w-50");
 
 	setTimeout(function() {
 	    $("#endMessageArea").removeClass("d-none");
 	}, 250);
 	setTimeout(function() {
+		$("#title").html(title);
 	    $("#title").attr("style", "font-size: 150px; color: rgba(255,255,255,1);");
 	    $("#container").addClass("d-none");
 	}, 750);
 	setTimeout(function() {
+		$("#infoEnd").html(message);
 	    $("#infoEnd").attr("style", "color: rgba(255,255,255,1);");
 	    let spans = $("#endMessageArea #infoEnd span");
 	    for(let i = 0; i < spans.length; ++i)
@@ -453,6 +474,76 @@ function endo(){
 	    $("#endMessageArea #Again img").attr("style", "opacity: 1;");
 
 	}, 1750);
+}
+
+function checkWin(){
+	let winner = true;
+	let k = 0;
+	for(let i = 0; i < nrows; ++i){
+		for(let j = 0; j < ncols; ++j){
+
+			if(piezas[k].id != solucion[k].id){
+				winner = false;
+			}
+			++k;
+		}
+	}
+	return winner;
+}
+
+
+function reset(){
+	let ctx1 = $("#c1").getContext('2d');
+	let ctx2 = $("#c2").getContext('2d');
+
+	ctx1.clearRect(0, 0, _ANCHO, _ALTO);
+	ctx2.clearRect(0, 0, _ANCHO, _ALTO);
+
+	$("#c1").addClass("pointer");
+	$("#c2").removeClass("pointer");
+
+	$("#timer > div").attr("style", "margin-top: -300px;");
+	$("#buttonStarto").removeAttr("disabled");
+	$("#buttonStarto").addClass("pointer");
+	$("#buttonEndo").attr("disabled", "true");
+	$("#buttonEndo").removeClass("pointer");
+	$("#Aiuuuudame").attr("disabled", "true");
+	$("#Aiuuuudame").removeClass("pointer");
+	$("input[type=file]").removeAttr("disabled");
+	$("input[type=color]").removeAttr("disabled");
+	$("select").removeAttr("disabled");
+
+	ncols = -1;
+	nrows = -1;
+
+	imgCargada = false;
+	piezas = [];
+	solucion = []
+
+	readyToChange = -1;
+	elapsedSeconds = 0;
+
+	SEACEPTANFOTOS = true;
+	aiudando = false;
+
+    $("#title").attr("style", "font-size: 150px; color: rgba(255,255,255, 0);");
+    $("#infoEnd").attr("style", "color: rgba(255,255,255,0);");
+    $("#Again").attr("style", "color: rgba(255,255,255,0);");
+	$("#endMessageArea #Again img").attr("style", "opacity: 0;");
+	$("#seconds").html("0");
+	setTimeout(function() {
+		$("#overlap-left").addClass("w-0");
+		$("#overlap-left").removeClass("w-50");
+
+		$("#overlap-right").addClass("w-0");
+		$("#overlap-right").removeClass("w-50");
+		$("#title").attr("style", "font-size: 500px; color: rgba(255,255,255, 0);");
+	    $("#endMessageArea").addClass("d-none");
+
+	}, 500);
+
+	$("#container").removeClass("d-none");
+	
 }
 
 //<TRON>
