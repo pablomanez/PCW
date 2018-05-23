@@ -1,3 +1,5 @@
+var easterEgg = false;
+
 const _ANCHO = 360;
 const _ALTO = 240;
 
@@ -5,6 +7,12 @@ var ncols = -1;
 var nrows = -1;
 
 var imgCargada = false;
+
+var click = false;
+var marcadorClick = {
+	'x' : -1,
+	'y' : -1
+}
 
 // PIEZAS ALMACENA LA POSICION Y LAS DIMENSIONES
 // DE TODOS LOS CUADROS DEL PUZZLE
@@ -72,44 +80,123 @@ function prepararCanvases(){
 	let cv1 = getCV("#c1");
 	let cv2 = getCV("#c2");
 
-	cv2.onmousemove = function(e){
+
+	$("#c2").onmouseover = function(e){
+		if(aiudando){
+			dibujaPiezas();
+			aiudando = false;
+		}
+	};
+
+	$("#c2").onclick = function(e){
 		if(!SEACEPTANFOTOS){
-			let x = e.offsetX;
-			let y = e.offsetY;
-			let dim = e.target.width / ncols;
-			if(ncols != -1){
-				let [row,col] = sacarFilaColumna(e);
-				let ctx2 = cv2.getContext('2d');
-
-
-				//document.querySelector('#posXY').innerHTML = `(${x},${y})`;
-
-				/*
-				if(!cv02.getAttribute('data-FC')){
-					let FC = {'col':col,'row':row};
-					cv02.setAttribute('data-FC',JSON.stringify(FC));
-				}
-				else{
-					let FC = JSON.parse(cv02.getAttribute('data-FC'));
-					if(FC.row == row && FC.col = col){
-						return;
-					}
-				}
-				*/
-				cv2.width = cv2.width;
-
-				let img = new Image();
-				img.src = 'Images/BITCONNEEEEECT.png';
-
-				//console.log("("+col*dim+","+row*dim+")");
-
-				dibujaPiezas();
-				ctx2.drawImage(img,col*dim,row*dim,dim,dim);
-				dibujarLineas();
+			let [row,col] = sacarFilaColumna(e);
+			//Debug
+			//document.querySelector('#posXY').innerHTML = `(${row},${col})`;
+			if(readyToChange == -1){
+				readyToChange = row*ncols + col;
 			}
-		}	
+			else{
+				let aux = piezas[readyToChange];
+				piezas[readyToChange] = piezas[row*ncols + col];
+				piezas[row*ncols + col] = aux;
+				readyToChange = -1;
+			}
+
+			dibujaPiezas();
+			actualizaMarcadorClick(e);
+
+		}
 	};
 	
+	cv2.onmousemove = function(e){
+		if(!SEACEPTANFOTOS){
+			muestraMarcador(e);
+		}	
+	};
+
+	let body = document.getElementsByTagName('body');
+	body[0].onkeyup = function(e){
+		if(e.key == 'e'){
+			easterEgg? easterEgg = false : easterEgg = true;
+		}
+	}
+}
+
+function actualizaMarcadorClick(e){
+	if(!click){
+		click = true;
+		let [row,col] = sacarFilaColumna(e);
+		
+		marcadorClick.x = row;
+		marcadorClick.y = col;
+
+		console.log(marcadorClick);
+		console.log('Primer click');
+	}
+	else{
+		click = false;
+		console.log('Segundo click');
+	}
+}
+
+function muestraMarcador(e){
+	let cv1 = getCV("#c1");
+	let cv2 = getCV("#c2");
+
+	let dim = e.target.width / ncols;
+	if(ncols != -1){
+		let [row,col] = sacarFilaColumna(e);
+		let ctx2 = cv2.getContext('2d');
+
+		//document.querySelector('#posXY').innerHTML = `(${x},${y})`;
+
+		/*
+		if(!cv02.getAttribute('data-FC')){
+			let FC = {'col':col,'row':row};
+			cv02.setAttribute('data-FC',JSON.stringify(FC));
+		}
+		else{
+			let FC = JSON.parse(cv02.getAttribute('data-FC'));
+			if(FC.row == row && FC.col = col){
+				return;
+			}
+		}#005e50
+		*/
+		cv2.width = cv2.width;
+
+		let img = new Image();
+		img.src = 'Images/BITCONNEEEEECT.png';
+		dibujaPiezas();
+
+		if(!easterEgg){
+			ctx2.globalAlpha = 0.6;
+			ctx2.fillStyle = document.querySelector("#color").value;
+			ctx2.fillRect(col*dim,row*dim,dim,dim);
+			ctx2.globalAlpha = 1.0;
+		}
+		else{
+			ctx2.drawImage(img,col*dim,row*dim,dim,dim);
+		}
+
+		if(click){
+			if(!easterEgg){
+				let mx = marcadorClick.x;
+				let my = marcadorClick.y;
+
+				ctx2.globalAlpha = 0.6;
+				ctx2.fillStyle = document.querySelector("#color").value;
+				ctx2.fillRect(my*dim,mx*dim,dim,dim);
+				ctx2.globalAlpha = 1.0;
+			}
+			else{
+				ctx2.drawImage(img,marcadorClick.y*dim,marcadorClick.x*dim,dim,dim);
+			}
+			//console.log('Dibujaaaaaaaaaaaaaaaaaaaa');
+		}
+
+		dibujarLineas()
+	}
 }
 
 //FUNCION PRINCIPAL
@@ -127,36 +214,6 @@ function copiarCanvas(){
 		let imgData = ctx1.getImageData(0,0,cv1.width,cv1.height);
 
 		ctx2.putImageData(imgData,0,0);
-		
-		$("#c2").onmouseover = function(e){
-			if(aiudando){
-				dibujaPiezas();
-				aiudando = false;
-			}
-		};
-
-		$("#c2").onclick = function(e){
-			if(!SEACEPTANFOTOS){
-				let [row,col] = sacarFilaColumna(e);
-				//Debug
-				//document.querySelector('#posXY').innerHTML = `(${row},${col})`;
-				if(readyToChange == -1){
-					readyToChange = row*ncols + col;
-				}
-				else{
-					let aux = piezas[readyToChange];
-					piezas[readyToChange] = piezas[row*ncols + col];
-					piezas[row*ncols + col] = aux;
-					readyToChange = -1;
-					let WINNER = checkWin();
-					if(WINNER == true){
-						endo(true);
-					}
-				}
-
-				dibujaPiezas();
-			}
-		};
 
 		//CREO LAS LINEAS
 		dibujarLineas();
@@ -316,8 +373,8 @@ function deshordena(){
 		aux2 = -1;
 	}
 
-	console.log(piezas);
-	console.log(solucion);
+	//console.log(piezas);
+	//console.log(solucion);
 }
 
 //DEVUELVE UN NUMERO RANDOM ENTRE min Y max INCLUIDOS
@@ -352,6 +409,8 @@ function dibujaPiezas(){
 			ctx2.putImageData(imgData,x*j,y*i);
 
 			k++;
+
+
 		}
 	}
 
