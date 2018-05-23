@@ -72,8 +72,8 @@ function prepararCanvases(){
 	let cv1 = getCV("#c1");
 	let cv2 = getCV("#c2");
 
-	if(!SEACEPTANFOTOS){
-		cv2.onmousemove = function(e){
+	cv2.onmousemove = function(e){
+		if(!SEACEPTANFOTOS){
 			let x = e.offsetX;
 			let y = e.offsetY;
 			let dim = e.target.width / ncols;
@@ -107,8 +107,8 @@ function prepararCanvases(){
 				ctx2.drawImage(img,col*dim,row*dim,dim,dim);
 				dibujarLineas();
 			}
-		};
-	}
+		}	
+	};
 	
 }
 
