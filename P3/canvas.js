@@ -10,12 +10,14 @@ var imgCargada = false;
 // DE TODOS LOS CUADROS DEL PUZZLE
 // PARA DESPUES INVOCAR EL getImageData(...) 
 var piezas = [];
-var piezasOriginal = []
+var solucion = []
+
 var readyToChange = -1;
 var TIMER;
 var elapsedSeconds = 0;
 
 var SEACEPTANFOTOS = true;
+var aiudando = false;
 
 function getCTX(query){
 	let cv = document.querySelector(query);
@@ -85,7 +87,11 @@ function copiarCanvas(){
 		let imgData = ctx1.getImageData(0,0,cv1.width,cv1.height);
 
 		ctx2.putImageData(imgData,0,0);
-
+		
+		$("#c2").onmouseover = function(e){
+			if(aiudando)
+				dibujaPiezas();
+		};
 
 		$("#c2").onclick = function(e){
 			let [row,col] = sacarFilaColumna(e);
@@ -184,25 +190,32 @@ function cargaImg(input){
 //SE LLAMA DESDE COPIARCANVAS
 function creaArrayPiezas(){
 	let query = '#c1';
-		let cv1 = getCV(query);
-		let ctx1 = getCTX(query);
+	let cv1 = getCV(query);
+	let ctx1 = getCTX(query);
 
 	piezas = [];
-	let imgData;
+	let pieza;
 
 	let x = cv1.width/ncols;
 	let y = cv1.height/nrows;
 
+	let target = 0;
 	//FILAS > COLUMNAS
 	for(let i=0 ; i<nrows; i++){
 		for(let j=0 ; j<ncols ; j++){
 			//imgData = ctx1.getImageData(x*j,y*i,x,y);
-			imgData = [x*j,y*i,x,y];
 
-			piezas.push(imgData);
+			pieza ={
+				'id': target,
+				'imgData': [x*j,y*i,x,y]
+			}
+			piezas.push(pieza);
+			solucion.push(pieza);
+			++target;
 		}
 	}
 
+	console.log(solucion);
 	console.log(piezas);
 }
 
@@ -212,6 +225,10 @@ function comiensaElPusle(){
 
 		deshordena();
 		dibujaPiezas();
+
+		$("#c1").removeClass("pointer");
+		$("#c2").addClass("pointer");
+
 		$("#timer > div").attr("style", "margin-top: 0;");
 		$("#buttonStarto").attr("disabled","true");
 		$("#buttonStarto").removeClass("pointer");
@@ -252,7 +269,8 @@ function deshordena(){
 		aux2 = -1;
 	}
 
-	//console.log(piezas);
+	console.log(piezas);
+	console.log(solucion);
 }
 
 //DEVUELVE UN NUMERO RANDOM ENTRE min Y max INCLUIDOS
@@ -278,10 +296,10 @@ function dibujaPiezas(){
 
 	for(let i=0 ; i<nrows ; i++){
 		for(let j=0 ; j<ncols ; j++){
-			let xp = piezas[k][0];
-			let yp = piezas[k][1];
-			let w = piezas[k][2];
-			let h = piezas[k][3];
+			let xp = piezas[k].imgData[0];
+			let yp = piezas[k].imgData[1];
+			let w = piezas[k].imgData[2];
+			let h = piezas[k].imgData[3];
 			
 			imgData = ctx1.getImageData(xp,yp,w,h);
 			ctx2.putImageData(imgData,x*j,y*i);
@@ -331,6 +349,32 @@ function timea() {
 function stopTimer(){
 	clearInterval(TIMER);
 	elapsedSeconds = 0;
+}
+
+function aiuda(){
+	console.log(piezas);
+	console.log(solucion);
+	aiudando = true;
+	let k = 0;
+	let ctx = $("#c2").getContext('2d');
+	for(let i = 0; i < nrows; ++i){
+		for(let j = 0; j < ncols; ++j){
+
+			if(piezas[k].id != solucion[k].id){
+			
+				let xp = piezas[k].imgData[0];
+				let yp = piezas[k].imgData[1];
+				let w = piezas[k].imgData[2];
+				let h = piezas[k].imgData[3];
+				ctx.globalAlpha = 0.7;
+				ctx.fillStyle = "#ff8800";
+				ctx.fillRect(xp,yp,w,h);
+				ctx.globalAlpha = 1.0;
+				dibujarLineas();
+			}
+			++k;
+		}
+	}
 }
 
 //<TRON>
