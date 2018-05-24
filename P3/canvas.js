@@ -37,13 +37,27 @@ function getCV(query){
 	return document.querySelector(query);
 }
 
+function escribeTextoInicial(){
+	//TEXTO DEL C1
+	let ctx1 = getCTX('#c1');
+
+	ctx1.shadowBlur = 0;
+	ctx1.fillStyle = '#000';
+	ctx1.font = 'bold 20px Arial'; //COMO EN CSS
+	ctx1.textAlign = "center";
+	ctx1.fillText("Haz click o arrastra una imagen aquí",_ANCHO/2,_ALTO/2);
+}
+
 function prepararCanvases(){
 	let cvs = document.querySelectorAll("canvas");
-	
+	let ctx1 = getCTX('#c1');
+
 	cvs.forEach(function(e){
 		e.width 	= _ANCHO;
 		e.height 	= _ALTO;
 	});
+	
+	escribeTextoInicial();
 
 	//derrapa&dropea
 	let c1 = document.querySelector('#c1');
@@ -51,6 +65,25 @@ function prepararCanvases(){
 		e.stopPropagation();
 		e.preventDefault(); //return false;
 		console.log("DERRAPANDO");
+	};
+
+	c1.ondragenter = function(e){
+		ctx1.fillStyle = '#00967f';
+		ctx1.fillRect(0,0,_ANCHO,_ALTO);
+
+		ctx1.shadowOffsetX = 0;
+		ctx1.shadowOffsetY = 0;
+		ctx1.shadowBlur = 20;
+		ctx1.shadowColor = "#000";
+
+		ctx1.strokeRect(0,0,_ANCHO,_ALTO);
+	
+		escribeTextoInicial();
+	};
+
+	c1.ondragleave = function(e){
+		c1.width = c1.width;
+		escribeTextoInicial();
 	};
 
 	c1.ondrop = function(e){
@@ -116,6 +149,7 @@ function prepararCanvases(){
 	};
 
 	let body = document.getElementsByTagName('body');
+
 	body[0].onkeyup = function(e){
 		if(e.key == 'e'){
 			easterEgg? easterEgg = false : easterEgg = true;
@@ -298,6 +332,7 @@ function creaArrayPiezas(){
 	let ctx1 = getCTX(query);
 
 	piezas = [];
+	solucion = [];
 	let pieza;
 
 	let x = cv1.width/ncols;
