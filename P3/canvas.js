@@ -18,7 +18,7 @@ var marcadorClick = {
 // DE TODOS LOS CUADROS DEL PUZZLE
 // PARA DESPUES INVOCAR EL getImageData(...) 
 var piezas = [];
-var solucion = []
+var solucion = [];
 
 var readyToChange = -1;
 var TIMER;
@@ -26,6 +26,8 @@ var elapsedSeconds = 0;
 
 var SEACEPTANFOTOS = true;
 var aiudando = false;
+
+var MOVIMIENTOS = 0;
 
 function getCTX(query){
 	let cv = document.querySelector(query);
@@ -96,16 +98,23 @@ function prepararCanvases(){
 			if(readyToChange == -1){
 				readyToChange = row*ncols + col;
 			}
-			else{
+			else if (piezas[readyToChange].id != piezas[row*ncols + col].id){
 				let aux = piezas[readyToChange];
 				piezas[readyToChange] = piezas[row*ncols + col];
 				piezas[row*ncols + col] = aux;
 				readyToChange = -1;
+
+				++MOVIMIENTOS;
+			}
+
+			let WINNER = checkWin();
+			if(WINNER == true){
+				endo(true);
 			}
 
 			dibujaPiezas();
 			actualizaMarcadorClick(e);
-
+			console.log(MOVIMIENTOS);
 		}
 	};
 	
@@ -131,12 +140,12 @@ function actualizaMarcadorClick(e){
 		marcadorClick.x = row;
 		marcadorClick.y = col;
 
-		console.log(marcadorClick);
-		console.log('Primer click');
+		//console.log(marcadorClick);
+		//console.log('Primer click');
 	}
 	else{
 		click = false;
-		console.log('Segundo click');
+		//console.log('Segundo click');
 	}
 }
 
@@ -217,7 +226,6 @@ function copiarCanvas(){
 
 		//CREO LAS LINEAS
 		dibujarLineas();
-
 		creaArrayPiezas();
 	}
 }
@@ -298,6 +306,7 @@ function creaArrayPiezas(){
 	let ctx1 = getCTX(query);
 
 	piezas = [];
+	solucion = [];
 	let pieza;
 
 	let x = cv1.width/ncols;
@@ -308,7 +317,7 @@ function creaArrayPiezas(){
 	for(let i=0 ; i<nrows; i++){
 		for(let j=0 ; j<ncols ; j++){
 			//imgData = ctx1.getImageData(x*j,y*i,x,y);
-
+			console.log()
 			pieza ={
 				'id': target,
 				'imgData': [x*j,y*i,x,y]
@@ -459,6 +468,7 @@ function stopTimer(){
 
 function aiuda(){
 	if(!aiudando){
+
 		aiudando = true;
 		let k = 0;
 		let ctx = $("#c2").getContext('2d');
@@ -498,14 +508,27 @@ function endo(flag){
 
 	let color = "background: #930000;";
 	let title = "Derrota";
-	let message = "Paquete has perdido";
+	let k = 0;
+	let contador = 0;
+	for(let i = 0; i < nrows; ++i){
+		for(let j = 0; j < ncols; ++j){
+
+			if(piezas[k].id != solucion[k].id){
+				contador++;
+			}
+			++k;
+		}
+	}
+
+
+	let message = "Has dejado "+contador+" piezas por colocar bien después de "+MOVIMIENTOS+" movimientos y has empleado "+elapsedSeconds+" segundos.";
 	$("#Again").removeClass("again_green");
 	$("#Again").addClass("again_red");
 
 	if(flag){
 		color = "background: #008470;";
 		title = "Victoria";
-		message = "Has dejado 12 piezas por colocar bien después de 26 movimientos y has empleado 76 segundos."
+		message = "¡¡¡Enhorabuena!!! Has montado el puzzle en "+MOVIMIENTOS+" movimientos y "+elapsedSeconds+" segundos.";
 		$("#Again").removeClass("again_red");
 		$("#Again").addClass("again_green");
 	}
@@ -587,6 +610,7 @@ function reset(){
 
 	readyToChange = -1;
 	elapsedSeconds = 0;
+	MOVIMIENTOS = 0;
 
 	SEACEPTANFOTOS = true;
 	aiudando = false;
