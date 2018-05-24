@@ -261,6 +261,8 @@ function copiarCanvas(){
 		//CREO LAS LINEAS
 		dibujarLineas();
 		creaArrayPiezas();
+		$("#buttonStarto").removeAttr("disabled");
+		$("#buttonStarto").addClass("pointer");
 	}
 }
 
