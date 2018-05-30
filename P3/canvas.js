@@ -13,6 +13,7 @@ var marcadorClick = {
 	'x' : -1,
 	'y' : -1
 }
+var ratonFuera = false;
 
 // PIEZAS ALMACENA LA POSICION Y LAS DIMENSIONES
 // DE TODOS LOS CUADROS DEL PUZZLE
@@ -151,10 +152,25 @@ function prepararCanvases(){
 		}
 	};
 	
+
 	cv2.onmousemove = function(e){
 		if(!SEACEPTANFOTOS){
 			muestraMarcador(e);
-		}	
+		}
+	};
+
+	cv2.onmouseleave = function(e){
+		if(!SEACEPTANFOTOS){
+			ratonFuera = true;
+			muestraMarcador(e);			
+		}
+	};
+
+	cv2.onmouseenter = function(e){
+		if(!SEACEPTANFOTOS){
+			ratonFuera = false;
+			muestraMarcador(e);
+		}
 	};
 
 	let body = document.getElementsByTagName('body');
@@ -212,14 +228,16 @@ function muestraMarcador(e){
 		img.src = 'Images/BITCONNEEEEECT.png';
 		dibujaPiezas();
 
-		if(!easterEgg){
-			ctx2.globalAlpha = 0.6;
-			ctx2.fillStyle = document.querySelector("#color").value;
-			ctx2.fillRect(col*dim,row*dim,dim,dim);
-			ctx2.globalAlpha = 1.0;
-		}
-		else{
-			ctx2.drawImage(img,col*dim,row*dim,dim,dim);
+		if(!ratonFuera){
+			if(!easterEgg){
+				ctx2.globalAlpha = 0.6;
+				ctx2.fillStyle = document.querySelector("#color").value;
+				ctx2.fillRect(col*dim,row*dim,dim,dim);
+				ctx2.globalAlpha = 1.0;
+			}
+			else{
+				ctx2.drawImage(img,col*dim,row*dim,dim,dim);
+			}
 		}
 
 		if(click){
@@ -235,7 +253,7 @@ function muestraMarcador(e){
 			else{
 				ctx2.drawImage(img,marcadorClick.y*dim,marcadorClick.x*dim,dim,dim);
 			}
-			//console.log('Dibujaaaaaaaaaaaaaaaaaaaa');
+			console.log('Dibujaaaaaaaaaaaaaaaaaaaa');
 		}
 
 		dibujarLineas()

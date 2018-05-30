@@ -36,52 +36,18 @@
 				<div id="seconds" class="timerBox">0</div>&nbsp;s
 			</div>
 		</div>
-		<main>
-			
-			<div>
-				<div class="cab">LA IMAGEN</div>
-				<label for="l_img">
-					<canvas id="c1" class="pointer"></canvas>
-					
-				</label>
-				<div class="control">
-					<input type="file" name="image" id="l_img" accept="image/*" onchange="cargaImg(this);">
-				</div>
-			</div>
-			<div>
-				<div class="cab">EL PUZZLE</div>
-				<canvas id="c2">
-				
-				</canvas>
-				<div style="color: white;" id="posXY"> </div>
-				<div class="control player-area">
-
-					<div>
-						<div>
-							<input type="color" name="color_lines" id="color" value="#00ddbc" onchange="dibujarLineas();">
-						</div>
-						<div>
-							<select class="form-control" id="diff" onchange="copiarCanvas();">
-								<option value="0">Nivel fácil</option>
-								<option value="1">Nivel medio</option>
-								<option value="2">Nivel difícil</option>
-							</select>
-						</div>
-					</div>
-					<div class="bg-turquesa">
-						<button id="buttonStarto" class="form-control" onclick="comiensaElPusle();" disabled>Empezar</button>
-						<button id="buttonEndo" onclick="endo(false);" class="form-control" disabled>Terminar</button>
-						<button id="Aiuuuudame" onclick="aiuda();" class="form-control aiuda" disabled>Aiuda</button>
-					</div>
-				</div>
-			</div>
-		</main>
-		
+		<div id="ACERCA_DIV">
+			<h2>PRÁCTICA 3, PROGRAMACIÓN DEL CLIENTE WEB</h2>
+			<h4>Pertenece al segundo curso de la titulación de Ingeniería Multimedia</h4>
+			<h3>AUTORES:</h3>
+			<div>DANNY GABRIEL RIVERA SOLÓRZANO</div>
+			<div>PABLO MÁÑEZ FERNÁNDEZ</div>
+		</div>
 
 	</div>
 	<footer>
 		&copy; <time datetime="2018">2018 </time> &nbsp; BITRECONNECT, ALL RIGHTS RESERVED &nbsp; - &nbsp; 
-		<a href="acerca.html">INFORMACIÓN DE CONTACTO</a>
+		<a href="index.html">VOLVER AL ÍNDICE</a>
 	</footer>
 
 	<div id="overlap-left" class="w-0" style="background: #00ddbc;"></div>
@@ -94,9 +60,11 @@
 		</div>
 	</div>
 	<script src="jQueryLight.js"></script>
+	<!--
 	<script src="canvas.js"></script>
 	<script>
 		prepararCanvases();
 	</script>
+	-->
 </body>
 </html>
