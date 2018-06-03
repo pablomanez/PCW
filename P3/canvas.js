@@ -19,7 +19,6 @@ var ratonFuera = false;
 // DE TODOS LOS CUADROS DEL PUZZLE
 // PARA DESPUES INVOCAR EL getImageData(...) 
 var piezas = [];
-var solucion = [];
 
 var readyToChange = -1;
 var TIMER;
@@ -29,6 +28,9 @@ var SEACEPTANFOTOS = true;
 var aiudando = false;
 
 var MOVIMIENTOS = 0;
+var DESORDENADAS = 0;
+
+var STATE;
 
 function getCTX(query){
 	let cv = document.querySelector(query);
@@ -45,10 +47,11 @@ function escribeTextoInicial(){
 	let ctx1 = getCTX('#c1');
 
 	ctx1.shadowBlur = 0;
-	ctx1.fillStyle = '#000';
-	ctx1.font = 'bold 20px Arial'; //COMO EN CSS
+	ctx1.fillStyle = '#F4F4F4';
+	ctx1.font = '20px Arial'; //COMO EN CSS
 	ctx1.textAlign = "center";
-	ctx1.fillText("Haz click o arrastra una imagen aquí",_ANCHO/2,_ALTO/2);
+	
+	ctx1.fillText("Haz click o arrastra una imagen aquí",_ANCHO/2,_ALTO/2+10);
 }
 
 function prepararCanvases(){
@@ -61,6 +64,7 @@ function prepararCanvases(){
 	});
 	
 	escribeTextoInicial();
+	saveState();
 
 	//derrapa&dropea
 	let c1 = document.querySelector('#c1');
@@ -71,7 +75,12 @@ function prepararCanvases(){
 	};
 
 	c1.ondragenter = function(e){
-		ctx1.fillStyle = '#00967f';
+
+
+		if(imgCargada)
+			ctx1.globalAlpha = 0.83;
+		
+		ctx1.fillStyle = '#00af95';
 		ctx1.fillRect(0,0,_ANCHO,_ALTO);
 
 		ctx1.shadowOffsetX = 0;
@@ -79,14 +88,19 @@ function prepararCanvases(){
 		ctx1.shadowBlur = 20;
 		ctx1.shadowColor = "#000";
 
-		ctx1.strokeRect(0,0,_ANCHO,_ALTO);
-	
-		escribeTextoInicial();
+		ctx1.shadowBlur = 0;
+		ctx1.fillStyle = '#F4F4F4';
+		ctx1.font = '20px Arial'; //COMO EN CSS
+		ctx1.textAlign = "center";
+		
+		ctx1.fillText("DROP IT!",_ANCHO/2,_ALTO/2+10);
+		ctx1.globalAlpha = 1.0;
 	};
 
 	c1.ondragleave = function(e){
-		c1.width = c1.width;
-		escribeTextoInicial();
+		//c1.width = c1.width;
+		//escribeTextoInicial();
+		restoreState();
 	};
 
 	c1.ondrop = function(e){
@@ -100,16 +114,18 @@ function prepararCanvases(){
 			fr.onload = function(){
 				let img = new Image();
 				img.onload = function(){
+					ctx1.clearRect(0, 0, _ANCHO, _ALTO);
 					let ctx = c1.getContext('2d');
 					ctx.drawImage(img,0,0,c1.width,c1.height);
 					imgCargada = true;
 
 					copiarCanvas();	//CARGA DE FORMA ASÍNCRONA ÓPTIMA :ok_hand:
+					saveState();
 				};
 				img.src = fr.result;
 			};
 			fr.readAsDataURL(fichero);
-
+			$("input[type=file]").val("fichero");
 		}
 	};
 
@@ -139,6 +155,7 @@ function prepararCanvases(){
 				readyToChange = -1;
 
 				++MOVIMIENTOS;
+				$("#MOVIMIENTOS").html(MOVIMIENTOS);
 			}
 
 			let WINNER = checkWin();
@@ -360,7 +377,7 @@ function creaArrayPiezas(){
 	let ctx1 = getCTX(query);
 
 	piezas = [];
-	solucion = [];
+
 	let pieza;
 
 	let x = cv1.width/ncols;
@@ -379,12 +396,10 @@ function creaArrayPiezas(){
 				'imgData': [x*j,y*i,x,y]
 			}
 			piezas.push(pieza);
-			solucion.push(pieza);
 			++target;
 		}
 	}
 
-	console.log(solucion);
 	console.log(piezas);
 }
 
@@ -398,7 +413,18 @@ function comiensaElPusle(){
 		$("#c1").removeClass("pointer");
 		$("#c2").addClass("pointer");
 
-		$("#timer > div").attr("style", "margin-top: 0;");
+		$("main").attr("style", "margin-top: 0;");
+
+		setTimeout(function() {
+
+			$("#timer > div:first-child").attr("style", "margin-top: 0;");
+
+			let marcadores = $("#marcador > div > div");
+			for(let i = 0; i < marcadores.length; ++i)
+				marcadores[i].attr("style", "margin-top: 0;");
+
+		}, 500);
+
 		$("#buttonStarto").attr("disabled","true");
 		$("#buttonStarto").removeClass("pointer");
 		$("#buttonEndo").removeAttr("disabled");
@@ -438,6 +464,7 @@ function deshordena(){
 		aux2 = -1;
 	}
 
+	checkWin();
 	//console.log(piezas);
 	//console.log(solucion);
 }
@@ -531,7 +558,7 @@ function aiuda(){
 		for(let i = 0; i < nrows; ++i){
 			for(let j = 0; j < ncols; ++j){
 
-				if(piezas[k].id != solucion[k].id){
+				if(piezas[k].id != k){
 				
 					let xp = piezas[k].imgData[0];
 					let yp = piezas[k].imgData[1];
@@ -565,19 +592,8 @@ function endo(flag){
 	let color = "background: #930000;";
 	let title = "Derrota";
 	let k = 0;
-	let contador = 0;
-	for(let i = 0; i < nrows; ++i){
-		for(let j = 0; j < ncols; ++j){
 
-			if(piezas[k].id != solucion[k].id){
-				contador++;
-			}
-			++k;
-		}
-	}
-
-
-	let message = "Has dejado "+contador+" piezas por colocar bien después de "+MOVIMIENTOS+" movimientos y has empleado "+elapsedSeconds+" segundos.";
+	let message = "Has dejado "+DESORDENADAS+" piezas por colocar bien después de "+MOVIMIENTOS+" movimientos y has empleado "+elapsedSeconds+" segundos.";
 	$("#Again").removeClass("again_green");
 	$("#Again").addClass("again_red");
 
@@ -616,22 +632,25 @@ function endo(flag){
 		
 	    $("#Again").attr("style", "color: rgba(255,255,255,1); opacity: 1;");
 	    $("#endMessageArea #Again img").attr("style", "opacity: 1;");
-
 	}, 1750);
+	
 }
 
 function checkWin(){
 	let winner = true;
 	let k = 0;
+	DESORDENADAS = 0;
 	for(let i = 0; i < nrows; ++i){
 		for(let j = 0; j < ncols; ++j){
 
-			if(piezas[k].id != solucion[k].id){
+			if(piezas[k].id != k){
+				DESORDENADAS++;
 				winner = false;
 			}
 			++k;
 		}
 	}
+	$("#DESORDENADAS").html(DESORDENADAS);
 	return winner;
 }
 
@@ -642,6 +661,8 @@ function reset(){
 
 	ctx1.clearRect(0, 0, _ANCHO, _ALTO);
 	ctx2.clearRect(0, 0, _ANCHO, _ALTO);
+    escribeTextoInicial();
+	saveState();
 
 	$("#c1").addClass("pointer");
 	$("#c2").removeClass("pointer");
@@ -656,17 +677,24 @@ function reset(){
 	$("input[type=file]").removeAttr("disabled");
 	$("input[type=color]").removeAttr("disabled");
 	$("select").removeAttr("disabled");
+	$("main").attr("style", "margin-top: -70px;");
+	let marcadores = $("#marcador > div > div");
+	for(let i = 0; i < marcadores.length; ++i)
+		marcadores[i].attr("style", "margin-top: 50px;");
+
+	$("#DESORDENADAS").html("0");
+	$("#MOVIMIENTOS").html("0");
 
 	ncols = -1;
 	nrows = -1;
 
 	imgCargada = false;
 	piezas = [];
-	solucion = []
 
 	readyToChange = -1;
 	elapsedSeconds = 0;
 	MOVIMIENTOS = 0;
+	DESORDENADAS = 0;
 
 	SEACEPTANFOTOS = true;
 	aiudando = false;
@@ -691,6 +719,19 @@ function reset(){
 
 	$("#container").removeClass("d-none");
 	
+}
+
+function saveState(){
+	console.log("GUARDANDO");
+	let ctx = $("#c1").getContext('2d');
+	STATE = ctx.getImageData(0, 0, _ANCHO, _ALTO);
+}
+
+function restoreState(){
+
+	let ctx = $("#c1").getContext('2d');
+	ctx.putImageData(STATE, 0, 0);
+
 }
 
 //<TRON>
