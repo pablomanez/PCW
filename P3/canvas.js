@@ -75,26 +75,26 @@ function prepararCanvases(){
 	};
 
 	c1.ondragenter = function(e){
+		if(SEACEPTANFOTOS){
+			if(imgCargada)
+				ctx1.globalAlpha = 0.83;
+			
+			ctx1.fillStyle = '#00af95';
+			ctx1.fillRect(0,0,_ANCHO,_ALTO);
 
+			ctx1.shadowOffsetX = 0;
+			ctx1.shadowOffsetY = 0;
+			ctx1.shadowBlur = 20;
+			ctx1.shadowColor = "#000";
 
-		if(imgCargada)
-			ctx1.globalAlpha = 0.83;
-		
-		ctx1.fillStyle = '#00af95';
-		ctx1.fillRect(0,0,_ANCHO,_ALTO);
-
-		ctx1.shadowOffsetX = 0;
-		ctx1.shadowOffsetY = 0;
-		ctx1.shadowBlur = 20;
-		ctx1.shadowColor = "#000";
-
-		ctx1.shadowBlur = 0;
-		ctx1.fillStyle = '#F4F4F4';
-		ctx1.font = '20px Arial'; //COMO EN CSS
-		ctx1.textAlign = "center";
-		
-		ctx1.fillText("DROP IT!",_ANCHO/2,_ALTO/2+10);
-		ctx1.globalAlpha = 1.0;
+			ctx1.shadowBlur = 0;
+			ctx1.fillStyle = '#F4F4F4';
+			ctx1.font = '20px Arial'; //COMO EN CSS
+			ctx1.textAlign = "center";
+			
+			ctx1.fillText("DROP IT!",_ANCHO/2,_ALTO/2+10);
+			ctx1.globalAlpha = 1.0;
+		}
 	};
 
 	c1.ondragleave = function(e){
@@ -677,7 +677,7 @@ function reset(){
 	$("input[type=file]").removeAttr("disabled");
 	$("input[type=color]").removeAttr("disabled");
 	$("select").removeAttr("disabled");
-	$("main").attr("style", "margin-top: -70px;");
+	$("main").attr("style", "margin-top: -100px;");
 	let marcadores = $("#marcador > div > div");
 	for(let i = 0; i < marcadores.length; ++i)
 		marcadores[i].attr("style", "margin-top: 50px;");
