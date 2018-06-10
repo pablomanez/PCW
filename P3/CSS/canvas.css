@@ -62,6 +62,11 @@ header a,footer a {
 	margin-left: 40px;
 }
 
+#INICIO:hover, #ACERCA:hover{
+	color: orange;
+	transition: color 0.2s linear;
+}
+
 .cab{
 	text-align: center;
 	padding: 10px;
