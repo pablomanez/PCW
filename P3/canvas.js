@@ -363,6 +363,7 @@ function cargaImg(input){
 			imgCargada = true;
 
 			copiarCanvas();
+			saveState();
 		};
 		img.src = URL.createObjectURL(input.files[0]);
 
